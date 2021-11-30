@@ -1,7 +1,10 @@
 package org.uma.jmetal.solution.binarysolution;
 
+import org.uma.jmetal.problem.multiobjective.UDN.model.cells.Cell;
 import org.uma.jmetal.solution.Solution;
 import org.uma.jmetal.util.binarySet.BinarySet;
+
+import java.util.List;
 
 /**
  * Interface representing binary (bitset) solutions
@@ -9,6 +12,15 @@ import org.uma.jmetal.util.binarySet.BinarySet;
  * @author Antonio J. Nebro <antonio@lcc.uma.es>
  */
 public interface BinarySolution extends Solution<BinarySet> {
-  int getNumberOfBits(int index) ;
-  int getTotalNumberOfBits() ;
+    int getNumberOfBits(int index);
+
+    int getTotalNumberOfBits();
+
+    public void setUEsToCellAssignment(List<Cell> assignment);
+
+    public List<Cell> getCurrentUesToCellAssignment();
+
+    public List<Cell> getPreviousUesToCellAssignment();
+
+    public void forgetUEsToCellAssignment();
 }

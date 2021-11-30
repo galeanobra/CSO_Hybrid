@@ -1,0 +1,128 @@
+//  ZDT1.java
+//
+//  Author:
+//       Antonio J. Nebro <antonio@lcc.uma.es>
+//       Juan J. Durillo <durillo@lcc.uma.es>
+//
+//  Copyright (c) 2011 Antonio J. Nebro, Juan J. Durillo
+//
+//  This program is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU Lesser General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  This program is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU Lesser General Public License for more details.
+// 
+//  You should have received a copy of the GNU Lesser General Public License
+//  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+package org.uma.jmetal.problem.multiobjective.UDN;
+
+import jmetal.core.Problem;
+import jmetal.core.Solution;
+import jmetal.encodings.solutionType.IntSolutionType;
+import jmetal.problems.UDN.model.Point;
+import jmetal.problems.UDN.model.StaticUDN;
+import jmetal.problems.UDN.model.UDN;
+import jmetal.problems.UDN.model.users.User;
+import jmetal.util.JMException;
+import jmetal.util.wrapper.XInt;
+
+/**
+ * Class representing problem ZDT1
+ */
+public class PlanningUDN extends Problem {
+
+    UDN udn_;
+
+    /**
+     * Creates an instance of the UDN planning problems.
+     */
+    public PlanningUDN(String mainConfig, String cellConfig, String saConfig, String usersConfig) throws ClassNotFoundException {
+
+        //Create the UDN model
+        udn_ = new StaticUDN(mainConfig, 0);
+
+        //udn_.printXDeployment();
+        //Heterogenerous deployment of BTSs and users
+        //udn_.printXDeployment();
+        //udn_.printDelaunayDiemke();
+
+        numberOfVariables_ = udn_.getUsers().size();
+        numberOfObjectives_ = 1;
+        numberOfConstraints_ = 0;
+        problemName_ = "PlanningUDN";
+
+        upperLimit_ = new double[numberOfVariables_];
+        lowerLimit_ = new double[numberOfVariables_];
+
+        // Establishes upper and lower limits for the variables
+        int numbefOfCells = udn_.getTotalNumberOfCells();
+        for (int var = 0; var < numberOfVariables_; var++) {
+            lowerLimit_[var] = 0;
+            upperLimit_[var] = numbefOfCells;
+        } // for
+
+        //Solutions arrays of integers
+        solutionType_ = new IntSolutionType(this);
+
+
+        //udn_.printXVoronoi();
+    }
+
+    /**
+     * Evaluates a solution.
+     *
+     * @param solution The solution to evaluate.
+     * @throws JMException
+     */
+    public void evaluate(Solution solution) throws JMException {
+        XInt x = new XInt(solution);
+
+        double[] f = new double[numberOfObjectives_];
+        System.out.print("Solution :");
+        for (int i = 0; i < x.getNumberOfDecisionVariables(); i++) {
+            System.out.print(x.getValue(i) + " ");
+        }
+        System.out.println();
+
+        solution.setObjective(0, f[0]);
+    } // evaluate
+
+    /**
+     * Assign the closest BTS to each user, regardless of its type
+     */
+    void setBasicPlanning(Solution s) throws JMException {
+        //XInt x = new XInt(s);
+        for (int user = 0; user < udn_.getUsers().size(); user++) {
+            //Get the point at which the user is placed
+            User u = udn_.getUsers().get(user);
+            Point p = udn_.getGridPoint(u.getX(), u.getY(), u.getZ());
+
+            //get the closest BTS
+//            Cell cell = p.getServingActiveCell();
+//            System.out.println("Femto: " + p.femtoCells_.size() + " " + p.femtoCells_);
+//            System.out.println("Pico: " + p.picoCells_.size() + " " + p.picoCells_);
+//            System.out.println("Micro: " + p.microCells_.size() + " " + p.microCells_) ;
+//            System.out.println("Macro: " + p.macroCells_ .size() + " " + p.macroCells_);
+//            System.out.println("Closest BTS = " + cellID + "\n");
+
+            //assign the Cell id to the solution
+//            s.getDecisionVariables()[user].setValue(cell.getID());
+        }
+    }
+
+    void setHigherCapacityPlanning(Solution s) throws JMException {
+        for (int user = 0; user < udn_.getUsers().size(); user++) {
+            //Get the point at which the user is placed
+            User u = udn_.getUsers().get(user);
+            Point p = udn_.getGridPoint(u.getX(), u.getY(), u.getZ());
+
+            //int cellID = p.getIdHighestCapacityBTSOnRange();
+
+            //s.getDecisionVariables()[user].setValue(cellID);
+        }
+    }
+} // Planning UDN

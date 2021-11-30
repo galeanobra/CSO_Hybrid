@@ -90,7 +90,7 @@ public class GenericChartContainer<S extends Solution<?>> {
       XYSeries referencePointSeries =
           this.frontChart.addSeries(
               referencePointName.get(i), new double[] {rp1}, new double[] {rp2});
-      referencePointSeries.setMarkerColor(java.awt.Color.green);
+      referencePointSeries.setMarkerColor(Color.green);
     }
   }
 

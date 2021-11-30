@@ -1,4 +1,4 @@
-package org.uma.jmetal.problem.integerproblem ;
+package org.uma.jmetal.problem.integerproblem;
 
 import org.uma.jmetal.problem.BoundedProblem;
 import org.uma.jmetal.solution.integersolution.IntegerSolution;
