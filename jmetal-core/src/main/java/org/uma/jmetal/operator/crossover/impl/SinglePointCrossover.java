@@ -19,19 +19,23 @@ import java.util.List;
  */
 @SuppressWarnings("serial")
 public class SinglePointCrossover implements CrossoverOperator<BinarySolution> {
-  private double crossoverProbability;
-  private RandomGenerator<Double> crossoverRandomGenerator;
-  private BoundedRandomGenerator<Integer> pointRandomGenerator;
+    private double crossoverProbability;
+    private final RandomGenerator<Double> crossoverRandomGenerator;
+    private final BoundedRandomGenerator<Integer> pointRandomGenerator;
 
-  /** Constructor */
-  public SinglePointCrossover(double crossoverProbability) {
-    this(
-        crossoverProbability,
-        () -> JMetalRandom.getInstance().nextDouble(),
-        (a, b) -> JMetalRandom.getInstance().nextInt(a, b));
-  }
+    /**
+     * Constructor
+     */
+    public SinglePointCrossover(double crossoverProbability) {
+        this(
+                crossoverProbability,
+                () -> JMetalRandom.getInstance().nextDouble(),
+                (a, b) -> JMetalRandom.getInstance().nextInt(a, b));
+    }
 
-  /** Constructor */
+    /**
+     * Constructor
+     */
   public SinglePointCrossover(
       double crossoverProbability, RandomGenerator<Double> randomGenerator) {
     this(

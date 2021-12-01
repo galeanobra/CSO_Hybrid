@@ -22,20 +22,24 @@ import java.util.List;
  */
 @SuppressWarnings("serial")
 public class GroupedAndLinkedPolynomialMutation implements MutationOperator<DoubleSolution> {
-  private static final double DEFAULT_DISTRIBUTION_INDEX = 20.0;
-  private double distributionIndex;
-  private RepairDoubleSolution solutionRepair;
-  private CollectionGrouping<List<Double>> variableGrouping;
+    private static final double DEFAULT_DISTRIBUTION_INDEX = 20.0;
+    private double distributionIndex;
+    private final RepairDoubleSolution solutionRepair;
+    private final CollectionGrouping<List<Double>> variableGrouping;
 
-  private PseudoRandomGenerator randomGenerator;
+    private final PseudoRandomGenerator randomGenerator;
 
-  /** Constructor */
-  public GroupedAndLinkedPolynomialMutation(CollectionGrouping<List<Double>> variableGrouping) {
-    this(DEFAULT_DISTRIBUTION_INDEX, variableGrouping);
-  }
+    /**
+     * Constructor
+     */
+    public GroupedAndLinkedPolynomialMutation(CollectionGrouping<List<Double>> variableGrouping) {
+        this(DEFAULT_DISTRIBUTION_INDEX, variableGrouping);
+    }
 
-  /** Constructor */
-  public GroupedAndLinkedPolynomialMutation(
+    /**
+     * Constructor
+     */
+    public GroupedAndLinkedPolynomialMutation(
       double distributionIndex, CollectionGrouping<List<Double>> variableGrouping) {
     this(distributionIndex, new RepairDoubleSolutionWithBoundValue(), variableGrouping);
   }

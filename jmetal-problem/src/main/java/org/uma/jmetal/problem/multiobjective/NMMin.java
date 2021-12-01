@@ -15,18 +15,20 @@ import java.util.List;
  */
 @SuppressWarnings("serial")
 public class NMMin extends AbstractIntegerProblem {
-  private int valueN ;
-  private int valueM ;
+    private final int valueN;
+    private final int valueM;
 
-  public NMMin() {
-    this(20, 100, -100, -1000, +1000);
-  }
+    public NMMin() {
+        this(20, 100, -100, -1000, +1000);
+    }
 
-  /** Constructor */
-  public NMMin(int numberOfVariables, int n, int m, int lowerBound, int upperBound)  {
-    valueN = n ;
-    valueM = m ;
-    setNumberOfVariables(numberOfVariables);
+    /**
+     * Constructor
+     */
+    public NMMin(int numberOfVariables, int n, int m, int lowerBound, int upperBound) {
+        valueN = n;
+        valueM = m;
+        setNumberOfVariables(numberOfVariables);
     setNumberOfObjectives(2);
     setName("NMMin");
 

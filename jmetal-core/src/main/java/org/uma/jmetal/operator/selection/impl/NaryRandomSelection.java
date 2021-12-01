@@ -15,7 +15,7 @@ import java.util.List;
  */
 @SuppressWarnings("serial")
 public class NaryRandomSelection<S> implements SelectionOperator<List<S>, List<S>> {
-  private int numberOfSolutionsToBeReturned;
+  private final int numberOfSolutionsToBeReturned;
 
   /** Constructor */
   public NaryRandomSelection() {

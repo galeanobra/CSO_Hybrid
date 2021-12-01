@@ -18,7 +18,7 @@ import java.util.List;
 public class StrenghtRawFitnessDensityEstimator<S extends Solution<?>>
     implements DensityEstimator<S> {
   private final String attributeId = getClass().getName();
-  private int k;
+    private final int k;
 
   private static final Comparator<Solution<?>> DOMINANCE_COMPARATOR =
       new DominanceComparator<Solution<?>>();

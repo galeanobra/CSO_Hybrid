@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class KnnDensityEstimatorTest {
-  private double EPSILON = 0.00000000000001;
+  private final double EPSILON = 0.00000000000001;
 
   @Test
   public void shouldDensityEstimatorComputeTheRightDistancesCase1() {
@@ -95,19 +95,19 @@ public class KnnDensityEstimatorTest {
     solution4.objectives()[0] = 5.0;
     solution4.objectives()[1] = 1.0;
 
-    solution5.objectives()[0] = 3.0;
-    solution5.objectives()[1] = 2.0;
+      solution5.objectives()[0] = 3.0;
+      solution5.objectives()[1] = 2.0;
 
-    List<DoubleSolution> solutionList =
-        Arrays.asList(solution1, solution2, solution4, solution3, solution5);
+      List<DoubleSolution> solutionList =
+              Arrays.asList(solution1, solution2, solution4, solution3, solution5);
 
-    densityEstimator.compute(solutionList);
-    solutionList.sort(Comparator.comparing(densityEstimator::getValue).reversed());
+      densityEstimator.compute(solutionList);
+      solutionList.sort(Comparator.comparing(densityEstimator::getValue).reversed());
 
-    assertEquals(solutionList.get(0), solution4);
-    assertTrue((solutionList.get(1) == solution1) || (solutionList.get(1) == solution2)); ;
-    assertTrue((solutionList.get(2) == solution1) || (solutionList.get(2) == solution2)); ;
-    assertTrue((solutionList.get(3) == solution3) || (solutionList.get(3) == solution5)); ;
-    assertTrue((solutionList.get(4) == solution3) || (solutionList.get(4) == solution5)); ;
+      assertEquals(solutionList.get(0), solution4);
+      assertTrue((solutionList.get(1) == solution1) || (solutionList.get(1) == solution2));
+      assertTrue((solutionList.get(2) == solution1) || (solutionList.get(2) == solution2));
+      assertTrue((solutionList.get(3) == solution3) || (solutionList.get(3) == solution5));
+      assertTrue((solutionList.get(4) == solution3) || (solutionList.get(4) == solution5));
   }
 }

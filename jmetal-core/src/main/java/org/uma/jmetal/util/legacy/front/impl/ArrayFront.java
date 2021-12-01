@@ -220,9 +220,7 @@ public class ArrayFront implements Front {
 
     if (numberOfPoints != that.numberOfPoints) return false;
     if (pointDimensions != that.pointDimensions) return false;
-    if (!Arrays.equals(points, that.points)) return false;
-
-    return true;
+    return Arrays.equals(points, that.points);
   }
 
   @Override

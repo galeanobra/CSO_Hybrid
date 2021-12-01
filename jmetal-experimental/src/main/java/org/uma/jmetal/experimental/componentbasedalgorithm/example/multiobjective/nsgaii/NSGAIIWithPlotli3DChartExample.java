@@ -39,7 +39,7 @@ public class NSGAIIWithPlotli3DChartExample extends AbstractAlgorithmRunner {
     String problemName = "org.uma.jmetal.problem.multiobjective.dtlz.DTLZ2";
     String referenceParetoFront = "resources/referenceFrontsCSV/DTLZ2.3D.csv";
 
-    problem = ProblemUtils.<DoubleSolution>loadProblem(problemName);
+    problem = ProblemUtils.loadProblem(problemName);
 
     double crossoverProbability = 0.9;
     double crossoverDistributionIndex = 20.0;

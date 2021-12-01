@@ -67,7 +67,7 @@ public class BLXAlphaCrossoverExample {
 
     List<DoubleSolution> population = new ArrayList<>(numberOfPoints);
     for (int i = 0; i < numberOfPoints; i++) {
-      List<DoubleSolution> solutions = (List<DoubleSolution>) crossover.execute(parents);
+      List<DoubleSolution> solutions = crossover.execute(parents);
       population.add(solutions.get(0));
       population.add(solutions.get(1));
     }

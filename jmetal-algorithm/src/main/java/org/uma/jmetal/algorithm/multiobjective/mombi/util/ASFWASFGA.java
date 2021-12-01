@@ -16,8 +16,8 @@ import java.util.List;
 public class ASFWASFGA<S extends Solution<?>> extends AbstractUtilityFunctionsSet<S> {
 
 	private final List<Double> interestPoint;
-	private double augmentationCoefficient = 0.001;
-	private List<Double> utopia = null;
+    private final double augmentationCoefficient = 0.001;
+    private List<Double> utopia = null;
 	private List<Double> nadir  = null;
 	
 	

@@ -18,7 +18,7 @@ import java.util.List;
 @SuppressWarnings("serial")
 public class UniformCrossover implements CrossoverOperator<BinarySolution> {
   private double crossoverProbability;
-  private RandomGenerator<Double> crossoverRandomGenerator;
+    private final RandomGenerator<Double> crossoverRandomGenerator;
 
   /** Constructor */
   public UniformCrossover(double crossoverProbability) {

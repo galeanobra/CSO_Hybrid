@@ -54,7 +54,7 @@ public class WASFGAMeasuresRunner extends AbstractAlgorithmRunner {
       referenceParetoFront = "resources/referenceFrontsCSV/ZDT1.csv" ;
     }
 
-    problem = ProblemUtils.<DoubleSolution> loadProblem(problemName);
+    problem = ProblemUtils.loadProblem(problemName);
 
     referencePoint = new ArrayList<>();
     referencePoint.add(0.6);
@@ -113,7 +113,7 @@ public class WASFGAMeasuresRunner extends AbstractAlgorithmRunner {
   }
   
   private static class ChartListener implements MeasureListener<List<DoubleSolution>> {
-      private ChartContainer chart;
+      private final ChartContainer chart;
       private int iteration = 0;
 
       public ChartListener(ChartContainer chart) {

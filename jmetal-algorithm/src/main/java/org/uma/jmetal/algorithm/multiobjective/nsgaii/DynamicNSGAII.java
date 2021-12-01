@@ -20,21 +20,22 @@ import java.util.Map;
 
 @SuppressWarnings("serial")
 public class DynamicNSGAII<S extends Solution<?>> extends NSGAII<S>
-    implements DynamicAlgorithm<List<S>> {
+        implements DynamicAlgorithm<List<S>> {
 
-  private RestartStrategy<S> restartStrategy;
-  private DynamicProblem<S, Integer> problem;
-  private Observable<Map<String, Object>> observable;
-  private int completedIterations;
-  private CoverageFront coverageFront;
-  private List<S> lastReceivedFront;
-  /**
-   * Constructor
-   *
-   * @param problem
-   * @param maxEvaluations
-   * @param populationSize
-   * @param matingPoolSize
+    private final RestartStrategy<S> restartStrategy;
+    private final DynamicProblem<S, Integer> problem;
+    private final Observable<Map<String, Object>> observable;
+    private int completedIterations;
+    private final CoverageFront coverageFront;
+    private List<S> lastReceivedFront;
+
+    /**
+     * Constructor
+     *
+     * @param problem
+     * @param maxEvaluations
+     * @param populationSize
+     * @param matingPoolSize
    * @param offspringPopulationSize
    * @param crossoverOperator
    * @param mutationOperator

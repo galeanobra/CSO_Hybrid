@@ -15,7 +15,7 @@ import org.uma.jmetal.util.pseudorandom.RandomGenerator;
 @SuppressWarnings("serial")
 public class SimpleRandomMutation implements MutationOperator<DoubleSolution> {
   private double mutationProbability;
-  private RandomGenerator<Double> randomGenerator;
+    private final RandomGenerator<Double> randomGenerator;
 
   /** Constructor */
   public SimpleRandomMutation(double probability) {

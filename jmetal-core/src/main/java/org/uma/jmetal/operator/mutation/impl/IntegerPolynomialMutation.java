@@ -27,10 +27,10 @@ public class IntegerPolynomialMutation implements MutationOperator<IntegerSoluti
   private static final double DEFAULT_DISTRIBUTION_INDEX = 20.0 ;
 
   private double distributionIndex ;
-  private double mutationProbability ;
-  private RepairDoubleSolution solutionRepair ;
+  private double mutationProbability;
+    private final RepairDoubleSolution solutionRepair;
 
-  private RandomGenerator<Double> randomGenerator ;
+    private final RandomGenerator<Double> randomGenerator;
 
   /** Constructor */
   public IntegerPolynomialMutation() {

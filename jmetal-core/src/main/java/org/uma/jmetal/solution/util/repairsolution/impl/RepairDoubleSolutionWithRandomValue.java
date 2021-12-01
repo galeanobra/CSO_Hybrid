@@ -11,7 +11,7 @@ import org.uma.jmetal.util.pseudorandom.JMetalRandom;
  */
 @SuppressWarnings("serial")
 public class RepairDoubleSolutionWithRandomValue implements RepairDoubleSolution {
-  private BoundedRandomGenerator<Double> randomGenerator ;
+  private final BoundedRandomGenerator<Double> randomGenerator;
 
   /**
    * Constructor

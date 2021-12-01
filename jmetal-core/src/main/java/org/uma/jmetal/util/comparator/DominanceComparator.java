@@ -13,7 +13,7 @@ import java.util.Comparator;
  */
 @SuppressWarnings("serial")
 public class DominanceComparator<S extends Solution<?>> implements Comparator<S>, Serializable {
-  private ConstraintViolationComparator<S> constraintViolationComparator;
+  private final ConstraintViolationComparator<S> constraintViolationComparator;
 
   /** Constructor */
   public DominanceComparator() {

@@ -12,27 +12,26 @@ import java.util.List;
 
 /**
  * This class implements a constrained version of the MOEAD algorithm based on the one presented in
-  the paper: "An adaptive constraint handling approach embedded MOEA/D". DOI: 10.1109/CEC.2012.6252868
-
+ the paper: "An adaptive constraint handling approach embedded MOEA/D". DOI: 10.1109/CEC.2012.6252868
  * @author Antonio J. Nebro
  * @author Juan J. Durillo
  * @version 1.0
  */
 @SuppressWarnings("serial")
-public class ConstraintMOEAD extends AbstractMOEAD<DoubleSolution>  {
+public class ConstraintMOEAD extends AbstractMOEAD<DoubleSolution> {
 
-  private DifferentialEvolutionCrossover differentialEvolutionCrossover ;
-  private ViolationThresholdComparator<DoubleSolution> violationThresholdComparator ;
+    private final DifferentialEvolutionCrossover differentialEvolutionCrossover;
+    private final ViolationThresholdComparator<DoubleSolution> violationThresholdComparator;
 
-  public ConstraintMOEAD(Problem<DoubleSolution> problem,
-      int populationSize,
-      int resultPopulationSize,
-      int maxEvaluations,
-      MutationOperator<DoubleSolution> mutation,
-      CrossoverOperator<DoubleSolution> crossover,
-      FunctionType functionType,
-      String dataDirectory,
-      double neighborhoodSelectionProbability,
+    public ConstraintMOEAD(Problem<DoubleSolution> problem,
+                           int populationSize,
+                           int resultPopulationSize,
+                           int maxEvaluations,
+                           MutationOperator<DoubleSolution> mutation,
+                           CrossoverOperator<DoubleSolution> crossover,
+                           FunctionType functionType,
+                           String dataDirectory,
+                           double neighborhoodSelectionProbability,
       int maximumNumberOfReplacedSolutions,
       int neighborSize) {
     super(problem, populationSize, resultPopulationSize, maxEvaluations, crossover, mutation, functionType,
@@ -83,7 +82,7 @@ public class ConstraintMOEAD extends AbstractMOEAD<DoubleSolution>  {
 
   public void initializePopulation() {
     for (int i = 0; i < populationSize; i++) {
-      DoubleSolution newSolution = (DoubleSolution)problem.createSolution() ;
+        DoubleSolution newSolution = problem.createSolution();
 
       problem.evaluate(newSolution);
       population.add(newSolution);

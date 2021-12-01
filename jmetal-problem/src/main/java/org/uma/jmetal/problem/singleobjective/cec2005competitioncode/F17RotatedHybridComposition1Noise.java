@@ -74,29 +74,29 @@ public class F17RotatedHybridComposition1Noise extends TestFunc {
     5.0 / 60.0, 5.0 / 60.0, 5.0 / 32.0, 5.0 / 32.0,
     5.0 / 100.0, 5.0 / 100.0
   };
-  private final double[] m_func_biases = {
-    0.0, 100.0, 200.0, 300.0, 400.0,
-    500.0, 600.0, 700.0, 800.0, 900.0
-  };
-  private final double[] m_testPoint;
-  private final double[] m_testPointM;
-  private final double[] m_fmax;
+    private final double[] m_func_biases = {
+            0.0, 100.0, 200.0, 300.0, 400.0,
+            500.0, 600.0, 700.0, 800.0, 900.0
+    };
+    private final double[] m_testPoint;
+    private final double[] m_testPointM;
+    private final double[] m_fmax;
 
-  // In order to avoid excessive memory allocation,
-  // a fixed memory buffer is allocated for each function object.
-  private double[] m_w;
-  private double[][] m_z;
-  private double[][] m_zM;
+    // In order to avoid excessive memory allocation,
+    // a fixed memory buffer is allocated for each function object.
+    private final double[] m_w;
+    private final double[][] m_z;
+    private final double[][] m_zM;
 
-  // Constructors
-  public F17RotatedHybridComposition1Noise(int dimension, double bias) throws JMetalException {
-    this(dimension, bias, DEFAULT_FILE_DATA,
-      DEFAULT_FILE_MX_PREFIX + dimension + DEFAULT_FILE_MX_SUFFIX);
-  }
+    // Constructors
+    public F17RotatedHybridComposition1Noise(int dimension, double bias) throws JMetalException {
+        this(dimension, bias, DEFAULT_FILE_DATA,
+                DEFAULT_FILE_MX_PREFIX + dimension + DEFAULT_FILE_MX_SUFFIX);
+    }
 
-  public F17RotatedHybridComposition1Noise(int dimension, double bias, String file_data,
-      String file_m) throws JMetalException {
-    super(dimension, bias, FUNCTION_NAME);
+    public F17RotatedHybridComposition1Noise(int dimension, double bias, String file_data,
+                                             String file_m) throws JMetalException {
+        super(dimension, bias, FUNCTION_NAME);
 
     // Note: dimension starts from 0
     m_o = new double[NUM_FUNC][mDimension];

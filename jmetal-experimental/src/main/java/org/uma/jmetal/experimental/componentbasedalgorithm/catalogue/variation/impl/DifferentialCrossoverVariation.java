@@ -10,20 +10,22 @@ import org.uma.jmetal.util.sequencegenerator.SequenceGenerator;
 import java.util.ArrayList;
 import java.util.List;
 
-/** */
+/**
+ *
+ */
 public class DifferentialCrossoverVariation implements Variation<DoubleSolution> {
-  private int matingPoolSize;
-  private int offspringPopulationSize;
+    private final int matingPoolSize;
+    private final int offspringPopulationSize;
 
-  private SequenceGenerator<Integer> solutionIndexGenerator ;
+    private final SequenceGenerator<Integer> solutionIndexGenerator;
 
-  private DifferentialEvolutionCrossover crossover;
+    private final DifferentialEvolutionCrossover crossover;
 
-  private MutationOperator<DoubleSolution> mutation;
+    private final MutationOperator<DoubleSolution> mutation;
 
-  public DifferentialCrossoverVariation(
-      int offspringPopulationSize,
-      DifferentialEvolutionCrossover crossover,
+    public DifferentialCrossoverVariation(
+            int offspringPopulationSize,
+            DifferentialEvolutionCrossover crossover,
       MutationOperator<DoubleSolution> mutation, SequenceGenerator<Integer> solutionIndexGenerator) {
     this.offspringPopulationSize = offspringPopulationSize;
     this.crossover = crossover;

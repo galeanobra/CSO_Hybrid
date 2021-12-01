@@ -43,7 +43,7 @@ public class DefaultDoubleSolution extends AbstractSolution<Double> implements D
 
     for (int i = 0 ; i < boundsList.size(); i++) {
       Bounds<Double> bounds = boundsList.get(i);
-      variables().set(i, JMetalRandom.getInstance().nextDouble(bounds.getLowerBound(), bounds.getUpperBound())); ;
+      variables().set(i, JMetalRandom.getInstance().nextDouble(bounds.getLowerBound(), bounds.getUpperBound()));
     }
   }
 

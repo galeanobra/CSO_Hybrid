@@ -6,7 +6,7 @@ import org.uma.jmetal.util.errorchecking.Check;
 import java.util.Comparator;
 
 public class IntegerVariableComparator implements Comparator<IntegerSolution> {
-  private int variableIndex ;
+  private final int variableIndex;
 
   public IntegerVariableComparator() {
     this(0) ;

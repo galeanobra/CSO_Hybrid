@@ -11,18 +11,18 @@ import java.util.List;
  */
 @SuppressWarnings("serial")
 public class MaF14 extends AbstractDoubleProblem {
-  public int nk14;
-  public int sublen14[], len14[];
+    public int nk14;
+    public int[] sublen14, len14;
 
-  /**
-   * Default constructor
-   */
-  public MaF14() {
-    this(60, 3) ;
-  }
+    /**
+     * Default constructor
+     */
+    public MaF14() {
+        this(60, 3);
+    }
 
-  /**
-   * Creates a MaF14 problem instance
+    /**
+     * Creates a MaF14 problem instance
    *
    * @param numberOfVariables Number of variables
    * @param numberOfObjectives Number of objective functions

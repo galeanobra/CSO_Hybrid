@@ -29,7 +29,7 @@ import java.util.List;
  *     <p>Applies a hv tournament selection to return a solution from a list.
  */
 public class HVTournamentSelection<S extends Solution<?>> implements SelectionOperator<List<S>, S> {
-  private Comparator<S> comparator;
+  private final Comparator<S> comparator;
 
   private final int numberOfTournaments;
 

@@ -13,18 +13,18 @@ import java.util.Comparator;
  */
 @SuppressWarnings("serial")
 public class GenericBoundedArchive<S extends Solution<?>> extends AbstractBoundedArchive<S> {
-  private Comparator<S> comparator;
-  private DensityEstimator<S> densityEstimator ;
+    private final Comparator<S> comparator;
+    private final DensityEstimator<S> densityEstimator;
 
-  public GenericBoundedArchive(int maxSize, DensityEstimator<S> densityEstimator) {
-    super(maxSize);
-    this.densityEstimator = densityEstimator ;
-    comparator = densityEstimator.getComparator() ;
-  }
+    public GenericBoundedArchive(int maxSize, DensityEstimator<S> densityEstimator) {
+        super(maxSize);
+        this.densityEstimator = densityEstimator;
+        comparator = densityEstimator.getComparator();
+    }
 
-  @Override
-  public void prune() {
-    if (getSolutionList().size() > getMaxSize()) {
+    @Override
+    public void prune() {
+        if (getSolutionList().size() > getMaxSize()) {
       computeDensityEstimator();
       S worst = new SolutionListUtils().findWorstSolution(getSolutionList(), comparator) ;
       getSolutionList().remove(worst);

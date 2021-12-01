@@ -14,18 +14,19 @@ import java.util.List;
  */
 @Deprecated
 public class FrontNormalizer {
-  private double[] maximumValues;
-  private double[] minimumValues;
+    private final double[] maximumValues;
+    private final double[] minimumValues;
 
-  /**
-   * Constructor.
-   * @param referenceFront
-   */
-  public FrontNormalizer(List<? extends Solution<?>> referenceFront) {
-    if (referenceFront == null) {
-      throw new JMetalException("The reference front is null") ;
-    }
-    maximumValues = FrontUtils.getMaximumValues(new ArrayFront(referenceFront));
+    /**
+     * Constructor.
+     *
+     * @param referenceFront
+     */
+    public FrontNormalizer(List<? extends Solution<?>> referenceFront) {
+        if (referenceFront == null) {
+            throw new JMetalException("The reference front is null");
+        }
+        maximumValues = FrontUtils.getMaximumValues(new ArrayFront(referenceFront));
     minimumValues = FrontUtils.getMinimumValues(new ArrayFront(referenceFront));
   }
 

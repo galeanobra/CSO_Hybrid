@@ -81,16 +81,16 @@ public class PISAHypervolume<S extends Solution<?>> extends Hypervolume<S> {
   returns true if 'point1' dominates 'points2' with respect to the
   to the first 'noObjectives' objectives
   */
-  private boolean dominates(double point1[], double point2[], int noObjectives) {
-    int i;
-    int betterInAnyObjective;
+  private boolean dominates(double[] point1, double[] point2, int noObjectives) {
+      int i;
+      int betterInAnyObjective;
 
-    betterInAnyObjective = 0;
-    for (i = 0; i < noObjectives && point1[i] >= point2[i]; i++) {
-      if (point1[i] > point2[i]) {
-        betterInAnyObjective = 1;
+      betterInAnyObjective = 0;
+      for (i = 0; i < noObjectives && point1[i] >= point2[i]; i++) {
+          if (point1[i] > point2[i]) {
+              betterInAnyObjective = 1;
+          }
       }
-    }
 
     return ((i >= noObjectives) && (betterInAnyObjective > 0));
   }

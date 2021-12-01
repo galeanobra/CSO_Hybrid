@@ -23,31 +23,33 @@ import java.util.List;
  */
 @SuppressWarnings("serial")
 public abstract class AbstractCoralReefsOptimization<S, R>
-		implements Algorithm<R> {
+        implements Algorithm<R> {
 
-	protected List<S> population;
-	protected List<Coordinate> coordinates;
+    protected List<S> population;
+    protected List<Coordinate> coordinates;
 
-	protected SelectionOperator<List<S>, S> selectionOperator;
-	protected CrossoverOperator<S> crossoverOperator;
-	protected MutationOperator<S> mutationOperator;
-	protected Comparator<S> comparator;
+    protected SelectionOperator<List<S>, S> selectionOperator;
+    protected CrossoverOperator<S> crossoverOperator;
+    protected MutationOperator<S> mutationOperator;
+    protected Comparator<S> comparator;
 
-	private int N, M; // Grid sizes
-	private double rho; // Percentage of occupied reef
-	private double Fbs, Fbr; // Percentage of broadcast spawners and brooders
-	private double Fa, Fd; // Percentage of budders and depredated corals
-	private double Pd; // Probability of depredation
-	private int attemptsToSettle;
+    private final int N;
+    private final int M; // Grid sizes
+    private final double rho; // Percentage of occupied reef
+    private final double Fbs;
+    private final double Fbr; // Percentage of broadcast spawners and brooders
+    private final double Fa;
+    private final double Fd; // Percentage of budders and depredated corals
+    private final double Pd; // Probability of depredation
+    private final int attemptsToSettle;
 
-	/**
-	 * Represents a Coordinate in Coral Reef Grid
-	 * 
-	 * @author inacio-medeiros
-	 *
-	 */
-	public static class Coordinate implements Comparable<Coordinate> {
-		private int x, y;
+    /**
+     * Represents a Coordinate in Coral Reef Grid
+     *
+     * @author inacio-medeiros
+     */
+    public static class Coordinate implements Comparable<Coordinate> {
+        private int x, y;
 
 		/**
 		 * Constructor
@@ -121,9 +123,7 @@ public abstract class AbstractCoralReefsOptimization<S, R>
 
 			if (x != other.x)
 				return false;
-			if (y != other.y)
-				return false;
-			return true;
+            return y == other.y;
 		}
 
 	}

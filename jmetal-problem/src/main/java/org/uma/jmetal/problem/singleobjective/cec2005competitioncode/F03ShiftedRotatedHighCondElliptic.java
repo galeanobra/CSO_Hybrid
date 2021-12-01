@@ -52,28 +52,28 @@ public class F03ShiftedRotatedHighCondElliptic extends TestFunc {
 
   // Fixed (class) parameters
   static final public String FUNCTION_NAME = "Shifted Rotated High Conditioned Elliptic Function";
-  static final public String DEFAULT_FILE_DATA = Benchmark.CEC2005SUPPORTDATADIRECTORY + "/high_cond_elliptic_rot_data.txt";
-  static final public String DEFAULT_FILE_MX_PREFIX = Benchmark.CEC2005SUPPORTDATADIRECTORY + "/Elliptic_M_D";
-  static final public String DEFAULT_FILE_MX_SUFFIX = ".txt";
+    static final public String DEFAULT_FILE_DATA = Benchmark.CEC2005SUPPORTDATADIRECTORY + "/high_cond_elliptic_rot_data.txt";
+    static final public String DEFAULT_FILE_MX_PREFIX = Benchmark.CEC2005SUPPORTDATADIRECTORY + "/Elliptic_M_D";
+    static final public String DEFAULT_FILE_MX_SUFFIX = ".txt";
 
-  // Shifted global optimum
-  private final double[] m_o;
-  private final double[][] m_matrix;
+    // Shifted global optimum
+    private final double[] m_o;
+    private final double[][] m_matrix;
 
-  // In order to avoid excessive memory allocation,
-  // a fixed memory buffer is allocated for each function object.
-  private double[] m_z;
-  private double[] m_zM;
+    // In order to avoid excessive memory allocation,
+    // a fixed memory buffer is allocated for each function object.
+    private final double[] m_z;
+    private final double[] m_zM;
 
-  private double constant;
+    private final double constant;
 
-  // Constructors
-  public F03ShiftedRotatedHighCondElliptic(int dimension, double bias) throws JMetalException {
-    this(dimension, bias, DEFAULT_FILE_DATA,
-      DEFAULT_FILE_MX_PREFIX + dimension + DEFAULT_FILE_MX_SUFFIX);
-  }
+    // Constructors
+    public F03ShiftedRotatedHighCondElliptic(int dimension, double bias) throws JMetalException {
+        this(dimension, bias, DEFAULT_FILE_DATA,
+                DEFAULT_FILE_MX_PREFIX + dimension + DEFAULT_FILE_MX_SUFFIX);
+    }
 
-  public F03ShiftedRotatedHighCondElliptic(int dimension, double bias, String file_data,
+    public F03ShiftedRotatedHighCondElliptic(int dimension, double bias, String file_data,
       String file_m) throws JMetalException {
     super(dimension, bias, FUNCTION_NAME);
 

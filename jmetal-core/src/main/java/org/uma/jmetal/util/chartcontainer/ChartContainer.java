@@ -20,28 +20,28 @@ import java.util.concurrent.TimeUnit;
  * @author Jorge Rodriguez Ordonez
  */
 public class ChartContainer {
-  private Map<String, XYChart> charts;
-  private XYChart frontChart;
-  private XYChart varChart;
-  private SwingWrapper<XYChart> swingWrapper;
-  private String name;
-  private int delay;
-  private int objective1;
-  private int objective2;
-  private int variable1;
-  private int variable2;
-  private Map<String, List<Integer>> iterations;
-  private Map<String, List<Double>> indicatorValues;
+    private final Map<String, XYChart> charts;
+    private XYChart frontChart;
+    private XYChart varChart;
+    private SwingWrapper<XYChart> swingWrapper;
+    private String name;
+    private int delay;
+    private int objective1;
+    private int objective2;
+    private int variable1;
+    private int variable2;
+    private final Map<String, List<Integer>> iterations;
+    private final Map<String, List<Double>> indicatorValues;
 
-  public ChartContainer(String name) {
-    this(name, 0);
-  }
+    public ChartContainer(String name) {
+        this(name, 0);
+    }
 
-  public ChartContainer(String name, int delay) {
-    this.name = name;
-    this.delay = delay;
-    this.charts = new LinkedHashMap<String, XYChart>();
-    this.iterations = new HashMap<String, List<Integer>>();
+    public ChartContainer(String name, int delay) {
+        this.name = name;
+        this.delay = delay;
+        this.charts = new LinkedHashMap<String, XYChart>();
+        this.iterations = new HashMap<String, List<Integer>>();
     this.indicatorValues = new HashMap<String, List<Double>>();
   }
 

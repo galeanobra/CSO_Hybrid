@@ -14,19 +14,19 @@ import java.util.Map;
  */
 @SuppressWarnings("serial")
 public abstract class AbstractSolution<T> implements Solution<T> {
-  private double[] objectives;
-  private List<T> variables;
-  private double[] constraints;
-  protected Map<Object, Object> attributes;
+    private final double[] objectives;
+    private final List<T> variables;
+    private final double[] constraints;
+    protected Map<Object, Object> attributes;
 
-  @Override
-  public List<T> variables() {
-    return variables ;
-  }
+    @Override
+    public List<T> variables() {
+        return variables;
+    }
 
-  @Override
-  public double[] objectives() {
-    return objectives ;
+    @Override
+    public double[] objectives() {
+        return objectives;
   }
 
   @Override

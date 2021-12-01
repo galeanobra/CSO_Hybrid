@@ -16,8 +16,8 @@ import java.util.Comparator;
 import java.util.List;
 
 public class ReplacementParameter extends CategoricalParameter {
-  public ReplacementParameter(String args[], List<String> selectionStrategies) {
-    super("replacement", args, selectionStrategies);
+  public ReplacementParameter(String[] args, List<String> selectionStrategies) {
+      super("replacement", args, selectionStrategies);
   }
 
   public Replacement<?> getParameter(Comparator<DoubleSolution> comparator) {

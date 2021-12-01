@@ -33,7 +33,7 @@ public class TerminationByKeyboard implements Termination {
   }
 
   private class KeyboardReader extends Thread {
-    private TerminationByKeyboard terminationByKeyboard ;
+    private final TerminationByKeyboard terminationByKeyboard;
 
     public KeyboardReader(TerminationByKeyboard terminationByKeyboard) {
       this.terminationByKeyboard = terminationByKeyboard ;

@@ -16,13 +16,13 @@ import static org.uma.jmetal.problem.multiobjective.re.Util.getClosestValue;
  */
 public class RE25 extends AbstractDoubleProblem {
 
-  private int numberOfOriginalConstraints = 6;
-  private static final double[] diameterFeasibleIntergers = {
-    0.009, 0.0095, 0.0104, 0.0118, 0.0128, 0.0132, 0.014, 0.015, 0.0162, 0.0173, 0.018, 0.02, 0.023,
-    0.025, 0.028, 0.032, 0.035, 0.041, 0.047, 0.054, 0.063, 0.072, 0.08, 0.092, 0.105, 0.12, 0.135,
-    0.148, 0.162, 0.177, 0.192, 0.207, 0.225, 0.244, 0.263, 0.283, 0.307, 0.331, 0.362, 0.394,
-    0.4375, 0.5
-  };
+  private final int numberOfOriginalConstraints = 6;
+    private static final double[] diameterFeasibleIntergers = {
+            0.009, 0.0095, 0.0104, 0.0118, 0.0128, 0.0132, 0.014, 0.015, 0.0162, 0.0173, 0.018, 0.02, 0.023,
+            0.025, 0.028, 0.032, 0.035, 0.041, 0.047, 0.054, 0.063, 0.072, 0.08, 0.092, 0.105, 0.12, 0.135,
+            0.148, 0.162, 0.177, 0.192, 0.207, 0.225, 0.244, 0.263, 0.283, 0.307, 0.331, 0.362, 0.394,
+            0.4375, 0.5
+    };
 
   /** Constructor */
   public RE25() {

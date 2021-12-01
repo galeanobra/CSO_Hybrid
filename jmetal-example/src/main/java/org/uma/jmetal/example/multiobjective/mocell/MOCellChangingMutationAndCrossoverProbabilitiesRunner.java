@@ -58,7 +58,7 @@ public class MOCellChangingMutationAndCrossoverProbabilitiesRunner extends Abstr
       referenceParetoFront = "resources/referenceFrontsCSV/ZDT4.csv" ;
     }
 
-    problem = ProblemUtils.<DoubleSolution> loadProblem(problemName);
+    problem = ProblemUtils.loadProblem(problemName);
 
     double crossoverProbability = 0.9 ;
     double crossoverDistributionIndex = 20.0 ;

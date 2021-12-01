@@ -17,18 +17,18 @@ import java.util.List;
  */
 public class HypervolumeContributionDensityEstimator<S extends Solution<?>> implements DensityEstimator<S> {
 
-  private String attributeId = getClass().getName();
-  private Hypervolume<S> hypervolume ;
+    private final String attributeId = getClass().getName();
+    private final Hypervolume<S> hypervolume;
 
-  public HypervolumeContributionDensityEstimator(List<S> referenceFront) {
-    hypervolume = new PISAHypervolume<>(new ArrayFront(referenceFront)) ;
-  }
+    public HypervolumeContributionDensityEstimator(List<S> referenceFront) {
+        hypervolume = new PISAHypervolume<>(new ArrayFront(referenceFront));
+    }
 
-  public HypervolumeContributionDensityEstimator(double[] referencePoint) {
-    hypervolume = new PISAHypervolume<>(referencePoint) ;
-  }
+    public HypervolumeContributionDensityEstimator(double[] referencePoint) {
+        hypervolume = new PISAHypervolume<>(referencePoint);
+    }
 
-  /**
+    /**
    * Assigns the hv contribution to all population in a <code>SolutionSet</code>.
    *
    * @param solutionList The <code>SolutionSet</code>.

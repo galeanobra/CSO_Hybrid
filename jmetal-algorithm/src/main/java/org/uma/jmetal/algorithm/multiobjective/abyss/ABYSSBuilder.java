@@ -20,7 +20,7 @@ import java.util.Comparator;
 
 /** @author Cristobal Barba */
 public class ABYSSBuilder implements AlgorithmBuilder<ABYSS> {
-  private DoubleProblem problem;
+  private final DoubleProblem problem;
   private CrossoverOperator<DoubleSolution> crossoverOperator;
   protected LocalSearchOperator<DoubleSolution> improvementOperator;
 
@@ -31,7 +31,7 @@ public class ABYSSBuilder implements AlgorithmBuilder<ABYSS> {
   private int refSet2Size;
   private int archiveSize;
   private int maxEvaluations;
-  private CrowdingDistanceArchive<DoubleSolution> archive;
+  private final CrowdingDistanceArchive<DoubleSolution> archive;
 
   public ABYSSBuilder(DoubleProblem problem, Archive<DoubleSolution> archive) {
     this.populationSize = 20;

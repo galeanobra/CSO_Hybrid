@@ -31,7 +31,7 @@ import java.util.List;
 @SuppressWarnings("serial")
 public class SpatialSpreadDeviationSelection<S extends Solution<?>>
     implements SelectionOperator<List<S>, S> {
-  private Comparator<S> comparator;
+  private final Comparator<S> comparator;
 
   private final int numberOfTournaments;
 

@@ -15,27 +15,27 @@ import java.util.List;
  * to a particular solution, which is determined by its position in the population as indicated by a
  * {@link SequenceGenerator} object.
  *
- * @author Antonio J. Nebro
  * @param <S> Type of the solutions
+ * @author Antonio J. Nebro
  */
 public class NeighborhoodMatingPoolSelection<S extends Solution<?>>
-    implements MatingPoolSelection<S> {
-  private SelectionOperator<List<S>, S> selectionOperator;
-  private int matingPoolSize;
-  private boolean updateCurrentSolutionIndex ;
+        implements MatingPoolSelection<S> {
+    private final SelectionOperator<List<S>, S> selectionOperator;
+    private final int matingPoolSize;
+    private final boolean updateCurrentSolutionIndex;
 
-  private SequenceGenerator<Integer> solutionIndexGenerator;
-  private Neighborhood<S> neighborhood;
+    private final SequenceGenerator<Integer> solutionIndexGenerator;
+    private final Neighborhood<S> neighborhood;
 
-  public NeighborhoodMatingPoolSelection(
-      int matingPoolSize,
-      SequenceGenerator<Integer> solutionIndexGenerator,
-      Neighborhood<S> neighborhood,
-      SelectionOperator<List<S>, S> selectionOperator, boolean updateCurrentSolutionIndex) {
-    this.matingPoolSize = matingPoolSize;
-    this.solutionIndexGenerator = solutionIndexGenerator;
-    this.neighborhood = neighborhood;
-    this.selectionOperator = selectionOperator ;
+    public NeighborhoodMatingPoolSelection(
+            int matingPoolSize,
+            SequenceGenerator<Integer> solutionIndexGenerator,
+            Neighborhood<S> neighborhood,
+            SelectionOperator<List<S>, S> selectionOperator, boolean updateCurrentSolutionIndex) {
+        this.matingPoolSize = matingPoolSize;
+        this.solutionIndexGenerator = solutionIndexGenerator;
+        this.neighborhood = neighborhood;
+        this.selectionOperator = selectionOperator;
     this.updateCurrentSolutionIndex = updateCurrentSolutionIndex ;
   }
 

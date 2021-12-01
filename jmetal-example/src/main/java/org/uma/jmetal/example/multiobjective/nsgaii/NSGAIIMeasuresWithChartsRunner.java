@@ -54,7 +54,7 @@ public class NSGAIIMeasuresWithChartsRunner extends AbstractAlgorithmRunner {
       referenceParetoFront = "resources/referenceFrontsCSV/ZDT1.csv";
     }
 
-    problem = ProblemUtils.<DoubleSolution>loadProblem(problemName);
+    problem = ProblemUtils.loadProblem(problemName);
 
     double crossoverProbability = 0.9;
     double crossoverDistributionIndex = 20.0;
@@ -146,8 +146,8 @@ public class NSGAIIMeasuresWithChartsRunner extends AbstractAlgorithmRunner {
   }
 
   private static class ChartListener implements MeasureListener<List<DoubleSolution>> {
-    private ChartContainer chart;
-    private int iteration = 0;
+      private final ChartContainer chart;
+      private int iteration = 0;
 
     public ChartListener(ChartContainer chart) {
       this.chart = chart;

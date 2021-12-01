@@ -22,8 +22,8 @@ import java.util.List;
 @SuppressWarnings("serial")
 public class RankingAndCrowdingSelection<S extends Solution<?>>
     implements SelectionOperator<List<S>,List<S>> {
-  private final int solutionsToSelect ;
-  private Comparator<S> dominanceComparator ;
+  private final int solutionsToSelect;
+    private final Comparator<S> dominanceComparator;
 
 
   /** Constructor */

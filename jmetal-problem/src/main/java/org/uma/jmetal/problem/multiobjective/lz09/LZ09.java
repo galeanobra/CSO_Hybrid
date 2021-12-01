@@ -25,17 +25,17 @@ public class LZ09 {
   }
 
   // control the PF shape
-  void alphaFunction(double alpha[], List<Double> x, int dim, int type) {
-    if (dim == 2) {
-      if (type == 21) {
-        alpha[0] = x.get(0);
-        alpha[1] = 1 - Math.sqrt(x.get(0));
-      }
+  void alphaFunction(double[] alpha, List<Double> x, int dim, int type) {
+      if (dim == 2) {
+          if (type == 21) {
+              alpha[0] = x.get(0);
+              alpha[1] = 1 - Math.sqrt(x.get(0));
+          }
 
-      if (type == 22) {
-        alpha[0] = x.get(0);
-        alpha[1] = 1 - x.get(0) * x.get(0);
-      }
+          if (type == 22) {
+              alpha[0] = x.get(0);
+              alpha[1] = 1 - x.get(0) * x.get(0);
+          }
 
       if (type == 23) {
         alpha[0] = x.get(0);
@@ -240,7 +240,7 @@ public class LZ09 {
         g = betaFunction(aa, dtype);
         h = betaFunction(bb, dtype);
 
-        double alpha[] = new double[2];
+          double[] alpha = new double[2];
         alphaFunction(alpha, xVar, 2, ptype);  // shape function
         yObj.set(0, alpha[0] + h);
         yObj.set(1, alpha[1] + g);
@@ -271,7 +271,7 @@ public class LZ09 {
         }
         g = betaFunction(aa, dtype);
         h = betaFunction(bb, dtype);
-        double alpha[] = new double[2];
+          double[] alpha = new double[2];
         alphaFunction(alpha, xVar, 2, ptype);
         yObj.set(0, alpha[0] + h);
         yObj.set(1, alpha[1] + g);
@@ -302,7 +302,7 @@ public class LZ09 {
         h = betaFunction(bb, dtype);
         e = betaFunction(cc, dtype);
 
-        double alpha[] = new double[3];
+          double[] alpha = new double[3];
         alphaFunction(alpha, xVar, 3, ptype);
         yObj.set(0, alpha[0] + h);
         yObj.set(1, alpha[1] + g);

@@ -23,7 +23,7 @@ public class IntegerSBXCrossover implements CrossoverOperator<IntegerSolution> {
   private double distributionIndex ;
   private double crossoverProbability  ;
 
-  private RandomGenerator<Double> randomGenerator ;
+  private final RandomGenerator<Double> randomGenerator;
 
   /** Constructor */
   public IntegerSBXCrossover(double crossoverProbability, double distributionIndex) {

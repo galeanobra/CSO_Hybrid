@@ -11,22 +11,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * @param <S>
  */
 public class CrossoverAndMutationVariation<S extends Solution<?>> implements Variation<S> {
-  private CrossoverOperator<S> crossover ;
-  private MutationOperator<S> mutation ;
-  private int matingPoolSize ;
-  private int offspringPopulationSize ;
+    private final CrossoverOperator<S> crossover;
+    private final MutationOperator<S> mutation;
+    private int matingPoolSize;
+    private final int offspringPopulationSize;
 
-  public CrossoverAndMutationVariation(
-      int offspringPopulationSize,
-      CrossoverOperator<S> crossover,
-      MutationOperator<S> mutation) {
-    this.crossover = crossover ;
-    this.mutation = mutation ;
-    this.offspringPopulationSize = offspringPopulationSize ;
+    public CrossoverAndMutationVariation(
+            int offspringPopulationSize,
+            CrossoverOperator<S> crossover,
+            MutationOperator<S> mutation) {
+        this.crossover = crossover;
+        this.mutation = mutation;
+        this.offspringPopulationSize = offspringPopulationSize;
 
     this.matingPoolSize = offspringPopulationSize *
         crossover.getNumberOfRequiredParents() / crossover.getNumberOfGeneratedChildren();

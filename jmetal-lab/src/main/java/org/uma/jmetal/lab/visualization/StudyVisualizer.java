@@ -37,29 +37,29 @@ import java.util.LinkedList;
 public class StudyVisualizer {
   public enum TYPE_OF_FRONT_TO_SHOW {
     NONE,
-    BEST,
-    MEDIAN
+      BEST,
+      MEDIAN
   }
 
-  private static final String INDICATOR_SUMMARY_CSV = "QualityIndicatorSummary.csv";
-  // NAMES OF CSV COLUMNS
-  private static final String ALGORITHM = "Algorithm";
-  private static final String PROBLEM = "Problem";
-  private static final String INDICATOR_NAME = "IndicatorName";
-  private static final String INDICATOR_VALUE = "IndicatorValue";
-  private String folderPath;
-  private Table table;
-  private TYPE_OF_FRONT_TO_SHOW typeOfFrontToShow;
+    private static final String INDICATOR_SUMMARY_CSV = "QualityIndicatorSummary.csv";
+    // NAMES OF CSV COLUMNS
+    private static final String ALGORITHM = "Algorithm";
+    private static final String PROBLEM = "Problem";
+    private static final String INDICATOR_NAME = "IndicatorName";
+    private static final String INDICATOR_VALUE = "IndicatorValue";
+    private final String folderPath;
+    private final Table table;
+    private final TYPE_OF_FRONT_TO_SHOW typeOfFrontToShow;
 
-  public StudyVisualizer(String path, TYPE_OF_FRONT_TO_SHOW typeOfFrontToShow) throws IOException {
-    folderPath = path;
-    table = Table.read().csv(path + "/" + INDICATOR_SUMMARY_CSV);
-    this.typeOfFrontToShow = typeOfFrontToShow;
-  }
+    public StudyVisualizer(String path, TYPE_OF_FRONT_TO_SHOW typeOfFrontToShow) throws IOException {
+        folderPath = path;
+        table = Table.read().csv(path + "/" + INDICATOR_SUMMARY_CSV);
+        this.typeOfFrontToShow = typeOfFrontToShow;
+    }
 
-  public StudyVisualizer(String path) throws IOException {
-    this(path, null);
-  }
+    public StudyVisualizer(String path) throws IOException {
+        this(path, null);
+    }
 
   public static void main(String[] args) throws IOException {
     String directory;

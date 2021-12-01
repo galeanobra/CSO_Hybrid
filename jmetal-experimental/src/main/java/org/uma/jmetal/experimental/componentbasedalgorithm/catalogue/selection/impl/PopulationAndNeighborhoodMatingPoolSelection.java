@@ -15,27 +15,26 @@ import java.util.List;
  * This class allows to select N different solutions that can be taken from a solution list (i.e, population or swarm) or
  * from a neighborhood according to a given probability.
  *
- * @author Antonio J. Nebro
-
  * @param <S> Type of the solutions
+ * @author Antonio J. Nebro
  */
 public class PopulationAndNeighborhoodMatingPoolSelection<S extends Solution<?>>
-    implements MatingPoolSelection<S> {
-  private SelectionOperator<List<S>, List<S>> selectionOperator;
-  private int matingPoolSize;
+        implements MatingPoolSelection<S> {
+    private final SelectionOperator<List<S>, List<S>> selectionOperator;
+    private final int matingPoolSize;
 
-  private SequenceGenerator<Integer> solutionIndexGenerator;
-  private Neighborhood<S> neighborhood;
+    private final SequenceGenerator<Integer> solutionIndexGenerator;
+    private final Neighborhood<S> neighborhood;
 
-  private Neighborhood.NeighborType neighborType;
-  private double neighborhoodSelectionProbability;
+    private Neighborhood.NeighborType neighborType;
+    private final double neighborhoodSelectionProbability;
 
-  private boolean selectCurrentSolution ;
+    private final boolean selectCurrentSolution;
 
-  public PopulationAndNeighborhoodMatingPoolSelection(
-      int matingPoolSize,
-      SequenceGenerator<Integer> solutionIndexGenerator,
-      Neighborhood<S> neighborhood,
+    public PopulationAndNeighborhoodMatingPoolSelection(
+            int matingPoolSize,
+            SequenceGenerator<Integer> solutionIndexGenerator,
+            Neighborhood<S> neighborhood,
       double neighborhoodSelectionProbability,
       boolean selectCurrentSolution) {
     this.matingPoolSize = matingPoolSize;

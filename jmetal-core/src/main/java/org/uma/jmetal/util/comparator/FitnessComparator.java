@@ -15,7 +15,7 @@ import java.util.Comparator;
  */
 @SuppressWarnings("serial")
 public class FitnessComparator<S extends Solution<?>> implements Comparator<S>, Serializable {
-  private Fitness<S> solutionFitness = new Fitness<S>() ;
+  private final Fitness<S> solutionFitness = new Fitness<S>();
 
   /**
    * Compares two solutions.

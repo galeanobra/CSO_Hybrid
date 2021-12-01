@@ -9,8 +9,8 @@ import org.uma.jmetal.util.ranking.impl.StrengthRanking;
 import java.util.List;
 
 public class RankingParameter <S extends Solution<?>> extends CategoricalParameter {
-  public RankingParameter(String name, String args[], List<String> validRankings) {
-    super(name, args, validRankings);
+  public RankingParameter(String name, String[] args, List<String> validRankings) {
+      super(name, args, validRankings);
   }
 
   public Ranking<S> getParameter() {

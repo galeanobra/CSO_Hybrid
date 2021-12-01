@@ -73,7 +73,7 @@ public class BinaryTournamentSelectionTest {
     DoubleSolution solution1 = mock(DoubleSolution.class);
     DoubleSolution solution2 = mock(DoubleSolution.class);
 
-    List<DoubleSolution> population = Arrays.<DoubleSolution>asList(solution1, solution2);
+    List<DoubleSolution> population = Arrays.asList(solution1, solution2);
 
     BinaryTournamentSelection<DoubleSolution> selection =
         new BinaryTournamentSelection<DoubleSolution>(comparator);

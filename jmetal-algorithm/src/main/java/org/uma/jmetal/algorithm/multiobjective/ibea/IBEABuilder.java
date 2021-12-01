@@ -16,8 +16,8 @@ import java.util.List;
  * This class implements the IBEA algorithm
  */
 public class IBEABuilder implements AlgorithmBuilder<IBEA<DoubleSolution>> {
-  private Problem<DoubleSolution> problem;
-  private int populationSize;
+  private final Problem<DoubleSolution> problem;
+    private int populationSize;
   private int archiveSize;
   private int maxEvaluations;
 

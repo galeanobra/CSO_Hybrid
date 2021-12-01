@@ -14,18 +14,18 @@ import java.util.Map;
  */
 @SuppressWarnings("serial")
 public class PointSolution implements Solution<Double> {
-  private int numberOfObjectives;
-  private double[] objectives;
-  protected Map<Object, Object> attributes;
+    private final int numberOfObjectives;
+    private final double[] objectives;
+    protected Map<Object, Object> attributes;
 
-  @Override
-  public List<Double> variables() {
-    return null;
-  }
+    @Override
+    public List<Double> variables() {
+        return null;
+    }
 
-  @Override
-  public double[] objectives() {
-    return objectives;
+    @Override
+    public double[] objectives() {
+        return objectives;
   }
 
   @Override
@@ -103,9 +103,7 @@ public class PointSolution implements Solution<Double> {
     PointSolution that = (PointSolution) o;
 
     if (numberOfObjectives != that.numberOfObjectives) return false;
-    if (!Arrays.equals(objectives, that.objectives)) return false;
-
-    return true;
+      return Arrays.equals(objectives, that.objectives);
   }
 
   @Override

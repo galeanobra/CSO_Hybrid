@@ -22,7 +22,7 @@ import java.util.stream.IntStream;
  */
 public class StrengthRanking<S extends Solution<?>> implements Ranking<S> {
   private final String attributeId = getClass().getName();
-  private Comparator<S> dominanceComparator;
+    private final Comparator<S> dominanceComparator;
 
   private List<ArrayList<S>> rankedSubPopulations;
 

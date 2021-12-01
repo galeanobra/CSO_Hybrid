@@ -14,7 +14,7 @@ import java.util.List;
 public class HtmlGridView implements HtmlComponent {
 
   private final List<HtmlComponent> components = new LinkedList<>();
-  private String title;
+    private final String title;
 
   public HtmlGridView(String title) {
     this.title = title;

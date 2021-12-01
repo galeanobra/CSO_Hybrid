@@ -11,20 +11,20 @@ import java.util.Comparator;
 import java.util.List;
 
 public class RankingAndDensityEstimatorReplacement<S extends Solution<?>>
-    implements Replacement<S> {
-  private Ranking<S> ranking;
-  private DensityEstimator<S> densityEstimator;
-  private RemovalPolicy removalPolicy;
+        implements Replacement<S> {
+    private final Ranking<S> ranking;
+    private final DensityEstimator<S> densityEstimator;
+    private final RemovalPolicy removalPolicy;
 
-  public RankingAndDensityEstimatorReplacement(
-          Ranking<S> ranking, DensityEstimator<S> densityEstimator) {
-    this(ranking, densityEstimator, RemovalPolicy.sequential);
-  }
+    public RankingAndDensityEstimatorReplacement(
+            Ranking<S> ranking, DensityEstimator<S> densityEstimator) {
+        this(ranking, densityEstimator, RemovalPolicy.sequential);
+    }
 
-  public RankingAndDensityEstimatorReplacement(
-          Ranking<S> ranking, DensityEstimator<S> densityEstimator, RemovalPolicy removalPolicy) {
-    this.ranking = ranking;
-    this.densityEstimator = densityEstimator;
+    public RankingAndDensityEstimatorReplacement(
+            Ranking<S> ranking, DensityEstimator<S> densityEstimator, RemovalPolicy removalPolicy) {
+        this.ranking = ranking;
+        this.densityEstimator = densityEstimator;
     this.removalPolicy = removalPolicy;
   }
 

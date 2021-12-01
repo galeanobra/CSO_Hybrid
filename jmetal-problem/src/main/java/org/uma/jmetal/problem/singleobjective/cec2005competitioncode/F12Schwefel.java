@@ -52,27 +52,27 @@ public class F12Schwefel extends TestFunc {
 
   // Fixed (class) parameters
   static final public String FUNCTION_NAME = "Schwefel's Problem 2.13";
-  static final public String DEFAULT_FILE_DATA = Benchmark.CEC2005SUPPORTDATADIRECTORY + "/supportData/schwefel_213_data.txt";
+    static final public String DEFAULT_FILE_DATA = Benchmark.CEC2005SUPPORTDATADIRECTORY + "/supportData/schwefel_213_data.txt";
 
-  // Shifted global optimum
-  private final double[] m_o;
-  private final double[][] m_a;
-  private final double[][] m_b;
+    // Shifted global optimum
+    private final double[] m_o;
+    private final double[][] m_a;
+    private final double[][] m_b;
 
-  // In order to avoid excessive memory allocation,
-  // a fixed memory buffer is allocated for each function object.
-  private double[] m_A;
-  private double[] m_B;
+    // In order to avoid excessive memory allocation,
+    // a fixed memory buffer is allocated for each function object.
+    private final double[] m_A;
+    private final double[] m_B;
 
-  // Constructors
-  public F12Schwefel(int dimension, double bias) throws JMetalException {
-    this(dimension, bias, DEFAULT_FILE_DATA);
-  }
+    // Constructors
+    public F12Schwefel(int dimension, double bias) throws JMetalException {
+        this(dimension, bias, DEFAULT_FILE_DATA);
+    }
 
-  public F12Schwefel(int dimension, double bias, String file_data) throws JMetalException {
-    super(dimension, bias, FUNCTION_NAME);
+    public F12Schwefel(int dimension, double bias, String file_data) throws JMetalException {
+        super(dimension, bias, FUNCTION_NAME);
 
-    // Note: dimension starts from 0
+        // Note: dimension starts from 0
     m_o = new double[mDimension];
     m_a = new double[mDimension][mDimension];
     m_b = new double[mDimension][mDimension];

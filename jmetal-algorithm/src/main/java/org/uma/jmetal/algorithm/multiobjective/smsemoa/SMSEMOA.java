@@ -24,8 +24,8 @@ public class SMSEMOA<S extends Solution<?>> extends AbstractGeneticAlgorithm<S, 
 
   protected int evaluations;
 
-  private Hypervolume<S> hypervolume;
-  protected Comparator<S> dominanceComparator ;
+  private final Hypervolume<S> hypervolume;
+    protected Comparator<S> dominanceComparator;
 
   /**
    * Constructor

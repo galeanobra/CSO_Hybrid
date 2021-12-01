@@ -11,7 +11,7 @@ import org.uma.jmetal.util.pseudorandom.PseudoRandomGenerator;
 /** @author Jorge Rodriguez */
 public class DMOPSOBuilder implements AlgorithmBuilder<DMOPSO> {
   private String name;
-  private DoubleProblem problem;
+    private final DoubleProblem problem;
 
   private double c1Max;
   private double c1Min;

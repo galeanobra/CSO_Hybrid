@@ -64,26 +64,26 @@ public class DifferentialEvolutionCrossover implements CrossoverOperator<DoubleS
   private double cr;
   private double f;
 
-  private int numberOfDifferenceVectors = 1;
-  private DE_CROSSOVER_TYPE crossoverType = DE_CROSSOVER_TYPE.BIN;
-  private DE_MUTATION_TYPE mutationType = DE_MUTATION_TYPE.RAND;
+    private int numberOfDifferenceVectors = 1;
+    private DE_CROSSOVER_TYPE crossoverType = DE_CROSSOVER_TYPE.BIN;
+    private DE_MUTATION_TYPE mutationType = DE_MUTATION_TYPE.RAND;
 
-  private DE_VARIANT variant;
+    private final DE_VARIANT variant;
 
-  private DoubleSolution currentSolution = null;
-  private DoubleSolution bestSolution = null;
+    private DoubleSolution currentSolution = null;
+    private DoubleSolution bestSolution = null;
 
-  private BoundedRandomGenerator<Integer> jRandomGenerator;
-  private BoundedRandomGenerator<Double> crRandomGenerator;
+    private final BoundedRandomGenerator<Integer> jRandomGenerator;
+    private final BoundedRandomGenerator<Double> crRandomGenerator;
 
-  private RepairDoubleSolution solutionRepair;
+    private final RepairDoubleSolution solutionRepair;
 
-  /**
-   * Constructor
-   */
-  public DifferentialEvolutionCrossover() {
-    this(DEFAULT_CR, DEFAULT_F, DEFAULT_DE_VARIANT);
-  }
+    /**
+     * Constructor
+     */
+    public DifferentialEvolutionCrossover() {
+        this(DEFAULT_CR, DEFAULT_F, DEFAULT_DE_VARIANT);
+    }
 
   /**
    * Constructor

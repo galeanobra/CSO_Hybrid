@@ -16,8 +16,8 @@ import java.util.List;
  * This class implements the GDE3 algorithm
  */
 public class GDE3Builder implements AlgorithmBuilder<GDE3> {
-  private DoubleProblem problem;
-  protected int populationSize;
+  private final DoubleProblem problem;
+    protected int populationSize;
   protected int maxEvaluations;
 
   protected DifferentialEvolutionCrossover crossoverOperator;

@@ -23,7 +23,7 @@ public abstract class AbstractDoubleProblem extends AbstractGenericProblem<Doubl
    */
   @Deprecated
   public List<Pair<Double, Double>> getVariableBounds() {
-    return bounds.stream().map(Bounds<Double>::toPair).collect(Collectors.toList());
+    return bounds.stream().map(Bounds::toPair).collect(Collectors.toList());
   }
 
   @Override

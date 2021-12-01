@@ -17,18 +17,19 @@ import java.util.List;
  */
 @SuppressWarnings("serial")
 public class AdaptiveRandomNeighborhood<S> implements Neighborhood<S> {
-  private int solutionListSize ;
-  private int numberOfRandomNeighbours;
-  private List<List<Integer>> neighbours;
-  private BoundedRandomGenerator<Integer> randomGenerator ;
+    private final int solutionListSize;
+    private final int numberOfRandomNeighbours;
+    private List<List<Integer>> neighbours;
+    private final BoundedRandomGenerator<Integer> randomGenerator;
 
-  /**
-   * Constructor
-   * @param solutionListSize The expected size of the list of solutions
-   * @param numberOfRandomNeighbours The number of neighbors per solution
-   */
-  public AdaptiveRandomNeighborhood(int solutionListSize, int numberOfRandomNeighbours) {
-	  this(solutionListSize, numberOfRandomNeighbours, (a, b) -> JMetalRandom.getInstance().nextInt(a, b));
+    /**
+     * Constructor
+     *
+     * @param solutionListSize         The expected size of the list of solutions
+     * @param numberOfRandomNeighbours The number of neighbors per solution
+     */
+    public AdaptiveRandomNeighborhood(int solutionListSize, int numberOfRandomNeighbours) {
+        this(solutionListSize, numberOfRandomNeighbours, (a, b) -> JMetalRandom.getInstance().nextInt(a, b));
   }
 
   /**

@@ -24,11 +24,11 @@ public class AdaptiveGridTest {
 
     int bisections = 5 ;
     int objectives = 2 ;
-    adaptiveGrid = new AdaptiveGrid<>(bisections, objectives) ;
-    adaptiveGrid.calculateOccupied(); ;
+    adaptiveGrid = new AdaptiveGrid<>(bisections, objectives);
+      adaptiveGrid.calculateOccupied();
 
-    assertEquals(bisections, adaptiveGrid.getBisections()) ;
-    assertEquals(0, adaptiveGrid.occupiedHypercubes());
+      assertEquals(bisections, adaptiveGrid.getBisections());
+      assertEquals(0, adaptiveGrid.occupiedHypercubes());
     assertEquals((int)Math.pow(2.0, bisections * objectives), adaptiveGrid.getHypercubes().length) ;
   }
 

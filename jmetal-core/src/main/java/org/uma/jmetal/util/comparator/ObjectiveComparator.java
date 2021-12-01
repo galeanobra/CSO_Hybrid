@@ -13,20 +13,21 @@ import java.util.Comparator;
  */
 @SuppressWarnings("serial")
 public class ObjectiveComparator<S extends Solution<?>> implements Comparator<S>, Serializable {
-  public enum Ordering {ASCENDING, DESCENDING} ;
-  private int objectiveId;
+    public enum Ordering {ASCENDING, DESCENDING}
 
-  private Ordering order;
+    private final int objectiveId;
 
-  /**
-   * Constructor.
-   *
-   * @param objectiveId The index of the objective to compare
-   */
-  public ObjectiveComparator(int objectiveId) {
-    this.objectiveId = objectiveId;
-    order = Ordering.ASCENDING;
-  }
+    private final Ordering order;
+
+    /**
+     * Constructor.
+     *
+     * @param objectiveId The index of the objective to compare
+     */
+    public ObjectiveComparator(int objectiveId) {
+        this.objectiveId = objectiveId;
+        order = Ordering.ASCENDING;
+    }
 
   /**
    * Comparator.

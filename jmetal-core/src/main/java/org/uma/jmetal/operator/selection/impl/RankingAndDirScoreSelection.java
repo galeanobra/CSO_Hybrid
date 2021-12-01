@@ -22,21 +22,21 @@ import java.util.List;
  */
 @SuppressWarnings("serial")
 public class RankingAndDirScoreSelection<S extends Solution<?>>
-    extends RankingAndCrowdingSelection<S> {
+        extends RankingAndCrowdingSelection<S> {
 
-  private int solutionsToSelect;
-  private Comparator<S> dominanceComparator;
-  private double[][] referenceVectors;
+    private final int solutionsToSelect;
+    private final Comparator<S> dominanceComparator;
+    private final double[][] referenceVectors;
 
-  public RankingAndDirScoreSelection(
-      int solutionsToSelect, Comparator<S> dominanceComparator, double[][] referenceVectors) {
-    super(solutionsToSelect, dominanceComparator);
-    this.solutionsToSelect = solutionsToSelect;
-    this.dominanceComparator = dominanceComparator;
-    this.referenceVectors = referenceVectors;
-  }
+    public RankingAndDirScoreSelection(
+            int solutionsToSelect, Comparator<S> dominanceComparator, double[][] referenceVectors) {
+        super(solutionsToSelect, dominanceComparator);
+        this.solutionsToSelect = solutionsToSelect;
+        this.dominanceComparator = dominanceComparator;
+        this.referenceVectors = referenceVectors;
+    }
 
-  @Override
+    @Override
   public List<S> execute(List<S> solutionSet) {
     if (referenceVectors == null || referenceVectors.length == 0) {
       throw new JMetalException("reference vectors can not be null.");

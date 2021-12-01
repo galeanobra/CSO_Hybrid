@@ -19,19 +19,23 @@ import java.util.List;
  */
 @SuppressWarnings("serial")
 public class WholeArithmeticCrossover implements CrossoverOperator<DoubleSolution> {
-  private double crossoverProbability;
-  private RepairDoubleSolution solutionRepair ;
-  private RandomGenerator<Double> randomGenerator ;
+    private double crossoverProbability;
+    private final RepairDoubleSolution solutionRepair;
+    private final RandomGenerator<Double> randomGenerator;
 
-  /** Constructor */
-  public WholeArithmeticCrossover(double crossoverProbability) {
-    this (crossoverProbability, new RepairDoubleSolutionWithBoundValue()) ;
-  }
+    /**
+     * Constructor
+     */
+    public WholeArithmeticCrossover(double crossoverProbability) {
+        this(crossoverProbability, new RepairDoubleSolutionWithBoundValue());
+    }
 
-  /** Constructor */
-  public WholeArithmeticCrossover(double crossoverProbability, RepairDoubleSolution solutionRepair) {
-	  this(crossoverProbability, solutionRepair, () -> JMetalRandom.getInstance().nextDouble());
-  }
+    /**
+     * Constructor
+     */
+    public WholeArithmeticCrossover(double crossoverProbability, RepairDoubleSolution solutionRepair) {
+        this(crossoverProbability, solutionRepair, () -> JMetalRandom.getInstance().nextDouble());
+    }
 
   /** Constructor */
   public WholeArithmeticCrossover(double crossoverProbability, RepairDoubleSolution solutionRepair, RandomGenerator<Double> randomGenerator) {

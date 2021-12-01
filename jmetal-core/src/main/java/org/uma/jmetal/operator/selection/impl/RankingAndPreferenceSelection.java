@@ -13,18 +13,18 @@ import java.util.List;
 
 public class RankingAndPreferenceSelection<S extends Solution<?>>
         implements SelectionOperator<List<S>, List<S>> {
-  private final int solutionsToSelect;
-  private List<Double> interestPoint;
-  private double epsilon;
+    private final int solutionsToSelect;
+    private final List<Double> interestPoint;
+    private final double epsilon;
 
-  /**
-   * Constructor
-   */
-  public RankingAndPreferenceSelection(int solutionsToSelect, List<Double> interestPoint, double epsilon) {
-    this.solutionsToSelect = solutionsToSelect;
-    this.interestPoint = interestPoint;
-    this.epsilon = epsilon;
-  }
+    /**
+     * Constructor
+     */
+    public RankingAndPreferenceSelection(int solutionsToSelect, List<Double> interestPoint, double epsilon) {
+        this.solutionsToSelect = solutionsToSelect;
+        this.interestPoint = interestPoint;
+        this.epsilon = epsilon;
+    }
 
   /* Getter */
   public int getNumberOfSolutionsToSelect() {

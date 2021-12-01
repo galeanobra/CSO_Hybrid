@@ -79,8 +79,8 @@ public class SMPSOHv2Runner extends AbstractAlgorithmRunner {
     AlgorithmRunner algorithmRunner = new AlgorithmRunner.Executor(algorithm)
         .execute();
 
-    List<DoubleSolution> population = ((SMPSO)algorithm).getResult();
-    long computingTime = algorithmRunner.getComputingTime();
+    List<DoubleSolution> population = algorithm.getResult();
+      long computingTime = algorithmRunner.getComputingTime();
 
     JMetalLogger.logger.info("Total execution time: " + computingTime + "ms");
 

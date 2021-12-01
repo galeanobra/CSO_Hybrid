@@ -19,8 +19,8 @@ import java.util.Map;
  * @author Antonio J. Nebro <antonio@lcc.uma.es>
  */
 public class RunTimeForDynamicProblemsChartObserver<S extends Solution<?>> implements Observer<Map<String, Object>> {
-  private ChartForDynamicProblemsContainer<S> chart;
-  private Integer evaluations ;
+  private final ChartForDynamicProblemsContainer<S> chart;
+    private Integer evaluations;
 
   /**
    *

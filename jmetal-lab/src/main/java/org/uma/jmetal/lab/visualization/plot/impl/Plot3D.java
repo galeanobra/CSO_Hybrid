@@ -8,17 +8,17 @@ import tech.tablesaw.plotly.Plot;
 import tech.tablesaw.plotly.api.Scatter3DPlot;
 
 public class Plot3D implements PlotFront {
-  private double[][] matrix;
-  private String plotTitle;
+    private final double[][] matrix;
+    private final String plotTitle;
 
-  public Plot3D(double[][] matrix, String title) {
-    Check.notNull(matrix);
-    Check.that(matrix.length >= 1, "The data matrix is empty");
-    Check.that(matrix[0].length == 3, "The data matrix does not have three columns");
+    public Plot3D(double[][] matrix, String title) {
+        Check.notNull(matrix);
+        Check.that(matrix.length >= 1, "The data matrix is empty");
+        Check.that(matrix[0].length == 3, "The data matrix does not have three columns");
 
-    this.plotTitle = title ;
-    this.matrix = matrix;
-  }
+        this.plotTitle = title;
+        this.matrix = matrix;
+    }
 
   public Plot3D(double[][] matrix) {
     this(matrix, "Front") ;

@@ -13,7 +13,7 @@ import java.util.List;
  */
 @SuppressWarnings("serial")
 public class NIntegerMin extends AbstractIntegerProblem {
-  private int valueN ;
+  private final int valueN;
 
   public NIntegerMin() {
     this(10, 100, -100, +100);

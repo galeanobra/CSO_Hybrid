@@ -35,28 +35,28 @@ public class SpatialSpreadDeviationDensityEstimator<S extends Solution<?>>
 
     // Use a new SolutionSet to avoid altering the original solutionSet
     List<S> front = new ArrayList<>(size);
-    for (S solution : solutionList) {
-      front.add(solution);
-    }
+      for (S solution : solutionList) {
+          front.add(solution);
+      }
 
-    for (int i = 0; i < size; i++) {
-      front.get(i).attributes().put(attributeId, 0.0);
-    }
+      for (int i = 0; i < size; i++) {
+          front.get(i).attributes().put(attributeId, 0.0);
+      }
 
-    int numberOfObjectives = solutionList.get(0).objectives().length;
+      int numberOfObjectives = solutionList.get(0).objectives().length;
 
-    double objetiveMaxn[] = new double[numberOfObjectives];
-    double objetiveMinn[] = new double[numberOfObjectives];
+      double[] objetiveMaxn = new double[numberOfObjectives];
+      double[] objetiveMinn = new double[numberOfObjectives];
 
-    for (int i = 0; i < numberOfObjectives; i++) {
-      // Sort the population by Obj n
-      Collections.sort(front, new ObjectiveComparator<S>(i));
-      objetiveMinn[i] = front.get(0).objectives()[i];
-      objetiveMaxn[i] = front.get(front.size() - 1).objectives()[i];
+      for (int i = 0; i < numberOfObjectives; i++) {
+          // Sort the population by Obj n
+          Collections.sort(front, new ObjectiveComparator<S>(i));
+          objetiveMinn[i] = front.get(0).objectives()[i];
+          objetiveMaxn[i] = front.get(front.size() - 1).objectives()[i];
 
-      // Set de crowding distance Los extremos si infinitos
-      front.get(0).attributes().put(attributeId, Double.POSITIVE_INFINITY);
-      front.get(size - 1).attributes().put(attributeId, Double.POSITIVE_INFINITY);
+          // Set de crowding distance Los extremos si infinitos
+          front.get(0).attributes().put(attributeId, Double.POSITIVE_INFINITY);
+          front.get(size - 1).attributes().put(attributeId, Double.POSITIVE_INFINITY);
     }
     double[][] distance =
             SolutionListUtils.normalizedDistanceMatrix(front, objetiveMaxn, objetiveMinn);

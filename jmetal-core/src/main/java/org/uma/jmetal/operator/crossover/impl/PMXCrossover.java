@@ -18,20 +18,20 @@ import java.util.List;
  */
 @SuppressWarnings("serial")
 public class PMXCrossover implements
-    CrossoverOperator<PermutationSolution<Integer>> {
-  private double crossoverProbability = 1.0;
-  private BoundedRandomGenerator<Integer> cuttingPointRandomGenerator ;
-  private RandomGenerator<Double> crossoverRandomGenerator ;
+        CrossoverOperator<PermutationSolution<Integer>> {
+    private double crossoverProbability = 1.0;
+    private final BoundedRandomGenerator<Integer> cuttingPointRandomGenerator;
+    private final RandomGenerator<Double> crossoverRandomGenerator;
 
-  /**
-   * Constructor
-   */
-  public PMXCrossover(double crossoverProbability) {
-	  this(crossoverProbability, () -> JMetalRandom.getInstance().nextDouble(), (a, b) -> JMetalRandom.getInstance().nextInt(a, b));
-  }
+    /**
+     * Constructor
+     */
+    public PMXCrossover(double crossoverProbability) {
+        this(crossoverProbability, () -> JMetalRandom.getInstance().nextDouble(), (a, b) -> JMetalRandom.getInstance().nextInt(a, b));
+    }
 
-  /**
-   * Constructor
+    /**
+     * Constructor
    */
   public PMXCrossover(double crossoverProbability, RandomGenerator<Double> randomGenerator) {
 	  this(crossoverProbability, randomGenerator, BoundedRandomGenerator.fromDoubleToInteger(randomGenerator));
@@ -98,28 +98,28 @@ public class PMXCrossover implements
       cuttingPoint1 = cuttingPointRandomGenerator.getRandomValue(0, permutationLength - 1);
       cuttingPoint2 = cuttingPointRandomGenerator.getRandomValue(0, permutationLength - 1);
       while (cuttingPoint2 == cuttingPoint1)
-        cuttingPoint2 = cuttingPointRandomGenerator.getRandomValue(0, permutationLength - 1);
+          cuttingPoint2 = cuttingPointRandomGenerator.getRandomValue(0, permutationLength - 1);
 
-      if (cuttingPoint1 > cuttingPoint2) {
-        int swap;
-        swap = cuttingPoint1;
-        cuttingPoint1 = cuttingPoint2;
-        cuttingPoint2 = swap;
-      }
+        if (cuttingPoint1 > cuttingPoint2) {
+            int swap;
+            swap = cuttingPoint1;
+            cuttingPoint1 = cuttingPoint2;
+            cuttingPoint2 = swap;
+        }
 
-      // STEP 2: Get the subchains to interchange
-      int replacement1[] = new int[permutationLength];
-      int replacement2[] = new int[permutationLength];
-      for (int i = 0; i < permutationLength; i++)
-        replacement1[i] = replacement2[i] = -1;
+        // STEP 2: Get the subchains to interchange
+        int[] replacement1 = new int[permutationLength];
+        int[] replacement2 = new int[permutationLength];
+        for (int i = 0; i < permutationLength; i++)
+            replacement1[i] = replacement2[i] = -1;
 
-      // STEP 3: Interchange
-      for (int i = cuttingPoint1; i <= cuttingPoint2; i++) {
-        offspring.get(0).variables().set(i, parents.get(1).variables().get(i));
-        offspring.get(1).variables().set(i, parents.get(0).variables().get(i));
+        // STEP 3: Interchange
+        for (int i = cuttingPoint1; i <= cuttingPoint2; i++) {
+            offspring.get(0).variables().set(i, parents.get(1).variables().get(i));
+            offspring.get(1).variables().set(i, parents.get(0).variables().get(i));
 
-        replacement1[parents.get(1).variables().get(i)] = parents.get(0).variables().get(i) ;
-        replacement2[parents.get(0).variables().get(i)] = parents.get(1).variables().get(i) ;
+            replacement1[parents.get(1).variables().get(i)] = parents.get(0).variables().get(i);
+            replacement2[parents.get(0).variables().get(i)] = parents.get(1).variables().get(i) ;
       }
 
       // STEP 4: Repair offspring

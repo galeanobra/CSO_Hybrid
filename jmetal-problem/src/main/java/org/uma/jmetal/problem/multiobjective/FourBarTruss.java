@@ -17,20 +17,20 @@ import java.util.List;
  */
 @SuppressWarnings("serial")
 public class FourBarTruss extends AbstractDoubleProblem {
-  private double f = 10   ;
-  private double e = 200000;
-  private double l = 200  ;
-  private double sigma = 10 ;
-	
-  /**
-   * Constructor
-   * Creates a default instance of the FourBarTruss problem
-   */
-  public FourBarTruss() {
-    setNumberOfVariables(4);
-    setNumberOfObjectives(2);
-    setNumberOfConstraints(0);
-    setName("FourBarTruss");
+    private final double f = 10;
+    private final double e = 200000;
+    private final double l = 200;
+    private final double sigma = 10;
+
+    /**
+     * Constructor
+     * Creates a default instance of the FourBarTruss problem
+     */
+    public FourBarTruss() {
+        setNumberOfVariables(4);
+        setNumberOfObjectives(2);
+        setNumberOfConstraints(0);
+        setName("FourBarTruss");
 
     List<Double> lowerLimit = new ArrayList<>(getNumberOfVariables()) ;
     List<Double> upperLimit = new ArrayList<>(getNumberOfVariables()) ;

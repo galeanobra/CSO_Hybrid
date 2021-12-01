@@ -12,7 +12,7 @@ import org.uma.jmetal.problem.multiobjective.UDN.model.cells.BTS;
  */
 public class SocialAttractor {
 
-    private int id_;
+    private final int id_;
     private int x_;
     private int y_;
     private int z_;

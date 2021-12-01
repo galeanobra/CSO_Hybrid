@@ -18,9 +18,9 @@ import java.util.function.Consumer;
 @SuppressWarnings("serial")
 public class AuditableRandomGenerator implements PseudoRandomGenerator {
 
-	public static enum RandomMethod {
-		BOUNDED_INT, BOUNDED_DOUBLE, DOUBLE
-	}
+	public enum RandomMethod {
+        BOUNDED_INT, BOUNDED_DOUBLE, DOUBLE
+    }
 
 	public static class Bounds {
 		final Number lower;

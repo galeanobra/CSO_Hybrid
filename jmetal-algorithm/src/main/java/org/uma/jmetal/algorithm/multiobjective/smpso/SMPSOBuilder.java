@@ -17,7 +17,7 @@ import org.uma.jmetal.util.pseudorandom.PseudoRandomGenerator;
 public class SMPSOBuilder implements AlgorithmBuilder<SMPSO> {
   public enum SMPSOVariant {SMPSO, Measures}
 
-  private DoubleProblem problem;
+  private final DoubleProblem problem;
 
   private double c1Max;
   private double c1Min;

@@ -9,14 +9,12 @@ package org.uma.jmetal.util.naming;
  */
 public interface DescribedEntity {
 	/**
-	 * 
-	 * @return the name of the {@link DescribedEntity}
-	 */
-	public String getName();
+     * @return the name of the {@link DescribedEntity}
+     */
+    String getName();
 
-	/**
-	 * 
-	 * @return the description of the {@link DescribedEntity}
-	 */
-	public String getDescription();
+    /**
+     * @return the description of the {@link DescribedEntity}
+     */
+    String getDescription();
 }

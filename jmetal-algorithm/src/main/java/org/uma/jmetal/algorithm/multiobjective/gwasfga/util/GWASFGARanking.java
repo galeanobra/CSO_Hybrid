@@ -26,25 +26,25 @@ import java.util.List;
  */
 @SuppressWarnings("serial")
 public class GWASFGARanking<S extends Solution<?>> extends GenericSolutionAttribute<S, Integer>
-    implements Ranking<S> {
-  private final String attributeId = getClass().getName();
+        implements Ranking<S> {
+    private final String attributeId = getClass().getName();
 
-  private int numberOfRanks;
-  private AbstractUtilityFunctionsSet<S> utilityFunctionsUtopia;
-  private AbstractUtilityFunctionsSet<S> utilityFunctionsNadir;
-  private List<List<S>> rankedSubpopulations;
-  private NumberOfViolatedConstraints<S> numberOfViolatedConstraints;
-  private OverallConstraintViolation<S> overallConstraintViolation;
+    private int numberOfRanks;
+    private final AbstractUtilityFunctionsSet<S> utilityFunctionsUtopia;
+    private final AbstractUtilityFunctionsSet<S> utilityFunctionsNadir;
+    private List<List<S>> rankedSubpopulations;
+    private final NumberOfViolatedConstraints<S> numberOfViolatedConstraints;
+    private final OverallConstraintViolation<S> overallConstraintViolation;
 
-  public GWASFGARanking(
-      AbstractUtilityFunctionsSet<S> utilityFunctionsUtopia,
-      AbstractUtilityFunctionsSet<S> utilityFunctionsNadir) {
-    this.numberOfRanks = 0;
-    this.utilityFunctionsUtopia = utilityFunctionsUtopia;
-    this.utilityFunctionsNadir = utilityFunctionsNadir;
-    this.numberOfViolatedConstraints = new NumberOfViolatedConstraints<S>();
-    this.overallConstraintViolation = new OverallConstraintViolation<S>();
-  }
+    public GWASFGARanking(
+            AbstractUtilityFunctionsSet<S> utilityFunctionsUtopia,
+            AbstractUtilityFunctionsSet<S> utilityFunctionsNadir) {
+        this.numberOfRanks = 0;
+        this.utilityFunctionsUtopia = utilityFunctionsUtopia;
+        this.utilityFunctionsNadir = utilityFunctionsNadir;
+        this.numberOfViolatedConstraints = new NumberOfViolatedConstraints<S>();
+        this.overallConstraintViolation = new OverallConstraintViolation<S>();
+    }
 
   @Override
   public Ranking<S> compute(List<S> population) {

@@ -11,9 +11,8 @@ package org.uma.jmetal.util.measure;
  */
 public interface Measurable {
 	/**
-	 * 
-	 * @return the {@link MeasureManager} which stores all the {@link Measure}s
-	 *         supported by this {@link Measurable} entity
-	 */
-	public MeasureManager getMeasureManager();
+     * @return the {@link MeasureManager} which stores all the {@link Measure}s
+     * supported by this {@link Measurable} entity
+     */
+    MeasureManager getMeasureManager();
 }

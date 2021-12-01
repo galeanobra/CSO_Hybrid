@@ -33,23 +33,23 @@ public class EnergyArchive<S extends Solution<?>> extends AbstractBoundedArchive
    *
    * @author marlon.braun
    */
-  public static enum ReplacementStrategy {
-    /**
-     * Inserts the new solution such that the energy it introduces into the
-     * archive is minimized.
-     */
-    BEST_FEASIBLE_POSITION,
+  public enum ReplacementStrategy {
+      /**
+       * Inserts the new solution such that the energy it introduces into the
+       * archive is minimized.
+       */
+      BEST_FEASIBLE_POSITION,
 
-    /**
-     * Maximizes the energy differences before and after replacement.
-     */
-    LARGEST_DIFFERENCE,
+      /**
+       * Maximizes the energy differences before and after replacement.
+       */
+      LARGEST_DIFFERENCE,
 
     /**
      * Among all eligible archive members that can be replaced the one
      * exhibiting the largest energy contribution is replaced.
      */
-    WORST_IN_ARCHIVE;
+    WORST_IN_ARCHIVE
   }
 
   /**

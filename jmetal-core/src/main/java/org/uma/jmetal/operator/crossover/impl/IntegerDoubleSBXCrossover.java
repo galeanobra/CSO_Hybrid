@@ -21,18 +21,23 @@ import java.util.List;
 @Deprecated
 @SuppressWarnings("serial")
 public class IntegerDoubleSBXCrossover implements CrossoverOperator<IntegerDoubleSolution> {
-  private IntegerSBXCrossover integerSBXCrossover;
-  private SBXCrossover doubleSBXCrossover;
+    private final IntegerSBXCrossover integerSBXCrossover;
+    private final SBXCrossover doubleSBXCrossover;
 
-  /** Constructor */
-  public IntegerDoubleSBXCrossover(
-      IntegerSBXCrossover integerSBXCrossover, SBXCrossover doubleSBXCrossover) {
-    this.integerSBXCrossover = integerSBXCrossover;
-    this.doubleSBXCrossover = doubleSBXCrossover;
-  }
-  /** Execute() method */
-  @Override
-  public List<IntegerDoubleSolution> execute(List<IntegerDoubleSolution> parentSolutions) {
+    /**
+     * Constructor
+     */
+    public IntegerDoubleSBXCrossover(
+            IntegerSBXCrossover integerSBXCrossover, SBXCrossover doubleSBXCrossover) {
+        this.integerSBXCrossover = integerSBXCrossover;
+        this.doubleSBXCrossover = doubleSBXCrossover;
+    }
+
+    /**
+     * Execute() method
+     */
+    @Override
+    public List<IntegerDoubleSolution> execute(List<IntegerDoubleSolution> parentSolutions) {
     Check.notNull(parentSolutions);
     Check.that(
         parentSolutions.size() == 2,

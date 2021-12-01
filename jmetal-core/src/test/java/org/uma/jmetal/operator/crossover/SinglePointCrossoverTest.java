@@ -297,7 +297,7 @@ public class SinglePointCrossoverTest {
    */
   @SuppressWarnings("serial")
   private class MockBinaryProblem extends AbstractBinaryProblem {
-    private int[] bitsPerVariable ;
+    private final int[] bitsPerVariable;
 
     /** Constructor */
     public MockBinaryProblem(Integer numberOfVariables) {

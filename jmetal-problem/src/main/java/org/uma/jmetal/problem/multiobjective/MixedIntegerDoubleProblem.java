@@ -16,26 +16,26 @@ import java.util.List;
  * Bi-objective problem for testing class {@link CompositeSolution )}. This problem requires an encoding where a
  * solution is composed of an integer solution and a double solution. For the sake of simplicity, it is assumed that
  * the lower and upper bounds of the variables of both solutions are the same.
- *
+ * <p>
  * Objective 1: minimizing the sum of the distances of every variable to value N
  * Objective 2: minimizing the sum of the distances of every variable to value M
  */
 @SuppressWarnings("serial")
 public class MixedIntegerDoubleProblem extends AbstractGenericProblem<CompositeSolution> {
-  private int valueN;
-  private int valueM;
-  private List<Bounds<Integer>> integerBounds;
-  private List<Bounds<Double>> doubleBounds;
+    private final int valueN;
+    private final int valueM;
+    private final List<Bounds<Integer>> integerBounds;
+    private final List<Bounds<Double>> doubleBounds;
 
-  public MixedIntegerDoubleProblem() {
-    this(10, 10, 100, -100, -1000, +1000);
-  }
+    public MixedIntegerDoubleProblem() {
+        this(10, 10, 100, -100, -1000, +1000);
+    }
 
-  /** Constructor */
-  public MixedIntegerDoubleProblem(
-      int numberOfIntegerVariables,
-      int numberOfDoubleVariables,
-      int n,
+    /** Constructor */
+    public MixedIntegerDoubleProblem(
+            int numberOfIntegerVariables,
+            int numberOfDoubleVariables,
+            int n,
       int m,
       int lowerBound,
       int upperBound) {

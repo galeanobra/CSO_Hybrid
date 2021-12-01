@@ -17,19 +17,19 @@ import java.util.List;
  */
 @SuppressWarnings("serial")
 public class NonElitistEvolutionStrategy<S extends Solution<?>> extends AbstractEvolutionStrategy<S, S> {
-  private int mu;
-  private int lambda;
-  private int maxEvaluations;
-  private int evaluations;
-  private MutationOperator<S> mutation;
+    private final int mu;
+    private final int lambda;
+    private final int maxEvaluations;
+    private int evaluations;
+    private final MutationOperator<S> mutation;
 
-  private Comparator<S> comparator;
+    private final Comparator<S> comparator;
 
-  /**
-   * Constructor
-   */
-  public NonElitistEvolutionStrategy(Problem<S> problem, int mu, int lambda, int maxEvaluations,
-      MutationOperator<S> mutation) {
+    /**
+     * Constructor
+     */
+    public NonElitistEvolutionStrategy(Problem<S> problem, int mu, int lambda, int maxEvaluations,
+                                       MutationOperator<S> mutation) {
     super(problem) ;
     this.mu = mu;
     this.lambda = lambda;

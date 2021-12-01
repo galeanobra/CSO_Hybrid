@@ -23,7 +23,7 @@ import java.util.List;
 @SuppressWarnings("serial")
 public class HUXCrossover implements CrossoverOperator<BinarySolution> {
   private double crossoverProbability;
-  private RandomGenerator<Double> randomGenerator;
+    private final RandomGenerator<Double> randomGenerator;
 
   /** Constructor */
   public HUXCrossover(double crossoverProbability) {

@@ -60,7 +60,7 @@ public class F02ShiftedSchwefel extends TestFunc {
 
   // In order to avoid excessive memory allocation,
   // a fixed memory buffer is allocated for each function object.
-  private double[] m_z;
+  private final double[] m_z;
 
   // Constructors
   public F02ShiftedSchwefel(int dimension, double bias) throws JMetalException {

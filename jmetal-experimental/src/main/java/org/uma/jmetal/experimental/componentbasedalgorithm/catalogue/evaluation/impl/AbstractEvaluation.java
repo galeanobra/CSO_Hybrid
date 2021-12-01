@@ -8,9 +8,9 @@ import org.uma.jmetal.util.evaluator.SolutionListEvaluator;
 import java.util.List;
 
 public abstract  class AbstractEvaluation<S extends Solution<?>> implements Evaluation<S> {
-  private SolutionListEvaluator<S> evaluator ;
-  private int numberOfComputedEvaluations ;
-  private Problem<S> problem ;
+  private final SolutionListEvaluator<S> evaluator;
+    private int numberOfComputedEvaluations;
+    private final Problem<S> problem;
 
   public AbstractEvaluation(SolutionListEvaluator<S> evaluator, Problem<S> problem) {
     this.numberOfComputedEvaluations = 0 ;

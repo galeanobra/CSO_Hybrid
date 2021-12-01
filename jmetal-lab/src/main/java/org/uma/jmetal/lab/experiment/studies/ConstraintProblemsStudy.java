@@ -160,7 +160,7 @@ public class ConstraintProblemsStudy {
 
       for (int i = 0; i < problemList.size(); i++) {
         Algorithm<List<DoubleSolution>> algorithm = new MOCellBuilder<DoubleSolution>(
-                (DoubleProblem) problemList.get(i).getProblem(),
+                problemList.get(i).getProblem(),
                 new SBXCrossover(1.0, 20.0),
                 new PolynomialMutation(1.0 / problemList.get(i).getProblem().getNumberOfVariables(), 20.0))
                 .setSelectionOperator(new BinaryTournamentSelection<>())

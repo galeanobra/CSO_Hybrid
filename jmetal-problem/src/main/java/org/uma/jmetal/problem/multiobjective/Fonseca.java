@@ -42,14 +42,14 @@ public class Fonseca extends AbstractDoubleProblem {
 
     double sum1 = 0.0;
     for (int i = 0; i < numberOfVariables; i++) {
-      sum1 += StrictMath.pow(x[i] - (1.0 / StrictMath.sqrt((double) numberOfVariables)), 2.0);
+      sum1 += StrictMath.pow(x[i] - (1.0 / StrictMath.sqrt(numberOfVariables)), 2.0);
     }
     double exp1 = StrictMath.exp((-1.0) * sum1);
     f[0] = 1 - exp1;
 
     double sum2 = 0.0;
     for (int i = 0; i < numberOfVariables; i++) {
-      sum2 += StrictMath.pow(x[i] + (1.0 / StrictMath.sqrt((double) numberOfVariables)), 2.0);
+        sum2 += StrictMath.pow(x[i] + (1.0 / StrictMath.sqrt(numberOfVariables)), 2.0);
     }
     double exp2 = StrictMath.exp((-1.0) * sum2);
     f[1] = 1 - exp2;

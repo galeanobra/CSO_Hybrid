@@ -98,7 +98,7 @@ public class SMSEMOAIT {
     // should
     // return find a front with a hypervolume value higher than 0.65
 
-    double hv = (Double) hypervolume.evaluate(population);
+    double hv = hypervolume.evaluate(population);
 
     assertTrue(hv > 0.65);
   }

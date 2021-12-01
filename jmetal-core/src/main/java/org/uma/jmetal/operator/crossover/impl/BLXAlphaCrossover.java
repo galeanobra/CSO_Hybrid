@@ -25,9 +25,9 @@ public class BLXAlphaCrossover implements CrossoverOperator<DoubleSolution> {
   private double crossoverProbability;
   private double alpha ;
 
-  private RepairDoubleSolution solutionRepair ;
+  private final RepairDoubleSolution solutionRepair;
 
-  private RandomGenerator<Double> randomGenerator ;
+    private final RandomGenerator<Double> randomGenerator;
 
   /** Constructor */
   public BLXAlphaCrossover(double crossoverProbability) {

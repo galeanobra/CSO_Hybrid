@@ -19,19 +19,19 @@ import java.util.List;
  * @author Antonio J. Nebro <antonio@lcc.uma.es>
  */
 public class KnnDensityEstimator<S extends Solution<?>> implements DensityEstimator<S> {
-  private final String attributeId = getClass().getName();
-  private Distance<double[], double[]> distance = new EuclideanDistanceBetweenVectors();
-  private int k;
-  private double[][] distanceMatrix;
-  private boolean normalize ;
+    private final String attributeId = getClass().getName();
+    private final Distance<double[], double[]> distance = new EuclideanDistanceBetweenVectors();
+    private final int k;
+    private double[][] distanceMatrix;
+    private final boolean normalize;
 
-  public KnnDensityEstimator(int k) {
-    this(k, false) ;
-  }
+    public KnnDensityEstimator(int k) {
+        this(k, false);
+    }
 
-  public KnnDensityEstimator(int k, boolean normalize) {
-    this.k = k;
-    this.normalize = normalize ;
+    public KnnDensityEstimator(int k, boolean normalize) {
+        this.k = k;
+        this.normalize = normalize;
   }
 
   /**

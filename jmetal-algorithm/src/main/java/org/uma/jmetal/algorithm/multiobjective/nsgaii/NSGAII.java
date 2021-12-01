@@ -51,7 +51,7 @@ public class NSGAII<S extends Solution<?>> extends AbstractGeneticAlgorithm<S, L
                 SolutionListEvaluator<S> evaluator) {
     super(problem);
     this.maxEvaluations = maxEvaluations;
-    setMaxPopulationSize(populationSize); ;
+    setMaxPopulationSize(populationSize);
 
     this.crossoverOperator = crossoverOperator;
     this.mutationOperator = mutationOperator;

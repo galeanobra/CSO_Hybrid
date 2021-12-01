@@ -13,7 +13,7 @@ import java.util.List;
  * Created by antonio on 6/06/17.
  */
 public class RemoveNSolutionsAccordingToTheHypervolumeContribution<S extends Solution<?>> implements RemoveSolutionsStrategy<S> {
-  private int numberOfSolutionsToDelete ;
+  private final int numberOfSolutionsToDelete;
 
   public RemoveNSolutionsAccordingToTheHypervolumeContribution(int numberOfSolutionsToDelete) {
     this.numberOfSolutionsToDelete = numberOfSolutionsToDelete ;

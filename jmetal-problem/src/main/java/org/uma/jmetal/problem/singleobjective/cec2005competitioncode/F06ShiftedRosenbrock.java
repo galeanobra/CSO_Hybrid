@@ -59,7 +59,7 @@ public class F06ShiftedRosenbrock extends TestFunc {
 
   // In order to avoid excessive memory allocation,
   // a fixed memory buffer is allocated for each function object.
-  private double[] m_z;
+  private final double[] m_z;
 
   // Constructors
   public F06ShiftedRosenbrock(int dimension, double bias) throws JMetalException {

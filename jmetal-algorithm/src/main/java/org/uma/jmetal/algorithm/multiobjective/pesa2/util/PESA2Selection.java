@@ -10,7 +10,7 @@ import org.uma.jmetal.util.pseudorandom.JMetalRandom;
 @SuppressWarnings("serial")
 public class PESA2Selection<S extends Solution<?>> implements SelectionOperator<AdaptiveGridArchive<S>, S> {
 
-  private JMetalRandom randomGenerator ;
+  private final JMetalRandom randomGenerator;
 
   public PESA2Selection() {
     randomGenerator = JMetalRandom.getInstance() ;
@@ -44,13 +44,13 @@ public class PESA2Selection<S extends Solution<?>> implements SelectionOperator<
     int base = randomGenerator.nextInt(0, archive.size() - 1);
     int cnt = 0;
     while (cnt < archive.size()){
-      S individual = (S) archive.get((base + cnt)% archive.size());
+        S individual = archive.get((base + cnt) % archive.size());
       if (archive.getGrid().location(individual) != selected){
         cnt++;
       } else {
         return individual;
       }
     }
-    return (S) archive.get((base + cnt) % archive.size());
+      return archive.get((base + cnt) % archive.size());
   }
 }

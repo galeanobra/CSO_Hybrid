@@ -23,33 +23,33 @@ import java.util.List;
  */
 @SuppressWarnings("serial")
 public class StandardPSO2007 extends AbstractParticleSwarmOptimization<DoubleSolution, DoubleSolution> {
-  private DoubleProblem problem;
-  private SolutionListEvaluator<DoubleSolution> evaluator;
+    private final DoubleProblem problem;
+    private final SolutionListEvaluator<DoubleSolution> evaluator;
 
-  private Operator<List<DoubleSolution>, DoubleSolution> findBestSolution;
-  private Comparator<DoubleSolution> fitnessComparator;
-  private int swarmSize;
-  private int maxIterations;
-  private int iterations;
-  private int numberOfParticlesToInform;
-  private DoubleSolution[] localBest;
-  private DoubleSolution[] neighborhoodBest;
-  private double[][] speed;
-  private AdaptiveRandomNeighborhood<DoubleSolution> neighborhood;
-  private GenericSolutionAttribute<DoubleSolution, Integer> positionInSwarm;
-  private double weight;
-  private double c;
-  private JMetalRandom randomGenerator = JMetalRandom.getInstance();
-  private DoubleSolution bestFoundParticle;
+    private final Operator<List<DoubleSolution>, DoubleSolution> findBestSolution;
+    private final Comparator<DoubleSolution> fitnessComparator;
+    private final int swarmSize;
+    private final int maxIterations;
+    private int iterations;
+    private final int numberOfParticlesToInform;
+    private final DoubleSolution[] localBest;
+    private final DoubleSolution[] neighborhoodBest;
+    private final double[][] speed;
+    private final AdaptiveRandomNeighborhood<DoubleSolution> neighborhood;
+    private final GenericSolutionAttribute<DoubleSolution, Integer> positionInSwarm;
+    private final double weight;
+    private final double c;
+    private final JMetalRandom randomGenerator = JMetalRandom.getInstance();
+    private DoubleSolution bestFoundParticle;
 
-  private int objectiveId;
+    private final int objectiveId;
 
-  /**
-   * Constructor
-   *
-   * @param problem
-   * @param objectiveId This field indicates which objective, in the case of a multi-objective problem,
-   *                    is selected to be optimized.
+    /**
+     * Constructor
+     *
+     * @param problem
+     * @param objectiveId This field indicates which objective, in the case of a multi-objective problem,
+     *                    is selected to be optimized.
    * @param swarmSize
    * @param maxIterations
    * @param numberOfParticlesToInform

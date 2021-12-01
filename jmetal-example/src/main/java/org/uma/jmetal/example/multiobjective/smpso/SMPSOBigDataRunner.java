@@ -68,8 +68,8 @@ public class SMPSOBigDataRunner extends AbstractAlgorithmRunner {
     AlgorithmRunner algorithmRunner = new AlgorithmRunner.Executor(algorithm)
             .execute();
 
-    List<DoubleSolution> population = ((SMPSO)algorithm).getResult();
-    long computingTime = algorithmRunner.getComputingTime();
+    List<DoubleSolution> population = algorithm.getResult();
+      long computingTime = algorithmRunner.getComputingTime();
 
     new SolutionListOutput(population)
             .setVarFileOutputContext(new DefaultFileOutputContext("VAR.tsv"))

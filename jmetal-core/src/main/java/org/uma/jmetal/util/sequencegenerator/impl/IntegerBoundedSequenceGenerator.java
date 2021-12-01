@@ -11,7 +11,7 @@ import org.uma.jmetal.util.sequencegenerator.SequenceGenerator;
  */
 public class IntegerBoundedSequenceGenerator implements SequenceGenerator<Integer> {
   private int index;
-  private int size ;
+    private final int size;
 
   public IntegerBoundedSequenceGenerator(int size) {
     Check.that(size > 0, "Size " + size + " is not a positive number greater than zero");

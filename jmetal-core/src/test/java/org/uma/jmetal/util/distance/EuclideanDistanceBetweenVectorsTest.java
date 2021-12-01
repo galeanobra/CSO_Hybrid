@@ -39,7 +39,7 @@ public class EuclideanDistanceBetweenVectorsTest {
   }
 
   @Test public void shouldCalculatingDistanceOfPointsWithZeroDimensionReturnZero() {
-    assertEquals(0, distance.compute(new double[]{}, new double[]{}), EPSILON) ; ;
+    assertEquals(0, distance.compute(new double[]{}, new double[]{}), EPSILON);
   }
 
   @Test public void shouldCalculatingDistanceOfPointsWithOneDimensionReturnTheCorrectValue() {

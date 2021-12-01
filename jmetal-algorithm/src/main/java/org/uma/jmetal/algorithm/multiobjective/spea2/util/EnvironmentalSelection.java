@@ -12,23 +12,23 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- * @author Juanjo Durillo
  * @param <S>
+ * @author Juanjo Durillo
  */
-public class EnvironmentalSelection<S extends Solution<?>> implements SelectionOperator<List<S>,List<S>> {
+public class EnvironmentalSelection<S extends Solution<?>> implements SelectionOperator<List<S>, List<S>> {
 
-  private int solutionsToSelect ;
-  private StrenghtRawFitnessDensityEstimator<S> densityEstimator = new StrenghtRawFitnessDensityEstimator<>(1) ;
+    private final int solutionsToSelect;
+    private final StrenghtRawFitnessDensityEstimator<S> densityEstimator = new StrenghtRawFitnessDensityEstimator<>(1);
 
-  public EnvironmentalSelection(int solutionsToSelect) {
-    this(solutionsToSelect, 1) ;
-  }
+    public EnvironmentalSelection(int solutionsToSelect) {
+        this(solutionsToSelect, 1);
+    }
 
-  public EnvironmentalSelection(int solutionsToSelect, int k) {
-    this.solutionsToSelect = solutionsToSelect ;
-  }
+    public EnvironmentalSelection(int solutionsToSelect, int k) {
+        this.solutionsToSelect = solutionsToSelect;
+    }
 
-  @Override
+    @Override
   public List<S> execute(List<S> source2) {
     int size;
     List<S> source = new ArrayList<>(source2.size());
@@ -106,7 +106,7 @@ public class EnvironmentalSelection<S extends Solution<?>> implements SelectionO
         i++;
       }
 
-      int tmp =  (int) location.getAttribute(aux.get(toRemove));
+        int tmp = location.getAttribute(aux.get(toRemove));
       aux.remove(toRemove);
       distanceList.remove(toRemove);
 

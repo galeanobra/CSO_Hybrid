@@ -40,11 +40,11 @@ public class HypervolumeContributionComparator<S extends Solution<?>> implements
       double contribution2 = Double.MAX_VALUE ;
 
       if (hvContribution.getAttribute(solution1) != null) {
-        contribution1 = (double) hvContribution.getAttribute(solution1);
+        contribution1 = hvContribution.getAttribute(solution1);
       }
 
       if (hvContribution.getAttribute(solution2) != null) {
-        contribution2 = (double) hvContribution.getAttribute(solution2);
+          contribution2 = hvContribution.getAttribute(solution2);
       }
 
       result = Double.compare(contribution2, contribution1);

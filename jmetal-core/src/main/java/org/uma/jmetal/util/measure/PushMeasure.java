@@ -14,21 +14,20 @@ package org.uma.jmetal.util.measure;
  */
 public interface PushMeasure<Value> extends Measure<Value> {
 	/**
-	 * Register a {@link MeasureListener} to use the {@link Value}s of the
-	 * {@link PushMeasure} when they are generated.
-	 * 
-	 * @param listener
-	 *            the {@link MeasureListener} to register
-	 */
-	public void register(MeasureListener<Value> listener);
+     * Register a {@link MeasureListener} to use the {@link Value}s of the
+     * {@link PushMeasure} when they are generated.
+     *
+     * @param listener the {@link MeasureListener} to register
+     */
+    void register(MeasureListener<Value> listener);
 
 	/**
-	 * Unregister a {@link MeasureListener} registered with
-	 * {@link #register(MeasureListener)} to stop receiving the notifications of
-	 * the {@link PushMeasure}.
-	 * 
-	 * @param listener
-	 *            the {@link MeasureListener} to unregister
-	 */
-	public void unregister(MeasureListener<Value> listener);
+     * Unregister a {@link MeasureListener} registered with
+     * {@link #register(MeasureListener)} to stop receiving the notifications of
+     * the {@link PushMeasure}.
+     *
+     * @param listener
+     *            the {@link MeasureListener} to unregister
+     */
+    void unregister(MeasureListener<Value> listener);
 }

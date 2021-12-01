@@ -14,18 +14,20 @@ import java.util.List;
  */
 @SuppressWarnings("serial")
 public class RandomSearch<S extends Solution<?>> implements Algorithm<List<S>> {
-  private Problem<S> problem ;
-  private int maxEvaluations ;
-  NonDominatedSolutionListArchive<S> nonDominatedArchive ;
+    private final Problem<S> problem;
+    private final int maxEvaluations;
+    NonDominatedSolutionListArchive<S> nonDominatedArchive;
 
-  /** Constructor */
-  public RandomSearch(Problem<S> problem, int maxEvaluations) {
-    this.problem = problem ;
-    this.maxEvaluations = maxEvaluations ;
-    nonDominatedArchive = new NonDominatedSolutionListArchive<S>();
-  }
+    /**
+     * Constructor
+     */
+    public RandomSearch(Problem<S> problem, int maxEvaluations) {
+        this.problem = problem;
+        this.maxEvaluations = maxEvaluations;
+        nonDominatedArchive = new NonDominatedSolutionListArchive<S>();
+    }
 
-  /* Getter */
+    /* Getter */
   public int getMaxEvaluations() {
     return maxEvaluations;
   }

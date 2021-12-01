@@ -12,24 +12,24 @@ import org.uma.jmetal.util.errorchecking.JMetalException;
  * @author Antonio J. Nebro <antonio@lcc.uma.es>
  */
 public class EvolutionStrategyBuilder<S extends Solution<?>> implements AlgorithmBuilder<Algorithm<S>> {
-  public enum EvolutionStrategyVariant {ELITIST, NON_ELITIST}
+    public enum EvolutionStrategyVariant {ELITIST, NON_ELITIST}
 
-  private Problem<S> problem;
-  private int mu;
-  private int lambda;
-  private int maxEvaluations;
-  private MutationOperator<S> mutation;
-  private EvolutionStrategyVariant variant ;
+    private final Problem<S> problem;
+    private int mu;
+    private int lambda;
+    private int maxEvaluations;
+    private final MutationOperator<S> mutation;
+    private final EvolutionStrategyVariant variant;
 
-  public EvolutionStrategyBuilder(Problem<S> problem, MutationOperator<S> mutationOperator,
-      EvolutionStrategyVariant variant) {
-    this.problem = problem;
-    this.mu = 1;
-    this.lambda = 10;
-    this.maxEvaluations = 250000;
-    this.mutation = mutationOperator;
-    this.variant = variant ;
-  }
+    public EvolutionStrategyBuilder(Problem<S> problem, MutationOperator<S> mutationOperator,
+                                    EvolutionStrategyVariant variant) {
+        this.problem = problem;
+        this.mu = 1;
+        this.lambda = 10;
+        this.maxEvaluations = 250000;
+        this.mutation = mutationOperator;
+        this.variant = variant;
+    }
 
   public EvolutionStrategyBuilder<S> setMu(int mu) {
     this.mu = mu;

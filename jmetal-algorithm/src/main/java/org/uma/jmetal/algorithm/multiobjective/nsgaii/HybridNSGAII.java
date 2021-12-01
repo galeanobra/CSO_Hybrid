@@ -3,19 +3,15 @@ package org.uma.jmetal.algorithm.multiobjective.nsgaii;
 import org.uma.jmetal.operator.crossover.CrossoverOperator;
 import org.uma.jmetal.operator.mutation.MutationOperator;
 import org.uma.jmetal.operator.selection.SelectionOperator;
-import org.uma.jmetal.operator.selection.impl.RankingAndCrowdingSelection;
 import org.uma.jmetal.problem.Problem;
 import org.uma.jmetal.problem.multiobjective.UDN.StaticCSO;
 import org.uma.jmetal.solution.Solution;
 import org.uma.jmetal.solution.binarysolution.BinarySolution;
-import org.uma.jmetal.util.SolutionListUtils;
 import org.uma.jmetal.util.comparator.DominanceComparator;
 import org.uma.jmetal.util.evaluator.SolutionListEvaluator;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class HybridNSGAII<S extends Solution<?>> extends NSGAII<S> {
 
@@ -29,7 +25,7 @@ public class HybridNSGAII<S extends Solution<?>> extends NSGAII<S> {
     @Override
     protected List<S> evaluatePopulation(List<S> population) {
         for (S s : population) {
-            ((StaticCSO) problem).intelligentSwitchOff((BinarySolution) s);
+            ((StaticCSO) problem).intelligentSwitchOff((BinarySolution) s); //TODO comprobar que lo modifica
         }
 
         population = evaluator.evaluate(population, getProblem());

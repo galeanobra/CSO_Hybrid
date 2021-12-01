@@ -8,8 +8,8 @@ import org.uma.jmetal.util.pseudorandom.PseudoRandomGenerator;
  */
 @SuppressWarnings("serial")
 public class MersenneTwisterGenerator implements PseudoRandomGenerator {
-  private MersenneTwister rnd ;
-  private long seed ;
+  private final MersenneTwister rnd;
+    private long seed;
   private static final String NAME = "MersenneTwister" ;
 
   /** Constructor */

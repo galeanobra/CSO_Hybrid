@@ -8,9 +8,9 @@ import java.util.List;
 
 public class CoverageFront<S extends Solution<?>> {
 
-  private double coverageValue;
-  private double lastCoverageValue;
-  private QualityIndicator indicator;
+  private final double coverageValue;
+    private double lastCoverageValue;
+    private final QualityIndicator indicator;
 
   private List<S> lastFront;
 

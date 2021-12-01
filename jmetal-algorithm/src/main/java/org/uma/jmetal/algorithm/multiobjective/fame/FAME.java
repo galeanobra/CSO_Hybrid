@@ -37,20 +37,23 @@ import java.util.Random;
  */
 @SuppressWarnings("serial")
 public class FAME<S extends DoubleSolution> extends SteadyStateNSGAII<S> {
-  private double[] Utilization;
-  private double[] OpProb;
-  private int operators = 4;
-  private int windowSize;
-  private int window;
-  private double Stagnation = 0.0;
-  private SpatialSpreadDeviationArchive<S> archiveSSD;
-  Engine engine;
-  InputVariable operatoruse, stagnation;
-  OutputVariable probability;
-  /** Constructor */
-  public FAME(
-      Problem<S> problem,
-      int populationSize,
+    private final double[] Utilization;
+    private final double[] OpProb;
+    private final int operators = 4;
+    private final int windowSize;
+    private int window;
+    private double Stagnation = 0.0;
+    private final SpatialSpreadDeviationArchive<S> archiveSSD;
+    Engine engine;
+    InputVariable operatoruse, stagnation;
+    OutputVariable probability;
+
+    /**
+     * Constructor
+     */
+    public FAME(
+            Problem<S> problem,
+            int populationSize,
       int archiveSize,
       int maxEvaluations,
       SelectionOperator<List<S>, S> selectionOperator,
@@ -139,8 +142,8 @@ public class FAME<S extends DoubleSolution> extends SteadyStateNSGAII<S> {
 
     StringBuilder status = new StringBuilder();
     if (!engine.isReady(status)) {
-      throw new RuntimeException(
-          "Engine not ready. " + "The following errors were encountered:\n" + status.toString());
+        throw new RuntimeException(
+                "Engine not ready. " + "The following errors were encountered:\n" + status);
     }
   }
 
@@ -167,9 +170,9 @@ public class FAME<S extends DoubleSolution> extends SteadyStateNSGAII<S> {
     for (int x = 0; x < 3; x++) {
       double aleat = Math.random();
       if (aleat <= 0.1) // 0.1 n_n wiiii (0.1 lo hace parecido a measo1 (0.05 asco))
-      matingPopulation.add((S) selectionOperator.execute(population));
+          matingPopulation.add(selectionOperator.execute(population));
       else {
-        matingPopulation.add((S) selectionOperator.execute(archiveSSD.getSolutionList()));
+          matingPopulation.add(selectionOperator.execute(archiveSSD.getSolutionList()));
       }
     }
 

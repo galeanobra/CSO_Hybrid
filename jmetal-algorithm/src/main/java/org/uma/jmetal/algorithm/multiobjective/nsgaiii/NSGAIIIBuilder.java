@@ -15,8 +15,8 @@ import java.util.List;
 /** Builder class */
 public class NSGAIIIBuilder<S extends Solution<?>> implements AlgorithmBuilder<NSGAIII<S>>{
   // no access modifier means access from classes within the same package
-  private Problem<S> problem ;
-  private int maxIterations ;
+  private final Problem<S> problem;
+    private int maxIterations;
   private int populationSize ;
   private int numberOfDivisions;
   private CrossoverOperator<S> crossoverOperator ;

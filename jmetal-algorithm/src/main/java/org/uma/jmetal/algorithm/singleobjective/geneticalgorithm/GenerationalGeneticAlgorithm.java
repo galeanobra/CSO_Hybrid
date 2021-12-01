@@ -18,18 +18,18 @@ import java.util.List;
  */
 @SuppressWarnings("serial")
 public class GenerationalGeneticAlgorithm<S extends Solution<?>> extends AbstractGeneticAlgorithm<S, S> {
-  private Comparator<S> comparator;
-  private int maxEvaluations;
-  private int evaluations;
+    private final Comparator<S> comparator;
+    private final int maxEvaluations;
+    private int evaluations;
 
-  private SolutionListEvaluator<S> evaluator;
+    private final SolutionListEvaluator<S> evaluator;
 
-  /**
-   * Constructor
-   */
-  public GenerationalGeneticAlgorithm(Problem<S> problem, int maxEvaluations, int populationSize,
-                                      CrossoverOperator<S> crossoverOperator, MutationOperator<S> mutationOperator,
-                                      SelectionOperator<List<S>, S> selectionOperator, SolutionListEvaluator<S> evaluator) {
+    /**
+     * Constructor
+     */
+    public GenerationalGeneticAlgorithm(Problem<S> problem, int maxEvaluations, int populationSize,
+                                        CrossoverOperator<S> crossoverOperator, MutationOperator<S> mutationOperator,
+                                        SelectionOperator<List<S>, S> selectionOperator, SolutionListEvaluator<S> evaluator) {
     super(problem);
     this.maxEvaluations = maxEvaluations;
     this.setMaxPopulationSize(populationSize);

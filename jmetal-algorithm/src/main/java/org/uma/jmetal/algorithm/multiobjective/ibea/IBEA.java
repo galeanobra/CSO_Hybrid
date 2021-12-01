@@ -124,17 +124,17 @@ public class IBEA<S extends Solution<?>> implements Algorithm<List<S>> {
    * is dominated by individual a but not by individual b
    */
   double calculateHypervolumeIndicator(Solution<?> solutionA, Solution<?> solutionB, int d,
-      double maximumValues[], double minimumValues[]) {
-    double a, b, r, max;
-    double volume ;
-    double rho = 2.0;
+                                       double[] maximumValues, double[] minimumValues) {
+      double a, b, r, max;
+      double volume;
+      double rho = 2.0;
 
-    r = rho * (maximumValues[d - 1] - minimumValues[d - 1]);
-    max = minimumValues[d - 1] + r;
+      r = rho * (maximumValues[d - 1] - minimumValues[d - 1]);
+      max = minimumValues[d - 1] + r;
 
-    a = solutionA.objectives()[d-1];
-    if (solutionB == null) {
-      b = max;
+      a = solutionA.objectives()[d - 1];
+      if (solutionB == null) {
+          b = max;
     } else {
       b = solutionB.objectives()[d - 1];
     }
@@ -256,21 +256,21 @@ public class IBEA<S extends Solution<?>> implements Algorithm<List<S>> {
   public void removeWorst(List<S> solutionSet) {
 
     // Find the worst;
-    double worst = (double) solutionFitness.getAttribute(solutionSet.get(0));
-    int worstIndex = 0;
+      double worst = solutionFitness.getAttribute(solutionSet.get(0));
+      int worstIndex = 0;
     double kappa = 0.05;
 
     for (int i = 1; i < solutionSet.size(); i++) {
-      if ((double) solutionFitness.getAttribute(solutionSet.get(i)) > worst) {
-        worst = (double) solutionFitness.getAttribute(solutionSet.get(i));
-        worstIndex = i;
-      }
+        if (solutionFitness.getAttribute(solutionSet.get(i)) > worst) {
+            worst = solutionFitness.getAttribute(solutionSet.get(i));
+            worstIndex = i;
+        }
     }
 
     // Update the population
     for (int i = 0; i < solutionSet.size(); i++) {
       if (i != worstIndex) {
-        double fitness = (double) solutionFitness.getAttribute(solutionSet.get(i));
+          double fitness = solutionFitness.getAttribute(solutionSet.get(i));
         fitness -= Math.exp((-indicatorValues.get(worstIndex).get(i) / maxIndicatorValue) / kappa);
         solutionFitness.setAttribute(solutionSet.get(i), fitness);
       }

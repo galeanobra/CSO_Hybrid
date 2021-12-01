@@ -13,23 +13,23 @@ import java.util.List;
  * @author Juan J. Durillo
  */
 public class AdaptiveGrid<S extends Solution<?>> {
-  private int bisections;
-  private int numberOfObjectives;
+    private final int bisections;
+    private final int numberOfObjectives;
 
-  private int[] hypercubes;
+    private final int[] hypercubes;
 
-  private double[] gridLowerLimits;
-  private double[] gridUpperLimits;
+    private final double[] gridLowerLimits;
+    private final double[] gridUpperLimits;
 
-  private double[] divisionSize;
-  private int mostPopulatedHypercube;
+    private final double[] divisionSize;
+    private int mostPopulatedHypercube;
 
-  /**
-   * Indicates when an hypercube has solutions
-   */
-  private int[] occupied;
+    /**
+     * Indicates when an hypercube has solutions
+     */
+    private int[] occupied;
 
-  /**
+    /**
    * Constructor.
    * Creates an instance of AdaptiveGrid.
    *

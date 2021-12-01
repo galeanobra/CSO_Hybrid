@@ -26,27 +26,27 @@ import java.util.List;
  */
 @SuppressWarnings("serial")
 public class MOCHC extends AbstractEvolutionaryAlgorithm<BinarySolution, List<BinarySolution>> {
-  private BinaryProblem problem;
+    private final BinaryProblem problem;
 
-  private int maxEvaluations;
-  private int maxPopulationSize ;
-  private int convergenceValue;
-  private double preservedPopulation;
-  private double initialConvergenceCount;
-  private CrossoverOperator<BinarySolution> crossover;
-  private MutationOperator<BinarySolution> cataclysmicMutation;
-  private SelectionOperator<List<BinarySolution>, List<BinarySolution>> newGenerationSelection;
-  private SelectionOperator<List<BinarySolution>, BinarySolution> parentSelection;
-  private int evaluations;
-  private int minimumDistance;
-  private int size;
-  private Comparator<BinarySolution> comparator;
+    private final int maxEvaluations;
+    private int maxPopulationSize;
+    private final int convergenceValue;
+    private final double preservedPopulation;
+    private final double initialConvergenceCount;
+    private final CrossoverOperator<BinarySolution> crossover;
+    private final MutationOperator<BinarySolution> cataclysmicMutation;
+    private final SelectionOperator<List<BinarySolution>, List<BinarySolution>> newGenerationSelection;
+    private final SelectionOperator<List<BinarySolution>, BinarySolution> parentSelection;
+    private int evaluations;
+    private int minimumDistance;
+    private int size;
+    private final Comparator<BinarySolution> comparator;
 
-  private SolutionListEvaluator<BinarySolution> evaluator;
-  private int lastOffspringPopulationSize ;
+    private final SolutionListEvaluator<BinarySolution> evaluator;
+    private int lastOffspringPopulationSize;
 
-  /**
-   * Constructor
+    /**
+     * Constructor
    */
   public MOCHC(BinaryProblem problem, int populationSize, int maxEvaluations, int convergenceValue,
       double preservedPopulation, double initialConvergenceCount,

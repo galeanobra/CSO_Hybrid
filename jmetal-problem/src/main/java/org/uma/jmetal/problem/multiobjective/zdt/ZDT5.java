@@ -24,7 +24,7 @@ import java.util.List;
 /** Class representing problem ZDT5 */
 @SuppressWarnings("serial")
 public class ZDT5 extends AbstractBinaryProblem {
-  private List<Integer> bitsPerVariable;
+  private final List<Integer> bitsPerVariable;
 
   /** Creates a default instance of problem ZDT5 (11 decision variables) */
   public ZDT5() {

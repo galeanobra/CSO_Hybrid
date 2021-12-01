@@ -31,28 +31,28 @@ import java.util.List;
  */
 @SuppressWarnings("serial")
 public class MOCHC45 implements Algorithm<List<BinarySolution>> {
-  private BinaryProblem problem;
+    private final BinaryProblem problem;
 
-  private List<BinarySolution> population ;
-  private int populationSize ;
-  private int maxEvaluations;
-  private int convergenceValue;
-  private double preservedPopulation;
-  private double initialConvergenceCount;
-  private CrossoverOperator<BinarySolution> crossover;
-  private MutationOperator<BinarySolution> cataclysmicMutation;
-  private SelectionOperator<List<BinarySolution>, List<BinarySolution>> newGenerationSelection;
-  private SelectionOperator<List<BinarySolution>, BinarySolution> parentSelection;
-  private int evaluations;
-  private int minimumDistance;
-  private int size;
-  private Comparator<BinarySolution> comparator;
+    private List<BinarySolution> population;
+    private final int populationSize;
+    private final int maxEvaluations;
+    private final int convergenceValue;
+    private final double preservedPopulation;
+    private final double initialConvergenceCount;
+    private final CrossoverOperator<BinarySolution> crossover;
+    private final MutationOperator<BinarySolution> cataclysmicMutation;
+    private final SelectionOperator<List<BinarySolution>, List<BinarySolution>> newGenerationSelection;
+    private final SelectionOperator<List<BinarySolution>, BinarySolution> parentSelection;
+    private int evaluations;
+    private int minimumDistance;
+    private int size;
+    private Comparator<BinarySolution> comparator;
 
-  /**
-   * Constructor
-   */
-  public MOCHC45(BinaryProblem problem, int populationSize, int maxEvaluations, int convergenceValue,
-                 double preservedPopulation, double initialConvergenceCount,
+    /**
+     * Constructor
+     */
+    public MOCHC45(BinaryProblem problem, int populationSize, int maxEvaluations, int convergenceValue,
+                   double preservedPopulation, double initialConvergenceCount,
                  CrossoverOperator<BinarySolution> crossoverOperator,
                  MutationOperator<BinarySolution> cataclysmicMutation,
                  SelectionOperator<List<BinarySolution>, List<BinarySolution>> newGenerationSelection,

@@ -69,8 +69,8 @@ public class GDE3BigDataRunner {
     AlgorithmRunner algorithmRunner = new AlgorithmRunner.Executor(algorithm)
       .execute() ;
 
-    List<DoubleSolution> population = ((GDE3)algorithm).getResult() ;
-    long computingTime = algorithmRunner.getComputingTime() ;
+    List<DoubleSolution> population = algorithm.getResult();
+      long computingTime = algorithmRunner.getComputingTime();
 
     new SolutionListOutput(population)
       .setVarFileOutputContext(new DefaultFileOutputContext("VAR.tsv"))

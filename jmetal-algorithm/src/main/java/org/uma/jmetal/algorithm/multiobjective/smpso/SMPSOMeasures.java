@@ -73,10 +73,10 @@ public class SMPSOMeasures extends SMPSO implements Measurable {
   }
 
   @Override protected void updateProgress() {
-    iterations.increment(1); ;
-    updateLeadersDensityEstimator();
+      iterations.increment(1);
+      updateLeadersDensityEstimator();
 
-    solutionListMeasure.push(super.getResult()) ;
+      solutionListMeasure.push(super.getResult());
   }
 
   @Override

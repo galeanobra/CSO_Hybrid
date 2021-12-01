@@ -23,21 +23,25 @@ import java.util.stream.Collectors;
  */
 @SuppressWarnings("serial")
 public class DifferentialEvolutionSelection
-    implements SelectionOperator<List<DoubleSolution>, List<DoubleSolution>> {
-  private int currentSolutionIndex = Integer.MIN_VALUE;
-  private BoundedRandomGenerator<Integer> randomGenerator;
-  private int numberOfSolutionsToSelect;
-  private boolean selectCurrentSolution;
+        implements SelectionOperator<List<DoubleSolution>, List<DoubleSolution>> {
+    private int currentSolutionIndex = Integer.MIN_VALUE;
+    private final BoundedRandomGenerator<Integer> randomGenerator;
+    private final int numberOfSolutionsToSelect;
+    private final boolean selectCurrentSolution;
 
-  /** Constructor */
-  public DifferentialEvolutionSelection() {
-    this((a, b) -> JMetalRandom.getInstance().nextInt(a, b), 3, false);
-  }
+    /**
+     * Constructor
+     */
+    public DifferentialEvolutionSelection() {
+        this((a, b) -> JMetalRandom.getInstance().nextInt(a, b), 3, false);
+    }
 
-  /** Constructor */
-  public DifferentialEvolutionSelection(
-      int numberOfSolutionsToSelect, boolean selectCurrentSolution) {
-    this(
+    /**
+     * Constructor
+     */
+    public DifferentialEvolutionSelection(
+            int numberOfSolutionsToSelect, boolean selectCurrentSolution) {
+        this(
         (a, b) -> JMetalRandom.getInstance().nextInt(a, b),
         numberOfSolutionsToSelect,
         selectCurrentSolution);

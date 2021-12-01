@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 public class RandomMatingPoolSelection<S extends Solution<?>> implements MatingPoolSelection<S> {
-  private int matingPoolSize;
+  private final int matingPoolSize;
 
   public RandomMatingPoolSelection(int matingPoolSize) {
     this.matingPoolSize = matingPoolSize;

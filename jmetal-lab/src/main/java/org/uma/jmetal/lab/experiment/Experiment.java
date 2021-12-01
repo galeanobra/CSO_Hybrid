@@ -14,24 +14,26 @@ import java.util.List;
  * @author Antonio J. Nebro
  */
 public class Experiment<S extends Solution<?>, Result extends List<S>> {
-  private String experimentName;
-  private List<ExperimentAlgorithm<S, Result>> algorithmList;
-  private List<ExperimentProblem<S>> problemList;
-  private String experimentBaseDirectory;
+    private final String experimentName;
+    private List<ExperimentAlgorithm<S, Result>> algorithmList;
+    private final List<ExperimentProblem<S>> problemList;
+    private final String experimentBaseDirectory;
 
-  private String outputParetoFrontFileName;
-  private String outputParetoSetFileName;
-  private int independentRuns;
+    private final String outputParetoFrontFileName;
+    private final String outputParetoSetFileName;
+    private final int independentRuns;
 
-  private String referenceFrontDirectory;
+    private String referenceFrontDirectory;
 
-  private List<QualityIndicator> indicatorList;
+    private final List<QualityIndicator> indicatorList;
 
-  private int numberOfCores;
+    private final int numberOfCores;
 
-  /** Constructor */
-  public Experiment(ExperimentBuilder<S, Result> builder) {
-    this.experimentName = builder.getExperimentName();
+    /**
+     * Constructor
+     */
+    public Experiment(ExperimentBuilder<S, Result> builder) {
+        this.experimentName = builder.getExperimentName();
     this.experimentBaseDirectory = builder.getExperimentBaseDirectory();
     this.algorithmList = builder.getAlgorithmList();
     this.problemList = builder.getProblemList();

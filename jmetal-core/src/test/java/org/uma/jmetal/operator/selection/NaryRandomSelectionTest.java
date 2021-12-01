@@ -92,7 +92,7 @@ public class NaryRandomSelectionTest {
     IntegerSolution solution = mock(IntegerSolution.class) ;
     list.add(solution) ;
 
-    List<IntegerSolution> result = (List<IntegerSolution>) selection.execute(list);
+    List<IntegerSolution> result = selection.execute(list);
     assertSame(solution, result.get(0)) ;
   }
 
@@ -105,7 +105,7 @@ public class NaryRandomSelectionTest {
     list.add(solution1) ;
     list.add(solution2) ;
 
-    List<BinarySolution> result = (List<BinarySolution>) selection.execute(list);
+      List<BinarySolution> result = selection.execute(list);
 
     assertThat(result.get(0),
         Matchers.either(Matchers.sameInstance(solution1)).or(Matchers.sameInstance(solution2)));
@@ -123,7 +123,7 @@ public class NaryRandomSelectionTest {
       list.add(mock(BinarySolution.class));
     }
 
-    List<BinarySolution> result = (List<BinarySolution>) selection.execute(list);
+      List<BinarySolution> result = selection.execute(list);
     assertEquals(solutionsToBeReturned, result.size());
   }
 
@@ -144,7 +144,7 @@ public class NaryRandomSelectionTest {
 
     NaryRandomSelection<IntegerSolution> selection = new NaryRandomSelection<IntegerSolution>(solutionsToBeReturned) ;
 
-    List<IntegerSolution> result = (List<IntegerSolution>) selection.execute(list);
+      List<IntegerSolution> result = selection.execute(list);
     assertTrue(result.contains(solution[0]));
     assertTrue(result.contains(solution[1]));
     assertTrue(result.contains(solution[2]));

@@ -15,7 +15,7 @@ import java.util.List;
 @SuppressWarnings("serial")
 public class DirScore<S extends Solution<?>>  extends GenericSolutionAttribute<S, Double> implements DensityEstimator<S> {
 
-    private double[][] referenceVectors ;
+    private final double[][] referenceVectors;
 
     public DirScore(double[][] referenceVectors){
         this.referenceVectors = referenceVectors ;

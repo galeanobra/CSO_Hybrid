@@ -52,7 +52,7 @@ public class MergeNonDominatedSortRanking<S extends Solution<?>> implements Rank
       System.arraycopy(solutionSet.get(i).objectives(), 0, population[i], 0, m);
       population[i][SOL_ID] = i;
     }
-    int ranking[] = sort(population);
+    int[] ranking = sort(population);
     rankedSubPopulations = new ArrayList<ArrayList<S>>();
     for (int i = 0; i < n; i++) {
       for (int r = rankedSubPopulations.size(); r <= ranking[i]; r++) {
@@ -72,18 +72,18 @@ public class MergeNonDominatedSortRanking<S extends Solution<?>> implements Rank
     return 0;
   }
 
-  private boolean merge_sort(
-          double src[][], double dest[][], int low, int high, int obj, int toObj) {
-    int i, j, s;
-    double temp[] = null;
-    int destLow = low;
-    int length = high - low;
+    private boolean merge_sort(
+            double[][] src, double[][] dest, int low, int high, int obj, int toObj) {
+        int i, j, s;
+        double[] temp = null;
+        int destLow = low;
+        int length = high - low;
 
-    if (length < INSERTIONSORT) {
-      for (i = low; i < high; i++) {
-        for (j = i; j > low && compare_lex(dest[j - 1], dest[j], obj, toObj) > 0; j--) {
-          temp = dest[j];
-          dest[j] = dest[j - 1];
+        if (length < INSERTIONSORT) {
+            for (i = low; i < high; i++) {
+                for (j = i; j > low && compare_lex(dest[j - 1], dest[j], obj, toObj) > 0; j--) {
+                    temp = dest[j];
+                    dest[j] = dest[j - 1];
           dest[j - 1] = temp;
         }
       }

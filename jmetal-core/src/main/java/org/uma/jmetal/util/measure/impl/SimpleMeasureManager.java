@@ -29,13 +29,13 @@ import java.util.Map.Entry;
 public class SimpleMeasureManager implements MeasureManager {
 
 	/**
-	 * The {@link PullMeasure}s registered to this {@link SimpleMeasureManager}.
-	 */
-	private Map<Object, PullMeasure<?>> pullers = new HashMap<>();
-	/**
-	 * The {@link PushMeasure}s registered to this {@link SimpleMeasureManager}.
-	 */
-	private Map<Object, PushMeasure<?>> pushers = new HashMap<>();
+     * The {@link PullMeasure}s registered to this {@link SimpleMeasureManager}.
+     */
+    private final Map<Object, PullMeasure<?>> pullers = new HashMap<>();
+    /**
+     * The {@link PushMeasure}s registered to this {@link SimpleMeasureManager}.
+     */
+    private final Map<Object, PushMeasure<?>> pushers = new HashMap<>();
 
 	/**
 	 * Provides the keys of all the {@link Measure}s which are supported by this

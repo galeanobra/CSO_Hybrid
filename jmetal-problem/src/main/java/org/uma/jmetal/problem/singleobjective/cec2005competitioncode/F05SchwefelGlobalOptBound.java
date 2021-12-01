@@ -50,27 +50,27 @@ import org.uma.jmetal.util.errorchecking.JMetalException;
 
 public class F05SchwefelGlobalOptBound extends TestFunc {
 
-  // Fixed (class) parameters
-  static final public String FUNCTION_NAME = "Schwefel's Problem 2.6 with Global Optimum on Bounds";
-  static final public String DEFAULT_FILE_DATA = Benchmark.CEC2005SUPPORTDATADIRECTORY + "/schwefel_206_data.txt";
+    // Fixed (class) parameters
+    static final public String FUNCTION_NAME = "Schwefel's Problem 2.6 with Global Optimum on Bounds";
+    static final public String DEFAULT_FILE_DATA = Benchmark.CEC2005SUPPORTDATADIRECTORY + "/schwefel_206_data.txt";
 
-  // Shifted global optimum
-  private final double[] m_o;
-  private final double[][] m_A;
+    // Shifted global optimum
+    private final double[] m_o;
+    private final double[][] m_A;
 
-  // In order to avoid excessive memory allocation,
-  // a fixed memory buffer is allocated for each function object.
-  private double[] m_B;
-  private double[] m_z;
+    // In order to avoid excessive memory allocation,
+    // a fixed memory buffer is allocated for each function object.
+    private final double[] m_B;
+    private final double[] m_z;
 
-  // Constructors
-  public F05SchwefelGlobalOptBound(int dimension, double bias) throws JMetalException {
-    this(dimension, bias, DEFAULT_FILE_DATA);
-  }
+    // Constructors
+    public F05SchwefelGlobalOptBound(int dimension, double bias) throws JMetalException {
+        this(dimension, bias, DEFAULT_FILE_DATA);
+    }
 
-  public F05SchwefelGlobalOptBound(int dimension, double bias, String file_data)
-    throws JMetalException {
-    super(dimension, bias, FUNCTION_NAME);
+    public F05SchwefelGlobalOptBound(int dimension, double bias, String file_data)
+            throws JMetalException {
+        super(dimension, bias, FUNCTION_NAME);
 
     // Note: dimension starts from 0
     m_o = new double[mDimension];

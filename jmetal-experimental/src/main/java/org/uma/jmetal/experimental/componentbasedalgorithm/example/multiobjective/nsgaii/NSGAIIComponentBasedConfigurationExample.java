@@ -49,7 +49,7 @@ public class NSGAIIComponentBasedConfigurationExample extends AbstractAlgorithmR
     String problemName = "org.uma.jmetal.problem.multiobjective.dtlz.DTLZ2";
     String referenceParetoFront = "resources/referenceFrontsCSV/DTLZ2.3D.csv";
 
-    problem = ProblemUtils.<DoubleSolution>loadProblem(problemName);
+    problem = ProblemUtils.loadProblem(problemName);
 
     int populationSize = 100;
     int offspringPopulationSize = 100 ;

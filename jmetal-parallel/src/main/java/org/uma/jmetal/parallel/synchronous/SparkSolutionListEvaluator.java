@@ -17,7 +17,7 @@ import java.util.List;
 @SuppressWarnings("serial")
 public class SparkSolutionListEvaluator<S> implements SolutionListEvaluator<S> {
 
-  private JavaSparkContext sparkContext ;
+  private final JavaSparkContext sparkContext;
 
   public SparkSolutionListEvaluator(JavaSparkContext sparkContext) {
     this.sparkContext = sparkContext;

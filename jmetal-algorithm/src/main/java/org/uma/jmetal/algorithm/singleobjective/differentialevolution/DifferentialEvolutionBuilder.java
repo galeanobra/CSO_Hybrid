@@ -13,8 +13,8 @@ import org.uma.jmetal.util.evaluator.impl.SequentialSolutionListEvaluator;
  * @author Antonio J. Nebro <antonio@lcc.uma.es>
  */
 public class DifferentialEvolutionBuilder {
-  private DoubleProblem problem;
-  private int populationSize;
+  private final DoubleProblem problem;
+    private int populationSize;
   private int maxEvaluations;
   private DifferentialEvolutionCrossover crossoverOperator;
   private DifferentialEvolutionSelection selectionOperator;

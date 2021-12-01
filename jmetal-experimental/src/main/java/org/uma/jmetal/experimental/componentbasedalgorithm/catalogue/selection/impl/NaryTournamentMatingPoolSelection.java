@@ -10,19 +10,19 @@ import java.util.Comparator;
 import java.util.List;
 
 public class NaryTournamentMatingPoolSelection<S extends Solution<?>>
-    implements MatingPoolSelection<S> {
-  private NaryTournamentSelection<S> selectionOperator;
-  private int matingPoolSize;
-  private Preference<S> preference;
+        implements MatingPoolSelection<S> {
+    private final NaryTournamentSelection<S> selectionOperator;
+    private final int matingPoolSize;
+    private Preference<S> preference;
 
-  public NaryTournamentMatingPoolSelection(NaryTournamentSelection<S> selection, int matingPoolSize) {
-    this.matingPoolSize = matingPoolSize ;
-    this.selectionOperator = selection ;
-  }
+    public NaryTournamentMatingPoolSelection(NaryTournamentSelection<S> selection, int matingPoolSize) {
+        this.matingPoolSize = matingPoolSize;
+        this.selectionOperator = selection;
+    }
 
-  public NaryTournamentMatingPoolSelection(
-      int tournamentSize, int matingPoolSize, Comparator<S> comparator) {
-    selectionOperator = new NaryTournamentSelection<>(tournamentSize, comparator);
+    public NaryTournamentMatingPoolSelection(
+            int tournamentSize, int matingPoolSize, Comparator<S> comparator) {
+        selectionOperator = new NaryTournamentSelection<>(tournamentSize, comparator);
     this.matingPoolSize = matingPoolSize;
     preference = null ;
   }

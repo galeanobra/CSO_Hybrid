@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class GridDensityEstimator<S extends Solution<?>> implements DensityEstimator<S> {
   private final String attributeId = getClass().getName();
-  private AdaptiveGrid<S> grid;
+    private final AdaptiveGrid<S> grid;
 
 
   public GridDensityEstimator(int bisections, int numberOfObjectives) {

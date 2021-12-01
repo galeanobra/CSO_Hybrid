@@ -20,7 +20,7 @@ public class NonUniformMutation implements MutationOperator<DoubleSolution> {
   private double mutationProbability;
 
   private int currentIteration;
-  private RandomGenerator<Double> randomGenenerator ;
+    private final RandomGenerator<Double> randomGenenerator;
 
   /** Constructor */
   public NonUniformMutation(double mutationProbability, double perturbation, int maxIterations) {

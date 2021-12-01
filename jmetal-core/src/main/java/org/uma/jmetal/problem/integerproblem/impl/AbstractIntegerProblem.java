@@ -23,7 +23,7 @@ public abstract class AbstractIntegerProblem extends AbstractGenericProblem<Inte
    */
   @Deprecated
   public List<Pair<Integer, Integer>> getVariableBounds() {
-    return bounds.stream().map(Bounds<Integer>::toPair).collect(Collectors.toList());
+    return bounds.stream().map(Bounds::toPair).collect(Collectors.toList());
   }
 
   @Override

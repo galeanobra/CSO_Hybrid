@@ -24,47 +24,47 @@ import java.util.List;
  */
 @SuppressWarnings("serial")
 public class SMPSO extends AbstractParticleSwarmOptimization<DoubleSolution, List<DoubleSolution>> {
-  private DoubleProblem problem;
+    private final DoubleProblem problem;
 
-  private double c1Max;
-  private double c1Min;
-  private double c2Max;
-  private double c2Min;
-  private double r1Max;
-  private double r1Min;
-  private double r2Max;
-  private double r2Min;
-  private double weightMax;
-  private double weightMin;
-  private double changeVelocity1;
-  private double changeVelocity2;
+    private final double c1Max;
+    private final double c1Min;
+    private final double c2Max;
+    private final double c2Min;
+    private final double r1Max;
+    private final double r1Min;
+    private final double r2Max;
+    private final double r2Min;
+    private final double weightMax;
+    private final double weightMin;
+    private final double changeVelocity1;
+    private final double changeVelocity2;
 
-  private int swarmSize;
-  private int maxIterations;
-  private int iterations;
+    private final int swarmSize;
+    private final int maxIterations;
+    private int iterations;
 
-  private GenericSolutionAttribute<DoubleSolution, DoubleSolution> localBest;
-  private double[][] speed;
+    private final GenericSolutionAttribute<DoubleSolution, DoubleSolution> localBest;
+    private final double[][] speed;
 
-  private JMetalRandom randomGenerator;
+    private final JMetalRandom randomGenerator;
 
-  private BoundedArchive<DoubleSolution> leaders;
-  private Comparator<DoubleSolution> dominanceComparator;
+    private final BoundedArchive<DoubleSolution> leaders;
+    private final Comparator<DoubleSolution> dominanceComparator;
 
-  private MutationOperator<DoubleSolution> mutation;
+    private final MutationOperator<DoubleSolution> mutation;
 
-  private double deltaMax[];
-  private double deltaMin[];
+    private final double[] deltaMax;
+    private final double[] deltaMin;
 
-  private SolutionListEvaluator<DoubleSolution> evaluator;
+    private final SolutionListEvaluator<DoubleSolution> evaluator;
 
-  /**
-   * Constructor
-   */
-  public SMPSO(DoubleProblem problem, int swarmSize, BoundedArchive<DoubleSolution> leaders,
-               MutationOperator<DoubleSolution> mutationOperator, int maxIterations, double r1Min, double r1Max,
-               double r2Min, double r2Max, double c1Min, double c1Max, double c2Min, double c2Max,
-               double weightMin, double weightMax, double changeVelocity1, double changeVelocity2,
+    /**
+     * Constructor
+     */
+    public SMPSO(DoubleProblem problem, int swarmSize, BoundedArchive<DoubleSolution> leaders,
+                 MutationOperator<DoubleSolution> mutationOperator, int maxIterations, double r1Min, double r1Max,
+                 double r2Min, double r2Max, double c1Min, double c1Max, double c2Min, double c2Max,
+                 double weightMin, double weightMax, double changeVelocity1, double changeVelocity2,
                SolutionListEvaluator<DoubleSolution> evaluator) {
     this.problem = problem;
     this.swarmSize = swarmSize;

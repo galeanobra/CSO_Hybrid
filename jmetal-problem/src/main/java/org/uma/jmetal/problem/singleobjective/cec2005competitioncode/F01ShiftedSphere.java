@@ -59,7 +59,7 @@ public class F01ShiftedSphere extends TestFunc {
 
   // In order to avoid excessive memory allocation,
   // a fixed memory buffer is allocated for each function object.
-  private double[] memoryBuffer;
+  private final double[] memoryBuffer;
 
   // Constructors
   public F01ShiftedSphere(int dimension, double bias) throws JMetalException {

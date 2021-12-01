@@ -17,19 +17,19 @@ import java.util.Comparator;
 @SuppressWarnings("serial")
 public class BasicLocalSearch<S extends Solution<?>> implements LocalSearchOperator<S> {
 
-  private Problem<S> problem;
-  private int improvementRounds;
-  private Comparator<S> comparator;
+    private final Problem<S> problem;
+    private final int improvementRounds;
+    private final Comparator<S> comparator;
 
-  private MutationOperator<S> mutationOperator;
-  private int evaluations;
-  private int numberOfImprovements;
+    private final MutationOperator<S> mutationOperator;
+    private int evaluations;
+    private int numberOfImprovements;
 
-  private RandomGenerator<Double> randomGenerator;
+    private final RandomGenerator<Double> randomGenerator;
 
-  /**
-   * Constructor. Creates a new local search object.
-   *
+    /**
+     * Constructor. Creates a new local search object.
+     *
    * @param improvementRounds number of iterations
    * @param mutationOperator mutation operator
    * @param comparator comparator to determine which solution is the best

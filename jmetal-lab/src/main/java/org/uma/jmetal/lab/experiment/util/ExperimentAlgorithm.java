@@ -16,19 +16,21 @@ import java.util.List;
  * @author Antonio J. Nebro <antonio@lcc.uma.es>
  */
 public class ExperimentAlgorithm<S extends Solution<?>, Result extends List<S>> {
-  private Algorithm<Result> algorithm;
-  private String algorithmTag;
-  private String problemTag;
-  private int runId;
+    private final Algorithm<Result> algorithm;
+    private final String algorithmTag;
+    private final String problemTag;
+    private final int runId;
 
-  /** Constructor */
-  public ExperimentAlgorithm(
-      Algorithm<Result> algorithm, String algorithmTag, ExperimentProblem<S> problem, int runId) {
-    this.algorithm = algorithm;
-    this.algorithmTag = algorithmTag;
-    this.problemTag = problem.getTag();
-    this.runId = runId;
-  }
+    /**
+     * Constructor
+     */
+    public ExperimentAlgorithm(
+            Algorithm<Result> algorithm, String algorithmTag, ExperimentProblem<S> problem, int runId) {
+        this.algorithm = algorithm;
+        this.algorithmTag = algorithmTag;
+        this.problemTag = problem.getTag();
+        this.runId = runId;
+    }
 
   public ExperimentAlgorithm(Algorithm<Result> algorithm, ExperimentProblem<S> problem, int runId) {
 

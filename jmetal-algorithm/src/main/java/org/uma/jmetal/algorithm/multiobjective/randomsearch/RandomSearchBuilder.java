@@ -10,8 +10,8 @@ import org.uma.jmetal.solution.Solution;
  * @author Antonio J. Nebro <antonio@lcc.uma.es>
  */
 public class RandomSearchBuilder<S extends Solution<?>> implements AlgorithmBuilder<RandomSearch<S>> {
-  private Problem<S> problem ;
-  private int maxEvaluations ;
+  private final Problem<S> problem;
+    private int maxEvaluations;
 
   /* Getter */
   public int getMaxEvaluations() {

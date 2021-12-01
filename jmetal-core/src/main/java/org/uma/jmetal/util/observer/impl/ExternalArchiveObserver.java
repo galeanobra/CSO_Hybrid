@@ -16,7 +16,7 @@ import java.util.Map;
  */
 public class ExternalArchiveObserver<S extends Solution<?>> implements Observer<Map<String, Object>> {
 
-  private Archive<S> archive ;
+  private final Archive<S> archive;
 
   public ExternalArchiveObserver(Archive<S> archive) {
     this.archive = archive ;

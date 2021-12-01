@@ -14,19 +14,21 @@ import java.util.List;
  * @author Antonio J. Nebro
  */
 public class Preference<S> {
-  private Ranking<S> ranking;
-  private DensityEstimator<S> densityEstimator;
-  private Preference<S> relatedPreference;
-  private boolean preferenceHasBeenComputedFirstTime = false;
+    private final Ranking<S> ranking;
+    private final DensityEstimator<S> densityEstimator;
+    private final Preference<S> relatedPreference;
+    private boolean preferenceHasBeenComputedFirstTime = false;
 
-  public Preference(Ranking<S> ranking, DensityEstimator<S> densityEstimator) {
-    this(ranking, densityEstimator, null);
-  }
+    public Preference(Ranking<S> ranking, DensityEstimator<S> densityEstimator) {
+        this(ranking, densityEstimator, null);
+    }
 
-  /** Constructor */
-  public Preference(
-          Ranking<S> ranking, DensityEstimator<S> densityEstimator, Preference<S> relatedPreference) {
-    this.ranking = ranking;
+    /**
+     * Constructor
+     */
+    public Preference(
+            Ranking<S> ranking, DensityEstimator<S> densityEstimator, Preference<S> relatedPreference) {
+        this.ranking = ranking;
     this.densityEstimator = densityEstimator;
     this.relatedPreference = relatedPreference;
   }

@@ -16,11 +16,11 @@ public interface BinarySolution extends Solution<BinarySet> {
 
     int getTotalNumberOfBits();
 
-    public void setUEsToCellAssignment(List<Cell> assignment);
+    void setUEsToCellAssignment(List<Cell> assignment);
 
-    public List<Cell> getCurrentUesToCellAssignment();
+    List<Cell> getCurrentUesToCellAssignment();
 
-    public List<Cell> getPreviousUesToCellAssignment();
+    List<Cell> getPreviousUesToCellAssignment();
 
-    public void forgetUEsToCellAssignment();
+    void forgetUEsToCellAssignment();
 }

@@ -97,15 +97,15 @@ public class WFGHypervolume<S extends Solution<?>> extends Hypervolume<S> {
     int nPoints;
     Point[] points;
 
-    public Front(double frente[][]) {
-      points = new Point[frente.length];
-      this.nPoints = frente.length;
-      for (int x = 0; x < frente.length; x++) {
-        points[x] = new Point(frente[0].length);
-        for (int j = 0; j < frente[0].length; j++) {
-          points[x].objectives[j] = frente[x][j];
+    public Front(double[][] frente) {
+        points = new Point[frente.length];
+        this.nPoints = frente.length;
+        for (int x = 0; x < frente.length; x++) {
+            points[x] = new Point(frente[0].length);
+            for (int j = 0; j < frente[0].length; j++) {
+                points[x].objectives[j] = frente[x][j];
+            }
         }
-      }
     }
   }
 
@@ -130,9 +130,7 @@ public class WFGHypervolume<S extends Solution<?>> extends Hypervolume<S> {
   }
 
   static boolean BEATS(double x, double y) {
-    if (x > y)
-      return true;
-    return false;
+      return x > y;
   }
 
   static double WORSE(double x, double y) {

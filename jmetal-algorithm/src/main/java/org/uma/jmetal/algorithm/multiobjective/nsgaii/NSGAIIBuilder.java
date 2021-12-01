@@ -27,12 +27,12 @@ public class NSGAIIBuilder<S extends Solution<?>> implements AlgorithmBuilder<NS
      */
     private final Problem<S> problem;
     private int maxEvaluations;
-    private int populationSize;
+    private final int populationSize;
     protected int matingPoolSize;
     protected int offspringPopulationSize;
 
-    private CrossoverOperator<S> crossoverOperator;
-    private MutationOperator<S> mutationOperator;
+    private final CrossoverOperator<S> crossoverOperator;
+    private final MutationOperator<S> mutationOperator;
     private SelectionOperator<List<S>, S> selectionOperator;
     private SolutionListEvaluator<S> evaluator;
     private Comparator<S> dominanceComparator;

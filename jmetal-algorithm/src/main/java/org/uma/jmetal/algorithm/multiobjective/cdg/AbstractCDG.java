@@ -603,20 +603,20 @@ public abstract class AbstractCDG<S extends Solution<?>> implements Algorithm<Li
     int detalSum = 0;
     gridDetal_[0] = -1;
     for (int i = 0; i < problem.getNumberOfObjectives(); i++)
-      gridDetalSum_[i][0] = (double) gridDetal_[0];
+      gridDetalSum_[i][0] = gridDetal_[0];
 
     for (int i = 1; i < slimDetal_; i++) {
       gridDetal_[i] = 2;
       detalSum = detalSum + gridDetal_[i];
       for (int j = 0; j < problem.getNumberOfObjectives(); j++)
-        gridDetalSum_[j][i] = (double) detalSum;
+          gridDetalSum_[j][i] = detalSum;
     }
 
     for (int i = slimDetal_; i < k_; i++) {
       gridDetal_[i] = 1;
       detalSum = detalSum + gridDetal_[i];
       for (int j = 0; j < problem.getNumberOfObjectives(); j++)
-        gridDetalSum_[j][i] = (double) detalSum;
+          gridDetalSum_[j][i] = detalSum;
     }
 
     double coefficient = 1 + (1 - evaluations / maxEvaluations) * 0.15;
@@ -801,8 +801,8 @@ public abstract class AbstractCDG<S extends Solution<?>> implements Algorithm<Li
 
   protected void subproblemSortl() {
     for (int i = 0; i < subproblemNum_; i++) {
-      int perObjSubproblemNum = (int) Math.pow(k_, problem.getNumberOfObjectives() - 1);
-      int objD = (int) (i / perObjSubproblemNum);
+        int perObjSubproblemNum = (int) Math.pow(k_, problem.getNumberOfObjectives() - 1);
+        int objD = i / perObjSubproblemNum;
 
       Collections.sort(
           subproblem.get(i),
@@ -819,8 +819,8 @@ public abstract class AbstractCDG<S extends Solution<?>> implements Algorithm<Li
   protected void setIndividualObjRank() {
     for (int i = 0; i < subproblemNum_; i++) {
 
-      int perObjSubproblemNum = (int) Math.pow(k_, problem.getNumberOfObjectives() - 1);
-      int objD = (int) (i / perObjSubproblemNum);
+        int perObjSubproblemNum = (int) Math.pow(k_, problem.getNumberOfObjectives() - 1);
+        int objD = i / perObjSubproblemNum;
 
       for (int j = 0; j < subproblem.get(i).size(); j++) {
         int order = getOrder(subproblem.get(i).get(j));

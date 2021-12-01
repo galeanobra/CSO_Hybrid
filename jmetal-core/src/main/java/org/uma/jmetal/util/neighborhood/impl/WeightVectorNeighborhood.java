@@ -17,21 +17,21 @@ import java.util.StringTokenizer;
  */
 @SuppressWarnings("serial")
 public class WeightVectorNeighborhood<S extends Solution<?>> implements Neighborhood<S> {
-  private int numberOfWeightVectors;
-  private int weightVectorSize;
-  private int[][] neighborhood;
-  private double[][] weightVector;
-  private int neighborhoodSize;
+    private final int numberOfWeightVectors;
+    private final int weightVectorSize;
+    private final int[][] neighborhood;
+    private final double[][] weightVector;
+    private final int neighborhoodSize;
 
-  public WeightVectorNeighborhood(int numberOfWeightVectors, int neighborhoodSize) {
-    this.numberOfWeightVectors = numberOfWeightVectors;
-    this.weightVectorSize = 2;
-    this.neighborhoodSize = neighborhoodSize;
+    public WeightVectorNeighborhood(int numberOfWeightVectors, int neighborhoodSize) {
+        this.numberOfWeightVectors = numberOfWeightVectors;
+        this.weightVectorSize = 2;
+        this.neighborhoodSize = neighborhoodSize;
 
-    this.neighborhood = new int[numberOfWeightVectors][neighborhoodSize];
-    this.weightVector = new double[numberOfWeightVectors][weightVectorSize];
+        this.neighborhood = new int[numberOfWeightVectors][neighborhoodSize];
+        this.weightVector = new double[numberOfWeightVectors][weightVectorSize];
 
-    for (int n = 0; n < numberOfWeightVectors; n++) {
+        for (int n = 0; n < numberOfWeightVectors; n++) {
       double a = 1.0 * n / (numberOfWeightVectors - 1);
       weightVector[n][0] = a;
       weightVector[n][1] = 1 - a;
@@ -106,17 +106,17 @@ public class WeightVectorNeighborhood<S extends Solution<?>> implements Neighbor
     }
   }
 
-  private void minFastSort(double x[], int idx[], int n, int m) {
-    for (int i = 0; i < m; i++) {
-      for (int j = i + 1; j < n; j++) {
-        if (x[i] > x[j]) {
-          double temp = x[i];
-          x[i] = x[j];
-          x[j] = temp;
-          int id = idx[i];
-          idx[i] = idx[j];
-          idx[j] = id;
-        }
+    private void minFastSort(double[] x, int[] idx, int n, int m) {
+        for (int i = 0; i < m; i++) {
+            for (int j = i + 1; j < n; j++) {
+                if (x[i] > x[j]) {
+                    double temp = x[i];
+                    x[i] = x[j];
+                    x[j] = temp;
+                    int id = idx[i];
+                    idx[i] = idx[j];
+                    idx[j] = id;
+                }
       }
     }
   }

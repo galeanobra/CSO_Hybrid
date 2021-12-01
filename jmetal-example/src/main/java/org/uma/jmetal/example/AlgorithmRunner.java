@@ -9,7 +9,7 @@ import org.uma.jmetal.util.errorchecking.JMetalException;
  * @author Antonio J. Nebro <antonio@lcc.uma.es>
  */
 public class AlgorithmRunner {
-  private long computingTime;
+  private final long computingTime;
 
   /** Constructor */
   private AlgorithmRunner(Executor execute) {

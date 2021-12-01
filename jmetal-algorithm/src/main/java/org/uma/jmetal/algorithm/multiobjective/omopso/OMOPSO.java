@@ -23,40 +23,42 @@ import java.util.List;
 @SuppressWarnings("serial")
 public class OMOPSO extends AbstractParticleSwarmOptimization<DoubleSolution, List<DoubleSolution>> {
 
-  private DoubleProblem problem;
+    private final DoubleProblem problem;
 
-  SolutionListEvaluator<DoubleSolution> evaluator;
+    SolutionListEvaluator<DoubleSolution> evaluator;
 
-  private final int swarmSize;
-  private int maxIterations;
-  private int currentIteration;
+    private final int swarmSize;
+    private final int maxIterations;
+    private int currentIteration;
 
-  private DoubleSolution[] localBest;
-  private CrowdingDistanceArchive<DoubleSolution> leaderArchive;
-  private NonDominatedSolutionListArchive<DoubleSolution> epsilonArchive;
+    private final DoubleSolution[] localBest;
+    private final CrowdingDistanceArchive<DoubleSolution> leaderArchive;
+    private final NonDominatedSolutionListArchive<DoubleSolution> epsilonArchive;
 
-  private double[][] speed;
+    private final double[][] speed;
 
-  private final Comparator<DoubleSolution> dominanceComparator;
-  private final Comparator<DoubleSolution> crowdingDistanceComparator;
+    private final Comparator<DoubleSolution> dominanceComparator;
+    private final Comparator<DoubleSolution> crowdingDistanceComparator;
 
-  private final UniformMutation uniformMutation;
-  private final NonUniformMutation nonUniformMutation;
+    private final UniformMutation uniformMutation;
+    private final NonUniformMutation nonUniformMutation;
 
-  private double eta = 0.0075;
+    private final double eta = 0.0075;
 
-  private JMetalRandom randomGenerator;
-  private DensityEstimator<DoubleSolution> crowdingDistance;
+    private final JMetalRandom randomGenerator;
+    private final DensityEstimator<DoubleSolution> crowdingDistance;
 
-  /** Constructor */
-  public OMOPSO(DoubleProblem problem, SolutionListEvaluator<DoubleSolution> evaluator,
-      int swarmSize, int maxIterations, int archiveSize, UniformMutation uniformMutation,
-      NonUniformMutation nonUniformMutation) {
-    this.problem = problem ;
-    this.evaluator = evaluator ;
+    /**
+     * Constructor
+     */
+    public OMOPSO(DoubleProblem problem, SolutionListEvaluator<DoubleSolution> evaluator,
+                  int swarmSize, int maxIterations, int archiveSize, UniformMutation uniformMutation,
+                  NonUniformMutation nonUniformMutation) {
+        this.problem = problem;
+        this.evaluator = evaluator;
 
-    this.swarmSize = swarmSize ;
-    this.maxIterations = maxIterations ;
+        this.swarmSize = swarmSize;
+        this.maxIterations = maxIterations;
 
     this.uniformMutation = uniformMutation ;
     this.nonUniformMutation = nonUniformMutation ;
@@ -138,8 +140,8 @@ public class OMOPSO extends AbstractParticleSwarmOptimization<DoubleSolution, Li
     DoubleSolution bestGlobal;
 
     for (int i = 0; i < swarmSize; i++) {
-      DoubleSolution particle = swarm.get(i);
-      DoubleSolution bestParticle = (DoubleSolution) localBest[i];
+        DoubleSolution particle = swarm.get(i);
+        DoubleSolution bestParticle = localBest[i];
 
       //Select a global localBest for calculate the speed of particle i, bestGlobal
       DoubleSolution one ;

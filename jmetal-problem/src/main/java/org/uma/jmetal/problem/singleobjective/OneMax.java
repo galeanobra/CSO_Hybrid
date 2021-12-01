@@ -15,7 +15,7 @@ import java.util.List;
  */
 @SuppressWarnings("serial")
 public class OneMax extends AbstractBinaryProblem {
-  private int bits;
+  private final int bits;
 
   /** Constructor */
   public OneMax() {

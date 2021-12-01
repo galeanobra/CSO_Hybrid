@@ -22,60 +22,60 @@ import static java.lang.Double.parseDouble;
 @SuppressWarnings("serial")
 public class DMOPSO implements Algorithm<List<DoubleSolution>> {
 
-  public enum FunctionType {
-    TCHE, PBI, AGG
-  }
+    public enum FunctionType {
+        TCHE, PBI, AGG
+    }
 
-  private String name;
-  private DoubleProblem problem;
-  private List<DoubleSolution> swarm ;
+    private final String name;
+    private final DoubleProblem problem;
+    private List<DoubleSolution> swarm;
 
-  private double c1Max;
-  private double c1Min;
-  private double c2Max;
-  private double c2Min;
-  private double r1Max;
-  private double r1Min;
-  private double r2Max;
-  private double r2Min;
-  private double weightMax;
-  private double weightMin;
-  private double changeVelocity1;
-  private double changeVelocity2;
+    private final double c1Max;
+    private final double c1Min;
+    private final double c2Max;
+    private final double c2Min;
+    private final double r1Max;
+    private final double r1Min;
+    private final double r2Max;
+    private final double r2Min;
+    private final double weightMax;
+    private final double weightMin;
+    private final double changeVelocity1;
+    private final double changeVelocity2;
 
-  protected int swarmSize;
-  protected int maxIterations;
-  protected int iterations;
-  protected int maxAge ;
+    protected int swarmSize;
+    protected int maxIterations;
+    protected int iterations;
+    protected int maxAge;
 
-  private DoubleSolution[] localBest ;
-  private DoubleSolution[] globalBest ;
-  private int[] shfGBest ;
-  private double[][] speed;
-  private int[] age;
-  double[] z;
-  double[][] lambda;
-  DoubleSolution[] indArray;
+    private final DoubleSolution[] localBest;
+    private final DoubleSolution[] globalBest;
+    private final int[] shfGBest;
+    private final double[][] speed;
+    private final int[] age;
+    double[] z;
+    double[][] lambda;
+    DoubleSolution[] indArray;
 
-  private double deltaMax[];
-  private double deltaMin[];
+    private final double[] deltaMax;
+    private final double[] deltaMin;
 
-  String dataDirectory ;
+    String dataDirectory;
 
-  FunctionType functionType = FunctionType.PBI ;
+    FunctionType functionType = FunctionType.PBI;
 
-  private JMetalRandom randomGenerator;
-  private SolutionListEvaluator<DoubleSolution> evaluator;
+    private final JMetalRandom randomGenerator;
+    private final SolutionListEvaluator<DoubleSolution> evaluator;
 
-  public DMOPSO(DoubleProblem problem, int swarmSize,
-                int maxIterations, double r1Min, double r1Max,
-                double r2Min, double r2Max, double c1Min, double c1Max, double c2Min, double c2Max,
-                double weightMin, double weightMax, double changeVelocity1, double changeVelocity2,
-                FunctionType functionType, String dataDirectory, int maxAge) {
-      this(problem, swarmSize,
-           maxIterations, r1Min, r1Max,
-           r2Min, r2Max, c1Min, c1Max, c2Min, c2Max,
-           weightMin, weightMax, changeVelocity1, changeVelocity2,
+    public DMOPSO(DoubleProblem problem, int swarmSize,
+                  int maxIterations, double r1Min, double r1Max,
+                  double r2Min, double r2Max, double c1Min, double c1Max, double c2Min, double c2Max,
+                  double weightMin, double weightMax, double changeVelocity1, double changeVelocity2,
+                  FunctionType functionType, String dataDirectory, int maxAge) {
+        this(problem, swarmSize,
+                maxIterations, r1Min, r1Max,
+                r2Min, r2Max, c1Min, c1Max, c2Min, c2Max,
+                weightMin, weightMax, changeVelocity1, changeVelocity2,
            functionType, dataDirectory, maxAge, "dMOPSO");
   }
   

@@ -16,8 +16,8 @@ import java.util.List;
 public class DistanceBetweenSolutionAndKNearestNeighbors<S extends Solution<?>>
         implements Distance<S, List<S>> {
 
-  private final int k ;
-  private Distance<S, S> distance ;
+  private final int k;
+    private final Distance<S, S> distance;
 
   public DistanceBetweenSolutionAndKNearestNeighbors(int k, Distance<S, S> distance) {
     this.k = k ;

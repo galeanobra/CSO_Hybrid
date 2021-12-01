@@ -8,23 +8,25 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.List;
 
-/** @author Antonio J. Nebro <antonio@lcc.uma.es> */
+/**
+ * @author Antonio J. Nebro <antonio@lcc.uma.es>
+ */
 public class SolutionListOutput {
-  private FileOutputContext varFileContext;
-  private FileOutputContext funFileContext;
-  private String varFileName = "VAR";
-  private String funFileName = "FUN";
-  private List<? extends Solution<?>> solutionList;
-  private List<Boolean> isObjectiveToBeMinimized;
+    private FileOutputContext varFileContext;
+    private FileOutputContext funFileContext;
+    private final String varFileName = "VAR";
+    private final String funFileName = "FUN";
+    private final List<? extends Solution<?>> solutionList;
+    private List<Boolean> isObjectiveToBeMinimized;
 
-  public SolutionListOutput(List<? extends Solution<?>> solutionList) {
-    varFileContext = new DefaultFileOutputContext(varFileName);
-    funFileContext = new DefaultFileOutputContext(funFileName);
-    this.solutionList = solutionList;
-    isObjectiveToBeMinimized = null;
-  }
+    public SolutionListOutput(List<? extends Solution<?>> solutionList) {
+        varFileContext = new DefaultFileOutputContext(varFileName);
+        funFileContext = new DefaultFileOutputContext(funFileName);
+        this.solutionList = solutionList;
+        isObjectiveToBeMinimized = null;
+    }
 
-  public SolutionListOutput setVarFileOutputContext(FileOutputContext fileContext) {
+    public SolutionListOutput setVarFileOutputContext(FileOutputContext fileContext) {
     varFileContext = fileContext;
 
     return this;

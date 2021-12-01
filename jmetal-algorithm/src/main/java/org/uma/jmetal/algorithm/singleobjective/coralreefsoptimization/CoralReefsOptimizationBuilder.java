@@ -17,25 +17,25 @@ import java.util.List;
  *
  */
 public class CoralReefsOptimizationBuilder<S extends Solution<?>> implements
-		AlgorithmBuilder<CoralReefsOptimization<S>> {
+        AlgorithmBuilder<CoralReefsOptimization<S>> {
 
-	/**
-	 * CoralReefsOptimizationBuilder class
-	 */
-	private Problem<S> problem;
+    /**
+     * CoralReefsOptimizationBuilder class
+     */
+    private final Problem<S> problem;
 
-	private SelectionOperator<List<S>, S> selectionOperator;
-	private CrossoverOperator<S> crossoverOperator;
-	private MutationOperator<S> mutationOperator;
-	private Comparator<S> comparator;
+    private final SelectionOperator<List<S>, S> selectionOperator;
+    private final CrossoverOperator<S> crossoverOperator;
+    private final MutationOperator<S> mutationOperator;
+    private Comparator<S> comparator;
 
-	private int maxEvaluations;
-	private int N, M; // Grid sizes
-	private double rho; // Percentage of occupied reef
-	private double Fbs, Fbr; // Percentage of broadcast spawners and brooders
-	private double Fa, Fd; // Percentage of budders and depredated corals
-	private double Pd; // Probability of depredation
-	private int attemptsToSettle;
+    private int maxEvaluations;
+    private int N, M; // Grid sizes
+    private double rho; // Percentage of occupied reef
+    private double Fbs, Fbr; // Percentage of broadcast spawners and brooders
+    private double Fa, Fd; // Percentage of budders and depredated corals
+    private double Pd; // Probability of depredation
+    private int attemptsToSettle;
 
 	/**
 	 * CoralReefsOptimizationBuilder constructor

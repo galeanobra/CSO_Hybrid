@@ -69,7 +69,7 @@ public class IntegerSBXCrossoverExample {
 
     List<IntegerSolution> population = new ArrayList<>(numberOfPoints) ;
     for (int i = 0; i < numberOfPoints ; i++) {
-      List<IntegerSolution> solutions = (List<IntegerSolution>) crossover.execute(parents);
+      List<IntegerSolution> solutions = crossover.execute(parents);
       population.add(solutions.get(0)) ;
       population.add(solutions.get(1)) ;
     }

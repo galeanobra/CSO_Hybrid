@@ -9,23 +9,23 @@ import java.util.Arrays;
 
 public class FriedmanTest {
 
-  public static final boolean MINIMIZAR = true;
-  public static final boolean MAXIMIZAR = false;
+    public static final boolean MINIMIZAR = true;
+    public static final boolean MAXIMIZAR = false;
 
-  private Table results;
-  private boolean minimizar;
-  private int numberOfAlgorithms;
-  private int datasetCount;
+    private Table results;
+    private final boolean minimizar;
+    private final int numberOfAlgorithms;
+    private final int datasetCount;
 
-  public FriedmanTest(
-      boolean minimizar,
-      Table table,
-      StringColumn algorithms,
-      StringColumn problems,
-      String indicatorValueColumnName) {
-    this.minimizar = minimizar;
-    numberOfAlgorithms = algorithms.size();
-    datasetCount = table.rowCount();
+    public FriedmanTest(
+            boolean minimizar,
+            Table table,
+            StringColumn algorithms,
+            StringColumn problems,
+            String indicatorValueColumnName) {
+        this.minimizar = minimizar;
+        numberOfAlgorithms = algorithms.size();
+        datasetCount = table.rowCount();
     double[][] mean =
         computeAveragePerformancePerAlgorithm(
             table, algorithms, problems, indicatorValueColumnName);
@@ -101,8 +101,8 @@ public class FriedmanTest {
             seen[k] = true;
           }
         }
-        sum /= (double) ig;
-        rank[i][j].setIndice(sum);
+          sum /= ig;
+          rank[i][j].setIndice(sum);
         for (int k = 0; k < notVisited.size(); k++) {
           rank[i][notVisited.get(k)].setIndice(sum);
         }

@@ -78,7 +78,7 @@ public class RNSGAIIWithChartsRunner extends AbstractAlgorithmRunner {
       referenceParetoFront = "resources/referenceFrontsCSV/ZDT1.csv" ;
     }
 
-    problem = (DoubleProblem) ProblemUtils.<DoubleSolution> loadProblem(problemName);
+    problem = ProblemUtils.<DoubleSolution>loadProblem(problemName);
 
     double crossoverProbability = 0.9 ;
     double crossoverDistributionIndex = 20.0 ;
@@ -167,8 +167,8 @@ public class RNSGAIIWithChartsRunner extends AbstractAlgorithmRunner {
   }
 
   private static class ChartListener implements MeasureListener<List<DoubleSolution>> {
-    private ChartContainerWithReferencePoints chart;
-    private int iteration = 0;
+      private final ChartContainerWithReferencePoints chart;
+      private int iteration = 0;
 
     public ChartListener(ChartContainerWithReferencePoints chart) {
       this.chart = chart;

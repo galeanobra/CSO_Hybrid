@@ -28,7 +28,7 @@ public class ArrayPointTest {
     double[] pointDimensions = (double[])ReflectionTestUtils.getField(point, "point");
 
     double[] expectedArray = {0.0, 0.0, 0.0, 0.0, 0.0} ;
-    assertArrayEquals(expectedArray, pointDimensions, EPSILON); ;
+    assertArrayEquals(expectedArray, pointDimensions, EPSILON);
   }
 
   @Test
@@ -224,7 +224,7 @@ public class ArrayPointTest {
     int dimension = 5 ;
     Point point = new ArrayPoint(dimension) ;
 
-    assertFalse(point.equals(new String("")));
+      assertFalse(point.equals(""));
   }
 
   @Test

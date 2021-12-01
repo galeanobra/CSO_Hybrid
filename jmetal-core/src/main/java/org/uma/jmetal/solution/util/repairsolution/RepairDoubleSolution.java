@@ -12,10 +12,11 @@ import java.io.Serializable;
 public interface RepairDoubleSolution extends Serializable {
   /**
    * Checks if a given value is between its bounds and repairs it otherwise
-   * @param value The value to be checked
+   *
+   * @param value      The value to be checked
    * @param lowerBound
    * @param upperBound
    * @return The same value if it is between the limits or a repaired value otherwise
    */
-  public double repairSolutionVariableValue(double value, double lowerBound, double upperBound) ;
+  double repairSolutionVariableValue(double value, double lowerBound, double upperBound);
 }

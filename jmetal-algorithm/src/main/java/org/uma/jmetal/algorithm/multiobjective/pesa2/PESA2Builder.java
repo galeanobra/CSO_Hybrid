@@ -13,23 +13,23 @@ import org.uma.jmetal.util.evaluator.impl.SequentialSolutionListEvaluator;
  * Created by Antonio J. Nebro
  */
 public class PESA2Builder<S extends Solution<?>> implements AlgorithmBuilder<PESA2<S>> {
-  private final Problem<S> problem;
-  private int maxEvaluations ;
-  private int archiveSize ;
-  private int populationSize ;
-  private int biSections ;
-  private CrossoverOperator<S> crossoverOperator;
-  private MutationOperator<S> mutationOperator;
-  private SolutionListEvaluator<S> evaluator;
+    private final Problem<S> problem;
+    private int maxEvaluations;
+    private int archiveSize;
+    private int populationSize;
+    private int biSections;
+    private final CrossoverOperator<S> crossoverOperator;
+    private final MutationOperator<S> mutationOperator;
+    private SolutionListEvaluator<S> evaluator;
 
-  /**
-   * Constructor
-   */
-  public PESA2Builder(Problem<S> problem, CrossoverOperator<S> crossoverOperator,
-      MutationOperator<S> mutationOperator) {
-    this.problem = problem;
-    maxEvaluations = 25000;
-    populationSize = 100;
+    /**
+     * Constructor
+     */
+    public PESA2Builder(Problem<S> problem, CrossoverOperator<S> crossoverOperator,
+                        MutationOperator<S> mutationOperator) {
+        this.problem = problem;
+        maxEvaluations = 25000;
+        populationSize = 100;
     archiveSize = 100 ;
     biSections = 5 ;
     this.crossoverOperator = crossoverOperator ;

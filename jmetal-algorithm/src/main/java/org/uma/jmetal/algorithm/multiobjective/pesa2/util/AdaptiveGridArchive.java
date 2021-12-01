@@ -17,9 +17,9 @@ import java.util.Iterator;
 @SuppressWarnings("serial")
 public class AdaptiveGridArchive<S extends Solution<?>> extends AbstractBoundedArchive<S> {
 
-  private AdaptiveGrid<S> grid;
+  private final AdaptiveGrid<S> grid;
 
-  private Comparator<S> dominanceComparator;
+    private final Comparator<S> dominanceComparator;
 
   /**
    * Constructor.

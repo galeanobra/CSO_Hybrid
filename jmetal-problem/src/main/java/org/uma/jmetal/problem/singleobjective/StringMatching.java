@@ -8,8 +8,8 @@ import org.uma.jmetal.util.pseudorandom.JMetalRandom;
 /** This problem consists in finding a string matching a target string. */
 @SuppressWarnings("serial")
 public class StringMatching extends CharSequenceProblem {
-  private String targetString;
-  private final char[] alphabet;
+  private final String targetString;
+    private final char[] alphabet;
 
   public StringMatching(String targetString, String alphabet) {
     this.targetString = targetString;

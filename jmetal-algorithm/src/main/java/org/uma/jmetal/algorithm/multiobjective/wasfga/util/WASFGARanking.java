@@ -31,25 +31,25 @@ import java.util.List;
  */
 @SuppressWarnings("serial")
 public class WASFGARanking<S extends Solution<?>> extends GenericSolutionAttribute<S, Integer>
-		implements Ranking<S> {
+        implements Ranking<S> {
 
-	private final String attributeId = getClass().getName();
+    private final String attributeId = getClass().getName();
 
-	private AbstractUtilityFunctionsSet<S> utilityFunctions;
-	private List<List<S>> rankedSubpopulations;
-	private int numberOfRanks;
-	private NumberOfViolatedConstraints<S> numberOfViolatedConstraints ;
-	private OverallConstraintViolation<S> overallConstraintViolation;
+    private final AbstractUtilityFunctionsSet<S> utilityFunctions;
+    private List<List<S>> rankedSubpopulations;
+    private int numberOfRanks;
+    private final NumberOfViolatedConstraints<S> numberOfViolatedConstraints;
+    private final OverallConstraintViolation<S> overallConstraintViolation;
 
-	public WASFGARanking(AbstractUtilityFunctionsSet<S> utilityFunctions) {
-		this.numberOfRanks = 0;
-		this.utilityFunctions = utilityFunctions;
-		this.numberOfViolatedConstraints = new NumberOfViolatedConstraints<S>() ;
-		this.overallConstraintViolation = new OverallConstraintViolation<S>();
-	}
+    public WASFGARanking(AbstractUtilityFunctionsSet<S> utilityFunctions) {
+        this.numberOfRanks = 0;
+        this.utilityFunctions = utilityFunctions;
+        this.numberOfViolatedConstraints = new NumberOfViolatedConstraints<S>();
+        this.overallConstraintViolation = new OverallConstraintViolation<S>();
+    }
 
-	@Override
-	public Ranking<S> compute(List<S> population) {
+    @Override
+    public Ranking<S> compute(List<S> population) {
 		int numberOfRanksForFeasibleSolutions, numberOfRanksForUnfeasibleSolutions, rank, indexOfBestSolution;
 		int index, indexOfWeight;
 		int numberOfWeights = this.utilityFunctions.getSize();

@@ -23,31 +23,29 @@ import java.util.Collection;
 public interface MeasureManager {
 	/**
 	 * This method should return all the keys identifying the {@link Measure}s
-	 * managed by this {@link MeasureManager}. More precisely, if
-	 * {@link #getPullMeasure(Object)} or {@link #getPushMeasure(Object)}
-	 * returns a non-<code>null</code> value for a given key, then this key
-	 * should be returned by {@link #getMeasureKeys()}. However, it is not
-	 * because a key is returned by {@link #getMeasureKeys()} that it
-	 * necessarily has a {@link PullMeasure} or a {@link PushMeasure} returned
-	 * by this {@link MeasureManager}.
-	 * 
-	 * @return the set of keys identifying the managed {@link Measure}s
-	 */
-	public Collection<Object> getMeasureKeys();
+     * managed by this {@link MeasureManager}. More precisely, if
+     * {@link #getPullMeasure(Object)} or {@link #getPushMeasure(Object)}
+     * returns a non-<code>null</code> value for a given key, then this key
+     * should be returned by {@link #getMeasureKeys()}. However, it is not
+     * because a key is returned by {@link #getMeasureKeys()} that it
+     * necessarily has a {@link PullMeasure} or a {@link PushMeasure} returned
+     * by this {@link MeasureManager}.
+     *
+     * @return the set of keys identifying the managed {@link Measure}s
+     */
+    Collection<Object> getMeasureKeys();
+
+    /**
+     * @param key the key of the {@link Measure}
+     * @return the {@link PullMeasure} identified by this key
+     */
+    <T> PullMeasure<T> getPullMeasure(Object key);
 
 	/**
-	 * 
-	 * @param key
-	 *            the key of the {@link Measure}
-	 * @return the {@link PullMeasure} identified by this key
-	 */
-	public <T> PullMeasure<T> getPullMeasure(Object key);
-
-	/**
-	 * 
-	 * @param key
-	 *            the key of the {@link Measure}
-	 * @return the {@link PushMeasure} identified by this key
-	 */
-	public <T> PushMeasure<T> getPushMeasure(Object key);
+	 *
+     * @param key
+     *            the key of the {@link Measure}
+     * @return the {@link PushMeasure} identified by this key
+     */
+    <T> PushMeasure<T> getPushMeasure(Object key);
 }

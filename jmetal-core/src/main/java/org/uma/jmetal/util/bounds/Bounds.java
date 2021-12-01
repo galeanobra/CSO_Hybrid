@@ -81,7 +81,7 @@ public interface Bounds<T extends Comparable<T>> extends Serializable {
    * time. Later changes of the {@link Pair} do not reflect on the previously
    * created {@link Bounds}. It allows to not keep a reference on the {@link Pair}
    * instance, which can be garbage collected.
-   * 
+   *
    * @param <T>
    *          the type of elements
    * @param pair
@@ -91,8 +91,8 @@ public interface Bounds<T extends Comparable<T>> extends Serializable {
    *             should disappear soon.
    */
   @Deprecated
-  public static <T extends Comparable<T>> Bounds<T> fromPair(Pair<T, T> pair) {
-    return create(pair.getLeft(), pair.getRight());
+  static <T extends Comparable<T>> Bounds<T> fromPair(Pair<T, T> pair) {
+      return create(pair.getLeft(), pair.getRight());
   }
 
   /**
@@ -101,13 +101,13 @@ public interface Bounds<T extends Comparable<T>> extends Serializable {
    * time. Later changes of the {@link Bounds} do not reflect on the previously
    * created {@link Pair}. It allows to not keep a reference on the {@link Bounds}
    * instance, which can be garbage collected.
-   * 
+   *
    * @return a {@link Pair} representing this {@link Bounds}
    * @deprecated This method is here for legacy purpose. Do not use since it
    *             should disappear soon.
    */
   @Deprecated
-  default public Pair<T, T> toPair() {
-    return new ImmutablePair<>(getLowerBound(), getUpperBound());
+  default Pair<T, T> toPair() {
+      return new ImmutablePair<>(getLowerBound(), getUpperBound());
   }
 }

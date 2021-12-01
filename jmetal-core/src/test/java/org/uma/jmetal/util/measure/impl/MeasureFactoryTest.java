@@ -20,14 +20,14 @@ public class MeasureFactoryTest {
 		SimplePushMeasure<Integer> push = new SimplePushMeasure<>();
 		PullMeasure<Integer> pull = factory.createPullFromPush(push, null);
 
-		assertEquals(null, (Object) pull.get());
-		push.push(3);
+		assertEquals(null, pull.get());
+        push.push(3);
 		assertEquals(3, (Object) pull.get());
 		push.push(5);
 		assertEquals(5, (Object) pull.get());
-		push.push(null);
-		assertEquals(null, (Object) pull.get());
-		push.push(-65);
+        push.push(null);
+        assertEquals(null, pull.get());
+        push.push(-65);
 		push.push(8);
 		push.push(4);
 		push.push(-10);
@@ -284,8 +284,8 @@ public class MeasureFactoryTest {
 	@SuppressWarnings("unused")
 	private class Parent {
 		public boolean parentPublic = true;
-		protected boolean parentProtected = true;
-		private boolean parentPrivate = true;
+        protected boolean parentProtected = true;
+        private final boolean parentPrivate = true;
 
 		public String getParentPublic() {
 			return "parent-test";
@@ -303,8 +303,8 @@ public class MeasureFactoryTest {
 	@SuppressWarnings("unused")
 	private class Child extends Parent {
 		public boolean childPublic = false;
-		protected boolean childProtected = false;
-		private boolean childPrivate = false;
+        protected boolean childProtected = false;
+        private final boolean childPrivate = false;
 
 		public String getChildPublic() {
 			return "child-test";

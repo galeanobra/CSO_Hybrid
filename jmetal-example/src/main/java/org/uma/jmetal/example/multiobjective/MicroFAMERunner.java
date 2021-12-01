@@ -70,7 +70,7 @@ public class MicroFAMERunner extends AbstractAlgorithmRunner {
       evaluations = Integer.parseInt(args[2]);
     }
 
-    problem = ProblemUtils.<DoubleSolution>loadProblem(problemName);
+    problem = ProblemUtils.loadProblem(problemName);
 
     crossover = new NullCrossover<>();
     mutation = new NullMutation<>();

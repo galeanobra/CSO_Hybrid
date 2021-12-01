@@ -16,7 +16,7 @@ public class PreferenceDistance<S extends Solution<?>> extends GenericSolutionAt
   private List<Double> interestPoint;
 
   private List<Double> weights = null;
-  private double epsilon;
+    private final double epsilon;
 
   public PreferenceDistance(List<Double> interestPoint, double epsilon) {
     this.epsilon = epsilon;

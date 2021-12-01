@@ -18,31 +18,31 @@ import java.util.List;
  * @author Antonio J. Nebro <antonio@lcc.uma.es>
  */
 public class RNSGAIIBuilder<S extends Solution<?>> implements AlgorithmBuilder<RNSGAII<S>> {
-  /**
-   * NSGAIIBuilder class
-   */
-  private final Problem<S> problem;
-  private int maxEvaluations;
-  private int populationSize;
-  protected int matingPoolSize;
-  protected int offspringPopulationSize ;
+    /**
+     * NSGAIIBuilder class
+     */
+    private final Problem<S> problem;
+    private int maxEvaluations;
+    private int populationSize;
+    protected int matingPoolSize;
+    protected int offspringPopulationSize;
 
-  private CrossoverOperator<S> crossoverOperator;
-  private MutationOperator<S> mutationOperator;
-  private SelectionOperator<List<S>, S> selectionOperator;
-  private SolutionListEvaluator<S> evaluator;
-  private List<Double> interestPoint;
-  private double epsilon;
+    private final CrossoverOperator<S> crossoverOperator;
+    private final MutationOperator<S> mutationOperator;
+    private SelectionOperator<List<S>, S> selectionOperator;
+    private SolutionListEvaluator<S> evaluator;
+    private final List<Double> interestPoint;
+    private final double epsilon;
 
-  /**
-   * RNSGAIIBuilder constructor
-   */
-  public RNSGAIIBuilder(Problem<S> problem, CrossoverOperator<S> crossoverOperator,
-                        MutationOperator<S> mutationOperator, List<Double> interestPoint, double epsilon) {
-    this.problem = problem;
-    maxEvaluations = 25000;
-    populationSize = 100;
-    this.matingPoolSize = 100 ;
+    /**
+     * RNSGAIIBuilder constructor
+     */
+    public RNSGAIIBuilder(Problem<S> problem, CrossoverOperator<S> crossoverOperator,
+                          MutationOperator<S> mutationOperator, List<Double> interestPoint, double epsilon) {
+        this.problem = problem;
+        maxEvaluations = 25000;
+        populationSize = 100;
+        this.matingPoolSize = 100;
     this.offspringPopulationSize = 100 ;
     this.crossoverOperator = crossoverOperator;
     this.mutationOperator = mutationOperator;

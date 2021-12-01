@@ -157,7 +157,8 @@ public abstract class Cell {
             occi = occi - 10;
         }
         //occi=90;
-        return this.getBTS().antennaArray_.getReal(azi - 1, occi - 1).floatValue();
+//        return this.getBTS().antennaArray_.getReal(azi - 1, occi - 1).floatValue();
+        return this.getBTS().antennaArray_.getFloat(azi - 1, occi - 1);
     }
 
     public BTS getBTS() {

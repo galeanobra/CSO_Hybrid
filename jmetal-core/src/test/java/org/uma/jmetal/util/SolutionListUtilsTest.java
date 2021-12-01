@@ -431,7 +431,7 @@ public class SolutionListUtilsTest {
     double[] maxValue = new double[] {20, 20};
 
     List<DoubleSolution> normalizedSolutions =
-        (List<DoubleSolution>) SolutionListUtils.normalizeSolutionList(solutions, minValue, maxValue);
+            SolutionListUtils.normalizeSolutionList(solutions, minValue, maxValue);
 
     assertNotSame(normalizedSolutions, solutions);
     assertEquals(1.0, normalizedSolutions.get(0).objectives()[0], EPSILON);

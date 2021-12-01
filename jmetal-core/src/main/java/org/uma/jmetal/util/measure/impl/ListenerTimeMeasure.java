@@ -182,7 +182,7 @@ public class ListenerTimeMeasure extends SimplePullMeasure<Long> implements
 
 					@Override
 					public <T> PushMeasure<T> getPushMeasure(Object key) {
-						return wrapMeasure(wrapped.<T> getPushMeasure(key));
+						return wrapMeasure(wrapped.getPushMeasure(key));
 					}
 
 					@SuppressWarnings("unchecked")
@@ -191,7 +191,7 @@ public class ListenerTimeMeasure extends SimplePullMeasure<Long> implements
 						if (key.equals(measureKey)) {
 							return (PullMeasure<T>) ListenerTimeMeasure.this;
 						} else {
-							return wrapped.<T> getPullMeasure(key);
+                            return wrapped.getPullMeasure(key);
 						}
 					}
 
@@ -208,12 +208,12 @@ public class ListenerTimeMeasure extends SimplePullMeasure<Long> implements
 
 					@Override
 					public <T> PushMeasure<T> getPushMeasure(Object key) {
-						return wrapMeasure(wrapped.<T> getPushMeasure(key));
+                        return wrapMeasure(wrapped.getPushMeasure(key));
 					}
 
 					@Override
 					public <T> PullMeasure<T> getPullMeasure(Object key) {
-						return wrapped.<T> getPullMeasure(key);
+                        return wrapped.getPullMeasure(key);
 					}
 
 					@Override

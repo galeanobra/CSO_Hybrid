@@ -19,25 +19,25 @@ import java.util.Map;
 
 @SuppressWarnings("serial")
 public class EvolutionaryAlgorithm<S extends Solution<?>>
-    implements Algorithm<List<S>>, ObservableEntity {
-  private List<S> population;
-  private Archive<S> externalArchive;
+        implements Algorithm<List<S>>, ObservableEntity {
+    private List<S> population;
+    private final Archive<S> externalArchive;
 
-  private Evaluation<S> evaluation;
-  private SolutionsCreation<S> createInitialPopulation;
-  private Termination termination;
-  private MatingPoolSelection<S> selection;
-  private Variation<S> variation;
-  private Replacement<S> replacement;
+    private final Evaluation<S> evaluation;
+    private final SolutionsCreation<S> createInitialPopulation;
+    private final Termination termination;
+    private final MatingPoolSelection<S> selection;
+    private final Variation<S> variation;
+    private final Replacement<S> replacement;
 
-  private Map<String, Object> attributes;
+    private final Map<String, Object> attributes;
 
-  private long initTime;
-  private long totalComputingTime;
-  private int evaluations;
-  private Observable<Map<String, Object>> observable;
+    private long initTime;
+    private long totalComputingTime;
+    private int evaluations;
+    private final Observable<Map<String, Object>> observable;
 
-  private final String name;
+    private final String name;
 
   /**
    * Constructor

@@ -23,20 +23,22 @@ import java.util.List;
 @SuppressWarnings("serial")
 @Deprecated
 public class NMMin2 extends AbstractGenericProblem<IntegerDoubleSolution> {
-  private int valueN;
-  private int valueM;
-  private List<Pair<Integer, Integer>> integerBounds;
-  private List<Pair<Double, Double>> doubleBounds;
+    private final int valueN;
+    private final int valueM;
+    private final List<Pair<Integer, Integer>> integerBounds;
+    private final List<Pair<Double, Double>> doubleBounds;
 
-  public NMMin2() {
-    this(10, 10, 100, -100, -1000, +1000);
-  }
+    public NMMin2() {
+        this(10, 10, 100, -100, -1000, +1000);
+    }
 
-  /** Constructor */
-  public NMMin2(
-      int numberOfIntegerVariables,
-      int numberOfDoubleVariables,
-      int n,
+    /**
+     * Constructor
+     */
+    public NMMin2(
+            int numberOfIntegerVariables,
+            int numberOfDoubleVariables,
+            int n,
       int m,
       int lowerBound,
       int upperBound) {

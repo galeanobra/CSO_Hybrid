@@ -20,8 +20,8 @@ import java.util.Map;
  */
 public class WriteSolutionsToFilesObserver implements Observer<Map<String, Object>> {
 
-  private Integer frequency ;
-  private int counter ;
+  private final Integer frequency;
+    private int counter;
   private String outputDirectory = "" ;
   /**
    * Constructor

@@ -26,7 +26,7 @@ public class ListenerTimeMeasureTest {
 				throw new RuntimeException(e);
 			}
 		}
-	};
+	}
 
 	@Ignore
 	@Test

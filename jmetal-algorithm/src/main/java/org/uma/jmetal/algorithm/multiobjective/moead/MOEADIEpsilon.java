@@ -30,10 +30,10 @@ import static org.uma.jmetal.util.ConstraintHandling.isFeasible;
 @SuppressWarnings("serial")
 public class MOEADIEpsilon extends AbstractMOEAD<DoubleSolution> {
 
-  private DifferentialEvolutionCrossover differentialEvolutionCrossover;
-  private double epsilonK;
-  private double phiMax = -1e30;
-  private List<DoubleSolution> archive ;
+  private final DifferentialEvolutionCrossover differentialEvolutionCrossover;
+    private double epsilonK;
+    private double phiMax = -1e30;
+    private final List<DoubleSolution> archive;
 
   public MOEADIEpsilon(
       Problem<DoubleSolution> problem,
@@ -121,9 +121,9 @@ public class MOEADIEpsilon extends AbstractMOEAD<DoubleSolution> {
         evaluations++;
 
         // Update PhiMax
-        if (phiMax < Math.abs((double) ConstraintHandling.overallConstraintViolationDegree(child))) {
-          phiMax = ConstraintHandling.overallConstraintViolationDegree(child);
-        }
+          if (phiMax < Math.abs(ConstraintHandling.overallConstraintViolationDegree(child))) {
+              phiMax = ConstraintHandling.overallConstraintViolationDegree(child);
+          }
 
         idealPoint.update(child.objectives());
         updateNeighborhood(child, subProblemId, neighborType);

@@ -5,6 +5,7 @@ import org.apache.commons.io.IOUtils;
 
 import java.io.*;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
@@ -84,8 +85,7 @@ public class JMetalLogger implements Serializable {
 
 		// Apply configuration
 		LogManager manager = LogManager.getLogManager();
-		manager.readConfiguration(IOUtils.toInputStream(new String(stream
-				.toByteArray(), Charset.forName("UTF-8"))));
-		logger.info("Loggers configured with " + propertyFile);
+        manager.readConfiguration(IOUtils.toInputStream(stream.toString(StandardCharsets.UTF_8)));
+        logger.info("Loggers configured with " + propertyFile);
 	}
 }

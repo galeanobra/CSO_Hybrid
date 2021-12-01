@@ -35,7 +35,7 @@ import java.util.List;
  */
 @SuppressWarnings("serial")
 public class CDG extends AbstractCDG<DoubleSolution> {
-  private DifferentialEvolutionCrossover differentialEvolutionCrossover ;
+  private final DifferentialEvolutionCrossover differentialEvolutionCrossover;
 
   public CDG(Problem<DoubleSolution> problem,
       int populationSize,
@@ -64,8 +64,8 @@ public class CDG extends AbstractCDG<DoubleSolution> {
     
     evaluations = populationSize;
 
-    int maxGen = (int) (maxEvaluations / populationSize);
-    int gen = 0;
+      int maxGen = maxEvaluations / populationSize;
+      int gen = 0;
     
     double mutationProbability = 1.0 / problem.getNumberOfVariables();
     
@@ -133,7 +133,7 @@ public class CDG extends AbstractCDG<DoubleSolution> {
 
   protected void initializePopulation() {
     for (int i = 0; i < populationSize; i++) {
-      DoubleSolution newSolution = (DoubleSolution)problem.createSolution();
+        DoubleSolution newSolution = problem.createSolution();
 
       problem.evaluate(newSolution);
       initialCDGAttributes(newSolution);

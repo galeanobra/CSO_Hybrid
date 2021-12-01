@@ -13,7 +13,7 @@ import java.util.stream.IntStream;
  * Created by antonio on 6/06/17.
  */
 public class RemoveNRandomSolutions<S extends Solution<?>> implements RemoveSolutionsStrategy<S> {
-  private int numberOfSolutionsToDelete ;
+  private final int numberOfSolutionsToDelete;
 
   public RemoveNRandomSolutions(int numberOfSolutionsToDelete) {
     this.numberOfSolutionsToDelete = numberOfSolutionsToDelete ;

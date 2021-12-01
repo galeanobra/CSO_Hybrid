@@ -23,7 +23,7 @@ public class LinkedPolynomialMutation implements MutationOperator<DoubleSolution
   private static final double DEFAULT_DISTRIBUTION_INDEX = 20.0;
   private double distributionIndex;
   private double mutationProbability;
-  private RepairDoubleSolution solutionRepair;
+    private final RepairDoubleSolution solutionRepair;
 
   private RandomGenerator<Double> randomGenerator;
 

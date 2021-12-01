@@ -9,16 +9,16 @@ public class CMAESUtils {
 
   // Symmetric Householder reduction to tridiagonal form, taken from JAMA package.
 
-  public static void tred2(int n, double v[][], double d[], double e[]) {
+  public static void tred2(int n, double[][] v, double[] d, double[] e) {
 
-    //  This is derived from the Algol procedures tred2 by
-    //  Bowdler, Martin, Reinsch, and Wilkinson, Handbook for
-    //  Auto. Comp., Vol.ii-Linear Algebra, and the corresponding
-    //  Fortran subroutine in EISPACK.
+      //  This is derived from the Algol procedures tred2 by
+      //  Bowdler, Martin, Reinsch, and Wilkinson, Handbook for
+      //  Auto. Comp., Vol.ii-Linear Algebra, and the corresponding
+      //  Fortran subroutine in EISPACK.
 
-    System.arraycopy(v[n - 1], 0, d, 0, n);
+      System.arraycopy(v[n - 1], 0, d, 0, n);
 
-    // Householder reduction to tridiagonal form.
+      // Householder reduction to tridiagonal form.
 
     for (int i = n - 1; i > 0; i--) {
 
@@ -50,18 +50,18 @@ public class CMAESUtils {
     e[0] = 0.0;
   }
 
-  private static double householderIteration(int index, double scale,
-        double[][]v, double d[], double e[]) {
+    private static double householderIteration(int index, double scale,
+                                               double[][] v, double[] d, double[] e) {
 
-    double h = 0.0;
+        double h = 0.0;
 
-    // Generate Householder vector.
-    for (int k = 0; k < index; k++) {
-      d[k] /= scale;
-      h += d[k] * d[k];
-    }
-    double f = d[index - 1];
-    double g = Math.sqrt(h);
+        // Generate Householder vector.
+        for (int k = 0; k < index; k++) {
+            d[k] /= scale;
+            h += d[k] * d[k];
+        }
+        double f = d[index - 1];
+        double g = Math.sqrt(h);
     if (f > 0) {
       g = -g;
     }
@@ -140,17 +140,17 @@ public class CMAESUtils {
 
   // Symmetric tridiagonal QL algorithm, taken from JAMA package.
 
-  public static void tql2(int n, double d[], double e[], double v[][]) {
+    public static void tql2(int n, double[] d, double[] e, double[][] v) {
 
-    //  This is derived from the Algol procedures tql2, by
-    //  Bowdler, Martin, Reinsch, and Wilkinson, Handbook for
-    //  Auto. Comp., Vol.ii-Linear Algebra, and the corresponding
-    //  Fortran subroutine in EISPACK.
+        //  This is derived from the Algol procedures tql2, by
+        //  Bowdler, Martin, Reinsch, and Wilkinson, Handbook for
+        //  Auto. Comp., Vol.ii-Linear Algebra, and the corresponding
+        //  Fortran subroutine in EISPACK.
 
-    System.arraycopy(e, 1, e, 0, n - 1);
-    e[n - 1] = 0.0;
+        System.arraycopy(e, 1, e, 0, n - 1);
+        e[n - 1] = 0.0;
 
-    double f = 0.0;
+        double f = 0.0;
     double tst1 = 0.0;
     double eps = Math.pow(2.0, -52.0);
     for (int l = 0; l < n; l++) {
@@ -202,28 +202,28 @@ public class CMAESUtils {
       r = -r;
     }
     d[idx] = e[idx] / (p + r);
-    d[idx + 1] = e[idx] * (p + r);
+      d[idx + 1] = e[idx] * (p + r);
 
-    double h = g - d[idx];
-    for (int i = idx + 2; i < n; i++) {
-      d[i] -= h;
-    }
-    return h;
+      double h = g - d[idx];
+      for (int i = idx + 2; i < n; i++) {
+          d[i] -= h;
+      }
+      return h;
 
   }
 
-  private static void implicitQLTransformation(int l, int m, int n, double v[][],
-        double[] d, double[] e) {
+    private static void implicitQLTransformation(int l, int m, int n, double[][] v,
+                                                 double[] d, double[] e) {
 
-    double dl1 = d[l + 1];
-    double p = d[m];
-    double c = 1.0;
-    double c2 = c;
-    double c3 = c;
-    double el1 = e[l + 1];
-    double s = 0.0;
-    double s2 = 0.0;
-    for (int i = m - 1; i >= l; i--) {
+        double dl1 = d[l + 1];
+        double p = d[m];
+        double c = 1.0;
+        double c2 = c;
+        double c3 = c;
+        double el1 = e[l + 1];
+        double s = 0.0;
+        double s2 = 0.0;
+        for (int i = m - 1; i >= l; i--) {
       c3 = c2;
       c2 = c;
       s2 = s;
@@ -274,7 +274,7 @@ public class CMAESUtils {
 
   }
 
-  public static int checkEigenSystem(int n, double c[][], double diag[], double q[][]) {
+    public static int checkEigenSystem(int n, double[][] c, double[] diag, double[][] q) {
     /*
      exhaustive org.uma.test of the output of the eigendecomposition
      needs O(n^3) operations
@@ -283,8 +283,8 @@ public class CMAESUtils {
      returns number of detected inaccuracies
     */
 
-    /* compute q diag q^T and q q^T to check */
-    int i, j, k, res = 0;
+        /* compute q diag q^T and q q^T to check */
+        int i, j, k, res = 0;
     double cc, dd;
     String s;
 

@@ -12,22 +12,22 @@ import java.util.TreeMap;
 
 @SuppressWarnings("serial")
 public class EnvironmentalSelection<S extends Solution<?>>
-    implements SelectionOperator<List<S>, List<S>>, SolutionAttribute<S, List<Double>> {
+        implements SelectionOperator<List<S>, List<S>>, SolutionAttribute<S, List<Double>> {
 
-  private List<List<S>> fronts;
-  private int solutionsToSelect;
-  private List<ReferencePoint<S>> referencePoints;
-  private int numberOfObjectives;
+    private final List<List<S>> fronts;
+    private final int solutionsToSelect;
+    private final List<ReferencePoint<S>> referencePoints;
+    private final int numberOfObjectives;
 
-  public EnvironmentalSelection(Builder<S> builder) {
-    fronts = builder.getFronts();
-    solutionsToSelect = builder.getSolutionsToSelet();
-    referencePoints = builder.getReferencePoints();
-    numberOfObjectives = builder.getNumberOfObjectives();
-  }
+    public EnvironmentalSelection(Builder<S> builder) {
+        fronts = builder.getFronts();
+        solutionsToSelect = builder.getSolutionsToSelet();
+        referencePoints = builder.getReferencePoints();
+        numberOfObjectives = builder.getNumberOfObjectives();
+    }
 
-  public EnvironmentalSelection(
-      List<List<S>> fronts,
+    public EnvironmentalSelection(
+            List<List<S>> fronts,
       int solutionsToSelect,
       List<ReferencePoint<S>> referencePoints,
       int numberOfObjectives) {
@@ -170,7 +170,7 @@ public class EnvironmentalSelection<S extends Solution<?>>
       for (S s : fronts.get(t)) {
 
         for (int f = 0; f < numberOfObjectives; f++) {
-          List<Double> conv_obj = (List<Double>) getAttribute(s);
+            List<Double> conv_obj = getAttribute(s);
           if (Math.abs(intercepts.get(f) - ideal_point.get(f)) > 10e-10) {
             conv_obj.set(f, conv_obj.get(f) / (intercepts.get(f) - ideal_point.get(f)));
           } else {
@@ -203,9 +203,9 @@ public class EnvironmentalSelection<S extends Solution<?>>
         int min_rp = -1;
         double min_dist = Double.MAX_VALUE;
         for (int r = 0; r < this.referencePoints.size(); r++) {
-          double d =
-              perpendicularDistance(
-                  this.referencePoints.get(r).position, (List<Double>) getAttribute(s));
+            double d =
+                    perpendicularDistance(
+                            this.referencePoints.get(r).position, getAttribute(s));
           if (d < min_dist) {
             min_dist = d;
             min_rp = r;
@@ -241,7 +241,7 @@ public class EnvironmentalSelection<S extends Solution<?>>
     return chosen;
   }
 
-  private TreeMap<Integer, ArrayList<ReferencePoint<S>>> referencePointsTree = new TreeMap<>();
+    private final TreeMap<Integer, ArrayList<ReferencePoint<S>>> referencePointsTree = new TreeMap<>();
 
   private void addToTree(ReferencePoint<S> rp) {
     var key = rp.MemberSize();

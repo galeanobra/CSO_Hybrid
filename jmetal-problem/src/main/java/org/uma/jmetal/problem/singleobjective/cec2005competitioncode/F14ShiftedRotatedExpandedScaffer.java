@@ -52,28 +52,28 @@ public class F14ShiftedRotatedExpandedScaffer extends TestFunc {
 
   // Fixed (class) parameters
   static final public String FUNCTION_NAME = "Shifted Rotated Expanded Scaffer's F6 Function";
-  static final public String DEFAULT_FILE_DATA = Benchmark.CEC2005SUPPORTDATADIRECTORY + "/E_ScafferF6_func_data.txt";
-  static final public String DEFAULT_FILE_MX_PREFIX = Benchmark.CEC2005SUPPORTDATADIRECTORY + "/E_ScafferF6_M_D";
-  static final public String DEFAULT_FILE_MX_SUFFIX = ".txt";
+    static final public String DEFAULT_FILE_DATA = Benchmark.CEC2005SUPPORTDATADIRECTORY + "/E_ScafferF6_func_data.txt";
+    static final public String DEFAULT_FILE_MX_PREFIX = Benchmark.CEC2005SUPPORTDATADIRECTORY + "/E_ScafferF6_M_D";
+    static final public String DEFAULT_FILE_MX_SUFFIX = ".txt";
 
-  // Shifted global optimum
-  private final double[] m_o;
-  private final double[][] m_matrix;
+    // Shifted global optimum
+    private final double[] m_o;
+    private final double[][] m_matrix;
 
-  // In order to avoid excessive memory allocation,
-  // a fixed memory buffer is allocated for each function object.
-  private double[] m_z;
-  private double[] m_zM;
+    // In order to avoid excessive memory allocation,
+    // a fixed memory buffer is allocated for each function object.
+    private final double[] m_z;
+    private final double[] m_zM;
 
-  // Constructors
-  public F14ShiftedRotatedExpandedScaffer(int dimension, double bias) throws JMetalException {
-    this(dimension, bias, DEFAULT_FILE_DATA,
-      DEFAULT_FILE_MX_PREFIX + dimension + DEFAULT_FILE_MX_SUFFIX);
-  }
+    // Constructors
+    public F14ShiftedRotatedExpandedScaffer(int dimension, double bias) throws JMetalException {
+        this(dimension, bias, DEFAULT_FILE_DATA,
+                DEFAULT_FILE_MX_PREFIX + dimension + DEFAULT_FILE_MX_SUFFIX);
+    }
 
-  public F14ShiftedRotatedExpandedScaffer(int dimension, double bias, String file_data,
-      String file_m) throws JMetalException {
-    super(dimension, bias, FUNCTION_NAME);
+    public F14ShiftedRotatedExpandedScaffer(int dimension, double bias, String file_data,
+                                            String file_m) throws JMetalException {
+        super(dimension, bias, FUNCTION_NAME);
 
     // Note: dimension starts from 0
     m_o = new double[mDimension];

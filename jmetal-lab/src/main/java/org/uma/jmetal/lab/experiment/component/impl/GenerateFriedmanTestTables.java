@@ -30,22 +30,22 @@ import java.util.*;
  */
 
 public class GenerateFriedmanTestTables<Result extends List<? extends Solution<?>>> implements ExperimentComponent {
-  private static final String DEFAULT_LATEX_DIRECTORY = "latex";
+    private static final String DEFAULT_LATEX_DIRECTORY = "latex";
 
-  private final Experiment<?, Result> experiment;
+    private final Experiment<?, Result> experiment;
 
-  private String latexDirectoryName ;
-  private int numberOfAlgorithms ;
-  private int numberOfProblems ;
+    private String latexDirectoryName;
+    private final int numberOfAlgorithms;
+    private final int numberOfProblems;
 
-  public GenerateFriedmanTestTables(Experiment<?, Result> experimentConfiguration) {
-    this.experiment = experimentConfiguration ;
+    public GenerateFriedmanTestTables(Experiment<?, Result> experimentConfiguration) {
+        this.experiment = experimentConfiguration;
 
-    numberOfAlgorithms = experiment.getAlgorithmList().size() ;
-    numberOfProblems = experiment.getProblemList().size() ;
+        numberOfAlgorithms = experiment.getAlgorithmList().size();
+        numberOfProblems = experiment.getProblemList().size();
 
-    experiment.removeDuplicatedAlgorithms();
-  }
+        experiment.removeDuplicatedAlgorithms();
+    }
 
   @Override
   public void run() throws IOException {
@@ -175,8 +175,8 @@ public class GenerateFriedmanTestTables<Result extends List<? extends Solution<?
             hasBeenVisited[k] = true;
           }
         }
-        sum /= (double)ig;
-        rank.get(i).get(j).setLeft(sum);
+          sum /= ig;
+          rank.get(i).get(j).setLeft(sum);
         for (int k=0; k<pendingToVisit.size(); k++) {
           rank.get(i).get(pendingToVisit.elementAt(k)).setLeft(sum) ;
         }

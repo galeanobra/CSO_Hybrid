@@ -106,8 +106,8 @@ public class SMPSOMeasuresWithChartsRunner extends AbstractAlgorithmRunner {
   }
 
   private static class ChartListener implements MeasureListener<List<DoubleSolution>> {
-    private ChartContainer chart;
-    private int iteration = 0;
+    private final ChartContainer chart;
+      private int iteration = 0;
 
     public ChartListener(ChartContainer chart) {
       this.chart = chart;

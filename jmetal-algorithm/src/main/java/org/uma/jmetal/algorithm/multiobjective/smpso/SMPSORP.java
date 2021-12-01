@@ -48,46 +48,46 @@ import java.util.List;
 public class SMPSORP
         extends AbstractParticleSwarmOptimization<DoubleSolution, List<DoubleSolution>>
         implements Measurable {
-  private DoubleProblem problem;
+    private final DoubleProblem problem;
 
-  private double c1Max;
-  private double c1Min;
-  private double c2Max;
-  private double c2Min;
-  private double r1Max;
-  private double r1Min;
-  private double r2Max;
-  private double r2Min;
-  private double weightMax;
-  private double weightMin;
-  private double changeVelocity1;
-  private double changeVelocity2;
+    private final double c1Max;
+    private final double c1Min;
+    private final double c2Max;
+    private final double c2Min;
+    private final double r1Max;
+    private final double r1Min;
+    private final double r2Max;
+    private final double r2Min;
+    private final double weightMax;
+    private final double weightMin;
+    private final double changeVelocity1;
+    private final double changeVelocity2;
 
-  protected int swarmSize;
-  protected int maxIterations;
-  protected int iterations;
+    protected int swarmSize;
+    protected int maxIterations;
+    protected int iterations;
 
-  private GenericSolutionAttribute<DoubleSolution, DoubleSolution> localBest;
-  private double[][] speed;
+    private final GenericSolutionAttribute<DoubleSolution, DoubleSolution> localBest;
+    private final double[][] speed;
 
-  private JMetalRandom randomGenerator;
+    private final JMetalRandom randomGenerator;
 
-  public List<ArchiveWithReferencePoint<DoubleSolution>> leaders;
-  private Comparator<DoubleSolution> dominanceComparator;
+    public List<ArchiveWithReferencePoint<DoubleSolution>> leaders;
+    private final Comparator<DoubleSolution> dominanceComparator;
 
-  private MutationOperator<DoubleSolution> mutation;
+    private final MutationOperator<DoubleSolution> mutation;
 
-  protected double deltaMax[];
-  protected double deltaMin[];
+    protected double[] deltaMax;
+    protected double[] deltaMin;
 
-  protected SolutionListEvaluator<DoubleSolution> evaluator;
+    protected SolutionListEvaluator<DoubleSolution> evaluator;
 
-  protected List<List<Double>> referencePoints ;
-  protected CountingMeasure currentIteration ;
-  protected SimpleMeasureManager measureManager ;
-  protected BasicMeasure<List<DoubleSolution>> solutionListMeasure ;
+    protected List<List<Double>> referencePoints;
+    protected CountingMeasure currentIteration;
+    protected SimpleMeasureManager measureManager;
+    protected BasicMeasure<List<DoubleSolution>> solutionListMeasure;
 
-  private List<DoubleSolution> referencePointSolutions ;
+    private List<DoubleSolution> referencePointSolutions;
 
   /**
    * Constructor
@@ -166,9 +166,9 @@ public class SMPSORP
   }
 
   @Override protected void updateProgress() {
-    iterations += 1;
-    currentIteration.increment(1); ;
-    updateLeadersDensityEstimator();
+      iterations += 1;
+      currentIteration.increment(1);
+      updateLeadersDensityEstimator();
 
     solutionListMeasure.push(getResult()) ;
   }

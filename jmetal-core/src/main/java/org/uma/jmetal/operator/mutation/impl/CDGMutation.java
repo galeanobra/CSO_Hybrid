@@ -38,10 +38,10 @@ public class CDGMutation implements MutationOperator<DoubleSolution> {
   private static final double DEFAULT_PROBABILITY = 0.01 ;
   private static final double DEFAULT_DELTA = 0.5 ;
   private double delta ;
-  private double mutationProbability ;
-  private RepairDoubleSolution solutionRepair ;
+  private double mutationProbability;
+    private final RepairDoubleSolution solutionRepair;
 
-  private JMetalRandom randomGenerator ;
+    private final JMetalRandom randomGenerator;
 
   /** Constructor */
   public CDGMutation() {

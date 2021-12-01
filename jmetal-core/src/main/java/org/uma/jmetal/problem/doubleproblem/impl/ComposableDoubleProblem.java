@@ -40,18 +40,18 @@ import java.util.stream.IntStream;
 @SuppressWarnings("serial")
 public class ComposableDoubleProblem implements DoubleProblem {
 
-  private List<Function<Double[], Double>> objectiveFunctions;
-  private List<Function<Double[], Double>> constraints;
-  private List<Bounds<Double>> bounds;
-  private String name;
+    private final List<Function<Double[], Double>> objectiveFunctions;
+    private final List<Function<Double[], Double>> constraints;
+    private final List<Bounds<Double>> bounds;
+    private String name;
 
-  public ComposableDoubleProblem() {
-    objectiveFunctions = new ArrayList<>();
-    constraints = new ArrayList<>();
-    bounds = new ArrayList<>();
+    public ComposableDoubleProblem() {
+        objectiveFunctions = new ArrayList<>();
+        constraints = new ArrayList<>();
+        bounds = new ArrayList<>();
 
-    name = "";
-  }
+        name = "";
+    }
 
   public ComposableDoubleProblem addFunction(Function<Double[], Double> objective) {
     objectiveFunctions.add(objective);
@@ -114,7 +114,7 @@ public class ComposableDoubleProblem implements DoubleProblem {
   @Override
   @Deprecated
   public List<Pair<Double, Double>> getBounds() {
-    return bounds.stream().map(Bounds<Double>::toPair).collect(Collectors.toList());
+      return bounds.stream().map(Bounds::toPair).collect(Collectors.toList());
   }
   
   @Override

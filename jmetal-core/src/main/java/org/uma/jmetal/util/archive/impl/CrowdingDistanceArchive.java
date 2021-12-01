@@ -13,18 +13,18 @@ import java.util.Comparator;
  */
 @SuppressWarnings("serial")
 public class CrowdingDistanceArchive<S extends Solution<?>> extends AbstractBoundedArchive<S> {
-  private Comparator<S> crowdingDistanceComparator;
-  private DensityEstimator<S> crowdingDistance ;
+    private final Comparator<S> crowdingDistanceComparator;
+    private final DensityEstimator<S> crowdingDistance;
 
-  public CrowdingDistanceArchive(int maxSize) {
-    super(maxSize);
-    crowdingDistance = new CrowdingDistanceDensityEstimator<S>();
-    crowdingDistanceComparator = Comparator.comparing(crowdingDistance::getValue).reversed() ;
-  }
+    public CrowdingDistanceArchive(int maxSize) {
+        super(maxSize);
+        crowdingDistance = new CrowdingDistanceDensityEstimator<S>();
+        crowdingDistanceComparator = Comparator.comparing(crowdingDistance::getValue).reversed();
+    }
 
-  @Override
-  public void prune() {
-    if (getSolutionList().size() > getMaxSize()) {
+    @Override
+    public void prune() {
+        if (getSolutionList().size() > getMaxSize()) {
       computeDensityEstimator();
       S worst = new SolutionListUtils().findWorstSolution(getSolutionList(), crowdingDistanceComparator) ;
       getSolutionList().remove(worst);

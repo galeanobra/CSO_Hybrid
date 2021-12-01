@@ -16,7 +16,7 @@ import java.util.List;
 /** @author Antonio J. Nebro <antonio@lcc.uma.es> */
 @SuppressWarnings("serial")
 public class SMSEMOAWithArchive<S extends Solution<?>> extends SMSEMOA<S> {
-  private Archive<S> archive;
+  private final Archive<S> archive;
 
   /** Constructor */
   public SMSEMOAWithArchive(

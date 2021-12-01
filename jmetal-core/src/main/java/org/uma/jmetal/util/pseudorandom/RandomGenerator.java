@@ -24,7 +24,7 @@ public interface RandomGenerator<Value> extends Serializable {
    *
    * @return the value generated
    */
-  public Value getRandomValue();
+  Value getRandomValue();
 
   /**
    * Create a {@link RandomGenerator} over a {@link Collection} based on a random selector.

@@ -16,17 +16,17 @@ public class ScalarizationWrapper {
    *
    * @author Marlon Braun <marlon.braun@partner.kit.edu>
    */
-  public static enum ScalarizationType {
-    /**
-     * Scalarization values are based on maximum angles to extreme points
-     * (see "Angle based Preferences Models in Multi-objective Optimization"
-     * by Braun et al.)
-     */
-    ANGLE_UTILITY,
+  public enum ScalarizationType {
+      /**
+       * Scalarization values are based on maximum angles to extreme points
+       * (see "Angle based Preferences Models in Multi-objective Optimization"
+       * by Braun et al.)
+       */
+      ANGLE_UTILITY,
 
-    /**
-     * Chebyhsev scalarization function.
-     */
+      /**
+       * Chebyhsev scalarization function.
+       */
     CHEBYSHEV,
 
     /**

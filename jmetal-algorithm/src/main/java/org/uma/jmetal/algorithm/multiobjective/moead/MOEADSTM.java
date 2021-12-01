@@ -116,7 +116,7 @@ public class MOEADSTM extends AbstractMOEAD<DoubleSolution> {
     jointPopulation = new ArrayList<>(populationSize);
 
     for (int i = 0; i < populationSize; i++) {
-      DoubleSolution newSolution = (DoubleSolution) problem.createSolution();
+      DoubleSolution newSolution = problem.createSolution();
 
       problem.evaluate(newSolution);
       population.add(newSolution);

@@ -15,22 +15,22 @@ import java.util.*;
  */
 @SuppressWarnings("serial")
 public class CovarianceMatrixAdaptationEvolutionStrategy
-    extends AbstractEvolutionStrategy<DoubleSolution, DoubleSolution> {
-  private Comparator<DoubleSolution> comparator ;
-  private int lambda ;
-  private int evaluations ;
-  private int maxEvaluations ;
-  private double[] typicalX;
+        extends AbstractEvolutionStrategy<DoubleSolution, DoubleSolution> {
+    private final Comparator<DoubleSolution> comparator;
+    private final int lambda;
+    private int evaluations;
+    private final int maxEvaluations;
+    private final double[] typicalX;
 
-  /**
-   * CMA-ES state variables
-   */
+    /**
+     * CMA-ES state variables
+     */
 
-  // Distribution mean and current favorite solution to the optimization problem
-  private double[] distributionMean;
+    // Distribution mean and current favorite solution to the optimization problem
+    private double[] distributionMean;
 
-  // coordinate wise standard deviation (step size)
-  private double sigma;
+    // coordinate wise standard deviation (step size)
+    private double sigma;
 
   // Symmetric and positive definitive covariance matrix
   private double[][] c;
@@ -89,7 +89,7 @@ public class CovarianceMatrixAdaptationEvolutionStrategy
 
   private DoubleSolution bestSolutionEver = null;
 
-  private Random rand;
+    private final Random rand;
 
   /** Constructor */
   private CovarianceMatrixAdaptationEvolutionStrategy (Builder builder) {
@@ -124,8 +124,8 @@ public class CovarianceMatrixAdaptationEvolutionStrategy
     private static final int DEFAULT_MAX_EVALUATIONS = 1000000 ;
     private static final double DEFAULT_SIGMA = 0.3;
 
-    private DoubleProblem problem ;
-    private int lambda ;
+      private final DoubleProblem problem;
+      private int lambda ;
     private int maxEvaluations ;
     private double [] typicalX;
     private double sigma;
@@ -356,7 +356,7 @@ public class CovarianceMatrixAdaptationEvolutionStrategy
     for (int i = 0; i < numberOfVariables; i++) {
       distributionMean[i] = 0.;
       for (int iNk = 0; iNk < mu; iNk++) {
-        double variableValue = (double) getPopulation().get(iNk).variables().get(i);
+          double variableValue = getPopulation().get(iNk).variables().get(i);
         distributionMean[i] += weights[iNk] * variableValue;
       }
     }

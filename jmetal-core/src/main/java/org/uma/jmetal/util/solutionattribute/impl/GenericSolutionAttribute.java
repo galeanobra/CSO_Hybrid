@@ -12,7 +12,7 @@ import org.uma.jmetal.util.solutionattribute.SolutionAttribute;
  */
 @SuppressWarnings("serial")
 public class GenericSolutionAttribute <S extends Solution<?>, V> implements SolutionAttribute<S, V>{
-  private Object identifier;
+  private final Object identifier;
 
   /**
    * Constructor

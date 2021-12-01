@@ -10,20 +10,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DifferentialEvolutionMatingPoolSelection
-    implements MatingPoolSelection<DoubleSolution> {
-  private DifferentialEvolutionSelection selectionOperator;
-  private int matingPoolSize;
-  private SequenceGenerator<Integer> solutionIndexGenerator ;
+        implements MatingPoolSelection<DoubleSolution> {
+    private final DifferentialEvolutionSelection selectionOperator;
+    private final int matingPoolSize;
+    private final SequenceGenerator<Integer> solutionIndexGenerator;
 
-  public DifferentialEvolutionMatingPoolSelection(
-      int matingPoolSize, int numberOfParentsToSelect, boolean takeCurrentIndividualAsParent, SequenceGenerator<Integer> solutionIndexGenerator) {
-    selectionOperator = new DifferentialEvolutionSelection(numberOfParentsToSelect, takeCurrentIndividualAsParent);
-    this.matingPoolSize = matingPoolSize;
-    this.solutionIndexGenerator = solutionIndexGenerator ;
-  }
+    public DifferentialEvolutionMatingPoolSelection(
+            int matingPoolSize, int numberOfParentsToSelect, boolean takeCurrentIndividualAsParent, SequenceGenerator<Integer> solutionIndexGenerator) {
+        selectionOperator = new DifferentialEvolutionSelection(numberOfParentsToSelect, takeCurrentIndividualAsParent);
+        this.matingPoolSize = matingPoolSize;
+        this.solutionIndexGenerator = solutionIndexGenerator;
+    }
 
-  public List<DoubleSolution> select(List<DoubleSolution> solutionList) {
-    List<DoubleSolution> matingPool = new ArrayList<>(matingPoolSize);
+    public List<DoubleSolution> select(List<DoubleSolution> solutionList) {
+        List<DoubleSolution> matingPool = new ArrayList<>(matingPoolSize);
 
     while (matingPool.size() < matingPoolSize) {
       selectionOperator.setIndex(solutionIndexGenerator.getValue());

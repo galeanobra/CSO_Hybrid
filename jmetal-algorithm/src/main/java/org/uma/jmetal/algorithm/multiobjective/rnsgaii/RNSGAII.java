@@ -28,7 +28,7 @@ public class RNSGAII<S extends Solution<?>> extends NSGAII<S> implements
     InteractiveAlgorithm<S,List<S>>, Measurable {
 
   private List<Double> interestPoint;
-  private double epsilon;
+    private final double epsilon;
 
   protected SimpleMeasureManager measureManager ;
   protected BasicMeasure<List<S>> solutionListMeasure ;

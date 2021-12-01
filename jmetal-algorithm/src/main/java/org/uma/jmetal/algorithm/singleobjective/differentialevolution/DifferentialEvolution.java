@@ -14,38 +14,39 @@ import java.util.List;
 
 /**
  * This class implements a differential evolution algorithm.
+ *
  * @author Antonio J. Nebro <antonio@lcc.uma.es>
  */
 @SuppressWarnings("serial")
 public class DifferentialEvolution extends AbstractDifferentialEvolution<DoubleSolution> {
-  private int populationSize;
-  private int maxEvaluations;
-  private SolutionListEvaluator<DoubleSolution> evaluator;
-  private Comparator<DoubleSolution> comparator;
+    private final int populationSize;
+    private final int maxEvaluations;
+    private final SolutionListEvaluator<DoubleSolution> evaluator;
+    private final Comparator<DoubleSolution> comparator;
 
-  private int evaluations;
+    private int evaluations;
 
-  /**
-   * Constructor
-   *
-   * @param problem Problem to solve
-   * @param maxEvaluations Maximum number of evaluations to perform
-   * @param populationSize
-   * @param crossoverOperator
+    /**
+     * Constructor
+     *
+     * @param problem Problem to solve
+     * @param maxEvaluations Maximum number of evaluations to perform
+     * @param populationSize
+     * @param crossoverOperator
    * @param selectionOperator
    * @param evaluator
    */
   public DifferentialEvolution(DoubleProblem problem, int maxEvaluations, int populationSize,
                                DifferentialEvolutionCrossover crossoverOperator,
                                DifferentialEvolutionSelection selectionOperator, SolutionListEvaluator<DoubleSolution> evaluator) {
-    setProblem(problem); ;
-    this.maxEvaluations = maxEvaluations;
-    this.populationSize = populationSize;
-    this.crossoverOperator = crossoverOperator;
-    this.selectionOperator = selectionOperator;
-    this.evaluator = evaluator;
+      setProblem(problem);
+      this.maxEvaluations = maxEvaluations;
+      this.populationSize = populationSize;
+      this.crossoverOperator = crossoverOperator;
+      this.selectionOperator = selectionOperator;
+      this.evaluator = evaluator;
 
-    comparator = new ObjectiveComparator<DoubleSolution>(0);
+      comparator = new ObjectiveComparator<DoubleSolution>(0);
   }
   
   public int getEvaluations() {

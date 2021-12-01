@@ -6,18 +6,18 @@ import java.util.Arrays;
 import java.util.List;
 
 public class RealParameter extends Parameter<Double> {
-  private double lowerBound;
-  private double upperBound;
+    private final double lowerBound;
+    private final double upperBound;
 
-  public RealParameter(String name, String[] args, double lowerBound, double upperBound) {
-    super(name, args);
-    this.lowerBound = lowerBound;
-    this.upperBound = upperBound;
-  }
+    public RealParameter(String name, String[] args, double lowerBound, double upperBound) {
+        super(name, args);
+        this.lowerBound = lowerBound;
+        this.upperBound = upperBound;
+    }
 
-  @Override
-  public RealParameter parse() {
-    return (RealParameter) parse(Double::parseDouble);
+    @Override
+    public RealParameter parse() {
+        return (RealParameter) parse(Double::parseDouble);
   }
 
   @Override

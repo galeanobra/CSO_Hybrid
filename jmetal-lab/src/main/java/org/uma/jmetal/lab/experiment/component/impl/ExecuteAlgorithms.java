@@ -23,7 +23,7 @@ import java.util.List;
  */
 public class ExecuteAlgorithms<S extends Solution<?>, Result extends List<S>>
     implements ExperimentComponent {
-  private Experiment<S, Result> experiment;
+  private final Experiment<S, Result> experiment;
 
   /** Constructor */
   public ExecuteAlgorithms(Experiment<S, Result> configuration) {

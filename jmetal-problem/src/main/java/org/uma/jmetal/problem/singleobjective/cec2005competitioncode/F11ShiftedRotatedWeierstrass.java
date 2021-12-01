@@ -57,28 +57,28 @@ public class F11ShiftedRotatedWeierstrass extends TestFunc {
   static final public String DEFAULT_FILE_MX_SUFFIX = ".txt";
 
   static final public double PIx2 = Math.PI * 2.0;
-  static final public int Kmax = 20;
-  static final public double a = 0.5;
-  static final public double b = 3.0;
+    static final public int Kmax = 20;
+    static final public double a = 0.5;
+    static final public double b = 3.0;
 
-  // Shifted global optimum
-  private final double[] m_o;
-  private final double[][] m_matrix;
+    // Shifted global optimum
+    private final double[] m_o;
+    private final double[][] m_matrix;
 
-  // In order to avoid excessive memory allocation,
-  // a fixed memory buffer is allocated for each function object.
-  private double[] m_z;
-  private double[] m_zM;
+    // In order to avoid excessive memory allocation,
+    // a fixed memory buffer is allocated for each function object.
+    private final double[] m_z;
+    private final double[] m_zM;
 
-  // Constructors
-  public F11ShiftedRotatedWeierstrass(int dimension, double bias) throws JMetalException {
-    this(dimension, bias, DEFAULT_FILE_DATA,
-      DEFAULT_FILE_MX_PREFIX + dimension + DEFAULT_FILE_MX_SUFFIX);
-  }
+    // Constructors
+    public F11ShiftedRotatedWeierstrass(int dimension, double bias) throws JMetalException {
+        this(dimension, bias, DEFAULT_FILE_DATA,
+                DEFAULT_FILE_MX_PREFIX + dimension + DEFAULT_FILE_MX_SUFFIX);
+    }
 
-  public F11ShiftedRotatedWeierstrass(int dimension, double bias, String file_data, String file_m) throws
-      JMetalException {
-    super(dimension, bias, FUNCTION_NAME);
+    public F11ShiftedRotatedWeierstrass(int dimension, double bias, String file_data, String file_m) throws
+            JMetalException {
+        super(dimension, bias, FUNCTION_NAME);
 
     // Note: dimension starts from 0
     m_o = new double[mDimension];

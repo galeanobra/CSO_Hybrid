@@ -7,7 +7,7 @@ import org.uma.jmetal.experimental.auto.parameter.*;
 import java.util.List;
 
 public class AutoNSGAIIIraceParameterFileGenerator {
-  private static String formatString = "%-40s %-40s %-7s %-30s %-20s\n";
+  private static final String formatString = "%-40s %-40s %-7s %-30s %-20s\n";
 
   public void generateConfigurationFile() {
     String[] parameters =
@@ -47,7 +47,7 @@ public class AutoNSGAIIIraceParameterFileGenerator {
       stringBuilder.append("#\n");
     }
 
-    System.out.println(stringBuilder.toString());
+      System.out.println(stringBuilder);
   }
 
   private void decodeParameter(Parameter<?> parameter, StringBuilder stringBuilder) {

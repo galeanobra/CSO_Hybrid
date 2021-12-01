@@ -68,7 +68,7 @@ public class ExperimentalFastNonDominanceRanking<S extends Solution<?>> implemen
     } else {
       // Need to apply the constraint comparator first
       List<S> defensiveCopy = new ArrayList<>(solutionList);
-      defensiveCopy.sort((Comparator<? super S>) constraintViolationComparator);
+      defensiveCopy.sort(constraintViolationComparator);
       int rankOffset = 0;
       int lastSpanStart = 0;
       double lastConstraint = getConstraint(defensiveCopy.get(0));

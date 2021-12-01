@@ -55,17 +55,17 @@ public class MOEADUtils {
     return Math.sqrt(sum);
   }
 
-  public static void minFastSort(double x[], int idx[], int n, int m) {
-    for (int i = 0; i < m; i++) {
-      for (int j = i + 1; j < n; j++) {
-        if (x[i] > x[j]) {
-          double temp = x[i];
-          x[i] = x[j];
-          x[j] = temp;
-          int id = idx[i];
-          idx[i] = idx[j];
-          idx[j] = id;
-        }
+  public static void minFastSort(double[] x, int[] idx, int n, int m) {
+      for (int i = 0; i < m; i++) {
+          for (int j = i + 1; j < n; j++) {
+              if (x[i] > x[j]) {
+                  double temp = x[i];
+                  x[i] = x[j];
+                  x[j] = temp;
+                  int id = idx[i];
+                  idx[i] = idx[j];
+                  idx[j] = id;
+              }
       }
     }
   }
@@ -162,17 +162,17 @@ public class MOEADUtils {
     }
   }
 
-  public static void shuffle(int sequence[]) {
-    JMetalRandom randomGenerator = JMetalRandom.getInstance();
-    int[] index = new int[sequence.length];
-    boolean[] flag = new boolean[sequence.length];
-    System.arraycopy(sequence, 0, index, 0, sequence.length);
+    public static void shuffle(int[] sequence) {
+        JMetalRandom randomGenerator = JMetalRandom.getInstance();
+        int[] index = new int[sequence.length];
+        boolean[] flag = new boolean[sequence.length];
+        System.arraycopy(sequence, 0, index, 0, sequence.length);
 
-    for (int n = 0; n < sequence.length; n++) {
-      flag[n] = true;
-    }
+        for (int n = 0; n < sequence.length; n++) {
+            flag[n] = true;
+        }
 
-    int num = 0;
+        int num = 0;
     while (num < sequence.length) {
       int start = randomGenerator.nextInt(0, sequence.length - 1);
       while (true) {

@@ -34,27 +34,27 @@ import java.util.List;
  */
 public class GenerateFriedmanHolmTestTables<Result extends List<? extends Solution<?>>>
     implements ExperimentComponent {
-  private static final String DEFAULT_LATEX_DIRECTORY = "latex";
-  private static final String INDICATOR_SUMMARY_CSV = "QualityIndicatorSummary.csv";
-  // NAMES OF CSV COLUMNS
-  private static final String ALGORITHM = "Algorithm";
-  private static final String PROBLEM = "Problem";
-  private static final String INDICATOR_NAME = "IndicatorName";
+    private static final String DEFAULT_LATEX_DIRECTORY = "latex";
+    private static final String INDICATOR_SUMMARY_CSV = "QualityIndicatorSummary.csv";
+    // NAMES OF CSV COLUMNS
+    private static final String ALGORITHM = "Algorithm";
+    private static final String PROBLEM = "Problem";
+    private static final String INDICATOR_NAME = "IndicatorName";
 
-  private final Experiment<?, Result> experiment;
+    private final Experiment<?, Result> experiment;
 
-  private String latexDirectoryName;
-  private int numberOfAlgorithms;
-  private int numberOfProblems;
+    private String latexDirectoryName;
+    private final int numberOfAlgorithms;
+    private final int numberOfProblems;
 
-  public GenerateFriedmanHolmTestTables(Experiment<?, Result> experimentConfiguration) {
-    this.experiment = experimentConfiguration;
+    public GenerateFriedmanHolmTestTables(Experiment<?, Result> experimentConfiguration) {
+        this.experiment = experimentConfiguration;
 
-    numberOfAlgorithms = experiment.getAlgorithmList().size();
-    numberOfProblems = experiment.getProblemList().size();
+        numberOfAlgorithms = experiment.getAlgorithmList().size();
+        numberOfProblems = experiment.getProblemList().size();
 
-    experiment.removeDuplicatedAlgorithms();
-  }
+        experiment.removeDuplicatedAlgorithms();
+    }
 
   @Override
   public void run() throws IOException {

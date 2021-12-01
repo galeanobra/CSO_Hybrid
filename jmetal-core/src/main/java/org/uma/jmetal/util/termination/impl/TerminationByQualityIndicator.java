@@ -17,21 +17,21 @@ import java.util.Map;
  * @author Antonio J. Nebro <antonio@lcc.uma.es>
  */
 public class TerminationByQualityIndicator implements Termination {
-  private QualityIndicator qualityIndicator;
-  private double[][] referenceFront;
-  private double percentage;
-  private double referenceFrontIndicatorValue;
-  private int evaluationsLimit ;
-  private int evaluations ;
-  private boolean evaluationsLimitReached ;
-  private double computedIndicatorValue ;
+    private final QualityIndicator qualityIndicator;
+    private final double[][] referenceFront;
+    private final double percentage;
+    private final double referenceFrontIndicatorValue;
+    private final int evaluationsLimit;
+    private int evaluations;
+    private boolean evaluationsLimitReached;
+    private double computedIndicatorValue;
 
-  public TerminationByQualityIndicator(
-      QualityIndicator qualityIndicator, double[][] referenceFront, double percentage, int evaluationsLimit) {
-    this.qualityIndicator = qualityIndicator;
-    this.percentage = percentage;
-    this.referenceFront = referenceFront;
-    this.evaluationsLimit = evaluationsLimit ;
+    public TerminationByQualityIndicator(
+            QualityIndicator qualityIndicator, double[][] referenceFront, double percentage, int evaluationsLimit) {
+        this.qualityIndicator = qualityIndicator;
+        this.percentage = percentage;
+        this.referenceFront = referenceFront;
+        this.evaluationsLimit = evaluationsLimit;
     evaluations = 0 ;
     evaluationsLimitReached = false ;
 

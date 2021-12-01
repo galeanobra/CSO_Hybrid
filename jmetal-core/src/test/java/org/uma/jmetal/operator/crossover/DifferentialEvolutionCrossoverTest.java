@@ -7,7 +7,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 public class DifferentialEvolutionCrossoverTest {
-  private double EPSILON = 0.0000000001;
+  private final double EPSILON = 0.0000000001;
 
   @Test
   public void shouldDefaultConstructorCreateADefaultOperator() {

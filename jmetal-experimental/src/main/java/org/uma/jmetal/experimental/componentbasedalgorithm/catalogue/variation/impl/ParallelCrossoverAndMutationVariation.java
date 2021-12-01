@@ -11,20 +11,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/** @param <S> */
+/**
+ * @param <S>
+ */
 public class ParallelCrossoverAndMutationVariation<S extends Solution<?>> implements Variation<S> {
-  private CrossoverOperator<S> crossover;
-  private MutationOperator<S> mutation;
-  private int matingPoolSize;
-  private int offspringPopulationSize;
+    private final CrossoverOperator<S> crossover;
+    private final MutationOperator<S> mutation;
+    private int matingPoolSize;
+    private final int offspringPopulationSize;
 
-  public ParallelCrossoverAndMutationVariation(
-      int offspringPopulationSize, CrossoverOperator<S> crossover, MutationOperator<S> mutation) {
-    this.crossover = crossover;
-    this.mutation = mutation;
-    this.offspringPopulationSize = offspringPopulationSize;
+    public ParallelCrossoverAndMutationVariation(
+            int offspringPopulationSize, CrossoverOperator<S> crossover, MutationOperator<S> mutation) {
+        this.crossover = crossover;
+        this.mutation = mutation;
+        this.offspringPopulationSize = offspringPopulationSize;
 
-    this.matingPoolSize =
+        this.matingPoolSize =
         offspringPopulationSize
             * crossover.getNumberOfRequiredParents()
             / crossover.getNumberOfGeneratedChildren();

@@ -18,18 +18,20 @@ import java.util.*;
  * @author Antonio J. Nebro <antonio@lcc.uma.es>
  */
 public class FastNonDominatedSortRanking<S extends Solution<?>> implements Ranking<S> {
-  private String attributeId = getClass().getName();
-  private Comparator<S> dominanceComparator;
-  private static final Comparator<Solution<?>> CONSTRAINT_VIOLATION_COMPARATOR =
-      new ConstraintViolationComparator<Solution<?>>();
+    private final String attributeId = getClass().getName();
+    private final Comparator<S> dominanceComparator;
+    private static final Comparator<Solution<?>> CONSTRAINT_VIOLATION_COMPARATOR =
+            new ConstraintViolationComparator<Solution<?>>();
 
-  private List<ArrayList<S>> rankedSubPopulations;
+    private List<ArrayList<S>> rankedSubPopulations;
 
-  /** Constructor */
-  public FastNonDominatedSortRanking(Comparator<S> comparator) {
-    this.dominanceComparator = comparator;
-    rankedSubPopulations = new ArrayList<>();
-  }
+    /**
+     * Constructor
+     */
+    public FastNonDominatedSortRanking(Comparator<S> comparator) {
+        this.dominanceComparator = comparator;
+        rankedSubPopulations = new ArrayList<>();
+    }
 
   /** Constructor */
   public FastNonDominatedSortRanking() {

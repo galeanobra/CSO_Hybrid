@@ -38,12 +38,12 @@ public class SpatialSpreadDeviationComparator<S extends Solution<?>> implements 
    */
   @Override
   public int compare(S solution1, S solution2) {
-    
-      double distance1 = Double.MIN_VALUE ;
-      double distance2 = Double.MIN_VALUE ;
 
-      distance1 = (double) NewcrowdingDistance.getAttribute(solution1);
-      distance2 = (double) NewcrowdingDistance.getAttribute(solution2);
+      double distance1 = Double.MIN_VALUE;
+      double distance2 = Double.MIN_VALUE;
+
+      distance1 = NewcrowdingDistance.getAttribute(solution1);
+      distance2 = NewcrowdingDistance.getAttribute(solution2);
       /*
       if (NewcrowdingDistance.getAttribute(solution1) != null) {
         distance1 = (double) NewcrowdingDistance.getAttribute(solution1);

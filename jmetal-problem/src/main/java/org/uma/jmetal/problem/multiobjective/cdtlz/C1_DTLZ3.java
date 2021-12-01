@@ -16,7 +16,7 @@ import java.util.Map;
  */
 @SuppressWarnings("serial")
 public class C1_DTLZ3 extends DTLZ3 {
-  private static Map<Integer, Double> rValue;
+  private static final Map<Integer, Double> rValue;
 
   static {
     rValue = new HashMap<Integer, Double>() ;

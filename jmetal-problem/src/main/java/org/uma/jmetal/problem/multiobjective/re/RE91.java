@@ -14,7 +14,7 @@ import java.util.Random;
  * @author Antonio J. Nebro
  */
 public class RE91 extends AbstractDoubleProblem {
-  private Random random = new Random() ;
+  private final Random random = new Random();
 
   /** Constructor */
   public RE91() {

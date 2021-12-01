@@ -56,7 +56,7 @@ public class MOMBI2Runner extends AbstractAlgorithmRunner {
       referenceParetoFront = "resources/referenceFrontsCSV/DTLZ1.3D.csv";
     }
 
-    problem = ProblemUtils.<DoubleSolution>loadProblem(problemName);
+    problem = ProblemUtils.loadProblem(problemName);
 
     double crossoverProbability = 0.9;
     double crossoverDistributionIndex = 20.0;

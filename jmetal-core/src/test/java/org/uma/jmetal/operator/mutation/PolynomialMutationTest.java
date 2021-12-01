@@ -197,26 +197,26 @@ public class PolynomialMutationTest {
   @Ignore
   @Test
   public void shouldMutateASingleVariableSolutionWithSameLowerAndUpperBoundsReturnTheBoundValue() {
-    @SuppressWarnings("unchecked")
-	RandomGenerator<Double> randomGenerator = mock(RandomGenerator.class) ;
-    double mutationProbability = 0.1;
-    double distributionIndex = 20.0 ;
+      @SuppressWarnings("unchecked")
+      RandomGenerator<Double> randomGenerator = mock(RandomGenerator.class);
+      double mutationProbability = 0.1;
+      double distributionIndex = 20.0;
 
-    Mockito.when(randomGenerator.getRandomValue()).thenReturn(0.005, 0.1) ;
+      Mockito.when(randomGenerator.getRandomValue()).thenReturn(0.005, 0.1);
 
-    PolynomialMutation mutation = new PolynomialMutation(mutationProbability, distributionIndex) ;
+      PolynomialMutation mutation = new PolynomialMutation(mutationProbability, distributionIndex);
 
-    MockDoubleProblem problem = new MockDoubleProblem(1) ;
-    ReflectionTestUtils.setField(problem, "lowerLimit", Arrays.asList(new Double[]{1.0}));
-    ReflectionTestUtils.setField(problem, "upperLimit", Arrays.asList(new Double[]{1.0}));
+      MockDoubleProblem problem = new MockDoubleProblem(1);
+      ReflectionTestUtils.setField(problem, "lowerLimit", Arrays.asList(1.0));
+      ReflectionTestUtils.setField(problem, "upperLimit", Arrays.asList(1.0));
 
-    DoubleSolution solution = problem.createSolution() ;
+      DoubleSolution solution = problem.createSolution();
 
-    ReflectionTestUtils.setField(mutation, "randomGenerator", randomGenerator);
+      ReflectionTestUtils.setField(mutation, "randomGenerator", randomGenerator);
 
-    mutation.execute(solution) ;
+      mutation.execute(solution);
 
-    assertEquals(1.0, solution.variables().get(0), EPSILON) ;
+      assertEquals(1.0, solution.variables().get(0), EPSILON);
   }
 
   /**

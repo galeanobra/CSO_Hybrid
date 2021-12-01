@@ -16,17 +16,17 @@ import java.util.List;
  */
 @SuppressWarnings("serial")
 public class KNearestNeighborhood<S extends Solution<?>> implements Neighborhood<S> {
-  private int neighborSize;
-  private Distance<S, S> distance;
+    private final int neighborSize;
+    private final Distance<S, S> distance;
 
-  public KNearestNeighborhood(int neighborSize) {
-    this(neighborSize, new EuclideanDistanceBetweenSolutionsInObjectiveSpace<S>());
-  }
+    public KNearestNeighborhood(int neighborSize) {
+        this(neighborSize, new EuclideanDistanceBetweenSolutionsInObjectiveSpace<S>());
+    }
 
-  public KNearestNeighborhood(int neighborSize, Distance<S, S> distance) {
-    this.neighborSize = neighborSize;
-    this.distance = distance;
-  }
+    public KNearestNeighborhood(int neighborSize, Distance<S, S> distance) {
+        this.neighborSize = neighborSize;
+        this.distance = distance;
+    }
 
   @Override
   public List<S> getNeighbors(List<S> solutionList, int solutionIndex) {
@@ -49,17 +49,17 @@ public class KNearestNeighborhood<S extends Solution<?>> implements Neighborhood
     return neighbourSolutions;
   }
 
-  private void minFastSort(double x[], int idx[], int n, int m) {
-    for (int i = 0; i < m; i++) {
-      for (int j = i + 1; j < n; j++) {
-        if (x[i] > x[j]) {
-          double temp = x[i];
-          x[i] = x[j];
-          x[j] = temp;
-          int id = idx[i];
-          idx[i] = idx[j];
-          idx[j] = id;
-        }
+    private void minFastSort(double[] x, int[] idx, int n, int m) {
+        for (int i = 0; i < m; i++) {
+            for (int j = i + 1; j < n; j++) {
+                if (x[i] > x[j]) {
+                    double temp = x[i];
+                    x[i] = x[j];
+                    x[j] = temp;
+                    int id = idx[i];
+                    idx[i] = idx[j];
+                    idx[j] = id;
+                }
       }
     }
   }

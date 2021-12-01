@@ -14,8 +14,8 @@ import java.io.*;
  */
 @SuppressWarnings("serial")
 public class TSP extends AbstractIntegerPermutationProblem {
-  private int         numberOfCities ;
-  private double [][] distanceMatrix ;
+  private int numberOfCities;
+    private final double[][] distanceMatrix;
 
   /**
    * Creates a new TSP problem instance

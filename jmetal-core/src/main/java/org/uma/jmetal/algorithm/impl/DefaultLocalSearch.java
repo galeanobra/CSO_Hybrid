@@ -18,20 +18,20 @@ import java.util.Comparator;
  */
 @SuppressWarnings("serial")
 public class DefaultLocalSearch<S extends Solution<?>> implements Algorithm<S> {
-  private Problem<S> problem;
-  private int maxEvaluations;
+    private final Problem<S> problem;
+    private final int maxEvaluations;
 
-  public Problem<S> getProblem() {
-    return problem;
-  }
+    public Problem<S> getProblem() {
+        return problem;
+    }
 
-  private MutationOperator<S> mutationOperator;
+    private final MutationOperator<S> mutationOperator;
 
-  public MutationOperator<S> getMutationOperator() {
-    return mutationOperator;
-  }
+    public MutationOperator<S> getMutationOperator() {
+        return mutationOperator;
+    }
 
-  private Comparator<S> comparator;
+    private final Comparator<S> comparator;
 
   public Comparator<S> getComparator() {
     return comparator;

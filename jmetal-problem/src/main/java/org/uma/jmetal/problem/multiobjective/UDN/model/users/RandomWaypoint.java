@@ -11,7 +11,7 @@ public class RandomWaypoint extends MobilityModel {
     //velocity in m/s
     private double minV_;
     private double maxV_;
-    private UDN udn;
+    private final UDN udn;
 
     public RandomWaypoint(UDN udn, String configFile) {
         this.udn = udn;

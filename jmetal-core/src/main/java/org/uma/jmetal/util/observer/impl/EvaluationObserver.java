@@ -14,7 +14,7 @@ import java.util.Map;
  */
 public class EvaluationObserver implements Observer<Map<String, Object>> {
 
-  private Integer frequency ;
+  private final Integer frequency;
 
   /**
    * Constructor

@@ -18,7 +18,7 @@ import java.util.List;
  */
 @SuppressWarnings("serial")
 public class SMPSOWithArchive extends SMPSO {
-  private Archive<DoubleSolution> archive;
+  private final Archive<DoubleSolution> archive;
 
   public SMPSOWithArchive(
       DoubleProblem problem,

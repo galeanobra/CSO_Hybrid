@@ -231,7 +231,7 @@ public class MOEADD<S extends DoubleSolution> extends AbstractMOEAD<S> {
       } else {
         for (int i = 0; i < populationSize; i++) {
           if (rankIdx[numRanks - 1][i] == 1) {
-            lastFront.add((S) population.get(i));
+            lastFront.add(population.get(i));
           }
         }
         if ((ranking.getRank(indiv)) == (numRanks - 1)) {

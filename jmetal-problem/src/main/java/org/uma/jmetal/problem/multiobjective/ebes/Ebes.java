@@ -505,8 +505,8 @@ public class Ebes extends AbstractDoubleProblem {
                                     // local
 
   double[][] PQ;
-  double Reaction_[][];
-  double[][] Kii = new double[numberOfLibertyDegree_][numberOfLibertyDegree_];
+    double[][] Reaction_;
+    double[][] Kii = new double[numberOfLibertyDegree_][numberOfLibertyDegree_];
   double[][] Kij = new double[numberOfLibertyDegree_][numberOfLibertyDegree_];
   double[][] Kji = new double[numberOfLibertyDegree_][numberOfLibertyDegree_];
   double[][] Kjj = new double[numberOfLibertyDegree_][numberOfLibertyDegree_];
@@ -862,9 +862,9 @@ public class Ebes extends AbstractDoubleProblem {
       } // end if
     } // gr
 
-    setVariableBounds(
-        new ArrayList<Double>(Arrays.<Double>asList(lowerLimit_)),
-        new ArrayList<Double>(Arrays.<Double>asList(upperLimit_)));
+      setVariableBounds(
+              new ArrayList<Double>(Arrays.asList(lowerLimit_)),
+              new ArrayList<Double>(Arrays.asList(upperLimit_)));
 
     // greates difference between nodes
     elementsBetweenDiffGreat_ = 0;
@@ -2347,17 +2347,17 @@ public class Ebes extends AbstractDoubleProblem {
     RpTji = EBEsMatrizTraspuesta(Rpji);
   }
 
-  public double[][] EBEsMatrizTraspuesta(double m[][]) {
+    public double[][] EBEsMatrizTraspuesta(double[][] m) {
 
-    int row = m.length;
-    int col = m[0].length;
-    double[][] mt = new double[row][col];
+        int row = m.length;
+        int col = m[0].length;
+        double[][] mt = new double[row][col];
 
-    for (int i = 0; i < row; i++) {
-      // cantidad de elementos de la 1ra dimensiÃƒÂ³n
-      for (int j = 0; j < col; j++) {
-        // cantidad de elementos de la 2ra dimensiÃƒÂ³n
-        mt[j][i] = m[i][j];
+        for (int i = 0; i < row; i++) {
+            // cantidad de elementos de la 1ra dimensiÃƒÂ³n
+            for (int j = 0; j < col; j++) {
+                // cantidad de elementos de la 2ra dimensiÃƒÂ³n
+                mt[j][i] = m[i][j];
       }
     }
 
@@ -3744,17 +3744,17 @@ public class Ebes extends AbstractDoubleProblem {
     } // ba
   }
 
-  public void EBEsEffortsElements3D(int hi, int countIter, double Slip[][]) throws JMetalException {
-    // ESFUERZOS EN EXTREMOS DE BARRA 3D EN COORDENADAS LOCALES
-    // i: rÃƒÂ­gido
-    // j: rÃƒÂ­gido
-    int i, ni, nj;
+    public void EBEsEffortsElements3D(int hi, int countIter, double[][] Slip) throws JMetalException {
+        // ESFUERZOS EN EXTREMOS DE BARRA 3D EN COORDENADAS LOCALES
+        // i: rÃƒÂ­gido
+        // j: rÃƒÂ­gido
+        int i, ni, nj;
 
-    for (int ba = 0; ba < numberOfElements_; ba++) {
+        for (int ba = 0; ba < numberOfElements_; ba++) {
 
-      switch ((int) Element_[ba][Vij_]) {
-        case 00:
-          EBEsMat3DL_iRig_jRig(ba);
+            switch ((int) Element_[ba][Vij_]) {
+                case 00:
+                    EBEsMat3DL_iRig_jRig(ba);
           break;
         case 01:
           EBEsMat3DL_iRig_jArt(ba);
@@ -5558,8 +5558,8 @@ public class Ebes extends AbstractDoubleProblem {
           for (i = 0; i < numberOfGroupsToCheckGeometry_; i++) {
             txt = input.nextLine();
             geometryCheck_[i] = new int[(txt.length() + 1) / 2];
-            String aTxt[] = txt.split(" ");
-            int k = 0;
+              String[] aTxt = txt.split(" ");
+              int k = 0;
             for (j = 0; j < aTxt.length; j++) {
               if (aTxt[j] != " ") {
                 geometryCheck_[i][k] = Integer.parseInt(aTxt[j]);

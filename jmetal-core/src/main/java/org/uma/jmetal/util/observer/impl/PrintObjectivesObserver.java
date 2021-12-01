@@ -15,7 +15,7 @@ import java.util.Map;
  */
 public class PrintObjectivesObserver implements Observer<Map<String, Object>> {
 
-  private Integer frequency ;
+  private final Integer frequency;
   /**
    * Constructor
    * value.

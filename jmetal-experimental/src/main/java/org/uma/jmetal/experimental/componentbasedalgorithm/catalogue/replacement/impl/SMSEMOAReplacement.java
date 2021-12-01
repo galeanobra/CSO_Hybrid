@@ -10,19 +10,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SMSEMOAReplacement<S extends Solution<?>>
-    implements Replacement<S> {
-  private Ranking<S> ranking;
-  private Hypervolume<S> hypervolume ;
+        implements Replacement<S> {
+    private final Ranking<S> ranking;
+    private final Hypervolume<S> hypervolume;
 
-  public SMSEMOAReplacement(Ranking<S> ranking) {
-    this(ranking,  new PISAHypervolume<>()) ;
-  }
+    public SMSEMOAReplacement(Ranking<S> ranking) {
+        this(ranking, new PISAHypervolume<>());
+    }
 
-  public SMSEMOAReplacement(
-          Ranking<S> ranking, Hypervolume<S> hypervolume) {
-    this.ranking = ranking;
-    this.hypervolume = hypervolume;
-  }
+    public SMSEMOAReplacement(
+            Ranking<S> ranking, Hypervolume<S> hypervolume) {
+        this.ranking = ranking;
+        this.hypervolume = hypervolume;
+    }
 
   public List<S> replace(List<S> solutionList, List<S> offspringList) {
     List<S> jointPopulation = new ArrayList<>();

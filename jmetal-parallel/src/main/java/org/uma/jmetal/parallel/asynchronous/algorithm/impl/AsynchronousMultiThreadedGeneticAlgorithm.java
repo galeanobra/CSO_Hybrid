@@ -22,31 +22,31 @@ import java.util.Map;
 import java.util.stream.IntStream;
 
 public class AsynchronousMultiThreadedGeneticAlgorithm<S extends Solution<?>>
-    extends Master<ParallelTask<S>, List<S>> {
-  private Problem<S> problem;
-  private CrossoverOperator<S> crossover;
-  private MutationOperator<S> mutation;
-  private SelectionOperator<List<S>, S> selection;
-  private Replacement<S> replacement;
-  private Termination termination;
+        extends Master<ParallelTask<S>, List<S>> {
+    private final Problem<S> problem;
+    private final CrossoverOperator<S> crossover;
+    private final MutationOperator<S> mutation;
+    private final SelectionOperator<List<S>, S> selection;
+    private final Replacement<S> replacement;
+    private final Termination termination;
 
-  private List<S> population = new ArrayList<>();
-  private int populationSize;
-  private int evaluations = 0;
-  private long initTime;
+    private List<S> population = new ArrayList<>();
+    private final int populationSize;
+    private int evaluations = 0;
+    private long initTime;
 
-  private Map<String, Object> attributes;
-  private Observable<Map<String, Object>> observable;
+    private final Map<String, Object> attributes;
+    private final Observable<Map<String, Object>> observable;
 
-  private int numberOfCores;
+    private final int numberOfCores;
 
-  public AsynchronousMultiThreadedGeneticAlgorithm(
-      int numberOfCores,
-      Problem<S> problem,
-      int populationSize,
-      CrossoverOperator<S> crossover,
-      MutationOperator<S> mutation,
-      SelectionOperator<List<S>, S> selection,
+    public AsynchronousMultiThreadedGeneticAlgorithm(
+            int numberOfCores,
+            Problem<S> problem,
+            int populationSize,
+            CrossoverOperator<S> crossover,
+            MutationOperator<S> mutation,
+            SelectionOperator<List<S>, S> selection,
       Replacement<S> replacement,
       Termination termination) {
     super(numberOfCores);

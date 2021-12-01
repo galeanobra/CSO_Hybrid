@@ -18,19 +18,19 @@ import java.util.List;
  */
 @SuppressWarnings("serial")
 public class NonDominatedSolutionListArchive<S extends Solution<?>> implements Archive<S> {
-  private List<S> solutionList;
-  private Comparator<S> dominanceComparator;
-  private Comparator<S> equalSolutions = new EqualSolutionsComparator<S>();
+    private final List<S> solutionList;
+    private final Comparator<S> dominanceComparator;
+    private final Comparator<S> equalSolutions = new EqualSolutionsComparator<S>();
 
-  /**
-   * Constructor
-   */
-  public NonDominatedSolutionListArchive() {
-    this(new DominanceComparator<S>());
-  }
+    /**
+     * Constructor
+     */
+    public NonDominatedSolutionListArchive() {
+        this(new DominanceComparator<S>());
+    }
 
-  /**
-   * Constructor
+    /**
+     * Constructor
    */
   public NonDominatedSolutionListArchive(DominanceComparator<S> comparator) {
     dominanceComparator = comparator;

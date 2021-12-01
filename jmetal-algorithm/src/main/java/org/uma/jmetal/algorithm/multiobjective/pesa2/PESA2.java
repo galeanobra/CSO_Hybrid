@@ -19,34 +19,34 @@ import java.util.List;
  */
 @SuppressWarnings("serial")
 public class PESA2<S extends Solution<?>> extends AbstractGeneticAlgorithm<S, List<S>> {
-  private int maxEvaluations ;
-  private int archiveSize ;
-  private int biSections ;
+    private final int maxEvaluations;
+    private final int archiveSize;
+    private final int biSections;
 
-  private int evaluations ;
+    private int evaluations;
 
-  protected SelectionOperator<AdaptiveGridArchive<S>, S> selectionOperator ;
+    protected SelectionOperator<AdaptiveGridArchive<S>, S> selectionOperator;
 
-  private AdaptiveGridArchive<S> archive;
-  protected final SolutionListEvaluator<S> evaluator;
+    private final AdaptiveGridArchive<S> archive;
+    protected final SolutionListEvaluator<S> evaluator;
 
-  public PESA2(Problem<S> problem, int maxEvaluations, int populationSize, int archiveSize,
-               int biSections, CrossoverOperator<S> crossoverOperator,
+    public PESA2(Problem<S> problem, int maxEvaluations, int populationSize, int archiveSize,
+                 int biSections, CrossoverOperator<S> crossoverOperator,
                MutationOperator<S> mutationOperator, SolutionListEvaluator<S> evaluator) {
-    super(problem) ;
-    this.maxEvaluations = maxEvaluations ;
-    setMaxPopulationSize(populationSize); ;
-    this.archiveSize = archiveSize ;
-    this.biSections = biSections ;
+        super(problem);
+        this.maxEvaluations = maxEvaluations;
+        setMaxPopulationSize(populationSize);
+        this.archiveSize = archiveSize;
+        this.biSections = biSections;
 
-    this.crossoverOperator = crossoverOperator;
-    this.mutationOperator = mutationOperator;
-    this.selectionOperator = new PESA2Selection<S>();
+        this.crossoverOperator = crossoverOperator;
+        this.mutationOperator = mutationOperator;
+        this.selectionOperator = new PESA2Selection<S>();
 
-    this.evaluator = evaluator ;
+        this.evaluator = evaluator;
 
-    archive = new AdaptiveGridArchive<>(this.archiveSize, this.biSections,problem.getNumberOfObjectives()) ;
-  }
+        archive = new AdaptiveGridArchive<>(this.archiveSize, this.biSections, problem.getNumberOfObjectives());
+    }
 
   @Override protected void initProgress() {
     evaluations = getMaxPopulationSize() ;

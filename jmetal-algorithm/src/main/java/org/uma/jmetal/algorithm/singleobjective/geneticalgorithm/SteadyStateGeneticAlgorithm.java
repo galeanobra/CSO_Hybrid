@@ -18,18 +18,18 @@ import java.util.List;
  */
 @SuppressWarnings("serial")
 public class SteadyStateGeneticAlgorithm<S extends Solution<?>> extends AbstractGeneticAlgorithm<S, S> {
-  private Comparator<S> comparator;
-  private int maxEvaluations;
-  private int evaluations;
+    private final Comparator<S> comparator;
+    private final int maxEvaluations;
+    private int evaluations;
 
-  /**
-   * Constructor
-   */
-  public SteadyStateGeneticAlgorithm(Problem<S> problem, int maxEvaluations, int populationSize,
-                                     CrossoverOperator<S> crossoverOperator, MutationOperator<S> mutationOperator,
-                                     SelectionOperator<List<S>, S> selectionOperator) {
-    super(problem);
-    setMaxPopulationSize(populationSize);
+    /**
+     * Constructor
+     */
+    public SteadyStateGeneticAlgorithm(Problem<S> problem, int maxEvaluations, int populationSize,
+                                       CrossoverOperator<S> crossoverOperator, MutationOperator<S> mutationOperator,
+                                       SelectionOperator<List<S>, S> selectionOperator) {
+        super(problem);
+        setMaxPopulationSize(populationSize);
     this.maxEvaluations = maxEvaluations;
 
     this.crossoverOperator = crossoverOperator;

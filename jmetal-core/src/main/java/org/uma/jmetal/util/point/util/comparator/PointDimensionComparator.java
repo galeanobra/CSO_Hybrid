@@ -17,7 +17,7 @@ public class PointDimensionComparator implements Comparator<Point> {
   /**
    * Stores the value of the index to compare
    */
-  private int index;
+  private final int index;
 
   /**
    * Constructor

@@ -8,18 +8,18 @@ import java.util.List;
 
 @SuppressWarnings("serial")
 public class AlgorithmReturningASubSetOfSolutions<S extends Solution<?>> implements Algorithm<List<S>> {
-  private Algorithm<List<S>> algorithm;
-  private int numberOfSolutionsToReturn;
+    private final Algorithm<List<S>> algorithm;
+    private final int numberOfSolutionsToReturn;
 
-  public AlgorithmReturningASubSetOfSolutions(
-          Algorithm<List<S>> algorithm, int numberOfSolutionsToReturn) {
-    this.algorithm = algorithm;
-    this.numberOfSolutionsToReturn = numberOfSolutionsToReturn;
-  }
+    public AlgorithmReturningASubSetOfSolutions(
+            Algorithm<List<S>> algorithm, int numberOfSolutionsToReturn) {
+        this.algorithm = algorithm;
+        this.numberOfSolutionsToReturn = numberOfSolutionsToReturn;
+    }
 
-  @Override
-  public void run() {
-    algorithm.run();
+    @Override
+    public void run() {
+        algorithm.run();
   }
 
   @Override

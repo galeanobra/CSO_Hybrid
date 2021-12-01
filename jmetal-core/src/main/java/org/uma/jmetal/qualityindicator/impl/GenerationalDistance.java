@@ -16,7 +16,7 @@ import org.uma.jmetal.util.errorchecking.Check;
  */
 @SuppressWarnings("serial")
 public class GenerationalDistance extends QualityIndicator {
-  private double pow = 2.0;
+  private final double pow = 2.0;
 
   /**
    * Default constructor

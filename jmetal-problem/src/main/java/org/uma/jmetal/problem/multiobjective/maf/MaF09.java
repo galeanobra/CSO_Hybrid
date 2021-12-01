@@ -15,20 +15,20 @@ import java.util.List;
 @SuppressWarnings("serial")
 public class MaF09 extends AbstractDoubleProblem {
 
-  public int maxinter9;
-  public int pindex9[];
-  public int M9;
-  public double points9[][], rangex9[][], rangey9[][], r_polyline9[][], oth_poly_points9[][];
+    public int maxinter9;
+    public int[] pindex9;
+    public int M9;
+    public double[][] points9, rangex9, rangey9, r_polyline9, oth_poly_points9;
 
-  /**
-   * Default constructor
-   */
-  public MaF09() {
-    this(2, 10) ;
-  }
+    /**
+     * Default constructor
+     */
+    public MaF09() {
+        this(2, 10);
+    }
 
-  /**
-   * Creates a MaF09 problem instance
+    /**
+     * Creates a MaF09 problem instance
    *
    * @param numberOfVariables Number of variables
    * @param numberOfObjectives Number of objective functions

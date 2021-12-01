@@ -15,19 +15,23 @@ import org.uma.jmetal.util.pseudorandom.RandomGenerator;
  */
 @SuppressWarnings("serial")
 public class PermutationSwapMutation<T> implements MutationOperator<PermutationSolution<T>> {
-  private double mutationProbability;
-  private RandomGenerator<Double> mutationRandomGenerator;
-  private BoundedRandomGenerator<Integer> positionRandomGenerator;
+    private double mutationProbability;
+    private final RandomGenerator<Double> mutationRandomGenerator;
+    private final BoundedRandomGenerator<Integer> positionRandomGenerator;
 
-  /** Constructor */
-  public PermutationSwapMutation(double mutationProbability) {
-    this(
-        mutationProbability,
-        () -> JMetalRandom.getInstance().nextDouble(),
-        (a, b) -> JMetalRandom.getInstance().nextInt(a, b));
-  }
+    /**
+     * Constructor
+     */
+    public PermutationSwapMutation(double mutationProbability) {
+        this(
+                mutationProbability,
+                () -> JMetalRandom.getInstance().nextDouble(),
+                (a, b) -> JMetalRandom.getInstance().nextInt(a, b));
+    }
 
-  /** Constructor */
+    /**
+     * Constructor
+     */
   public PermutationSwapMutation(
       double mutationProbability, RandomGenerator<Double> randomGenerator) {
     this(

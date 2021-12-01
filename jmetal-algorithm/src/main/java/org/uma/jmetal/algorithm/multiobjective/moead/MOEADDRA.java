@@ -56,7 +56,7 @@ public class MOEADDRA extends AbstractMOEAD<DoubleSolution> {
     initializePopulation() ;
     initializeUniformWeight();
     initializeNeighborhood();
-    idealPoint.update(population); ;
+      idealPoint.update(population);
 
     int generation = 0 ;
     evaluations = populationSize ;
@@ -93,7 +93,7 @@ public class MOEADDRA extends AbstractMOEAD<DoubleSolution> {
 
   protected void initializePopulation() {
     for (int i = 0; i < populationSize; i++) {
-      DoubleSolution newSolution = (DoubleSolution)problem.createSolution();
+        DoubleSolution newSolution = problem.createSolution();
 
       problem.evaluate(newSolution);
       population.add(newSolution);

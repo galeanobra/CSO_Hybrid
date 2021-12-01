@@ -17,25 +17,26 @@ import java.util.List;
  * Created by ajnebro on 10/12/14.
  */
 public class GeneticAlgorithmBuilder<S extends Solution<?>> {
-  public enum GeneticAlgorithmVariant {GENERATIONAL, STEADY_STATE}
-  /**
-   * Builder class
-   */
-  private Problem<S> problem;
-  private int maxEvaluations;
-  private int populationSize;
-  private CrossoverOperator<S> crossoverOperator;
-  private MutationOperator<S> mutationOperator;
-  private SelectionOperator<List<S>, S> selectionOperator;
-  private SolutionListEvaluator<S> evaluator;
+    public enum GeneticAlgorithmVariant {GENERATIONAL, STEADY_STATE}
 
-  private GeneticAlgorithmVariant variant ;
-  private SelectionOperator<List<S>, S> defaultSelectionOperator = new BinaryTournamentSelection<S>() ;
+    /**
+     * Builder class
+     */
+    private final Problem<S> problem;
+    private int maxEvaluations;
+    private int populationSize;
+    private final CrossoverOperator<S> crossoverOperator;
+    private final MutationOperator<S> mutationOperator;
+    private SelectionOperator<List<S>, S> selectionOperator;
+    private SolutionListEvaluator<S> evaluator;
 
-  /**
-   * Builder constructor
-   */
-  public GeneticAlgorithmBuilder(Problem<S> problem,
+    private GeneticAlgorithmVariant variant;
+    private final SelectionOperator<List<S>, S> defaultSelectionOperator = new BinaryTournamentSelection<S>();
+
+    /**
+     * Builder constructor
+     */
+    public GeneticAlgorithmBuilder(Problem<S> problem,
       CrossoverOperator<S> crossoverOperator,
       MutationOperator<S> mutationOperator) {
     this.problem = problem;

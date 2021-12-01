@@ -12,7 +12,7 @@ import java.util.List;
  * Created by antonio on 6/06/17.
  */
 public class RemoveNSolutionsAccordingToTheCrowdingDistance<S extends Solution<?>> implements RemoveSolutionsStrategy<S> {
-  private int numberOfSolutionsToDelete ;
+  private final int numberOfSolutionsToDelete;
 
   public RemoveNSolutionsAccordingToTheCrowdingDistance(int numberOfSolutionsToDelete) {
     this.numberOfSolutionsToDelete = numberOfSolutionsToDelete ;

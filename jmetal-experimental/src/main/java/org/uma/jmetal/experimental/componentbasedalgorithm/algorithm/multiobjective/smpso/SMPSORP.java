@@ -72,7 +72,7 @@ public class SMPSORP
   protected JMetalRandom randomGenerator;
 
   protected List<ArchiveWithReferencePoint<DoubleSolution>> leaders;
-  private Comparator<DoubleSolution> dominanceComparator;
+    private final Comparator<DoubleSolution> dominanceComparator;
 
   protected MutationOperator<DoubleSolution> mutation;
 

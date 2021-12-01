@@ -17,19 +17,21 @@ import org.uma.jmetal.util.pseudorandom.RandomGenerator;
  */
 @SuppressWarnings("serial")
 public class UniformMutation implements MutationOperator<DoubleSolution> {
-  private double perturbation;
-  private Double mutationProbability = null;
-  private RandomGenerator<Double> randomGenerator;
-  private RepairDoubleSolution solutionRepair;
+    private double perturbation;
+    private Double mutationProbability = null;
+    private final RandomGenerator<Double> randomGenerator;
+    private final RepairDoubleSolution solutionRepair;
 
-  /** Constructor */
-  public UniformMutation(double mutationProbability, double perturbation) {
-    this(
-        mutationProbability,
-        perturbation,
-        new RepairDoubleSolutionWithBoundValue(),
-        () -> JMetalRandom.getInstance().nextDouble());
-  }
+    /**
+     * Constructor
+     */
+    public UniformMutation(double mutationProbability, double perturbation) {
+        this(
+                mutationProbability,
+                perturbation,
+                new RepairDoubleSolutionWithBoundValue(),
+                () -> JMetalRandom.getInstance().nextDouble());
+    }
 
   /** Constructor */
   public UniformMutation(

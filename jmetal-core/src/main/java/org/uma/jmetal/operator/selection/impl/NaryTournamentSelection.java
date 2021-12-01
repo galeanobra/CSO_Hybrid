@@ -17,19 +17,23 @@ import java.util.List;
  */
 @SuppressWarnings("serial")
 public class NaryTournamentSelection<S extends Solution<?>>
-    implements SelectionOperator<List<S>, S> {
-  private Comparator<S> comparator;
-  private int tournamentSize;
+        implements SelectionOperator<List<S>, S> {
+    private final Comparator<S> comparator;
+    private final int tournamentSize;
 
-  /** Constructor */
-  public NaryTournamentSelection() {
-    this(2, new DominanceComparator<S>());
-  }
+    /**
+     * Constructor
+     */
+    public NaryTournamentSelection() {
+        this(2, new DominanceComparator<S>());
+    }
 
-  /** Constructor */
-  public NaryTournamentSelection(int tournamentSize, Comparator<S> comparator) {
-    this.tournamentSize = tournamentSize;
-    this.comparator = comparator;
+    /**
+     * Constructor
+     */
+    public NaryTournamentSelection(int tournamentSize, Comparator<S> comparator) {
+        this.tournamentSize = tournamentSize;
+        this.comparator = comparator;
   }
 
   @Override

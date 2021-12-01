@@ -13,19 +13,17 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- * 
  * @author Inacio Medeiros <inaciogmedeiros@gmail.com>
- * 
  */
 public class CoralReefsOptimization<S>
-		extends AbstractCoralReefsOptimization<S, List<S>> {
+        extends AbstractCoralReefsOptimization<S, List<S>> {
 
-	private Problem<S> problem;
-	private int maxIterations;
-	private int iterations;
-	private MersenneTwisterGenerator random;
+    private final Problem<S> problem;
+    private final int maxIterations;
+    private int iterations;
+    private final MersenneTwisterGenerator random;
 
-	public CoralReefsOptimization(Problem<S> problem,
+    public CoralReefsOptimization(Problem<S> problem,
                                   int maxIterations, Comparator<S> comparator,
                                   SelectionOperator<List<S>, S> selectionOperator,
                                   CrossoverOperator<S> crossoverOperator,
@@ -123,11 +121,9 @@ public class CoralReefsOptimization<S>
 
 			broadcastSpawners.remove(parents.get(0));
 
-			if (broadcastSpawners.contains(parents.get(1))) {
-				broadcastSpawners.remove(parents.get(1));
-			}
+			broadcastSpawners.remove(parents.get(1));
 
-			larvae.add(crossoverOperator.execute(parents).get(0));
+            larvae.add(crossoverOperator.execute(parents).get(0));
 			
 			parents.clear();
 

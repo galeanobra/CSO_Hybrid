@@ -134,8 +134,8 @@ public class SMPSORPWithMultipleReferencePointsAndChartsRunner {
   }
 
   private static class ChartListener implements MeasureListener<List<DoubleSolution>> {
-    private ChartContainerWithReferencePoints chart;
-    private int iteration = 0;
+    private final ChartContainerWithReferencePoints chart;
+      private int iteration = 0;
 
     public ChartListener(ChartContainerWithReferencePoints chart) {
       this.chart = chart;

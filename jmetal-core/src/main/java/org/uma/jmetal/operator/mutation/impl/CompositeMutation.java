@@ -17,18 +17,20 @@ import java.util.List;
  */
 @SuppressWarnings("serial")
 public class CompositeMutation implements MutationOperator<CompositeSolution> {
-  private List<MutationOperator<Solution<?>>> operators;
-  private double mutationProbability = 1.0;
+    private final List<MutationOperator<Solution<?>>> operators;
+    private final double mutationProbability = 1.0;
 
-  /** Constructor */
-  public CompositeMutation(List<?> operators) {
-    Check.notNull(operators);
-    Check.collectionIsNotEmpty(operators);
+    /**
+     * Constructor
+     */
+    public CompositeMutation(List<?> operators) {
+        Check.notNull(operators);
+        Check.collectionIsNotEmpty(operators);
 
-    this.operators = new ArrayList<>();
-    for (int i = 0; i < operators.size(); i++) {
-      Check.that(
-          operators.get(i) instanceof MutationOperator,
+        this.operators = new ArrayList<>();
+        for (int i = 0; i < operators.size(); i++) {
+            Check.that(
+                    operators.get(i) instanceof MutationOperator,
           "The operator list does not contain an object implementing class CrossoverOperator");
       this.operators.add((MutationOperator<Solution<?>>) operators.get(i));
     }

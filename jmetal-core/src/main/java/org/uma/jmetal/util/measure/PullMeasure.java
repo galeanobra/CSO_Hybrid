@@ -14,8 +14,7 @@ package org.uma.jmetal.util.measure;
  */
 public interface PullMeasure<Value> extends Measure<Value> {
 	/**
-	 * 
-	 * @return the current {@link Value} of the {@link Measure}
-	 */
-	public Value get();
+     * @return the current {@link Value} of the {@link Measure}
+     */
+    Value get();
 }

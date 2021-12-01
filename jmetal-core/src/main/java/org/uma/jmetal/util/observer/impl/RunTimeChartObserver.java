@@ -19,9 +19,9 @@ import java.util.Map;
  * @author Antonio J. Nebro <antonio@lcc.uma.es>
  */
 public class RunTimeChartObserver<S extends Solution<?>> implements Observer<Map<String, Object>> {
-  private GenericChartContainer<S> chart;
-  private Integer evaluations ;
-  private int plotUpdateFrequency ;
+  private final GenericChartContainer<S> chart;
+    private Integer evaluations;
+    private final int plotUpdateFrequency;
 
   /**
    * Constructor

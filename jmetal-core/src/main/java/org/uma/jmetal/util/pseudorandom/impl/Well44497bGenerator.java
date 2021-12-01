@@ -8,8 +8,8 @@ import org.uma.jmetal.util.pseudorandom.PseudoRandomGenerator;
  */
 @SuppressWarnings("serial")
 public class Well44497bGenerator implements PseudoRandomGenerator {
-  private Well44497b rnd ;
-  private long seed ;
+  private final Well44497b rnd;
+    private long seed;
   private static final String NAME = "Well44497b" ;
 
   /** Constructor */

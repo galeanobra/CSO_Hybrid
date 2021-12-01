@@ -14,10 +14,10 @@ public abstract class AttributeComparator<S extends Solution<?>> implements Comp
   public enum Ordering {
     DESCENDING,
     ASCENDING
-  };
+  }
 
-  protected final String attributeName;
-  protected Ordering ordering;
+    protected final String attributeName;
+    protected Ordering ordering;
 
   public AttributeComparator(String name, Ordering ordering) {
     this.attributeName = name;

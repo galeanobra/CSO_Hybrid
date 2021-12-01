@@ -68,7 +68,7 @@ public class RNSGAIIRunner extends AbstractAlgorithmRunner {
       referenceParetoFront = "resources/referenceFrontsCSV/ZDT1.csv" ;
     }
 
-    problem = (DoubleProblem) ProblemUtils.<DoubleSolution> loadProblem(problemName);
+    problem = ProblemUtils.<DoubleSolution>loadProblem(problemName);
 
     double crossoverProbability = 0.9 ;
     double crossoverDistributionIndex = 20.0 ;

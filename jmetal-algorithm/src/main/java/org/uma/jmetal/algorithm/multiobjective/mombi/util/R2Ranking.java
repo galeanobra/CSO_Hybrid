@@ -8,10 +8,10 @@ import java.util.*;
 @SuppressWarnings("serial")
 public class R2Ranking<S extends Solution<?>> extends GenericSolutionAttribute<S, R2SolutionData> {
 
-  private AbstractUtilityFunctionsSet<S> utilityFunctions;
-  private List<List<S>> rankedSubpopulations;
-  private int numberOfRanks = 0;
-  private R2RankingAttribute<S> attribute = new R2RankingAttribute<>();
+  private final AbstractUtilityFunctionsSet<S> utilityFunctions;
+    private List<List<S>> rankedSubpopulations;
+    private int numberOfRanks = 0;
+    private final R2RankingAttribute<S> attribute = new R2RankingAttribute<>();
 
 
   public R2Ranking(AbstractUtilityFunctionsSet<S> utilityFunctions) {
@@ -36,16 +36,16 @@ public class R2Ranking<S extends Solution<?>> extends GenericSolutionAttribute<S
       Collections.sort(population, new Comparator<S>() {
         @Override
         public int compare(S o1, S o2) {
-          R2RankingAttribute<S> attribute = new R2RankingAttribute<>();
-          R2SolutionData data1 = (R2SolutionData) attribute.getAttribute(o1);
-          R2SolutionData data2 = (R2SolutionData) attribute.getAttribute(o2);
+            R2RankingAttribute<S> attribute = new R2RankingAttribute<>();
+            R2SolutionData data1 = attribute.getAttribute(o1);
+            R2SolutionData data2 = attribute.getAttribute(o2);
 
-          if (data1.alpha < data2.alpha)
-            return -1;
-          else if (data1.alpha > data2.alpha)
-            return 1;
-          else
-            return 0;
+            if (data1.alpha < data2.alpha)
+                return -1;
+            else if (data1.alpha > data2.alpha)
+                return 1;
+            else
+                return 0;
         }
       });
 

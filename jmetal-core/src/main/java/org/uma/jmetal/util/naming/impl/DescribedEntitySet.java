@@ -51,11 +51,11 @@ public class DescribedEntitySet<Entity extends DescribedEntity> implements Set<E
 
   @Override
   public boolean contains(Object o) {
-    return map.values().contains(o);
+    return map.containsValue(o);
   }
 
   public boolean contains(String name) {
-    return map.keySet().contains(name);
+      return map.containsKey(name);
   }
 
   @Override

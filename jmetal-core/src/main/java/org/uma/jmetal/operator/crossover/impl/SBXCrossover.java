@@ -30,9 +30,9 @@ public class SBXCrossover implements CrossoverOperator<DoubleSolution> {
 
   private double distributionIndex;
   private double crossoverProbability;
-  private RepairDoubleSolution solutionRepair;
+    private final RepairDoubleSolution solutionRepair;
 
-  private RandomGenerator<Double> randomGenerator;
+    private final RandomGenerator<Double> randomGenerator;
 
   /** Constructor */
   public SBXCrossover(double crossoverProbability, double distributionIndex) {

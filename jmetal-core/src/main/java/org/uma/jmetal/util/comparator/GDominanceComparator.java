@@ -16,18 +16,20 @@ import java.util.List;
 @SuppressWarnings("serial")
 public class GDominanceComparator<S extends Solution<?>> implements Comparator<S>, Serializable {
 
-  private List<Double> referencePoint ;
-  private DominanceComparator<S> dominanceComparator ;
+    private final List<Double> referencePoint;
+    private final DominanceComparator<S> dominanceComparator;
 
-  /** Constructor */
-  public GDominanceComparator(List<Double> referencePoint) {
-    this.referencePoint = referencePoint ;
-    dominanceComparator = new DominanceComparator<>() ;
-  }
+    /**
+     * Constructor
+     */
+    public GDominanceComparator(List<Double> referencePoint) {
+        this.referencePoint = referencePoint;
+        dominanceComparator = new DominanceComparator<>();
+    }
 
-  /**
-   * Compares two solutions.
-   *
+    /**
+     * Compares two solutions.
+     *
    * @param solution1 Object representing the first <code>Solution</code>.
    * @param solution2 Object representing the second <code>Solution</code>.
    * @return -1, or 0, or 1 if solution1 dominates solution2, both are

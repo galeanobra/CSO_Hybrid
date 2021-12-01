@@ -12,8 +12,8 @@ import java.util.Comparator;
  */
 @SuppressWarnings("serial")
 public class HypervolumeArchive<S extends Solution<?>> extends AbstractBoundedArchive<S> {
-  private Comparator<S> comparator;
-  Hypervolume<S> hypervolume ;
+  private final Comparator<S> comparator;
+    Hypervolume<S> hypervolume;
 
   public HypervolumeArchive(int maxSize, Hypervolume<S> hypervolume) {
     super(maxSize);

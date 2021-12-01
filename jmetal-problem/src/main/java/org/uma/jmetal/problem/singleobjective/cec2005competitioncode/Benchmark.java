@@ -117,7 +117,7 @@ public class Benchmark {
   static private double[] m_iSqrt;
 
   // Instance variables
-  private double[] m_biases;
+  private final double[] m_biases;
 
   // Constructors
   //	Load the data common to all org.uma.test functions.
@@ -137,13 +137,13 @@ public class Benchmark {
     }
   }
 
-  // Entry point
-  //	If the Benchmark class is executed as a stand-alone application,
-  //	its job is to run the org.uma.test on all the org.uma.test functions.
-  static public void main(String args[]) throws JMetalException {
-    Benchmark theBenchmark = new Benchmark();
-    theBenchmark.runTest(0);
-  }
+    // Entry point
+    //	If the Benchmark class is executed as a stand-alone application,
+    //	its job is to run the org.uma.test on all the org.uma.test functions.
+    static public void main(String[] args) throws JMetalException {
+        Benchmark theBenchmark = new Benchmark();
+        theBenchmark.runTest(0);
+    }
 
   // Sphere function
   static public double sphere(double[] x) {

@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
  * @version 1.0
  */
 public class PointSolutionTest {
-  private static double EPSILON = 0.0000001 ;
+  private static final double EPSILON = 0.0000001;
 
   @Test public void shouldDefaultConstructorCreateTheObjectCorrectly() {
     int numberOfObjectives = 10 ;
@@ -76,7 +76,7 @@ public class PointSolutionTest {
     PointSolution solution = new PointSolution(numberOfObjectives) ;
     ReflectionTestUtils.setField(solution, "objectives", values);
 
-    PointSolution newSolution = (PointSolution)solution.copy() ;
+      PointSolution newSolution = solution.copy();
     assertEquals(solution, newSolution) ;
   }
 
@@ -87,7 +87,7 @@ public class PointSolutionTest {
     PointSolution solution = new PointSolution(numberOfObjectives) ;
     ReflectionTestUtils.setField(solution, "objectives", values);
 
-    PointSolution newSolution = (PointSolution)solution.copy() ;
+      PointSolution newSolution = solution.copy();
     assertTrue(solution.equals(newSolution));
   }
 
@@ -134,7 +134,7 @@ public class PointSolutionTest {
     int numberOfObjectives = 3 ;
     PointSolution solution = new PointSolution(numberOfObjectives) ;
 
-    assertFalse(solution.equals(new String("")));
+      assertFalse(solution.equals(""));
   }
 
   @Test

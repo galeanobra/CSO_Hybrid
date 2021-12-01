@@ -13,7 +13,7 @@ import org.uma.jmetal.solution.doublesolution.DoubleSolution;
  */
 @SuppressWarnings("serial")
 public class C2_DTLZ2 extends DTLZ2 {
-  private double rValue ;
+  private final double rValue;
   /**
    * Constructor
    * @param numberOfVariables

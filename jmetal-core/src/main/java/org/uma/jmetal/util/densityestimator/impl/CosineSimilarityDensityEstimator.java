@@ -20,20 +20,20 @@ import java.util.List;
  * @author Antonio J. Nebro <antonio@lcc.uma.es>
  */
 public class CosineSimilarityDensityEstimator<S extends Solution<?>> implements DensityEstimator<S> {
-  private final String attributeId = getClass().getName();
-  private Distance<double[], double[]> distance;
-  private Point referencePoint;
-  private boolean normalize;
+    private final String attributeId = getClass().getName();
+    private final Distance<double[], double[]> distance;
+    private final Point referencePoint;
+    private final boolean normalize;
 
-  public CosineSimilarityDensityEstimator(Point referencePoint) {
-    this(referencePoint, true);
-  }
+    public CosineSimilarityDensityEstimator(Point referencePoint) {
+        this(referencePoint, true);
+    }
 
-  public CosineSimilarityDensityEstimator(Point referencePoint, boolean normalize) {
-    this.referencePoint = referencePoint;
-    distance = new CosineSimilarityBetweenVectors(referencePoint.getValues());
-    this.normalize = normalize;
-  }
+    public CosineSimilarityDensityEstimator(Point referencePoint, boolean normalize) {
+        this.referencePoint = referencePoint;
+        distance = new CosineSimilarityBetweenVectors(referencePoint.getValues());
+        this.normalize = normalize;
+    }
 
   /**
    * Assigns the KNN distance to all the solutions in a list

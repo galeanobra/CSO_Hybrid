@@ -16,8 +16,8 @@ import java.util.Comparator;
 import java.util.List;
 
 public class SelectionParameter extends CategoricalParameter {
-  public SelectionParameter(String args[], List<String> selectionStrategies) {
-    super("selection", args, selectionStrategies) ;
+  public SelectionParameter(String[] args, List<String> selectionStrategies) {
+      super("selection", args, selectionStrategies);
   }
 
   public MatingPoolSelection<?> getParameter(int matingPoolSize, Comparator<?> comparator) {

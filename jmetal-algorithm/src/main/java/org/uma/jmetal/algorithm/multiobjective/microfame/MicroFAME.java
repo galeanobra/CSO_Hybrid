@@ -29,22 +29,24 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-/** @author Alejandro Santiago <aurelio.santiago@upalt.edu.mx> Micro-FAME */
+/**
+ * @author Alejandro Santiago <aurelio.santiago@upalt.edu.mx> Micro-FAME
+ */
 public class MicroFAME<S extends Solution<?>> extends SteadyStateNSGAII<S> {
-  private double operators_use[];
-  private double operators_desirability[];
-  private int operators_num = 4;
-  private int window_size;
-  private int contador_ventana;
-  private double estancamiento = 0.0;
-  private HypervolumeArchive archive_hv;
-  Input Stagnation, Operatoruse;
-  Output Probability;
-  T1_Rulebase rulebase;
+    private final double[] operators_use;
+    private final double[] operators_desirability;
+    private final int operators_num = 4;
+    private final int window_size;
+    private int contador_ventana;
+    private double estancamiento = 0.0;
+    private final HypervolumeArchive archive_hv;
+    Input Stagnation, Operatoruse;
+    Output Probability;
+    T1_Rulebase rulebase;
 
-  /** Constructor */
-  public MicroFAME(
-      Problem<S> problem,
+    /** Constructor */
+    public MicroFAME(
+            Problem<S> problem,
       int maxEvaluations,
       int populationSize,
       CrossoverOperator<S> crossoverOperator,
@@ -251,9 +253,9 @@ public class MicroFAME<S extends Solution<?>> extends SteadyStateNSGAII<S> {
         // Polynomial mutation
       case 2:
         parents = new ArrayList<>(1);
-        parents.add(population.get(0));
-        offspring.add((S) (DoubleSolution) population.get(0).copy());
-        mutationPolynomial.execute(offspring.get(0));
+          parents.add(population.get(0));
+          offspring.add((S) population.get(0).copy());
+          mutationPolynomial.execute(offspring.get(0));
         evaluator.evaluate(offspring, getProblem());
         offspringPopulation.add(offspring.get(0));
         operators_use[2] += 1.0 / window_size;
@@ -265,9 +267,9 @@ public class MicroFAME<S extends Solution<?>> extends SteadyStateNSGAII<S> {
         // UNIFORM MUTATION
       case 3:
         parents = new ArrayList<>(1);
-        parents.add(population.get(0));
-        offspring.add((S) (DoubleSolution) population.get(0).copy());
-        mutationUniform.execute(offspring.get(0));
+          parents.add(population.get(0));
+          offspring.add((S) population.get(0).copy());
+          mutationUniform.execute(offspring.get(0));
         evaluator.evaluate(offspring, getProblem());
         offspringPopulation.add(offspring.get(0));
         operators_use[3] += 1.0 / window_size;

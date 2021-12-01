@@ -6,18 +6,18 @@ import java.util.concurrent.BlockingQueue;
 import java.util.function.Function;
 
 public class Worker<T extends ParallelTask<?>> extends Thread {
-  private BlockingQueue<T> completedTaskQueue;
-  private BlockingQueue<T> pendingTaskQueue;
+    private final BlockingQueue<T> completedTaskQueue;
+    private final BlockingQueue<T> pendingTaskQueue;
 
-  protected Function<T, T> computeFunction;
+    protected Function<T, T> computeFunction;
 
-  public Worker(
-      Function<T, T> computeFunction,
-      BlockingQueue<T> pendingTaskQueue,
-      BlockingQueue<T> completedTaskQueue) {
-    this.computeFunction = computeFunction;
-    this.completedTaskQueue = completedTaskQueue;
-    this.pendingTaskQueue = pendingTaskQueue;
+    public Worker(
+            Function<T, T> computeFunction,
+            BlockingQueue<T> pendingTaskQueue,
+            BlockingQueue<T> completedTaskQueue) {
+        this.computeFunction = computeFunction;
+        this.completedTaskQueue = completedTaskQueue;
+        this.pendingTaskQueue = pendingTaskQueue;
   }
 
   @Override

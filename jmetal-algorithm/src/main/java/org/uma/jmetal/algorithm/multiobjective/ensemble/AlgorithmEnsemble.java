@@ -11,18 +11,18 @@ import java.util.List;
 
 @SuppressWarnings("serial")
 public class AlgorithmEnsemble<S extends Solution<?>> implements Algorithm<List<S>> {
-  private List<Algorithm<List<S>>> algorithmList;
-  private Archive<S> archive;
-  private long totalComputingTime;
+    private final List<Algorithm<List<S>>> algorithmList;
+    private final Archive<S> archive;
+    private long totalComputingTime;
 
-  public AlgorithmEnsemble(List<Algorithm<List<S>>> algorithmList, Archive<S> archive) {
-    Check.notNull(algorithmList);
-    Check.notNull(archive);
-    Check.that(algorithmList.size() > 0, "The algorithm list is empty");
+    public AlgorithmEnsemble(List<Algorithm<List<S>>> algorithmList, Archive<S> archive) {
+        Check.notNull(algorithmList);
+        Check.notNull(archive);
+        Check.that(algorithmList.size() > 0, "The algorithm list is empty");
 
-    this.algorithmList = algorithmList;
-    this.archive = archive;
-  }
+        this.algorithmList = algorithmList;
+        this.archive = archive;
+    }
 
   @Override
   public void run() {

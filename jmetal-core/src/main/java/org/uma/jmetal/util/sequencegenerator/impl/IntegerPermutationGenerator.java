@@ -7,7 +7,7 @@ import org.uma.jmetal.util.sequencegenerator.SequenceGenerator;
 public class IntegerPermutationGenerator implements SequenceGenerator<Integer> {
   private int[] sequence;
   private int index;
-  private int size ;
+    private final int size;
 
   public IntegerPermutationGenerator(int size) {
     Check.that(size > 0, "Size " + size + " is not a positive number greater than zero");

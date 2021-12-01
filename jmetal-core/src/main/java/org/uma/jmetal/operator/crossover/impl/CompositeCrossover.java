@@ -18,10 +18,12 @@ import java.util.List;
  */
 @SuppressWarnings("serial")
 public class CompositeCrossover implements CrossoverOperator<CompositeSolution> {
-  private List<CrossoverOperator<Solution<?>>> operators;
-  private double crossoverProbability = 1.0;
+    private final List<CrossoverOperator<Solution<?>>> operators;
+    private final double crossoverProbability = 1.0;
 
-  /** Constructor */
+    /**
+     * Constructor
+     */
   /*
     public CompositeCrossover(List<CrossoverOperator<Solution<?>>> operators) {
       Check.isNotNull(operators);

@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class RE42 extends AbstractDoubleProblem {
 
-  private int numberOfOriginalConstraints = 9;
+  private final int numberOfOriginalConstraints = 9;
 
   /** Constructor */
   public RE42() {

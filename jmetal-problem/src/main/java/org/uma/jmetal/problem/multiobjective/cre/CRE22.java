@@ -14,19 +14,21 @@ import java.util.List;
  */
 @SuppressWarnings("serial")
 public class CRE22 extends AbstractDoubleProblem {
-  private double P = 6000;
-  private double L = 14;
-  private double E = 30 * 1e6;
+    private final double P = 6000;
+    private final double L = 14;
+    private final double E = 30 * 1e6;
 
-  /** Constructor */
-  public CRE22() {
-    setNumberOfVariables(4);
-    setNumberOfObjectives(2);
-    setNumberOfConstraints(4);
-    setName("CRE22");
+    /**
+     * Constructor
+     */
+    public CRE22() {
+        setNumberOfVariables(4);
+        setNumberOfObjectives(2);
+        setNumberOfConstraints(4);
+        setName("CRE22");
 
-    List<Double> lowerLimit = List.of(0.125, 0.1, 0.1, 0.125);
-    List<Double> upperLimit = List.of(5.0, 10.0, 10.0, 5.0);
+        List<Double> lowerLimit = List.of(0.125, 0.1, 0.1, 0.125);
+        List<Double> upperLimit = List.of(5.0, 10.0, 10.0, 5.0);
 
     setVariableBounds(lowerLimit, upperLimit);
   }

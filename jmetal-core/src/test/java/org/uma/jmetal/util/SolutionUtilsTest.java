@@ -195,7 +195,7 @@ public class SolutionUtilsTest {
     double[] maxValue = new double[] {20, 20};
 
     DoubleSolution normalized =
-        (DoubleSolution) SolutionUtils.normalize(solution, minValue, maxValue);
+            SolutionUtils.normalize(solution, minValue, maxValue);
 
     assertNotSame(normalized, solution);
     assertEquals(0.0, normalized.objectives()[0], EPSILON);

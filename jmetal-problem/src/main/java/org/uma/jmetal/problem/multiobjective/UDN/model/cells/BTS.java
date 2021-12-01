@@ -5,17 +5,15 @@
  */
 package org.uma.jmetal.problem.multiobjective.UDN.model.cells;
 
-import com.jmatio.io.MatFileReader;
-import com.jmatio.types.MLNumericArray;
 import org.uma.jmetal.problem.multiobjective.UDN.model.Point;
 import org.uma.jmetal.problem.multiobjective.UDN.model.UDN;
+
+import us.hebi.matlab.mat.format.Mat5;
+import us.hebi.matlab.mat.types.Matrix;
 
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-//import static jmetal.problems.UDN.model.cells.Sector.patternFileLoaded_;
 
 /**
  * @author paco
@@ -23,7 +21,8 @@ import java.util.logging.Logger;
 public class BTS {
 
     protected static int uniqueId_ = 0;
-    MLNumericArray antennaArray_;
+    //    MLNumericArray antennaArray_;
+    Matrix antennaArray_;
     static boolean patternFileLoaded_ = false;
     int id_;
 
@@ -67,13 +66,19 @@ public class BTS {
         }
 
         //Load propagation antenna only once
-        MatFileReader reader = null;
+//        MatFileReader reader = null;
+//        try {
+//            reader = new MatFileReader(radiationPatternFile);
+//        } catch (IOException ex) {
+//            Logger.getLogger(BTS.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        antennaArray_ = (MLNumericArray) reader.getContent().get(radiationPatternFile.substring(0, radiationPatternFile.length() - 4));
+
         try {
-            reader = new MatFileReader(radiationPatternFile);
-        } catch (IOException ex) {
-            Logger.getLogger(BTS.class.getName()).log(Level.SEVERE, null, ex);
+            antennaArray_ = Mat5.readFromFile(radiationPatternFile).getMatrix(0);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        antennaArray_ = (MLNumericArray) reader.getContent().get(radiationPatternFile.substring(0, radiationPatternFile.length() - 4));
         patternFileLoaded_ = true;
     }
 

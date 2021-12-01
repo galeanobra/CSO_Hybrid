@@ -9,8 +9,8 @@ import java.util.Random;
  */
 @SuppressWarnings("serial")
 public class JavaRandomGenerator implements PseudoRandomGenerator {
-  private Random rnd ;
-  private long seed ;
+  private final Random rnd;
+    private long seed;
   private static final String NAME = "JavaRandomGenerator" ;
 
   /** Constructor */

@@ -12,7 +12,7 @@ import java.util.List;
  */
 @SuppressWarnings("serial")
 public class LZ09F1 extends AbstractDoubleProblem {
-  private LZ09 lz09;
+  private final LZ09 lz09;
 
   /**
    * Creates a default LZ09F1 problem (10 variables and 2 objectives)

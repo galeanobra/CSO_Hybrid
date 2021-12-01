@@ -18,15 +18,15 @@ import java.util.concurrent.TimeUnit;
  */
 
 public class ChartForDynamicProblemsContainer<S extends Solution<?>> {
-  private Map<String, XYChart> charts;
-  private XYChart frontChart;
+  private final Map<String, XYChart> charts;
+    private XYChart frontChart;
   private XYChart varChart;
   private SwingWrapper<XYChart> swingWrapper;
   private String name;
   private int delay;
   private int objective1;
-  private int objective2;
-  private List<String> referencePointName;
+    private int objective2;
+    private final List<String> referencePointName;
 
   private int counter = 0;
 

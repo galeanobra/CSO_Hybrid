@@ -10,8 +10,8 @@ import java.util.Set;
 
 /** @author Antonio J. Nebro <antonio@lcc.uma.es> */
 public class DefaultObservable<D> implements Observable<D> {
-  private Set<Observer<D>> observers;
-  private boolean dataHasChanged;
+  private final Set<Observer<D>> observers;
+    private boolean dataHasChanged;
   private String name;
 
   public DefaultObservable(String name) {

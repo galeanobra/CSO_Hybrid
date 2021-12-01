@@ -11,7 +11,7 @@ import java.util.Map;
  *  @author Antonio J. Nebro <antonio@lcc.uma.es>
  */
 public class TerminationByEvaluations implements Termination {
-  private int maximumNumberOfEvaluations ;
+  private final int maximumNumberOfEvaluations;
 
   public TerminationByEvaluations(int maximumNumberOfEvaluations) {
     this.maximumNumberOfEvaluations = maximumNumberOfEvaluations ;

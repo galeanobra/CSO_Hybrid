@@ -15,9 +15,9 @@ import org.uma.jmetal.solution.doublesolution.DoubleSolution;
  * @version 1.0
  */
 public class MOEADBuilder implements AlgorithmBuilder<AbstractMOEAD<DoubleSolution>> {
-  public enum Variant {MOEAD, ConstraintMOEAD, MOEADDRA, MOEADSTM, MOEADD, MOEADIEPSILON} ;
+  public enum Variant {MOEAD, ConstraintMOEAD, MOEADDRA, MOEADSTM, MOEADD, MOEADIEPSILON}
 
-  protected Problem<DoubleSolution> problem ;
+    protected Problem<DoubleSolution> problem;
 
   /** T in Zhang & Li paper */
   protected int neighborSize;

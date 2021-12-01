@@ -19,7 +19,7 @@ import java.util.List;
 @SuppressWarnings("serial")
 @Deprecated
 public class TournamentSelection<S extends Solution<?>> implements SelectionOperator<List<S>,S> {
-  private Comparator<S> comparator;
+  private final Comparator<S> comparator;
 
   private final int n_arity;
 

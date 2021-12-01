@@ -77,17 +77,17 @@ public class SolutionUtils {
   }
 
   static <S extends Solution<?>> double normalizedDistanceBetweenObjectives(
-      S firstSolution, S secondSolution, double maxs[], double mins[]) {
+          S firstSolution, S secondSolution, double[] maxs, double[] mins) {
 
-    double diff;
-    double distance = 0.0;
-    // euclidean distance
-    for (int nObj = 0; nObj < firstSolution.objectives().length; nObj++) {
-      diff =
-          (firstSolution.objectives()[nObj] / (maxs[nObj] - mins[nObj]))
-              - (secondSolution.objectives()[nObj] / (maxs[nObj] - mins[nObj]));
-      distance += Math.pow(diff, 2.0);
-    }
+      double diff;
+      double distance = 0.0;
+      // euclidean distance
+      for (int nObj = 0; nObj < firstSolution.objectives().length; nObj++) {
+          diff =
+                  (firstSolution.objectives()[nObj] / (maxs[nObj] - mins[nObj]))
+                          - (secondSolution.objectives()[nObj] / (maxs[nObj] - mins[nObj]));
+          distance += Math.pow(diff, 2.0);
+      }
 
     return Math.sqrt(distance);
   }
