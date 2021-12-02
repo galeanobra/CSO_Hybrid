@@ -146,7 +146,7 @@ public class SMPSORPWithMultipleReferencePointsAndChartsRunner {
       if (this.chart != null) {
         iteration++;
         this.chart.getFrontChart().setTitle("Iteration: " + this.iteration);
-        this.chart.updateFrontCharts(solutionList);
+//        this.chart.updateFrontCharts(solutionList);
         this.chart.refreshCharts();
 
         new SolutionListOutput(solutionList)
