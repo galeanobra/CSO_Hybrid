@@ -5,6 +5,7 @@ import org.uma.jmetal.example.AlgorithmRunner;
 import org.uma.jmetal.lab.visualization.plot.PlotFront;
 import org.uma.jmetal.lab.visualization.plot.impl.PlotSmile;
 import org.uma.jmetal.operator.crossover.CrossoverOperator;
+import org.uma.jmetal.operator.crossover.impl.SinglePointCrossover;
 import org.uma.jmetal.operator.crossover.impl.TwoPointCrossover;
 import org.uma.jmetal.operator.mutation.MutationOperator;
 import org.uma.jmetal.operator.mutation.impl.BitFlipMutation;
@@ -41,14 +42,14 @@ public class NSGAII_CSO_main extends AbstractAlgorithmRunner {
         problem = new StaticCSO(main, run);
 
         double crossoverProbability = 0.9;
-        crossover = new TwoPointCrossover(crossoverProbability);
+        crossover = new SinglePointCrossover(crossoverProbability);
 
         double mutationProbability = 1.0 / ((StaticCSO) problem).getTotalNumberOfActivableCells();
         mutation = new BitFlipMutation(mutationProbability);
 
         selection = new BinaryTournamentSelection<>();
 
-        algorithm = new NSGAIIBuilder<BinarySolution>(problem, crossover, mutation, popSize).setSelectionOperator(selection).setMaxEvaluations(numEvals)
+        algorithm = new NSGAIIBuilder<>(problem, crossover, mutation, popSize).setSelectionOperator(selection).setMaxEvaluations(numEvals)
                 .setVariant(NSGAIIBuilder.NSGAIIVariant.HybridNSGAII).build();
 
         AlgorithmRunner algorithmRunner = new AlgorithmRunner.Executor(algorithm).execute();
