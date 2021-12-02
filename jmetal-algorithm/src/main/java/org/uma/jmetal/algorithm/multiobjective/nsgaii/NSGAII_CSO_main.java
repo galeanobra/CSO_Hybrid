@@ -17,6 +17,7 @@ import org.uma.jmetal.problem.Problem;
 import org.uma.jmetal.problem.multiobjective.UDN.StaticCSO;
 import org.uma.jmetal.solution.Solution;
 import org.uma.jmetal.solution.binarysolution.BinarySolution;
+import org.uma.jmetal.solution.binarysolution.impl.DefaultBinarySolution;
 import org.uma.jmetal.solution.doublesolution.DoubleSolution;
 import org.uma.jmetal.util.AbstractAlgorithmRunner;
 import org.uma.jmetal.util.JMetalLogger;
@@ -55,7 +56,7 @@ public class NSGAII_CSO_main extends AbstractAlgorithmRunner {
         problem = new StaticCSO(main, run);
 
         double crossoverProbability = 0.9;
-        crossover = new SinglePointCrossover(crossoverProbability);
+        crossover = new TwoPointCrossover(crossoverProbability);
 
         double mutationProbability = 1.0 / ((StaticCSO) problem).getTotalNumberOfActivableCells();
         mutation = new BitFlipMutation(mutationProbability);
