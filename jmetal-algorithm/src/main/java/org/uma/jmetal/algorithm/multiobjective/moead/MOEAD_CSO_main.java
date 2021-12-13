@@ -1,13 +1,10 @@
-package org.uma.jmetal.algorithm.multiobjective.nsgaii;
+package org.uma.jmetal.algorithm.multiobjective.moead;
 
 import org.uma.jmetal.algorithm.Algorithm;
+import org.uma.jmetal.algorithm.multiobjective.nsgaii.HybridNSGAII;
+import org.uma.jmetal.algorithm.multiobjective.nsgaii.NSGAIIBuilder;
 import org.uma.jmetal.example.AlgorithmRunner;
-import org.uma.jmetal.example.multiobjective.nsgaii.NSGAIIMeasuresWithChartsRunner;
-import org.uma.jmetal.example.multiobjective.nsgaii.RNSGAIIWithChartsRunner;
-import org.uma.jmetal.lab.visualization.plot.PlotFront;
-import org.uma.jmetal.lab.visualization.plot.impl.PlotSmile;
 import org.uma.jmetal.operator.crossover.CrossoverOperator;
-import org.uma.jmetal.operator.crossover.impl.SinglePointCrossover;
 import org.uma.jmetal.operator.crossover.impl.TwoPointCrossover;
 import org.uma.jmetal.operator.mutation.MutationOperator;
 import org.uma.jmetal.operator.mutation.impl.BitFlipMutation;
@@ -15,18 +12,12 @@ import org.uma.jmetal.operator.selection.SelectionOperator;
 import org.uma.jmetal.operator.selection.impl.BinaryTournamentSelection;
 import org.uma.jmetal.problem.Problem;
 import org.uma.jmetal.problem.multiobjective.UDN.StaticCSO;
-import org.uma.jmetal.solution.Solution;
 import org.uma.jmetal.solution.binarysolution.BinarySolution;
-import org.uma.jmetal.solution.binarysolution.impl.DefaultBinarySolution;
-import org.uma.jmetal.solution.doublesolution.DoubleSolution;
 import org.uma.jmetal.util.AbstractAlgorithmRunner;
-import org.uma.jmetal.util.JMetalLogger;
 import org.uma.jmetal.util.chartcontainer.ChartContainer;
-import org.uma.jmetal.util.chartcontainer.ChartContainerWithReferencePoints;
 import org.uma.jmetal.util.errorchecking.JMetalException;
 import org.uma.jmetal.util.fileoutput.SolutionListOutput;
 import org.uma.jmetal.util.fileoutput.impl.DefaultFileOutputContext;
-import org.uma.jmetal.util.legacy.front.impl.ArrayFront;
 import org.uma.jmetal.util.measure.MeasureListener;
 import org.uma.jmetal.util.measure.MeasureManager;
 import org.uma.jmetal.util.measure.impl.BasicMeasure;
@@ -36,7 +27,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NSGAII_CSO_main extends AbstractAlgorithmRunner {
+public class MOEAD_CSO_main extends AbstractAlgorithmRunner {
     public static void main(String[] args) throws JMetalException, FileNotFoundException {
         Problem<BinarySolution> problem;
         Algorithm<List<BinarySolution>> algorithm;
@@ -58,7 +49,7 @@ public class NSGAII_CSO_main extends AbstractAlgorithmRunner {
 
         problem = new StaticCSO(main, run);
 
-        double crossoverProbability = 0.9;
+        double crossoverProbability = 0.6;
         double mutationProbability = 1.0 / ((StaticCSO) problem).getTotalNumberOfActivableCells();
 
         crossover = new TwoPointCrossover(crossoverProbability);
@@ -79,8 +70,8 @@ public class NSGAII_CSO_main extends AbstractAlgorithmRunner {
 //        chart.setReferencePoint(convertReferencePointListToListOfLists(referencePoint, problem.getNumberOfObjectives()));
             chart.initChart();
 
-            solutionListMeasure.register(new NSGAII_CSO_main.ChartListener(chart));
-            iterationMeasure.register(new NSGAII_CSO_main.IterationListener(chart));
+            solutionListMeasure.register(new MOEAD_CSO_main.ChartListener(chart));
+            iterationMeasure.register(new MOEAD_CSO_main.IterationListener(chart));
         }
 
 

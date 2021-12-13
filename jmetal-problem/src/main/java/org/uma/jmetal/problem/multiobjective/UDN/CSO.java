@@ -176,7 +176,7 @@ public abstract class CSO extends AbstractBinaryProblem {
      * certain problematic points in the network by switching off some BTS
      */
     public void intelligentSwitchOff(BinarySolution solution) throws JMetalException {
-        Map<Double, List<Point>> worsePoints = new TreeMap<>();
+        Map<Double, List<Point>> worsePoints = new HashMap<>();
         double sinr_limit = 12;
 
         for (double op_frequency : this.udn_.cells_.keySet()) {
@@ -280,8 +280,22 @@ public abstract class CSO extends AbstractBinaryProblem {
 
     public void increaseCapacityOp(double rate, BinarySolution solution) {
         if (new JavaRandomGenerator().nextDouble() < rate) {
-            //TODO preevaluacion
+            BitSet cso = solution.variables().get(0);
+
+            udn_.setCellActivation(cso);
+            udn_.computeSignaling();
+            udn_.resetNumberOfUsersAssignedToCells();
+
             if (udn_.getTotalNumberOfActiveCells() > 0) {
+
+                // Assign users to cells
+                for (User u : this.udn_.getUsers()) {
+                    Point p = udn_.getGridPoint(u.getX(), u.getY(), u.getZ());
+                    Cell c = p.getCellWithHigherSINR();
+                    c.addUserAssigned();
+                    u.setServingCell(c);
+                }
+
 //            Primera propuesta (Op1): encender celdas menores del x% de usuarios con peores capacidades
 //
 //            double n = 0.1;
@@ -555,9 +569,9 @@ public abstract class CSO extends AbstractBinaryProblem {
 
                     best.setActivation(true);
 
-//                if (u.getServingCell().getAssignedUsers() == 1 && !u.getServingCell().equals(best)) {
-//                    u.getServingCell().setActivation(false);
-//                }
+                    if (u.getServingCell().getAssignedUsers() == 1 && !u.getServingCell().equals(best)) {
+                        u.getServingCell().setActivation(false);
+                    }
                 }
 
             }
@@ -1046,7 +1060,7 @@ public abstract class CSO extends AbstractBinaryProblem {
         //read operators configuration
         //double noUsersOp_rate, macro1Op_rate, macro2Op_rate, tooManyUsersOp_rate, priorizeFemtoOp_rate, maintenancePowerOp_rate;
         Properties pro = new Properties();
-        this.operators_ = new TreeMap<>();
+        this.operators_ = new HashMap<>();
         try {
             System.out.println("Loading operators configuration file...");
             pro.load(new FileInputStream(configFile));

@@ -10,37 +10,33 @@ import org.uma.jmetal.solution.doublesolution.DoubleSolution;
 import java.util.List;
 
 public class VariationParameter extends CategoricalParameter {
-  public VariationParameter(String[] args, List<String> variationStrategies) {
-    super("variation", args, variationStrategies);
-  }
-
-  public Variation<?> getParameter() {
-    Variation<?> result;
-    int offspringPopulationSize = (Integer)findGlobalParameter("offspringPopulationSize").getValue() ;
-
-    switch (getValue()) {
-      case "crossoverAndMutationVariation":
-        CrossoverParameter crossoverParameter =
-            (CrossoverParameter) findSpecificParameter("crossover");
-        MutationParameter mutationParameter = (MutationParameter) findSpecificParameter("mutation");
-
-        CrossoverOperator<DoubleSolution> crossoverOperator = crossoverParameter.getParameter();
-        MutationOperator<DoubleSolution> mutationOperatorOperator =
-            mutationParameter.getParameter();
-
-        result =
-            new CrossoverAndMutationVariation<>(
-                offspringPopulationSize, crossoverOperator, mutationOperatorOperator);
-        break;
-      default:
-        throw new RuntimeException("Variation component unknown: " + getValue());
+    public VariationParameter(String[] args, List<String> variationStrategies) {
+        super("variation", args, variationStrategies);
     }
 
-    return result;
-  }
+    public Variation<?> getParameter() {
+        Variation<?> result;
+        int offspringPopulationSize = (Integer) findGlobalParameter("offspringPopulationSize").getValue();
 
-  @Override
-  public String getName() {
-    return "variation";
-  }
+        switch (getValue()) {
+            case "crossoverAndMutationVariation":
+                CrossoverParameter crossoverParameter = (CrossoverParameter) findSpecificParameter("crossover");
+                MutationParameter mutationParameter = (MutationParameter) findSpecificParameter("mutation");
+
+                CrossoverOperator<DoubleSolution> crossoverOperator = crossoverParameter.getParameter();
+                MutationOperator<DoubleSolution> mutationOperatorOperator = mutationParameter.getParameter();
+
+                result = new CrossoverAndMutationVariation<>(offspringPopulationSize, crossoverOperator, mutationOperatorOperator);
+                break;
+            default:
+                throw new RuntimeException("Variation component unknown: " + getValue());
+        }
+
+        return result;
+    }
+
+    @Override
+    public String getName() {
+        return "variation";
+    }
 }

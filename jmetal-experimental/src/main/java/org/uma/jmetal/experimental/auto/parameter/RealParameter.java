@@ -18,45 +18,28 @@ public class RealParameter extends Parameter<Double> {
     @Override
     public RealParameter parse() {
         return (RealParameter) parse(Double::parseDouble);
-  }
-
-  @Override
-  public void check() {
-    if ((getValue() < lowerBound) || (getValue() > upperBound)) {
-      throw new RuntimeException(
-          "Parameter "
-              + getName()
-              + ": Invalid value: "
-              + getValue()
-              + ". Range: "
-              + lowerBound
-              + ", "
-              + upperBound);
     }
-  }
 
-  public List<Double> getValidValues() {
-    return Arrays.asList(lowerBound, upperBound);
-  }
+    @Override
+    public void check() {
+        if ((getValue() < lowerBound) || (getValue() > upperBound)) {
+            throw new RuntimeException("Parameter " + getName() + ": Invalid value: " + getValue() + ". Range: " + lowerBound + ", " + upperBound);
+        }
+    }
 
-  @Override
-  public String toString() {
-    StringBuilder result =
-            new StringBuilder("Name: "
-                    + getName()
-                    + ": "
-                    + "Value: "
-                    + getValue()
-                    + ". Lower bound: "
-                    + lowerBound
-                    + ". Upper bound: "
-                    + upperBound);
-    for (Parameter<?> parameter : getGlobalParameters()) {
-      result.append("\n -> ").append(parameter.toString());
+    public List<Double> getValidValues() {
+        return Arrays.asList(lowerBound, upperBound);
     }
-    for (Pair<String, Parameter<?>> parameter : getSpecificParameters()) {
-      result.append("\n  -> ").append(parameter.getRight().toString());
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder("Name: " + getName() + ": " + "Value: " + getValue() + ". Lower bound: " + lowerBound + ". Upper bound: " + upperBound);
+        for (Parameter<?> parameter : getGlobalParameters()) {
+            result.append("\n -> ").append(parameter.toString());
+        }
+        for (Pair<String, Parameter<?>> parameter : getSpecificParameters()) {
+            result.append("\n  -> ").append(parameter.getRight().toString());
+        }
+        return result.toString();
     }
-    return result.toString();
-  }
 }

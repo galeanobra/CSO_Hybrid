@@ -38,8 +38,7 @@ public class StaticCSO extends CSO {
         //load operators config
         loadOperatorsConfig(udn_.getOperatorsFile());
 
-        //udn_.printXVoronoi();
-        //System.exit(-1);
+//        udn_.getCellsOfInterestByPoint();
     }
 
     public StaticCSO(String problemconf) {

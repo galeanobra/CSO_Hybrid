@@ -1,6 +1,7 @@
 package org.uma.jmetal.algorithm.multiobjective.smsemoa;
 
 import org.uma.jmetal.algorithm.AlgorithmBuilder;
+import org.uma.jmetal.algorithm.multiobjective.nsgaii.NSGAIIBuilder;
 import org.uma.jmetal.operator.crossover.CrossoverOperator;
 import org.uma.jmetal.operator.mutation.MutationOperator;
 import org.uma.jmetal.operator.selection.SelectionOperator;
@@ -19,124 +20,142 @@ import java.util.List;
  * @author Antonio J. Nebro <antonio@lcc.uma.es>
  */
 public class SMSEMOABuilder<S extends Solution<?>> implements AlgorithmBuilder<SMSEMOA<S>> {
-  private static final double DEFAULT_OFFSET = 100.0 ;
+    public enum SMSEMOAVariant {SMSEMOA, HybridSMSEMOA}
 
-  protected Problem<S> problem;
+    private static final double DEFAULT_OFFSET = 100.0;
 
-  protected int populationSize;
-  protected int maxEvaluations;
+    protected Problem<S> problem;
 
-  protected CrossoverOperator<S> crossoverOperator;
-  protected MutationOperator<S> mutationOperator;
-  protected SelectionOperator<List<S>, S> selectionOperator;
+    protected int populationSize;
+    protected int maxEvaluations;
 
-  protected double offset ;
+    protected CrossoverOperator<S> crossoverOperator;
+    protected MutationOperator<S> mutationOperator;
+    protected SelectionOperator<List<S>, S> selectionOperator;
 
-  protected Hypervolume<S> hypervolumeImplementation;
-  protected Comparator<S> dominanceComparator ;
+    protected double offset;
 
-  public SMSEMOABuilder(Problem<S> problem, CrossoverOperator<S> crossoverOperator,
-      MutationOperator<S> mutationOperator) {
-    this.problem = problem ;
-    this.offset = DEFAULT_OFFSET ;
-    populationSize = 100 ;
-    maxEvaluations = 25000 ;
-    this.hypervolumeImplementation = new PISAHypervolume<>() ;
-    hypervolumeImplementation.setOffset(offset);
+    protected Hypervolume<S> hypervolumeImplementation;
+    protected Comparator<S> dominanceComparator;
 
-    this.crossoverOperator = crossoverOperator ;
-    this.mutationOperator = mutationOperator ;
-    this.selectionOperator = new RandomSelection<S>() ;
-    this.dominanceComparator = new DominanceComparator<>()  ;
-  }
+    private SMSEMOAVariant variant;
 
-  public SMSEMOABuilder<S> setPopulationSize(int populationSize) {
-    this.populationSize = populationSize ;
+    public SMSEMOABuilder(Problem<S> problem, CrossoverOperator<S> crossoverOperator,
+                          MutationOperator<S> mutationOperator) {
+        this.problem = problem;
+        this.offset = DEFAULT_OFFSET;
+        populationSize = 100;
+        maxEvaluations = 25000;
+        this.hypervolumeImplementation = new PISAHypervolume<>();
+        hypervolumeImplementation.setOffset(offset);
 
-    return this ;
-  }
+        this.crossoverOperator = crossoverOperator;
+        this.mutationOperator = mutationOperator;
+        this.selectionOperator = new RandomSelection<S>();
+        this.dominanceComparator = new DominanceComparator<>();
 
-  public SMSEMOABuilder<S> setMaxEvaluations(int maxEvaluations) {
-    this.maxEvaluations = maxEvaluations ;
-
-    return this ;
-  }
-
-  public SMSEMOABuilder<S> setCrossoverOperator(CrossoverOperator<S> crossover) {
-    crossoverOperator = crossover ;
-
-    return this ;
-  }
-
-  public SMSEMOABuilder<S> setMutationOperator(MutationOperator<S> mutation) {
-    mutationOperator = mutation ;
-
-    return this ;
-  }
-
-  public SMSEMOABuilder<S> setSelectionOperator(SelectionOperator<List<S>, S> selection) {
-    selectionOperator = selection ;
-
-    return this ;
-  }
-
-  public SMSEMOABuilder<S> setHypervolumeImplementation(Hypervolume<S> hypervolumeImplementation) {
-    this.hypervolumeImplementation = hypervolumeImplementation;
-
-    return this ;
-  }
-
-
-  public SMSEMOABuilder<S> setOffset(double offset) {
-    this.offset = offset ;
-
-    return this ;
-  }
-
-  public SMSEMOABuilder<S> setDominanceComparator(Comparator<S> dominanceComparator) {
-    if (dominanceComparator == null) {
-      throw new JMetalException("dominanceComparator is null");
+        this.variant = SMSEMOAVariant.SMSEMOA;
     }
-    this.dominanceComparator = dominanceComparator ;
 
-    return this;
-  }
+    public SMSEMOABuilder<S> setPopulationSize(int populationSize) {
+        this.populationSize = populationSize;
 
-  @Override public SMSEMOA<S> build() {
-    return new SMSEMOA<S>(problem, maxEvaluations, populationSize, offset,
-        crossoverOperator, mutationOperator, selectionOperator, dominanceComparator,
-        hypervolumeImplementation);
-  }
+        return this;
+    }
 
-  /*
-   * Getters
-   */
+    public SMSEMOABuilder<S> setMaxEvaluations(int maxEvaluations) {
+        this.maxEvaluations = maxEvaluations;
 
-  public Problem<S> getProblem() {
-    return problem;
-  }
+        return this;
+    }
 
-  public int getPopulationSize() {
-    return populationSize;
-  }
+    public SMSEMOABuilder<S> setCrossoverOperator(CrossoverOperator<S> crossover) {
+        crossoverOperator = crossover;
 
-  public int getMaxEvaluations() {
-    return maxEvaluations;
-  }
+        return this;
+    }
 
-  public CrossoverOperator<S> getCrossoverOperator() {
-    return crossoverOperator;
-  }
+    public SMSEMOABuilder<S> setMutationOperator(MutationOperator<S> mutation) {
+        mutationOperator = mutation;
 
-  public MutationOperator<S> getMutationOperator() {
-    return mutationOperator;
-  }
+        return this;
+    }
 
-  public SelectionOperator<List<S>, S> getSelectionOperator() {
-    return selectionOperator;
-  }
+    public SMSEMOABuilder<S> setSelectionOperator(SelectionOperator<List<S>, S> selection) {
+        selectionOperator = selection;
 
-  public double getOffset() {
-    return offset;
-  }
+        return this;
+    }
+
+    public SMSEMOABuilder<S> setHypervolumeImplementation(Hypervolume<S> hypervolumeImplementation) {
+        this.hypervolumeImplementation = hypervolumeImplementation;
+
+        return this;
+    }
+
+
+    public SMSEMOABuilder<S> setOffset(double offset) {
+        this.offset = offset;
+
+        return this;
+    }
+
+    public SMSEMOABuilder<S> setDominanceComparator(Comparator<S> dominanceComparator) {
+        if (dominanceComparator == null) {
+            throw new JMetalException("dominanceComparator is null");
+        }
+        this.dominanceComparator = dominanceComparator;
+
+        return this;
+    }
+
+    @Override
+    public SMSEMOA<S> build() {
+        SMSEMOA<S> algorithm = null;
+
+        if (variant.equals(SMSEMOAVariant.SMSEMOA))
+            algorithm = new SMSEMOA<S>(problem, maxEvaluations, populationSize, offset, crossoverOperator, mutationOperator, selectionOperator, dominanceComparator, hypervolumeImplementation);
+        else if (variant.equals(SMSEMOAVariant.HybridSMSEMOA))
+            algorithm = new HybridSMSEMOA<S>(problem, maxEvaluations, populationSize, offset, crossoverOperator, mutationOperator, selectionOperator, dominanceComparator, hypervolumeImplementation);
+
+        return algorithm;
+    }
+
+    /*
+     * Getters
+     */
+
+    public Problem<S> getProblem() {
+        return problem;
+    }
+
+    public int getPopulationSize() {
+        return populationSize;
+    }
+
+    public int getMaxEvaluations() {
+        return maxEvaluations;
+    }
+
+    public CrossoverOperator<S> getCrossoverOperator() {
+        return crossoverOperator;
+    }
+
+    public MutationOperator<S> getMutationOperator() {
+        return mutationOperator;
+    }
+
+    public SelectionOperator<List<S>, S> getSelectionOperator() {
+        return selectionOperator;
+    }
+
+    public double getOffset() {
+        return offset;
+    }
+
+    public SMSEMOABuilder<S> setVariant(SMSEMOAVariant variant) {
+        this.variant = variant;
+
+        return this;
+    }
 }

@@ -1,5 +1,6 @@
-package org.uma.jmetal.algorithm.multiobjective.nsgaii;
+package org.uma.jmetal.algorithm.multiobjective.smsemoa;
 
+import org.uma.jmetal.algorithm.multiobjective.mocell.MOCell;
 import org.uma.jmetal.operator.crossover.CrossoverOperator;
 import org.uma.jmetal.operator.mutation.MutationOperator;
 import org.uma.jmetal.operator.selection.SelectionOperator;
@@ -13,6 +14,7 @@ import org.uma.jmetal.util.fileoutput.SolutionListOutput;
 import org.uma.jmetal.util.fileoutput.impl.DefaultFileOutputContext;
 import org.uma.jmetal.util.legacy.front.Front;
 import org.uma.jmetal.util.legacy.front.impl.ArrayFront;
+import org.uma.jmetal.util.legacy.qualityindicator.impl.hypervolume.Hypervolume;
 import org.uma.jmetal.util.measure.Measurable;
 import org.uma.jmetal.util.measure.MeasureManager;
 import org.uma.jmetal.util.measure.impl.BasicMeasure;
@@ -23,7 +25,7 @@ import org.uma.jmetal.util.measure.impl.SimpleMeasureManager;
 import java.util.Comparator;
 import java.util.List;
 
-public class HybridNSGAII<S extends Solution<?>> extends NSGAII<S> implements Measurable {
+public class HybridSMSEMOA<S extends Solution<?>> extends SMSEMOA<S> {
 
     protected SimpleMeasureManager measureManager;
     protected BasicMeasure<List<S>> solutionListMeasure;
@@ -32,10 +34,10 @@ public class HybridNSGAII<S extends Solution<?>> extends NSGAII<S> implements Me
 
     protected Front referenceFront;
 
-    public HybridNSGAII(Problem<S> problem, int maxEvaluations, int populationSize, int matingPoolSize, int offspringPopulationSize, CrossoverOperator<S> crossoverOperator,
-                        MutationOperator<S> mutationOperator, SelectionOperator<List<S>, S> selectionOperator, Comparator<S> dominanceComparator,
-                        SolutionListEvaluator<S> evaluator) {
-        super(problem, maxEvaluations, populationSize, matingPoolSize, offspringPopulationSize, crossoverOperator, mutationOperator, selectionOperator, new DominanceComparator<S>(), evaluator);
+    public HybridSMSEMOA(Problem<S> problem, int maxEvaluations, int populationSize, double offset,
+                         CrossoverOperator<S> crossoverOperator, MutationOperator<S> mutationOperator,
+                         SelectionOperator<List<S>, S> selectionOperator, Comparator<S> dominanceComparator, Hypervolume<S> hypervolumeImplementation) {
+        super(problem, maxEvaluations, populationSize, offset, crossoverOperator, mutationOperator, selectionOperator, dominanceComparator, hypervolumeImplementation);
 
         referenceFront = new ArrayFront();
 
@@ -68,16 +70,13 @@ public class HybridNSGAII<S extends Solution<?>> extends NSGAII<S> implements Me
 
     @Override
     protected List<S> evaluatePopulation(List<S> population) {
-        for (S s : population)
+        for (S s : population) {
             ((StaticCSO) problem).intelligentSwitchOff((BinarySolution) s);
-
-        population = evaluator.evaluate(population, getProblem());
+            getProblem().evaluate(s);
+        }
 
 //        if (evaluations.get() != 0 && evaluations.get() % 5000 == 0)
-//            new SolutionListOutput(population)
-//                    .setFunFileOutputContext(new DefaultFileOutputContext("HybridNSGAII.FUN." + evaluations.get().toString() + "." + ((StaticCSO) getProblem()).getRun(), " "))
-//                    .setVarFileOutputContext(new DefaultFileOutputContext("HybridNSGAII.VAR." + evaluations.get().toString() + "." + ((StaticCSO) getProblem()).getRun(), " "))
-//                    .print();
+//            new SolutionListOutput(population).setFunFileOutputContext(new DefaultFileOutputContext("HybridSMSEMOA." + evaluations.get().toString(), " ")).print();
 
         return population;
     }
@@ -97,16 +96,7 @@ public class HybridNSGAII<S extends Solution<?>> extends NSGAII<S> implements Me
     }
 
     @Override
-    public MeasureManager getMeasureManager() {
-        return measureManager;
-    }
-
-    public CountingMeasure getEvaluations() {
-        return evaluations;
-    }
-
-    @Override
     public String getName() {
-        return "HybridNSGAII";
+        return "HybridSMSEMOA";
     }
 }

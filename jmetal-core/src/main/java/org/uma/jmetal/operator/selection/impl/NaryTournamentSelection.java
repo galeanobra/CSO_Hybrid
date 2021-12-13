@@ -34,36 +34,34 @@ public class NaryTournamentSelection<S extends Solution<?>>
     public NaryTournamentSelection(int tournamentSize, Comparator<S> comparator) {
         this.tournamentSize = tournamentSize;
         this.comparator = comparator;
-  }
-
-  @Override
-  /** Execute() method */
-  public S execute(List<S> solutionList) {
-    Check.notNull(solutionList);
-    Check.collectionIsNotEmpty(solutionList);
-    Check.that(
-        solutionList.size() >= tournamentSize,
-        "The solution list size ("
-            + solutionList.size()
-            + ") is less than "
-            + "the number of requested solutions ("
-            + tournamentSize
-            + ")");
-
-    S result;
-    if (solutionList.size() == 1) {
-      result = solutionList.get(0);
-    } else {
-      List<S> selectedSolutions =
-          SolutionListUtils.selectNRandomDifferentSolutions(
-                  tournamentSize, solutionList);
-      result = SolutionListUtils.findBestSolution(selectedSolutions, comparator);
     }
 
-    return result;
-  }
+    @Override
+    /** Execute() method */
+    public S execute(List<S> solutionList) {
+        Check.notNull(solutionList);
+        Check.collectionIsNotEmpty(solutionList);
+        Check.that(
+                solutionList.size() >= tournamentSize,
+                "The solution list size ("
+                        + solutionList.size()
+                        + ") is less than "
+                        + "the number of requested solutions ("
+                        + tournamentSize
+                        + ")");
 
-  public int getTournamentSize() {
-    return tournamentSize ;
-  }
+        S result;
+        if (solutionList.size() == 1) {
+            result = solutionList.get(0);
+        } else {
+            List<S> selectedSolutions = SolutionListUtils.selectNRandomDifferentSolutions(tournamentSize, solutionList);
+            result = SolutionListUtils.findBestSolution(selectedSolutions, comparator);
+        }
+
+        return result;
+    }
+
+    public int getTournamentSize() {
+        return tournamentSize;
+    }
 }

@@ -6,5 +6,5 @@ package org.uma.jmetal.algorithm;
  * @author Antonio J. Nebro <antonio@lcc.uma.es>
  */
 public interface AlgorithmBuilder<A extends Algorithm<?>> {
-  A build() ;
+    A build();
 }

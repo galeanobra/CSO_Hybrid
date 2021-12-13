@@ -1,4 +1,4 @@
-package org.uma.jmetal.algorithm.multiobjective.nsgaii;
+package org.uma.jmetal.algorithm.multiobjective.mocell;
 
 import org.uma.jmetal.operator.crossover.CrossoverOperator;
 import org.uma.jmetal.operator.mutation.MutationOperator;
@@ -7,6 +7,7 @@ import org.uma.jmetal.problem.Problem;
 import org.uma.jmetal.problem.multiobjective.UDN.StaticCSO;
 import org.uma.jmetal.solution.Solution;
 import org.uma.jmetal.solution.binarysolution.BinarySolution;
+import org.uma.jmetal.util.archive.BoundedArchive;
 import org.uma.jmetal.util.comparator.DominanceComparator;
 import org.uma.jmetal.util.evaluator.SolutionListEvaluator;
 import org.uma.jmetal.util.fileoutput.SolutionListOutput;
@@ -19,11 +20,12 @@ import org.uma.jmetal.util.measure.impl.BasicMeasure;
 import org.uma.jmetal.util.measure.impl.CountingMeasure;
 import org.uma.jmetal.util.measure.impl.DurationMeasure;
 import org.uma.jmetal.util.measure.impl.SimpleMeasureManager;
+import org.uma.jmetal.util.neighborhood.Neighborhood;
 
 import java.util.Comparator;
 import java.util.List;
 
-public class HybridNSGAII<S extends Solution<?>> extends NSGAII<S> implements Measurable {
+public class HybridMOCell<S extends Solution<?>> extends MOCell<S> {
 
     protected SimpleMeasureManager measureManager;
     protected BasicMeasure<List<S>> solutionListMeasure;
@@ -32,10 +34,9 @@ public class HybridNSGAII<S extends Solution<?>> extends NSGAII<S> implements Me
 
     protected Front referenceFront;
 
-    public HybridNSGAII(Problem<S> problem, int maxEvaluations, int populationSize, int matingPoolSize, int offspringPopulationSize, CrossoverOperator<S> crossoverOperator,
-                        MutationOperator<S> mutationOperator, SelectionOperator<List<S>, S> selectionOperator, Comparator<S> dominanceComparator,
-                        SolutionListEvaluator<S> evaluator) {
-        super(problem, maxEvaluations, populationSize, matingPoolSize, offspringPopulationSize, crossoverOperator, mutationOperator, selectionOperator, new DominanceComparator<S>(), evaluator);
+    public HybridMOCell(Problem<S> problem, int maxEvaluations, int populationSize, BoundedArchive<S> archive, Neighborhood<S> neighborhood, CrossoverOperator<S> crossoverOperator,
+                        MutationOperator<S> mutationOperator, SelectionOperator<List<S>, S> selectionOperator, SolutionListEvaluator<S> evaluator) {
+        super(problem, maxEvaluations, populationSize, archive, neighborhood, crossoverOperator, mutationOperator, selectionOperator, evaluator);
 
         referenceFront = new ArrayFront();
 
@@ -73,11 +74,8 @@ public class HybridNSGAII<S extends Solution<?>> extends NSGAII<S> implements Me
 
         population = evaluator.evaluate(population, getProblem());
 
-//        if (evaluations.get() != 0 && evaluations.get() % 5000 == 0)
-//            new SolutionListOutput(population)
-//                    .setFunFileOutputContext(new DefaultFileOutputContext("HybridNSGAII.FUN." + evaluations.get().toString() + "." + ((StaticCSO) getProblem()).getRun(), " "))
-//                    .setVarFileOutputContext(new DefaultFileOutputContext("HybridNSGAII.VAR." + evaluations.get().toString() + "." + ((StaticCSO) getProblem()).getRun(), " "))
-//                    .print();
+//        if (evaluations.get() != 0 && evaluations.get() % 100 == 0)
+//            new SolutionListOutput(population).setFunFileOutputContext(new DefaultFileOutputContext("HybridMOCell." + evaluations.get().toString(), " ")).print();
 
         return population;
     }
@@ -97,16 +95,7 @@ public class HybridNSGAII<S extends Solution<?>> extends NSGAII<S> implements Me
     }
 
     @Override
-    public MeasureManager getMeasureManager() {
-        return measureManager;
-    }
-
-    public CountingMeasure getEvaluations() {
-        return evaluations;
-    }
-
-    @Override
     public String getName() {
-        return "HybridNSGAII";
+        return "HybridMOCell";
     }
 }

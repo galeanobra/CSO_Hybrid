@@ -5,40 +5,33 @@ import org.apache.commons.lang3.tuple.Pair;
 import java.util.List;
 
 public abstract class OrdinalParameter<T> extends Parameter<T> {
-  private final List<T> validValues;
+    private final List<T> validValues;
 
-  public OrdinalParameter(String name, String[] args, List<T> validValues) {
-    super(name, args);
-    this.validValues = validValues;
-  }
-
-  @Override
-  public void check() {
-    if (!validValues.contains(getValue())) {
-      throw new RuntimeException(
-          "Parameter "
-              + getName()
-              + ": Invalid value: "
-              + getValue()
-              + ". Valid values: "
-              + validValues);
+    public OrdinalParameter(String name, String[] args, List<T> validValues) {
+        super(name, args);
+        this.validValues = validValues;
     }
-  }
 
-  public List<T> getValidValues() {
-    return validValues;
-  }
+    @Override
+    public void check() {
+        if (!validValues.contains(getValue())) {
+            throw new RuntimeException("Parameter " + getName() + ": Invalid value: " + getValue() + ". Valid values: " + validValues);
+        }
+    }
 
-  @Override
-  public String toString() {
-    StringBuilder result =
-            new StringBuilder("Name: " + getName() + ": " + "Value: " + getValue() + ". Valid values: " + validValues);
-    for (Parameter<?> parameter : getGlobalParameters()) {
-      result.append(" -> ").append(parameter.toString());
+    public List<T> getValidValues() {
+        return validValues;
     }
-    for (Pair<String, Parameter<?>> parameter : getSpecificParameters()) {
-      result.append("\n  -> ").append(parameter.getRight().toString());
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder("Name: " + getName() + ": " + "Value: " + getValue() + ". Valid values: " + validValues);
+        for (Parameter<?> parameter : getGlobalParameters()) {
+            result.append(" -> ").append(parameter.toString());
+        }
+        for (Pair<String, Parameter<?>> parameter : getSpecificParameters()) {
+            result.append("\n  -> ").append(parameter.getRight().toString());
+        }
+        return result.toString();
     }
-    return result.toString();
-  }
 }

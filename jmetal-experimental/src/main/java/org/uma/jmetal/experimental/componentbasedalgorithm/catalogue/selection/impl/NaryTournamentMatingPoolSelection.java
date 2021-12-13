@@ -23,28 +23,28 @@ public class NaryTournamentMatingPoolSelection<S extends Solution<?>>
     public NaryTournamentMatingPoolSelection(
             int tournamentSize, int matingPoolSize, Comparator<S> comparator) {
         selectionOperator = new NaryTournamentSelection<>(tournamentSize, comparator);
-    this.matingPoolSize = matingPoolSize;
-    preference = null ;
-  }
-
-  public NaryTournamentMatingPoolSelection(
-      int tournamentSize, int matingPoolSize, Preference<S> preference) {
-    this.preference = preference ;
-
-    this.selectionOperator = new NaryTournamentSelection<>(tournamentSize, preference.getComparator());
-    this.matingPoolSize = matingPoolSize;
-  }
-
-  public List<S> select(List<S> solutionList) {
-    if (null != preference) {
-      preference.recompute(solutionList) ;
-    }
-    List<S> matingPool = new ArrayList<>(matingPoolSize);
-
-    while (matingPool.size() < matingPoolSize) {
-      matingPool.add(selectionOperator.execute(solutionList));
+        this.matingPoolSize = matingPoolSize;
+        preference = null;
     }
 
-    return matingPool;
-  }
+    public NaryTournamentMatingPoolSelection(
+            int tournamentSize, int matingPoolSize, Preference<S> preference) {
+        this.preference = preference;
+
+        this.selectionOperator = new NaryTournamentSelection<>(tournamentSize, preference.getComparator());
+        this.matingPoolSize = matingPoolSize;
+    }
+
+    public List<S> select(List<S> solutionList) {
+        if (null != preference) {
+            preference.recompute(solutionList);
+        }
+        List<S> matingPool = new ArrayList<>(matingPoolSize);
+
+        while (matingPool.size() < matingPoolSize) {
+            matingPool.add(selectionOperator.execute(solutionList));
+        }
+
+        return matingPool;
+    }
 }

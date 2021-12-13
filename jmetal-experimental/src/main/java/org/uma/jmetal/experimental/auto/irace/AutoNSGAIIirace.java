@@ -36,185 +36,152 @@ import java.util.Comparator;
 import java.util.List;
 
 public class AutoNSGAIIirace {
-  public List<Parameter<?>> autoConfigurableParameterList = new ArrayList<>();
-  public List<Parameter<?>> fixedParameterList = new ArrayList<>();
+    public List<Parameter<?>> autoConfigurableParameterList = new ArrayList<>();
+    public List<Parameter<?>> fixedParameterList = new ArrayList<>();
 
-  private StringParameter problemNameParameter;
-  private StringParameter referenceFrontFilename;
-  private IntegerParameter maximumNumberOfEvaluationsParameter;
-  private CategoricalParameter algorithmResultParameter;
-  private PopulationSizeParameter populationSizeParameter;
-  private IntegerParameter populationSizeWithArchiveParameter;
-  private IntegerParameter offspringPopulationSizeParameter;
-  private CreateInitialSolutionsParameter createInitialSolutionsParameter;
-  private SelectionParameter selectionParameter;
-  private VariationParameter variationParameter;
+    private StringParameter problemNameParameter;
+    private StringParameter referenceFrontFilename;
+    private IntegerParameter maximumNumberOfEvaluationsParameter;
+    private CategoricalParameter algorithmResultParameter;
+    private PopulationSizeParameter populationSizeParameter;
+    private IntegerParameter populationSizeWithArchiveParameter;
+    private IntegerParameter offspringPopulationSizeParameter;
+    private CreateInitialSolutionsParameter createInitialSolutionsParameter;
+    private SelectionParameter selectionParameter;
+    private VariationParameter variationParameter;
 
-  public void parseAndCheckParameters(String[] args) {
-    problemNameParameter = new StringParameter("problemName", args);
-    populationSizeParameter = new PopulationSizeParameter(args);
-    referenceFrontFilename = new StringParameter("referenceFrontFileName", args);
-    maximumNumberOfEvaluationsParameter =
-        new IntegerParameter("maximumNumberOfEvaluations", args, 1, 10000000);
+    public void parseAndCheckParameters(String[] args) {
+        problemNameParameter = new StringParameter("problemName", args);
+        populationSizeParameter = new PopulationSizeParameter(args);
+        referenceFrontFilename = new StringParameter("referenceFrontFileName", args);
+        maximumNumberOfEvaluationsParameter = new IntegerParameter("maximumNumberOfEvaluations", args, 1, 10000000);
 
-    fixedParameterList.add(problemNameParameter);
-    fixedParameterList.add(referenceFrontFilename);
-    fixedParameterList.add(maximumNumberOfEvaluationsParameter);
-    fixedParameterList.add(populationSizeParameter);
+        fixedParameterList.add(problemNameParameter);
+        fixedParameterList.add(referenceFrontFilename);
+        fixedParameterList.add(maximumNumberOfEvaluationsParameter);
+        fixedParameterList.add(populationSizeParameter);
 
-    for (Parameter<?> parameter : fixedParameterList) {
-      parameter.parse().check();
+        for (Parameter<?> parameter : fixedParameterList) {
+            parameter.parse().check();
+        }
+
+        algorithmResultParameter = new CategoricalParameter("algorithmResult", args, Arrays.asList("externalArchive", "population"));
+        populationSizeWithArchiveParameter = new IntegerParameter("populationSizeWithArchive", args, 10, 200);
+        algorithmResultParameter.addSpecificParameter("population", populationSizeParameter);
+        algorithmResultParameter.addSpecificParameter("externalArchive", populationSizeWithArchiveParameter);
+
+        createInitialSolutionsParameter = new CreateInitialSolutionsParameter(args, Arrays.asList("random", "latinHypercubeSampling", "scatterSearch"));
+
+        selectionParameter = new SelectionParameter(args, Arrays.asList("tournament", "random"));
+        IntegerParameter selectionTournamentSize = new IntegerParameter("selectionTournamentSize", args, 2, 10);
+        selectionParameter.addSpecificParameter("tournament", selectionTournamentSize);
+
+        CrossoverParameter crossover = new CrossoverParameter(args, Arrays.asList("SBX", "BLX_ALPHA"));
+        ProbabilityParameter crossoverProbability = new ProbabilityParameter("crossoverProbability", args);
+        crossover.addGlobalParameter(crossoverProbability);
+        RepairDoubleSolutionStrategyParameter crossoverRepairStrategy = new RepairDoubleSolutionStrategyParameter("crossoverRepairStrategy", args, Arrays.asList("random", "round", "bounds"));
+        crossover.addGlobalParameter(crossoverRepairStrategy);
+
+        RealParameter distributionIndex = new RealParameter("sbxDistributionIndex", args, 5.0, 400.0);
+        crossover.addSpecificParameter("SBX", distributionIndex);
+
+        RealParameter alpha = new RealParameter("blxAlphaCrossoverAlphaValue", args, 0.0, 1.0);
+        crossover.addSpecificParameter("BLX_ALPHA", alpha);
+
+        MutationParameter mutation = new MutationParameter(args, Arrays.asList("uniform", "polynomial"));
+        ProbabilityParameter mutationProbability = new ProbabilityParameter("mutationProbability", args);
+        mutation.addGlobalParameter(mutationProbability);
+        RepairDoubleSolutionStrategyParameter mutationRepairStrategy = new RepairDoubleSolutionStrategyParameter("mutationRepairStrategy", args, Arrays.asList("random", "round", "bounds"));
+        mutation.addGlobalParameter(mutationRepairStrategy);
+
+        RealParameter distributionIndexForMutation = new RealParameter("polynomialMutationDistributionIndex", args, 5.0, 400.0);
+        mutation.addSpecificParameter("polynomial", distributionIndexForMutation);
+
+        RealParameter uniformMutationPerturbation = new RealParameter("uniformMutationPerturbation", args, 0.0, 1.0);
+        mutation.addSpecificParameter("uniform", uniformMutationPerturbation);
+
+        DifferentialEvolutionCrossoverParameter differentialEvolutionCrossover = new DifferentialEvolutionCrossoverParameter(args);
+
+        RealParameter f = new RealParameter("f", args, 0.0, 1.0);
+        RealParameter cr = new RealParameter("cr", args, 0.0, 1.0);
+        differentialEvolutionCrossover.addGlobalParameter(f);
+        differentialEvolutionCrossover.addGlobalParameter(cr);
+
+        offspringPopulationSizeParameter = populationSizeWithArchiveParameter = new IntegerParameter("offspringPopulationSize", args, 1, 400);
+
+        variationParameter = new VariationParameter(args, List.of("crossoverAndMutationVariation"));
+        variationParameter.addGlobalParameter(offspringPopulationSizeParameter);
+        variationParameter.addSpecificParameter("crossoverAndMutationVariation", crossover);
+        variationParameter.addSpecificParameter("crossoverAndMutationVariation", mutation);
+
+        autoConfigurableParameterList.add(algorithmResultParameter);
+        autoConfigurableParameterList.add(offspringPopulationSizeParameter);
+        autoConfigurableParameterList.add(createInitialSolutionsParameter);
+        autoConfigurableParameterList.add(variationParameter);
+        autoConfigurableParameterList.add(selectionParameter);
+
+        for (Parameter<?> parameter : autoConfigurableParameterList) {
+            parameter.parse().check();
+        }
     }
 
-    algorithmResultParameter =
-        new CategoricalParameter(
-            "algorithmResult", args, Arrays.asList("externalArchive", "population"));
-    populationSizeWithArchiveParameter = new IntegerParameter("populationSizeWithArchive", args, 10, 200) ;
-    algorithmResultParameter.addSpecificParameter("population", populationSizeParameter);
-    algorithmResultParameter.addSpecificParameter(
-        "externalArchive", populationSizeWithArchiveParameter);
+    /**
+     * Creates an instance of NSGA-II from the parsed parameters
+     *
+     * @return
+     */
+    EvolutionaryAlgorithm<DoubleSolution> create() {
+        Problem<DoubleSolution> problem = ProblemUtils.loadProblem(problemNameParameter.getValue());
 
-    createInitialSolutionsParameter =
-        new CreateInitialSolutionsParameter(
-            args, Arrays.asList("random", "latinHypercubeSampling", "scatterSearch"));
+        Archive<DoubleSolution> archive = null;
+        if (algorithmResultParameter.getValue().equals("externalArchive")) {
+            archive = new CrowdingDistanceArchive<>(populationSizeParameter.getValue());
+            populationSizeParameter.setValue(populationSizeWithArchiveParameter.getValue());
+        }
 
-    selectionParameter = new SelectionParameter(args, Arrays.asList("tournament", "random"));
-    IntegerParameter selectionTournamentSize =
-        new IntegerParameter("selectionTournamentSize", args, 2, 10);
-    selectionParameter.addSpecificParameter("tournament", selectionTournamentSize);
+        Ranking<DoubleSolution> ranking = new MergeNonDominatedSortRanking<>();
+        DensityEstimator<DoubleSolution> densityEstimator = new CrowdingDistanceDensityEstimator<>();
+        var rankingAndCrowdingComparator = new MultiComparator<>(List.of(Comparator.comparing(ranking::getRank), Comparator.comparing(densityEstimator::getValue).reversed()));
 
-    CrossoverParameter crossover = new CrossoverParameter(args, Arrays.asList("SBX", "BLX_ALPHA"));
-    ProbabilityParameter crossoverProbability =
-        new ProbabilityParameter("crossoverProbability", args);
-    crossover.addGlobalParameter(crossoverProbability);
-    RepairDoubleSolutionStrategyParameter crossoverRepairStrategy =
-        new RepairDoubleSolutionStrategyParameter(
-            "crossoverRepairStrategy", args, Arrays.asList("random", "round", "bounds"));
-    crossover.addGlobalParameter(crossoverRepairStrategy);
+        var initialSolutionsCreation = createInitialSolutionsParameter.getParameter((DoubleProblem) problem, populationSizeParameter.getValue());
+        var variation = (Variation<DoubleSolution>) variationParameter.getParameter();
+        var selection = (MatingPoolSelection<DoubleSolution>) selectionParameter.getParameter(variation.getMatingPoolSize(), rankingAndCrowdingComparator);
 
-    RealParameter distributionIndex = new RealParameter("sbxDistributionIndex", args, 5.0, 400.0);
-    crossover.addSpecificParameter("SBX", distributionIndex);
+        Evaluation<DoubleSolution> evaluation = new SequentialEvaluation<>(problem);
 
-    RealParameter alpha = new RealParameter("blxAlphaCrossoverAlphaValue", args, 0.0, 1.0);
-    crossover.addSpecificParameter("BLX_ALPHA", alpha);
+        Replacement<DoubleSolution> replacement = new RankingAndDensityEstimatorReplacement<>(ranking, densityEstimator);
 
-    MutationParameter mutation =
-        new MutationParameter(args, Arrays.asList("uniform", "polynomial"));
-    ProbabilityParameter mutationProbability =
-        new ProbabilityParameter("mutationProbability", args);
-    mutation.addGlobalParameter(mutationProbability);
-    RepairDoubleSolutionStrategyParameter mutationRepairStrategy =
-        new RepairDoubleSolutionStrategyParameter(
-            "mutationRepairStrategy", args, Arrays.asList("random", "round", "bounds"));
-    mutation.addGlobalParameter(mutationRepairStrategy);
+        Termination termination = new TerminationByEvaluations(maximumNumberOfEvaluationsParameter.getValue());
 
-    RealParameter distributionIndexForMutation =
-        new RealParameter("polynomialMutationDistributionIndex", args, 5.0, 400.0);
-    mutation.addSpecificParameter("polynomial", distributionIndexForMutation);
-
-    RealParameter uniformMutationPerturbation =
-        new RealParameter("uniformMutationPerturbation", args, 0.0, 1.0);
-    mutation.addSpecificParameter("uniform", uniformMutationPerturbation);
-
-    DifferentialEvolutionCrossoverParameter differentialEvolutionCrossover =
-        new DifferentialEvolutionCrossoverParameter(args);
-
-    RealParameter f = new RealParameter("f", args, 0.0, 1.0);
-    RealParameter cr = new RealParameter("cr", args, 0.0, 1.0);
-    differentialEvolutionCrossover.addGlobalParameter(f);
-    differentialEvolutionCrossover.addGlobalParameter(cr);
-
-    offspringPopulationSizeParameter =
-            populationSizeWithArchiveParameter = new IntegerParameter("offspringPopulationSize", args, 1, 400) ;
-
-    variationParameter = new VariationParameter(args, List.of("crossoverAndMutationVariation"));
-    variationParameter.addGlobalParameter(offspringPopulationSizeParameter);
-    variationParameter.addSpecificParameter("crossoverAndMutationVariation", crossover);
-    variationParameter.addSpecificParameter("crossoverAndMutationVariation", mutation);
-
-    autoConfigurableParameterList.add(algorithmResultParameter);
-    autoConfigurableParameterList.add(offspringPopulationSizeParameter);
-    autoConfigurableParameterList.add(createInitialSolutionsParameter);
-    autoConfigurableParameterList.add(variationParameter);
-    autoConfigurableParameterList.add(selectionParameter);
-
-    for (Parameter<?> parameter : autoConfigurableParameterList) {
-      parameter.parse().check();
-    }
-  }
-
-  /**
-   * Creates an instance of NSGA-II from the parsed parameters
-   *
-   * @return
-   */
-  EvolutionaryAlgorithm<DoubleSolution> create() {
-    Problem<DoubleSolution> problem = ProblemUtils.loadProblem(problemNameParameter.getValue());
-
-    Archive<DoubleSolution> archive = null;
-    if (algorithmResultParameter.getValue().equals("externalArchive")) {
-      archive = new CrowdingDistanceArchive<>(populationSizeParameter.getValue());
-      populationSizeParameter.setValue(populationSizeWithArchiveParameter.getValue());
+        var nsgaii = new EvolutionaryAlgorithm<>(
+                "NSGAII",
+                evaluation,
+                initialSolutionsCreation,
+                termination,
+                selection,
+                variation,
+                replacement,
+                archive);
+        return nsgaii;
     }
 
-    Ranking<DoubleSolution> ranking =
-        new MergeNonDominatedSortRanking<>();
-    DensityEstimator<DoubleSolution> densityEstimator = new CrowdingDistanceDensityEstimator<>();
-    var rankingAndCrowdingComparator =
-        new MultiComparator<>(
-            List.of(Comparator.comparing(ranking::getRank), Comparator.comparing(densityEstimator::getValue).reversed()));
+    public static void main(String[] args) throws FileNotFoundException {
+        AutoNSGAIIirace nsgaiiWithParameters = new AutoNSGAIIirace();
+        nsgaiiWithParameters.parseAndCheckParameters(args);
 
-    var initialSolutionsCreation =
-        createInitialSolutionsParameter.getParameter((DoubleProblem)problem, populationSizeParameter.getValue());
-    var variation = (Variation<DoubleSolution>) variationParameter.getParameter();
-    var selection =
-        (MatingPoolSelection<DoubleSolution>)
-            selectionParameter.getParameter(
-                variation.getMatingPoolSize(), rankingAndCrowdingComparator);
+        EvolutionaryAlgorithm<DoubleSolution> nsgaII = nsgaiiWithParameters.create();
+        nsgaII.run();
 
-    Evaluation<DoubleSolution> evaluation = new SequentialEvaluation<>(problem);
+        String referenceFrontFile = "resources/referenceFrontsCSV/" + nsgaiiWithParameters.referenceFrontFilename.getValue();
+        Front referenceFront = new ArrayFront(referenceFrontFile);
 
-    Replacement<DoubleSolution> replacement =
-        new RankingAndDensityEstimatorReplacement<>(ranking, densityEstimator);
+        FrontNormalizer frontNormalizer = new FrontNormalizer(referenceFront);
+        Front normalizedReferenceFront = frontNormalizer.normalize(referenceFront);
+        Front normalizedFront = frontNormalizer.normalize(new ArrayFront(nsgaII.getResult()));
+        List<PointSolution> normalizedPopulation = FrontUtils.convertFrontToSolutionList(normalizedFront);
 
-    Termination termination =
-        new TerminationByEvaluations(maximumNumberOfEvaluationsParameter.getValue());
-
-    var nsgaii =
-        new EvolutionaryAlgorithm<>(
-            "NSGAII",
-            evaluation,
-            initialSolutionsCreation,
-            termination,
-            selection,
-            variation,
-            replacement,
-            archive);
-    return nsgaii;
-  }
-
-  public static void main(String[] args) throws FileNotFoundException {
-    AutoNSGAIIirace nsgaiiWithParameters = new AutoNSGAIIirace();
-    nsgaiiWithParameters.parseAndCheckParameters(args);
-
-    EvolutionaryAlgorithm<DoubleSolution> nsgaII = nsgaiiWithParameters.create();
-    nsgaII.run();
-
-    String referenceFrontFile =
-        "resources/referenceFrontsCSV/" + nsgaiiWithParameters.referenceFrontFilename.getValue();
-    Front referenceFront = new ArrayFront(referenceFrontFile);
-
-    FrontNormalizer frontNormalizer = new FrontNormalizer(referenceFront);
-    Front normalizedReferenceFront = frontNormalizer.normalize(referenceFront);
-    Front normalizedFront = frontNormalizer.normalize(new ArrayFront(nsgaII.getResult()));
-    List<PointSolution> normalizedPopulation =
-        FrontUtils.convertFrontToSolutionList(normalizedFront);
-
-    double referenceFrontHV =
-        new PISAHypervolume<PointSolution>(normalizedReferenceFront)
-            .evaluate(FrontUtils.convertFrontToSolutionList(normalizedReferenceFront));
-    double obtainedFrontHV =
-        new PISAHypervolume<PointSolution>(normalizedReferenceFront).evaluate(normalizedPopulation);
-    System.out.println((referenceFrontHV - obtainedFrontHV) / referenceFrontHV);
-  }
+        double referenceFrontHV = new PISAHypervolume<PointSolution>(normalizedReferenceFront).evaluate(FrontUtils.convertFrontToSolutionList(normalizedReferenceFront));
+        double obtainedFrontHV = new PISAHypervolume<PointSolution>(normalizedReferenceFront).evaluate(normalizedPopulation);
+        System.out.println((referenceFrontHV - obtainedFrontHV) / referenceFrontHV);
+    }
 }

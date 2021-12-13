@@ -35,81 +35,72 @@ import org.uma.jmetal.util.termination.impl.TerminationByEvaluations;
  * @author Antonio J. Nebro (ajnebro@uma.es)
  */
 public class NSGAII {
-  public static void main(String[] args) {
-    DoubleProblem problem = new ZDT1();
+    public static void main(String[] args) {
+        DoubleProblem problem = new ZDT1();
 
-    int populationSize = 100;
-    int offspringPopulationSize = 100;
-    int maxNumberOfEvaluations = 50000;
+        int populationSize = 100;
+        int offspringPopulationSize = 100;
+        int maxNumberOfEvaluations = 50000;
 
-    RepairDoubleSolution crossoverSolutionRepair = new RepairDoubleSolutionWithRandomValue();
-    double crossoverProbability = 0.9;
-    double crossoverDistributionIndex = 20.0;
-    CrossoverOperator<DoubleSolution> crossover =
-        new SBXCrossover(crossoverProbability, crossoverDistributionIndex, crossoverSolutionRepair);
+        RepairDoubleSolution crossoverSolutionRepair = new RepairDoubleSolutionWithRandomValue();
+        double crossoverProbability = 0.9;
+        double crossoverDistributionIndex = 20.0;
+        CrossoverOperator<DoubleSolution> crossover = new SBXCrossover(crossoverProbability, crossoverDistributionIndex, crossoverSolutionRepair);
 
-    RepairDoubleSolution mutationSolutionRepair = new RepairDoubleSolutionWithRandomValue();
-    double mutationProbability = 1.0 / problem.getNumberOfVariables();
-    double mutationDistributionIndex = 20.0;
-    MutationOperator<DoubleSolution> mutation =
-        new PolynomialMutation(
-            mutationProbability, mutationDistributionIndex, mutationSolutionRepair);
+        RepairDoubleSolution mutationSolutionRepair = new RepairDoubleSolutionWithRandomValue();
+        double mutationProbability = 1.0 / problem.getNumberOfVariables();
+        double mutationDistributionIndex = 20.0;
+        MutationOperator<DoubleSolution> mutation = new PolynomialMutation(mutationProbability, mutationDistributionIndex, mutationSolutionRepair);
 
-    CrossoverAndMutationVariation<DoubleSolution> variation =
-            new CrossoverAndMutationVariation<>(offspringPopulationSize, crossover, mutation);
+        CrossoverAndMutationVariation<DoubleSolution> variation = new CrossoverAndMutationVariation<>(offspringPopulationSize, crossover, mutation);
 
-    Evaluation<DoubleSolution> evaluation = new SequentialEvaluation<>(problem);
+        Evaluation<DoubleSolution> evaluation = new SequentialEvaluation<>(problem);
 
-    SolutionsCreation<DoubleSolution> createInitialPopulation =
-        new RandomSolutionsCreation<>(problem, populationSize);
+        SolutionsCreation<DoubleSolution> createInitialPopulation = new RandomSolutionsCreation<>(problem, populationSize);
 
-    Termination termination = new TerminationByEvaluations(maxNumberOfEvaluations);
+        Termination termination = new TerminationByEvaluations(maxNumberOfEvaluations);
 
-    Ranking<DoubleSolution> ranking = new MergeNonDominatedSortRanking<>();
-    DensityEstimator<DoubleSolution> densityEstimator = new CrowdingDistanceDensityEstimator<>();
+        Ranking<DoubleSolution> ranking = new MergeNonDominatedSortRanking<>();
+        DensityEstimator<DoubleSolution> densityEstimator = new CrowdingDistanceDensityEstimator<>();
 
-    Preference<DoubleSolution> preferenceForReplacement = new Preference<>(ranking, densityEstimator) ;
-    Replacement<DoubleSolution> replacement =
-        new RankingAndDensityEstimatorReplacement<>(preferenceForReplacement, Replacement.RemovalPolicy.oneShot);
+        Preference<DoubleSolution> preferenceForReplacement = new Preference<>(ranking, densityEstimator);
+        Replacement<DoubleSolution> replacement = new RankingAndDensityEstimatorReplacement<>(preferenceForReplacement, Replacement.RemovalPolicy.oneShot);
 
-    int tournamentSize = 2 ;
-    Preference<DoubleSolution> preferenceForSelection = new Preference<>(ranking, densityEstimator, preferenceForReplacement) ;
-    MatingPoolSelection<DoubleSolution> selection =
-        new NaryTournamentMatingPoolSelection<>(
-            tournamentSize, variation.getMatingPoolSize(), preferenceForSelection);
+        int tournamentSize = 2;
+        Preference<DoubleSolution> preferenceForSelection = new Preference<>(ranking, densityEstimator, preferenceForReplacement);
+        MatingPoolSelection<DoubleSolution> selection = new NaryTournamentMatingPoolSelection<>(tournamentSize, variation.getMatingPoolSize(), preferenceForSelection);
 
-    EvolutionaryAlgorithm<DoubleSolution> algorithm =
-        new EvolutionaryAlgorithm<>(
-            "NSGA-II",
-            evaluation,
-            createInitialPopulation,
-            termination,
-            selection,
-            variation,
-            replacement
+        EvolutionaryAlgorithm<DoubleSolution> algorithm = new EvolutionaryAlgorithm<>(
+                "NSGA-II",
+                evaluation,
+                createInitialPopulation,
+                termination,
+                selection,
+                variation,
+                replacement
         );
 
-    //RunTimeChartObserver<DoubleSolution> runTimeChartObserver =
+        //RunTimeChartObserver<DoubleSolution> runTimeChartObserver =
         //new RunTimeChartObserver<>("NSGA-II", 80, referenceParetoFront);
-    //ExternalArchiveObserver<DoubleSolution> boundedArchiveObserver =
-    //    new ExternalArchiveObserver<>(new CrowdingDistanceArchive<>(archiveMaximumSize));
+        //ExternalArchiveObserver<DoubleSolution> boundedArchiveObserver =
+        //    new ExternalArchiveObserver<>(new CrowdingDistanceArchive<>(archiveMaximumSize));
 
-    //algorithm.getObservable().register(evaluationObserver);
-    //algorithm.getObservable().register(runTimeChartObserver);
-    //evaluation.getObservable().register(boundedArchiveObserver);
+        //algorithm.getObservable().register(evaluationObserver);
+        //algorithm.getObservable().register(runTimeChartObserver);
+        //evaluation.getObservable().register(boundedArchiveObserver);
 
-    algorithm.run();
-    System.out.println("Total computing time: " + algorithm.getTotalComputingTime()) ;
+        algorithm.run();
+        System.out.println("Total computing time: " + algorithm.getTotalComputingTime());
     /*
     algorithm.updatePopulation(boundedArchiveObserver.getArchive().getSolutionList());
     AlgorithmDefaultOutputData.generateMultiObjectiveAlgorithmOutputData(
         algorithm.getResult(), algorithm.getTotalComputingTime());
     */
-    new SolutionListOutput(algorithm.getResult())
-        .setVarFileOutputContext(new DefaultFileOutputContext("VAR.csv", ","))
-        .setFunFileOutputContext(new DefaultFileOutputContext("FUN.csv", ","))
-        .print();
+        new SolutionListOutput(algorithm.getResult())
+                .setVarFileOutputContext(new DefaultFileOutputContext("VAR.csv", ","))
+                .setFunFileOutputContext(new DefaultFileOutputContext("FUN.csv", ","))
+                .print();
 
-    System.exit(0);
-  }
+        System.exit(0);
+    }
 }

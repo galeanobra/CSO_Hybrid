@@ -12,21 +12,21 @@ import java.util.List;
 
 public class CreateInitialSolutionsParameter extends CategoricalParameter {
 
-  public CreateInitialSolutionsParameter(String[] args, List<String> validValues) {
-    super("createInitialSolutions", args, validValues) ;
-  }
-
-  public SolutionsCreation<DoubleSolution> getParameter(DoubleProblem problem, int populationSize) {
-    switch (getValue()) {
-      case "random":
-        return new RandomSolutionsCreation<>(problem, populationSize);
-      case "scatterSearch":
-        return new ScatterSearchSolutionsCreation(problem, populationSize, 4);
-      case "latinHypercubeSampling":
-        return new LatinHypercubeSamplingSolutionsCreation(problem, populationSize);
-      default:
-        throw new RuntimeException(
-            getValue() + " is not a valid initialization strategy");
+    public CreateInitialSolutionsParameter(String[] args, List<String> validValues) {
+        super("createInitialSolutions", args, validValues);
     }
-  }
+
+    public SolutionsCreation<DoubleSolution> getParameter(DoubleProblem problem, int populationSize) {
+        switch (getValue()) {
+            case "random":
+                return new RandomSolutionsCreation<>(problem, populationSize);
+            case "scatterSearch":
+                return new ScatterSearchSolutionsCreation(problem, populationSize, 4);
+            case "latinHypercubeSampling":
+                return new LatinHypercubeSamplingSolutionsCreation(problem, populationSize);
+            default:
+                throw new RuntimeException(
+                        getValue() + " is not a valid initialization strategy");
+        }
+    }
 }

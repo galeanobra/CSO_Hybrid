@@ -104,7 +104,7 @@ public class ChartContainerWithReferencePoints {
         this.swingWrapper.displayChartMatrix();
     }
 
-    public void updateFrontCharts(List<BinarySolution> solutionList) {
+    public void updateFrontCharts(List solutionList) {
         if (this.frontChart != null) {
             this.frontChart.updateXYSeries(this.name,
                     this.getSolutionsForObjective(solutionList, this.objective1),
@@ -165,13 +165,17 @@ public class ChartContainerWithReferencePoints {
         return values;
     }
 
-    private double[] getSolutionsForObjective(List<BinarySolution> solutionList, int objective) {
+    private double[] getSolutionsForObjective(List solutionList, int objective) {
         double[] result = new double[solutionList.size()];
         for (int i = 0; i < solutionList.size(); i++) {
-            if (objective == 0)
-                result[i] = solutionList.get(i).objectives()[objective];
-            else
-                result[i] = -solutionList.get(i).objectives()[objective];
+            if (solutionList.get(0).getClass().equals(BinarySolution.class)) {
+                if (objective == 0)
+                    result[i] = ((BinarySolution) solutionList.get(i)).objectives()[objective];
+                else
+                    result[i] = -((BinarySolution) solutionList.get(i)).objectives()[objective];
+            } else {
+                result[i] = ((DoubleSolution) solutionList.get(i)).objectives()[objective];
+            }
         }
         return result;
     }

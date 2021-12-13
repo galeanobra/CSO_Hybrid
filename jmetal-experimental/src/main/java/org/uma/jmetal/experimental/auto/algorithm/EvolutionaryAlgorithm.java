@@ -39,162 +39,162 @@ public class EvolutionaryAlgorithm<S extends Solution<?>>
 
     private final String name;
 
-  /**
-   * Constructor
-   *
-   * @param name Algorithm name
-   * @param evaluation
-   * @param initialPopulationCreation
-   * @param termination
-   * @param selection
-   * @param variation
-   * @param replacement
-   * @param externalArchive
-   */
-  public EvolutionaryAlgorithm(
-      String name,
-      Evaluation<S> evaluation,
-      SolutionsCreation<S> initialPopulationCreation,
-      Termination termination,
-      MatingPoolSelection<S> selection,
-      Variation<S> variation,
-      Replacement<S> replacement,
-      Archive<S> externalArchive) {
-    this.name = name;
-    this.evaluation = evaluation;
-    this.createInitialPopulation = initialPopulationCreation;
-    this.termination = termination;
-    this.selection = selection;
-    this.variation = variation;
-    this.replacement = replacement;
-    this.externalArchive = externalArchive;
+    /**
+     * Constructor
+     *
+     * @param name                      Algorithm name
+     * @param evaluation
+     * @param initialPopulationCreation
+     * @param termination
+     * @param selection
+     * @param variation
+     * @param replacement
+     * @param externalArchive
+     */
+    public EvolutionaryAlgorithm(
+            String name,
+            Evaluation<S> evaluation,
+            SolutionsCreation<S> initialPopulationCreation,
+            Termination termination,
+            MatingPoolSelection<S> selection,
+            Variation<S> variation,
+            Replacement<S> replacement,
+            Archive<S> externalArchive) {
+        this.name = name;
+        this.evaluation = evaluation;
+        this.createInitialPopulation = initialPopulationCreation;
+        this.termination = termination;
+        this.selection = selection;
+        this.variation = variation;
+        this.replacement = replacement;
+        this.externalArchive = externalArchive;
 
-    this.observable = new DefaultObservable<>("Evolutionary Algorithm");
-    this.attributes = new HashMap<>();
-  }
-
-  /**
-   * Constructor
-   *
-   * @param name Algorithm name
-   * @param evaluation
-   * @param initialPopulationCreation
-   * @param termination
-   * @param selection
-   * @param variation
-   * @param replacement
-   */
-  public EvolutionaryAlgorithm(
-      String name,
-      Evaluation<S> evaluation,
-      SolutionsCreation<S> initialPopulationCreation,
-      Termination termination,
-      MatingPoolSelection<S> selection,
-      Variation<S> variation,
-      Replacement<S> replacement) {
-    this(
-        name,
-        evaluation,
-        initialPopulationCreation,
-        termination,
-        selection,
-        variation,
-        replacement,
-        null);
-  }
-
-  public void run() {
-    initTime = System.currentTimeMillis() ;
-
-    population = createInitialPopulation.create();
-    population = evaluation.evaluate(population);
-    initProgress();
-    while (!termination.isMet(attributes)) {
-      List<S> matingPopulation = selection.select(population);
-      List<S> offspringPopulation = variation.variate(population, matingPopulation);
-      offspringPopulation = evaluation.evaluate(offspringPopulation);
-      updateArchive(offspringPopulation);
-
-      population = replacement.replace(population, offspringPopulation);
-      updateProgress();
+        this.observable = new DefaultObservable<>("Evolutionary Algorithm");
+        this.attributes = new HashMap<>();
     }
 
-    totalComputingTime = System.currentTimeMillis() - initTime ;
-  }
-
-
-  private void updateArchive(List<S> population) {
-    if (externalArchive != null) {
-      for (S solution : population) {
-        externalArchive.add(solution);
-      }
+    /**
+     * Constructor
+     *
+     * @param name                      Algorithm name
+     * @param evaluation
+     * @param initialPopulationCreation
+     * @param termination
+     * @param selection
+     * @param variation
+     * @param replacement
+     */
+    public EvolutionaryAlgorithm(
+            String name,
+            Evaluation<S> evaluation,
+            SolutionsCreation<S> initialPopulationCreation,
+            Termination termination,
+            MatingPoolSelection<S> selection,
+            Variation<S> variation,
+            Replacement<S> replacement) {
+        this(
+                name,
+                evaluation,
+                initialPopulationCreation,
+                termination,
+                selection,
+                variation,
+                replacement,
+                null);
     }
-  }
 
-  protected void initProgress() {
-    evaluations = population.size();
+    public void run() {
+        initTime = System.currentTimeMillis();
 
-    updateArchive(population);
+        population = createInitialPopulation.create();
+        population = evaluation.evaluate(population);
+        initProgress();
+        while (!termination.isMet(attributes)) {
+            List<S> matingPopulation = selection.select(population);
+            List<S> offspringPopulation = variation.variate(population, matingPopulation);
+            offspringPopulation = evaluation.evaluate(offspringPopulation);
+            updateArchive(offspringPopulation);
 
-    attributes.put("EVALUATIONS", evaluations);
-    attributes.put("POPULATION", population);
-    attributes.put("COMPUTING_TIME", getCurrentComputingTime());
-  }
+            population = replacement.replace(population, offspringPopulation);
+            updateProgress();
+        }
 
-  protected void updateProgress() {
-    evaluations += variation.getOffspringPopulationSize();
-
-    attributes.put("EVALUATIONS", evaluations);
-    attributes.put("POPULATION", population);
-    attributes.put("COMPUTING_TIME", getCurrentComputingTime());
-
-    observable.setChanged();
-    observable.notifyObservers(attributes);
-
-    totalComputingTime = getCurrentComputingTime() ;
-  }
-
-  public long getCurrentComputingTime() {
-    return System.currentTimeMillis() - initTime;
-  }
-
-  public int getNumberOfEvaluations() {
-    return evaluations;
-  }
-
-  public long getTotalComputingTime() {
-    return totalComputingTime;
-  }
-
-  @Override
-  public List<S> getResult() {
-    if (externalArchive != null) {
-      return externalArchive.getSolutionList();
-    } else {
-      return population;
+        totalComputingTime = System.currentTimeMillis() - initTime;
     }
-  }
 
-  public void updatePopulation(List<S> newPopulation) {
-    this.population = newPopulation;
-  }
 
-  @Override
-  public String getName() {
-    return name;
-  }
+    private void updateArchive(List<S> population) {
+        if (externalArchive != null) {
+            for (S solution : population) {
+                externalArchive.add(solution);
+            }
+        }
+    }
 
-  @Override
-  public String getDescription() {
-    return "Evolutionary algorithm";
-  }
+    protected void initProgress() {
+        evaluations = population.size();
 
-  public Evaluation<S> getEvaluation() {
-    return evaluation;
-  }
+        updateArchive(population);
 
-  @Override
-  public Observable<Map<String, Object>> getObservable() {
-    return observable;
-  }
+        attributes.put("EVALUATIONS", evaluations);
+        attributes.put("POPULATION", population);
+        attributes.put("COMPUTING_TIME", getCurrentComputingTime());
+    }
+
+    protected void updateProgress() {
+        evaluations += variation.getOffspringPopulationSize();
+
+        attributes.put("EVALUATIONS", evaluations);
+        attributes.put("POPULATION", population);
+        attributes.put("COMPUTING_TIME", getCurrentComputingTime());
+
+        observable.setChanged();
+        observable.notifyObservers(attributes);
+
+        totalComputingTime = getCurrentComputingTime();
+    }
+
+    public long getCurrentComputingTime() {
+        return System.currentTimeMillis() - initTime;
+    }
+
+    public int getNumberOfEvaluations() {
+        return evaluations;
+    }
+
+    public long getTotalComputingTime() {
+        return totalComputingTime;
+    }
+
+    @Override
+    public List<S> getResult() {
+        if (externalArchive != null) {
+            return externalArchive.getSolutionList();
+        } else {
+            return population;
+        }
+    }
+
+    public void updatePopulation(List<S> newPopulation) {
+        this.population = newPopulation;
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public String getDescription() {
+        return "Evolutionary algorithm";
+    }
+
+    public Evaluation<S> getEvaluation() {
+        return evaluation;
+    }
+
+    @Override
+    public Observable<Map<String, Object>> getObservable() {
+        return observable;
+    }
 }

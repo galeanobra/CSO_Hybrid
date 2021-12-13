@@ -89,7 +89,7 @@ public class Point {
             double attenuationFactor = c.getAttenuationFactor(angles[0], angles[1]);
             double loss = Math.pow((waveLength / (4.0 * Math.PI * distance)), pathLoss);
             power = receptorGain * transmitterGain * transmitterPower * loss * attenuationFactor;
-
+            //
             powerDBm = 10.0 * Math.log10(power);
             signalPowerMap_.put(c.getID(), powerDBm);
         } else {
@@ -244,6 +244,19 @@ public class Point {
                 }
             }
         }
+
+        // If using cellsOfInterestByPoint in UDN
+//        for (double frequency : this.udn_.cellsOfInterestByPoint.get(this).keySet()) {
+//            for (Cell c : this.udn_.cellsOfInterestByPoint.get(this).get(frequency)) {
+//                if (c.isActive()) {
+//                    sinr = this.computeSINR(c);
+//                    if (sinr > maxSINR.get(frequency)) {
+//                        maxSINR.put(frequency, sinr);
+//                        servingBTSs.put(frequency, c);
+//                    }
+//                }
+//            }
+//        }
 
         //retrieve the best among the precomputed values
         double maxValue = Double.NEGATIVE_INFINITY;

@@ -13,7 +13,9 @@ import org.uma.jmetal.problem.multiobjective.UDN.model.users.User;
 import org.uma.jmetal.util.PPP;
 import org.uma.jmetal.solution.binarysolution.BinarySolution;
 
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
@@ -38,7 +40,8 @@ public abstract class UDN {
     public Map<Double, List<Cell>> cells_;
     public Map<Double, List<BTS>> btss_;
     public List<Integer[]> cellOrder;
-
+    public Map<Point, Map<Double, List<Cell>>> cellsOfInterestByPoint;
+    public double signalPowerThreshold = -90; // 0.000000000001;    // 1 pW
 
     //Users
     int usersTypes_;
@@ -213,8 +216,8 @@ public abstract class UDN {
      */
     private void loadCells(String configFile) {
         Properties pro = new Properties();
-        this.cells_ = new TreeMap<>();
-        this.btss_ = new TreeMap<>();
+        this.cells_ = new HashMap<>();
+        this.btss_ = new HashMap<>();
         this.cellOrder = new ArrayList<>();
         this.lastfreq = 0;
 
@@ -279,7 +282,7 @@ public abstract class UDN {
 
         //uncomment for PPP distributions
         int numBtss = ppp.getPoisson(lambda * mu);
-        numBtss = 2 * (int) Math.ceil(numBtss / (numSectors * numChainsTX));
+        numBtss = 3 * (int) Math.ceil(numBtss / (numSectors * numChainsTX));
         //int numBtss = (int) Math.ceil(lambda*mu);
         //numBtss = numCells;
         if (cellTypeName.equals("macro")) {
@@ -1021,7 +1024,6 @@ public abstract class UDN {
 
             grid[i][j][k].computeTotalReceivedPower();
         }
-
     }
 
     /**
@@ -1163,6 +1165,52 @@ public abstract class UDN {
         }
 
         return new int[]{azi, occi};
+    }
+
+    public void getCellsOfInterestByPoint() {
+//        FileWriter myWriter = null;
+//        try {
+//            myWriter = new FileWriter("potencias.txt");
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        cellsOfInterestByPoint = new HashMap<>();
+//        for (int i = 0; i < gridPointsX_; i++) {
+//            for (int j = 0; j < gridPointsY_; j++) {
+//                Point p = getGridPoint(i, j, 0);
+//                cellsOfInterestByPoint.put(p, new HashMap<>());
+//                for (Double f : cells_.keySet()) {
+//                    cellsOfInterestByPoint.get(p).put(f, new ArrayList<>());
+//                    for (Cell c : cells_.get(f)) {
+//                        if (Math.pow(10.0, p.computeSignalPower(c) / 10) > 1)
+//                            cellsOfInterestByPoint.get(p).get(f).add(c);
+//                    }
+//                }
+//
+//                try {
+//                    boolean hay = false;
+//                    for (double d : cellsOfInterestByPoint.get(p).keySet()) {
+//                        if (!cellsOfInterestByPoint.get(p).get(d).isEmpty())
+//                            hay = true;
+//                    }
+//
+//                    if (hay) {
+//                        myWriter.write("1 ");
+//                    } else
+//                        myWriter.write("0 ");
+////                                myWriter.write(Math.pow(10.0, p.computeSignalPower(c) / 10) + "\n");
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//
+//            try {
+//                myWriter.write("\n");
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        System.exit(0);
     }
 
     /**
