@@ -6,6 +6,7 @@ import org.uma.jmetal.algorithm.multiobjective.nsgaii.NSGAIIBuilder;
 import org.uma.jmetal.example.AlgorithmRunner;
 import org.uma.jmetal.operator.crossover.CrossoverOperator;
 import org.uma.jmetal.operator.crossover.impl.TwoPointCrossover;
+import org.uma.jmetal.operator.crossover.impl.TwoPointCrossoverMOEAD;
 import org.uma.jmetal.operator.mutation.MutationOperator;
 import org.uma.jmetal.operator.mutation.impl.BitFlipMutation;
 import org.uma.jmetal.operator.selection.SelectionOperator;
@@ -13,6 +14,7 @@ import org.uma.jmetal.operator.selection.impl.BinaryTournamentSelection;
 import org.uma.jmetal.problem.Problem;
 import org.uma.jmetal.problem.multiobjective.UDN.StaticCSO;
 import org.uma.jmetal.solution.binarysolution.BinarySolution;
+import org.uma.jmetal.solution.binarysolution.impl.DefaultBinarySolution;
 import org.uma.jmetal.util.AbstractAlgorithmRunner;
 import org.uma.jmetal.util.chartcontainer.ChartContainer;
 import org.uma.jmetal.util.errorchecking.JMetalException;
@@ -42,37 +44,17 @@ public class MOEAD_CSO_main extends AbstractAlgorithmRunner {
         int jobID = Integer.parseInt(args[4]);      // Job ID (for filename)
         String name = args[5];                      // Name (for output directory)
         String main = args[6];                      // Main configuration file
-        boolean display = false;                    // Shows dynamic chart
-
-        if (args.length == 8)
-            display = Boolean.parseBoolean(args[7]);
 
         problem = new StaticCSO(main, run);
 
-        double crossoverProbability = 0.6;
+        double crossoverProbability = 0.9;
         double mutationProbability = 1.0 / ((StaticCSO) problem).getTotalNumberOfActivableCells();
 
-        crossover = new TwoPointCrossover(crossoverProbability);
+        crossover = new TwoPointCrossoverMOEAD(crossoverProbability);
         mutation = new BitFlipMutation(mutationProbability);
-        selection = new BinaryTournamentSelection<>();
 
-        algorithm = new NSGAIIBuilder<>(problem, crossover, mutation, popSize).setSelectionOperator(selection).setMaxEvaluations(numEvals)
-                .setVariant(NSGAIIBuilder.NSGAIIVariant.HybridNSGAII).build();
-
-        // Display code
-        if (display) {
-            MeasureManager measureManager = ((HybridNSGAII<BinarySolution>) algorithm).getMeasureManager();
-            BasicMeasure<List<BinarySolution>> solutionListMeasure = (BasicMeasure<List<BinarySolution>>) measureManager.<List<BinarySolution>>getPushMeasure("currentPopulation");
-            CountingMeasure iterationMeasure = (CountingMeasure) measureManager.<Long>getPushMeasure("currentEvaluation");
-
-            ChartContainer chart = new ChartContainer(algorithm.getName(), 100);
-            chart.setFrontChart(0, 1, "resources/referenceFrontsCSV/0.csv");
-//        chart.setReferencePoint(convertReferencePointListToListOfLists(referencePoint, problem.getNumberOfObjectives()));
-            chart.initChart();
-
-            solutionListMeasure.register(new MOEAD_CSO_main.ChartListener(chart));
-            iterationMeasure.register(new MOEAD_CSO_main.IterationListener(chart));
-        }
+        algorithm = new MOEADBuilder<>(problem, MOEADBuilder.Variant.HybridMOEAD).setPopulationSize(popSize).setResultPopulationSize(popSize)
+                .setMaxEvaluations(numEvals).setCrossover(crossover).setMutation(mutation).setMaxEvaluations(numEvals).build();
 
 
         AlgorithmRunner algorithmRunner = new AlgorithmRunner.Executor(algorithm).execute();

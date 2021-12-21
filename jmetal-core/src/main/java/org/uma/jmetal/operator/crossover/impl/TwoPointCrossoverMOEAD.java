@@ -9,11 +9,11 @@ import java.util.List;
  * Created by FlapKap on 27-05-2017.
  */
 @SuppressWarnings("serial")
-public class TwoPointCrossover<T> implements CrossoverOperator<Solution<T>> {
-    NPointCrossover<T> operator;
+public class TwoPointCrossoverMOEAD<T> implements CrossoverOperator<Solution<T>> {
+    NPointCrossoverMOEAD<T> operator;
 
-    public TwoPointCrossover(double probability) {
-        this.operator = new NPointCrossover<>(probability, 2);
+    public TwoPointCrossoverMOEAD(double probability) {
+        this.operator = new NPointCrossoverMOEAD<T>(probability, 2);
     }
 
     @Override

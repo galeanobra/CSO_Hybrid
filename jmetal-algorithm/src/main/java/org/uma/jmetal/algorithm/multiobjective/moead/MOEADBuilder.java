@@ -15,7 +15,7 @@ import org.uma.jmetal.solution.doublesolution.DoubleSolution;
  * @author Antonio J. Nebro
  * @version 1.0
  */
-public class MOEADBuilder<S extends Solution<S>> implements AlgorithmBuilder<AbstractMOEAD<DoubleSolution>> {
+public class MOEADBuilder<S extends Solution<?>> implements AlgorithmBuilder<AbstractMOEAD<S>> {
     public enum Variant {MOEAD, ConstraintMOEAD, MOEADDRA, MOEADSTM, MOEADD, MOEADIEPSILON, HybridMOEAD}
 
     protected Problem<S> problem;
@@ -35,8 +35,8 @@ public class MOEADBuilder<S extends Solution<S>> implements AlgorithmBuilder<Abs
 
     protected MOEAD.FunctionType functionType;
 
-    protected CrossoverOperator<DoubleSolution> crossover;
-    protected MutationOperator<DoubleSolution> mutation;
+    protected CrossoverOperator<S> crossover;
+    protected MutationOperator<S> mutation;
     protected String dataDirectory;
 
     protected int populationSize;
@@ -56,8 +56,8 @@ public class MOEADBuilder<S extends Solution<S>> implements AlgorithmBuilder<Abs
         populationSize = 300;
         resultPopulationSize = 300;
         maxEvaluations = 150000;
-        crossover = new DifferentialEvolutionCrossover();
-        mutation = new PolynomialMutation(1.0 / problem.getNumberOfVariables(), 20.0);
+        crossover = (CrossoverOperator<S>) new DifferentialEvolutionCrossover();
+        mutation = (MutationOperator<S>) new PolynomialMutation(1.0 / problem.getNumberOfVariables(), 20.0);
         functionType = MOEAD.FunctionType.TCHE;
         neighborhoodSelectionProbability = 0.1;
         maximumNumberOfReplacedSolutions = 2;
@@ -88,11 +88,11 @@ public class MOEADBuilder<S extends Solution<S>> implements AlgorithmBuilder<Abs
         return dataDirectory;
     }
 
-    public MutationOperator<DoubleSolution> getMutation() {
+    public MutationOperator<S> getMutation() {
         return mutation;
     }
 
-    public CrossoverOperator<DoubleSolution> getCrossover() {
+    public CrossoverOperator<S> getCrossover() {
         return crossover;
     }
 
@@ -112,78 +112,76 @@ public class MOEADBuilder<S extends Solution<S>> implements AlgorithmBuilder<Abs
         return numberOfThreads;
     }
 
-    public MOEADBuilder setPopulationSize(int populationSize) {
+    public MOEADBuilder<S> setPopulationSize(int populationSize) {
         this.populationSize = populationSize;
 
         return this;
     }
 
-    public MOEADBuilder setResultPopulationSize(int resultPopulationSize) {
+    public MOEADBuilder<S> setResultPopulationSize(int resultPopulationSize) {
         this.resultPopulationSize = resultPopulationSize;
 
         return this;
     }
 
-    public MOEADBuilder setMaxEvaluations(int maxEvaluations) {
+    public MOEADBuilder<S> setMaxEvaluations(int maxEvaluations) {
         this.maxEvaluations = maxEvaluations;
 
         return this;
     }
 
-    public MOEADBuilder setNeighborSize(int neighborSize) {
+    public MOEADBuilder<S> setNeighborSize(int neighborSize) {
         this.neighborSize = neighborSize;
 
         return this;
     }
 
-    public MOEADBuilder setNeighborhoodSelectionProbability(double neighborhoodSelectionProbability) {
+    public MOEADBuilder<S> setNeighborhoodSelectionProbability(double neighborhoodSelectionProbability) {
         this.neighborhoodSelectionProbability = neighborhoodSelectionProbability;
 
         return this;
     }
 
-    public MOEADBuilder setFunctionType(MOEAD.FunctionType functionType) {
+    public MOEADBuilder<S> setFunctionType(MOEAD.FunctionType functionType) {
         this.functionType = functionType;
 
         return this;
     }
 
-    public MOEADBuilder setMaximumNumberOfReplacedSolutions(int maximumNumberOfReplacedSolutions) {
+    public MOEADBuilder<S> setMaximumNumberOfReplacedSolutions(int maximumNumberOfReplacedSolutions) {
         this.maximumNumberOfReplacedSolutions = maximumNumberOfReplacedSolutions;
 
         return this;
     }
 
-    public MOEADBuilder setCrossover(CrossoverOperator<DoubleSolution> crossover) {
+    public MOEADBuilder<S> setCrossover(CrossoverOperator<S> crossover) {
         this.crossover = crossover;
 
         return this;
     }
 
-    public MOEADBuilder setMutation(MutationOperator<DoubleSolution> mutation) {
+    public MOEADBuilder<S> setMutation(MutationOperator<S> mutation) {
         this.mutation = mutation;
 
         return this;
     }
 
-    public MOEADBuilder setDataDirectory(String dataDirectory) {
+    public MOEADBuilder<S> setDataDirectory(String dataDirectory) {
         this.dataDirectory = dataDirectory;
 
         return this;
     }
 
-    public MOEADBuilder setNumberOfThreads(int numberOfThreads) {
+    public MOEADBuilder<S> setNumberOfThreads(int numberOfThreads) {
         this.numberOfThreads = numberOfThreads;
 
         return this;
     }
 
     public AbstractMOEAD build() {
-        AbstractMOEAD algorithm = null;
+        AbstractMOEAD<S> algorithm = null;
         if (moeadVariant.equals(Variant.MOEAD)) {
-            algorithm = new MOEAD(problem, populationSize, resultPopulationSize, maxEvaluations, mutation,
-                    crossover, functionType, dataDirectory, neighborhoodSelectionProbability,
-                    maximumNumberOfReplacedSolutions, neighborSize);
+            algorithm = new MOEAD<S>(problem, populationSize, resultPopulationSize, maxEvaluations, mutation, crossover, functionType, dataDirectory, neighborhoodSelectionProbability, maximumNumberOfReplacedSolutions, neighborSize);
 //        } else if (moeadVariant.equals(Variant.ConstraintMOEAD)) {
 //            algorithm = new ConstraintMOEAD(problem, populationSize, resultPopulationSize, maxEvaluations, mutation,
 //                    crossover, functionType, dataDirectory, neighborhoodSelectionProbability,
@@ -204,8 +202,8 @@ public class MOEADBuilder<S extends Solution<S>> implements AlgorithmBuilder<Abs
 //            algorithm = new MOEADIEpsilon(problem, populationSize, resultPopulationSize, maxEvaluations, mutation,
 //                    crossover, functionType, dataDirectory, neighborhoodSelectionProbability,
 //                    maximumNumberOfReplacedSolutions, neighborSize);
-//        } else if (moeadVariant.equals(Variant.HybridMOEAD))
-//            algorithm = new HybridMOEAD<S>(problem, populationSize, resultPopulationSize, maxEvaluations, mutation, crossover, functionType, dataDirectory, neighborhoodSelectionProbability, maximumNumberOfReplacedSolutions, neighborSize);
+        } else if (moeadVariant.equals(Variant.HybridMOEAD)) {
+            algorithm = new HybridMOEAD<S>(problem, populationSize, resultPopulationSize, maxEvaluations, mutation, crossover, functionType, dataDirectory, neighborhoodSelectionProbability, maximumNumberOfReplacedSolutions, neighborSize);
         }
         return algorithm;
     }

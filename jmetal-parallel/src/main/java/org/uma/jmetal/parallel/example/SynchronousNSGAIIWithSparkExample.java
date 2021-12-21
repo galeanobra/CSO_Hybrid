@@ -32,68 +32,68 @@ import static java.lang.Math.sin;
  * @author Antonio J. Nebro <antonio@lcc.uma.es>
  */
 public class SynchronousNSGAIIWithSparkExample extends AbstractAlgorithmRunner {
-  /**
-   * @param args Command line arguments.
-   * @throws SecurityException Invoking command: java
-   *     org.uma.jmetal.runner.multiobjective.nsgaii.ParallelNSGAIIRunner problemName [referenceFront]
-   */
-  public static void main(String[] args) throws JMetalException, FileNotFoundException {
-    Problem<DoubleSolution> problem;
-    Algorithm<List<DoubleSolution>> algorithm;
-    CrossoverOperator<DoubleSolution> crossover;
-    MutationOperator<DoubleSolution> mutation;
-    SelectionOperator<List<DoubleSolution>, DoubleSolution> selection;
+    /**
+     * @param args Command line arguments.
+     * @throws SecurityException Invoking command: java
+     *                           org.uma.jmetal.runner.multiobjective.nsgaii.ParallelNSGAIIRunner problemName [referenceFront]
+     */
+    public static void main(String[] args) throws JMetalException, FileNotFoundException {
+        Problem<DoubleSolution> problem;
+        Algorithm<List<DoubleSolution>> algorithm;
+        CrossoverOperator<DoubleSolution> crossover;
+        MutationOperator<DoubleSolution> mutation;
+        SelectionOperator<List<DoubleSolution>, DoubleSolution> selection;
 
-    problem = new ZDT2() {
-      @Override
-      public DoubleSolution evaluate(DoubleSolution solution) {
-        super.evaluate(solution);
-        computingDelay();
+        problem = new ZDT2() {
+            @Override
+            public DoubleSolution evaluate(DoubleSolution solution) {
+                super.evaluate(solution);
+                computingDelay();
 
-        return solution;
-      }
+                return solution;
+            }
 
-      private void computingDelay() {
-        for (long i = 0; i < 1000; i++)
-          for (long j = 0; j < 1000; j++) {
-            double a = sin(i) * Math.cos(j);
-          }
-      }
-    };
+            private void computingDelay() {
+                for (long i = 0; i < 1000; i++)
+                    for (long j = 0; j < 1000; j++) {
+                        double a = sin(i) * Math.cos(j);
+                    }
+            }
+        };
 
-    double crossoverProbability = 0.9;
-    double crossoverDistributionIndex = 20.0;
-    crossover = new SBXCrossover(crossoverProbability, crossoverDistributionIndex);
+        double crossoverProbability = 0.9;
+        double crossoverDistributionIndex = 20.0;
+        crossover = new SBXCrossover(crossoverProbability, crossoverDistributionIndex);
 
-    double mutationProbability = 1.0 / problem.getNumberOfVariables();
-    double mutationDistributionIndex = 20.0;
-    mutation = new PolynomialMutation(mutationProbability, mutationDistributionIndex);
+        double mutationProbability = 1.0 / problem.getNumberOfVariables();
+        double mutationDistributionIndex = 20.0;
+        mutation = new PolynomialMutation(mutationProbability, mutationDistributionIndex);
 
-    selection = new BinaryTournamentSelection<>(new RankingAndCrowdingDistanceComparator<>());
+        selection = new BinaryTournamentSelection<>(new RankingAndCrowdingDistanceComparator<>());
 
-    int maxEvaluations = 25000;
-    int populationSize = 100;
+        int maxEvaluations = 25000;
+        int populationSize = 100;
 
-    Logger.getLogger("org").setLevel(Level.OFF) ;
+        Logger.getLogger("org").setLevel(Level.OFF);
 
-    SparkConf sparkConf = new SparkConf()
-            .setMaster("local[8]")
-            .setAppName("NSGA-II with Spark");
+        SparkConf sparkConf = new SparkConf()
+                .setMaster("local[8]")
+                .setAppName("NSGA-II with Spark");
 
-    JavaSparkContext sparkContext = new JavaSparkContext(sparkConf);
-    SolutionListEvaluator<DoubleSolution> evaluator = new SparkSolutionListEvaluator<>(sparkContext) ;
+        JavaSparkContext sparkContext = new JavaSparkContext(sparkConf);
+        SolutionListEvaluator<DoubleSolution> evaluator = new SparkSolutionListEvaluator<>(sparkContext);
 
-    algorithm = new NSGAIIBuilder<>(problem, crossover, mutation, populationSize)
-            .setSelectionOperator(selection)
-            .setMaxEvaluations(maxEvaluations)
-            .setSolutionListEvaluator(new SparkSolutionListEvaluator<>(sparkContext))
-            .build();
+        algorithm = new NSGAIIBuilder<>(problem, crossover, mutation, populationSize)
+                .setSelectionOperator(selection)
+                .setMaxEvaluations(maxEvaluations)
+                .setSolutionListEvaluator(new SparkSolutionListEvaluator<>(sparkContext))
+                .build();
 
-    algorithm.run();
-    List<DoubleSolution> population = algorithm.getResult();
+        algorithm.run();
+        List<DoubleSolution> population = algorithm.getResult();
 
-    evaluator.shutdown();
+        evaluator.shutdown();
 
-    printFinalSolutionSet(population);
-  }
+        printFinalSolutionSet(population);
+    }
 }

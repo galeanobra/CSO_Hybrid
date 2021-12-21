@@ -15,34 +15,45 @@ import java.util.List;
  * @param <T> Task to be computed
  */
 public interface AsynchronousParallelAlgorithm<T extends ParallelTask<?>, R> {
-  void submitInitialTasks(List<T> tasks);
-  List<T> createInitialTasks() ;
-  T waitForComputedTask();
-  void processComputedTask(T task);
-  void submitTask(T task);
-  T createNewTask();
-  boolean thereAreInitialTasksPending(List<T> tasks);
-  T getInitialTask(List<T> tasks);
-  boolean stoppingConditionIsNotMet();
-  void initProgress() ;
-  void updateProgress() ;
-  R getResult() ;
+    void submitInitialTasks(List<T> tasks);
 
-  default void run() {
-    List<T> initialTasks = createInitialTasks();
-    submitInitialTasks(initialTasks);
+    List<T> createInitialTasks();
 
-    initProgress() ;
-    while (stoppingConditionIsNotMet()) {
-      T computedTask = waitForComputedTask();
-      processComputedTask(computedTask);
+    T waitForComputedTask();
 
-      if (thereAreInitialTasksPending(initialTasks)) {
-        submitTask(getInitialTask(initialTasks));
-      } else {
-        submitTask(createNewTask());
-      }
-      updateProgress();
+    void processComputedTask(T task);
+
+    void submitTask(T task);
+
+    T createNewTask();
+
+    boolean thereAreInitialTasksPending(List<T> tasks);
+
+    T getInitialTask(List<T> tasks);
+
+    boolean stoppingConditionIsNotMet();
+
+    void initProgress();
+
+    void updateProgress();
+
+    R getResult();
+
+    default void run() {
+        List<T> initialTasks = createInitialTasks();
+        submitInitialTasks(initialTasks);
+
+        initProgress();
+        while (stoppingConditionIsNotMet()) {
+            T computedTask = waitForComputedTask();
+            processComputedTask(computedTask);
+
+            if (thereAreInitialTasksPending(initialTasks)) {
+                submitTask(getInitialTask(initialTasks));
+            } else {
+                submitTask(createNewTask());
+            }
+            updateProgress();
+        }
     }
-  }
 }

@@ -58,9 +58,12 @@ public class SparseEA_CSO_main {
         String name = args[5];                      // Name (for output directory)
         String main = args[6];                      // Main config file
 
-        // Defines the CSO problem
         problem = new StaticCSO(main, run);
-        algorithm = new HybridSparseEA(problem, numEvals, popSize, 0.5, 0.5, new BinaryTournamentSelection<>(), ((StaticCSO) problem).getTotalNumberOfActivableCells());
+
+        double crossoverProbability = 0.5; //0.9;
+        double mutationProbability = 0.5; //1.0 / ((StaticCSO) problem).getTotalNumberOfActivableCells();
+
+        algorithm = new HybridSparseEA(problem, numEvals, popSize, crossoverProbability, mutationProbability, new BinaryTournamentSelection<>(), ((StaticCSO) problem).getTotalNumberOfActivableCells());
 
         // Execute the Algorithm
         long initTime = System.currentTimeMillis();

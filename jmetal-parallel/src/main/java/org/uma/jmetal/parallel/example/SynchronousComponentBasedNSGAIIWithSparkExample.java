@@ -36,76 +36,76 @@ import static java.lang.Math.sin;
  * @author Antonio J. Nebro <antonio@lcc.uma.es>
  */
 public class SynchronousComponentBasedNSGAIIWithSparkExample extends AbstractAlgorithmRunner {
-  public static void main(String[] args) throws JMetalException {
-    Problem<DoubleSolution> problem;
-    ComponentBasedEvolutionaryAlgorithm<DoubleSolution> algorithm;
-    CrossoverOperator<DoubleSolution> crossover;
-    MutationOperator<DoubleSolution> mutation;
+    public static void main(String[] args) throws JMetalException {
+        Problem<DoubleSolution> problem;
+        ComponentBasedEvolutionaryAlgorithm<DoubleSolution> algorithm;
+        CrossoverOperator<DoubleSolution> crossover;
+        MutationOperator<DoubleSolution> mutation;
 
-    problem = new ZDT2() {
-      @Override
-      public DoubleSolution evaluate(DoubleSolution solution) {
-        super.evaluate(solution);
-        computingDelay();
+        problem = new ZDT2() {
+            @Override
+            public DoubleSolution evaluate(DoubleSolution solution) {
+                super.evaluate(solution);
+                computingDelay();
 
-        return solution;
-      }
+                return solution;
+            }
 
-      private void computingDelay() {
-        for (long i = 0; i < 1000; i++)
-          for (long j = 0; j < 1000; j++) {
-            double a = sin(i) * Math.cos(j);
-          }
-      }
-    };
+            private void computingDelay() {
+                for (long i = 0; i < 1000; i++)
+                    for (long j = 0; j < 1000; j++) {
+                        double a = sin(i) * Math.cos(j);
+                    }
+            }
+        };
 
-    double crossoverProbability = 0.9;
-    double crossoverDistributionIndex = 20.0;
-    crossover = new SBXCrossover(crossoverProbability, crossoverDistributionIndex);
+        double crossoverProbability = 0.9;
+        double crossoverDistributionIndex = 20.0;
+        crossover = new SBXCrossover(crossoverProbability, crossoverDistributionIndex);
 
-    double mutationProbability = 1.0 / problem.getNumberOfVariables();
-    double mutationDistributionIndex = 20.0;
-    mutation = new PolynomialMutation(mutationProbability, mutationDistributionIndex);
+        double mutationProbability = 1.0 / problem.getNumberOfVariables();
+        double mutationDistributionIndex = 20.0;
+        mutation = new PolynomialMutation(mutationProbability, mutationDistributionIndex);
 
-    int populationSize = 100;
-    int offspringPopulationSize = populationSize;
+        int populationSize = 100;
+        int offspringPopulationSize = populationSize;
 
-    Termination termination = new TerminationByEvaluations(25000);
+        Termination termination = new TerminationByEvaluations(25000);
 
-    Logger.getLogger("org").setLevel(Level.OFF) ;
+        Logger.getLogger("org").setLevel(Level.OFF);
 
-    SparkConf sparkConf = new SparkConf()
-            .setMaster("local[8]")
-            .setAppName("NSGA-II with Spark");
+        SparkConf sparkConf = new SparkConf()
+                .setMaster("local[8]")
+                .setAppName("NSGA-II with Spark");
 
-    JavaSparkContext sparkContext = new JavaSparkContext(sparkConf);
+        JavaSparkContext sparkContext = new JavaSparkContext(sparkConf);
 
 
-    algorithm =
-            new NSGAII<>(
-                    problem, populationSize, offspringPopulationSize, crossover, mutation, termination)
-                    .withEvaluation(new SparkEvaluation<>(sparkContext, problem));
+        algorithm =
+                new NSGAII<>(
+                        problem, populationSize, offspringPopulationSize, crossover, mutation, termination)
+                        .withEvaluation(new SparkEvaluation<>(sparkContext, problem));
 
-    RunTimeChartObserver<DoubleSolution> runTimeChartObserver =
-            new RunTimeChartObserver<>(
-                    "NSGA-II",
-                    80, 10, "resources/referenceFrontsCSV/ZDT2.csv");
+        RunTimeChartObserver<DoubleSolution> runTimeChartObserver =
+                new RunTimeChartObserver<>(
+                        "NSGA-II",
+                        80, 10, "resources/referenceFrontsCSV/ZDT2.csv");
 
-    algorithm.getObservable().register(runTimeChartObserver);
+        algorithm.getObservable().register(runTimeChartObserver);
 
-    algorithm.run();
+        algorithm.run();
 
-    List<DoubleSolution> population = algorithm.getResult();
-    JMetalLogger.logger.info("Total execution time : " + algorithm.getTotalComputingTime() + "ms");
-    JMetalLogger.logger.info("Number of evaluations: " + algorithm.getEvaluations());
+        List<DoubleSolution> population = algorithm.getResult();
+        JMetalLogger.logger.info("Total execution time : " + algorithm.getTotalComputingTime() + "ms");
+        JMetalLogger.logger.info("Number of evaluations: " + algorithm.getEvaluations());
 
-    new SolutionListOutput(population)
-        .setVarFileOutputContext(new DefaultFileOutputContext("VAR.csv", ","))
-        .setFunFileOutputContext(new DefaultFileOutputContext("FUN.csv", ","))
-        .print();
+        new SolutionListOutput(population)
+                .setVarFileOutputContext(new DefaultFileOutputContext("VAR.csv", ","))
+                .setFunFileOutputContext(new DefaultFileOutputContext("FUN.csv", ","))
+                .print();
 
-    JMetalLogger.logger.info("Random seed: " + JMetalRandom.getInstance().getSeed());
-    JMetalLogger.logger.info("Objectives values have been written to file FUN.csv");
-    JMetalLogger.logger.info("Variables values have been written to file VAR.csv");
-  }
+        JMetalLogger.logger.info("Random seed: " + JMetalRandom.getInstance().getSeed());
+        JMetalLogger.logger.info("Objectives values have been written to file FUN.csv");
+        JMetalLogger.logger.info("Variables values have been written to file VAR.csv");
+    }
 }

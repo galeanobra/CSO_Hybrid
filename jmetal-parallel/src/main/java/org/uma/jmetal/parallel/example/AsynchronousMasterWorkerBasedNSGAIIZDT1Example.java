@@ -17,49 +17,49 @@ import org.uma.jmetal.util.termination.impl.TerminationByEvaluations;
 import java.util.List;
 
 public class AsynchronousMasterWorkerBasedNSGAIIZDT1Example {
-  public static void main(String[] args) {
-    CrossoverOperator<DoubleSolution> crossover;
-    MutationOperator<DoubleSolution> mutation;
+    public static void main(String[] args) {
+        CrossoverOperator<DoubleSolution> crossover;
+        MutationOperator<DoubleSolution> mutation;
 
-    int populationSize = 100;
-    int maxEvaluations = 25000;
-    int numberOfCores = 8;
+        int populationSize = 100;
+        int maxEvaluations = 25000;
+        int numberOfCores = 8;
 
-    DoubleProblem problem = new ZDT1(2000000) ;
+        DoubleProblem problem = new ZDT1(2000000);
 
-    double crossoverProbability = 0.9;
-    double crossoverDistributionIndex = 20.0;
-    crossover = new SBXCrossover(crossoverProbability, crossoverDistributionIndex);
+        double crossoverProbability = 0.9;
+        double crossoverDistributionIndex = 20.0;
+        crossover = new SBXCrossover(crossoverProbability, crossoverDistributionIndex);
 
-    double mutationProbability = 1.0 / problem.getNumberOfVariables();
-    double mutationDistributionIndex = 20.0;
-    mutation = new PolynomialMutation(mutationProbability, mutationDistributionIndex);
+        double mutationProbability = 1.0 / problem.getNumberOfVariables();
+        double mutationDistributionIndex = 20.0;
+        mutation = new PolynomialMutation(mutationProbability, mutationDistributionIndex);
 
-    long initTime = System.currentTimeMillis();
+        long initTime = System.currentTimeMillis();
 
-    AsynchronousMultiThreadedNSGAII<DoubleSolution> nsgaii =
-            new AsynchronousMultiThreadedNSGAII<DoubleSolution>(
-                    numberOfCores, problem, populationSize, crossover, mutation, new TerminationByEvaluations(maxEvaluations));
+        AsynchronousMultiThreadedNSGAII<DoubleSolution> nsgaii =
+                new AsynchronousMultiThreadedNSGAII<DoubleSolution>(
+                        numberOfCores, problem, populationSize, crossover, mutation, new TerminationByEvaluations(maxEvaluations));
 
 
-    RunTimeChartObserver<DoubleSolution> runTimeChartObserver =
-            new RunTimeChartObserver<>(
-                    "NSGA-II",
-                    80, 10, "resources/referenceFrontsCSV/ZDT1.csv");
+        RunTimeChartObserver<DoubleSolution> runTimeChartObserver =
+                new RunTimeChartObserver<>(
+                        "NSGA-II",
+                        80, 10, "resources/referenceFrontsCSV/ZDT1.csv");
 
-    nsgaii.getObservable().register(runTimeChartObserver);
+        nsgaii.getObservable().register(runTimeChartObserver);
 
-    nsgaii.run();
+        nsgaii.run();
 
-    long endTime = System.currentTimeMillis();
+        long endTime = System.currentTimeMillis();
 
-    List<DoubleSolution> resultList = nsgaii.getResult();
+        List<DoubleSolution> resultList = nsgaii.getResult();
 
-    JMetalLogger.logger.info("Computing time: " + (endTime - initTime));
-    new SolutionListOutput(resultList)
-            .setVarFileOutputContext(new DefaultFileOutputContext("VAR.csv", ","))
-            .setFunFileOutputContext(new DefaultFileOutputContext("FUN.csv", ","))
-            .print();
-    System.exit(0);
-  }
+        JMetalLogger.logger.info("Computing time: " + (endTime - initTime));
+        new SolutionListOutput(resultList)
+                .setVarFileOutputContext(new DefaultFileOutputContext("VAR.csv", ","))
+                .setFunFileOutputContext(new DefaultFileOutputContext("FUN.csv", ","))
+                .print();
+        System.exit(0);
+    }
 }

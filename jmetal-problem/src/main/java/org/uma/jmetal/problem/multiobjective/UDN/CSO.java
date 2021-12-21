@@ -542,14 +542,14 @@ public abstract class CSO extends AbstractBinaryProblem {
                             if (!c.equals(u.getServingCell())) {
                                 if (c.getType() == FEMTO) {
                                     double sinr = p.computeSINR(c);
-                                    if (sinr > max_sinr) {
+                                    if (sinr >= max_sinr) {
                                         best = c;
                                         max_sinr = sinr;
                                     }
                                 } else if (c.getType() == PICO) {
                                     if (u.getServingCell().getType() == PICO || u.getServingCell().getType() == MICRO || u.getServingCell().getType() == MACRO) {
                                         double sinr = p.computeSINR(c);
-                                        if (sinr > max_sinr) {
+                                        if (sinr >= max_sinr) {
                                             best = c;
                                             max_sinr = sinr;
                                         }
@@ -557,7 +557,7 @@ public abstract class CSO extends AbstractBinaryProblem {
                                 } else if (c.getType() == MICRO) {
                                     if (u.getServingCell().getType() == MICRO || u.getServingCell().getType() == MACRO) {
                                         double sinr = p.computeSINR(c);
-                                        if (sinr > max_sinr) {
+                                        if (sinr >= max_sinr) {
                                             best = c;
                                             max_sinr = sinr;
                                         }
@@ -573,7 +573,6 @@ public abstract class CSO extends AbstractBinaryProblem {
                         u.getServingCell().setActivation(false);
                     }
                 }
-
             }
 
             modifySolution(solution);
@@ -842,23 +841,6 @@ public abstract class CSO extends AbstractBinaryProblem {
                                     if (current.getAssignedUsers() == 0)
                                         current.setActivation(false);
                                     alternative.setActivation(true);
-
-                                    //recompute the signaling
-                                    udn_.computeSignaling();
-
-                                    //reset the UEs assigned to cells
-                                    udn_.resetNumberOfUsersAssignedToCells();
-
-                                    //Assign users to cells, to compute the BW allocated to them
-                                    for (User us : this.udn_.getUsers()) {
-                                        Point p = udn_.getGridPoint(us.getX(), us.getY(), us.getZ());
-
-                                        Cell c = p.getCellWithHigherSINR();
-
-                                        c.addUserAssigned();
-
-                                        us.setServingCell(c);
-                                    }
                                     break;
                                 }
                             }

@@ -289,6 +289,8 @@ public class SparseEA<S extends Solution<?>> {
 //            problem_.evaluateConstraints(newSolution);
             _population_variation.add(s);
 
+            this.evaluations++;
+
 //            if (!tabu.contains(newSolution) || attempts > 5) {
 //                attempts = 0;
 //

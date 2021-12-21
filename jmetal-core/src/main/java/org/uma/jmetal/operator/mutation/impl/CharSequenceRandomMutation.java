@@ -16,7 +16,9 @@ public class CharSequenceRandomMutation implements MutationOperator<CharSequence
   private double mutationProbability;
   private final char[] alphabet;
 
-  /** Constructor */
+  /**
+   * Constructor
+   */
   public CharSequenceRandomMutation(double mutationProbability, char[] alphabet) {
     Check.probabilityIsValid(mutationProbability);
     this.mutationProbability = mutationProbability;
@@ -42,7 +44,9 @@ public class CharSequenceRandomMutation implements MutationOperator<CharSequence
     return solution;
   }
 
-  /** Performs the operation */
+  /**
+   * Performs the operation
+   */
   public void doMutation(CharSequenceSolution solution) {
     int sequenceLength = solution.variables().size();
 

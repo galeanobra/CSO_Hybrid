@@ -40,32 +40,6 @@ public class HybridSMSEMOA<S extends Solution<?>> extends SMSEMOA<S> {
         super(problem, maxEvaluations, populationSize, offset, crossoverOperator, mutationOperator, selectionOperator, dominanceComparator, hypervolumeImplementation);
 
         referenceFront = new ArrayFront();
-
-        initMeasures();
-    }
-
-    @Override
-    protected void initProgress() {
-        evaluations.reset(getMaxPopulationSize());
-    }
-
-    @Override
-    protected void updateProgress() {
-        evaluations.increment(getMaxPopulationSize());
-        solutionListMeasure.push(getPopulation());
-    }
-
-    @Override
-    protected boolean isStoppingConditionReached() {
-        return evaluations.get() >= maxEvaluations;
-    }
-
-    @Override
-    public void run() {
-        durationMeasure.reset();
-        durationMeasure.start();
-        super.run();
-        durationMeasure.stop();
     }
 
     @Override
@@ -79,20 +53,6 @@ public class HybridSMSEMOA<S extends Solution<?>> extends SMSEMOA<S> {
 //            new SolutionListOutput(population).setFunFileOutputContext(new DefaultFileOutputContext("HybridSMSEMOA." + evaluations.get().toString(), " ")).print();
 
         return population;
-    }
-
-    /* Measures code */
-    private void initMeasures() {
-        durationMeasure = new DurationMeasure();
-        evaluations = new CountingMeasure(0);
-        solutionListMeasure = new BasicMeasure<>();
-
-        measureManager = new SimpleMeasureManager();
-        measureManager.setPullMeasure("currentExecutionTime", durationMeasure);
-        measureManager.setPullMeasure("currentEvaluation", evaluations);
-
-        measureManager.setPushMeasure("currentPopulation", solutionListMeasure);
-        measureManager.setPushMeasure("currentEvaluation", evaluations);
     }
 
     @Override

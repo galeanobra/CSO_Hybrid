@@ -47,142 +47,142 @@ public class AsynchronousMultiThreadedGeneticAlgorithm<S extends Solution<?>>
             CrossoverOperator<S> crossover,
             MutationOperator<S> mutation,
             SelectionOperator<List<S>, S> selection,
-      Replacement<S> replacement,
-      Termination termination) {
-    super(numberOfCores);
-    this.problem = problem;
-    this.crossover = crossover;
-    this.mutation = mutation;
-    this.populationSize = populationSize;
-    this.termination = termination;
-    this.selection = selection ;
-    this.replacement = replacement ;
+            Replacement<S> replacement,
+            Termination termination) {
+        super(numberOfCores);
+        this.problem = problem;
+        this.crossover = crossover;
+        this.mutation = mutation;
+        this.populationSize = populationSize;
+        this.termination = termination;
+        this.selection = selection;
+        this.replacement = replacement;
 
-    attributes = new HashMap<>();
-    observable = new DefaultObservable<>("Observable");
+        attributes = new HashMap<>();
+        observable = new DefaultObservable<>("Observable");
 
-    this.numberOfCores = numberOfCores;
+        this.numberOfCores = numberOfCores;
 
-    createWorkers(numberOfCores, problem);
-  }
-
-  private void createWorkers(int numberOfCores, Problem<S> problem) {
-    IntStream.range(0, numberOfCores).forEach(i -> new Worker<>(
-            (task) -> {
-              problem.evaluate(task.getContents());
-              return ParallelTask.create(createTaskIdentifier(), task.getContents());
-            },
-            pendingTaskQueue,
-            completedTaskQueue).start());
-  }
-
-  private int createTaskIdentifier() {
-    return JMetalRandom.getInstance().nextInt(0, 1000000000) ;
-  }
-
-  @Override
-  public void initProgress() {
-    attributes.put("EVALUATIONS", evaluations);
-    attributes.put("POPULATION", population);
-    attributes.put("COMPUTING_TIME", System.currentTimeMillis() - initTime);
-
-    observable.setChanged();
-    observable.notifyObservers(attributes);
-  }
-
-  @Override
-  public void updateProgress() {
-    attributes.put("EVALUATIONS", evaluations);
-    attributes.put("POPULATION", population);
-    attributes.put("COMPUTING_TIME", System.currentTimeMillis() - initTime);
-    attributes.put("BEST_SOLUTION", population.get(0));
-
-    observable.setChanged();
-    observable.notifyObservers(attributes);
-  }
-
-  @Override
-  public List<ParallelTask<S>> createInitialTasks() {
-    List<S> initialPopulation = new ArrayList<>();
-    List<ParallelTask<S>> initialTaskList = new ArrayList<>() ;
-    IntStream.range(0, populationSize)
-        .forEach(i -> initialPopulation.add(problem.createSolution()));
-    initialPopulation.forEach(
-        solution -> {
-          int taskId = JMetalRandom.getInstance().nextInt(0, 1000);
-          initialTaskList.add(ParallelTask.create(taskId, solution));
-        });
-
-    return initialTaskList ;
-  }
-
-  @Override
-  public void submitInitialTasks(List<ParallelTask<S>> initialTaskList) {
-    if (initialTaskList.size() >= numberOfCores) {
-      initialTaskList.forEach(this::submitTask);
-    } else {
-      int idleWorkers = numberOfCores - initialTaskList.size();
-      initialTaskList.forEach(this::submitTask);
-      while (idleWorkers > 0) {
-        submitTask(createNewTask());
-        idleWorkers--;
-      }
+        createWorkers(numberOfCores, problem);
     }
-  }
 
-  @Override
-  public void processComputedTask(ParallelTask<S> task) {
-    evaluations++;
-    if (population.size() < populationSize) {
-      population.add(task.getContents());
-    } else {
-      List<S> offspringPopulation = new ArrayList<>(1);
-      offspringPopulation.add(task.getContents());
-
-      population = replacement.replace(population, offspringPopulation);
-      Check.that(population.size() == populationSize, "The population size is incorrect");
+    private void createWorkers(int numberOfCores, Problem<S> problem) {
+        IntStream.range(0, numberOfCores).forEach(i -> new Worker<>(
+                (task) -> {
+                    problem.evaluate(task.getContents());
+                    return ParallelTask.create(createTaskIdentifier(), task.getContents());
+                },
+                pendingTaskQueue,
+                completedTaskQueue).start());
     }
-  }
 
-  @Override
-  public void submitTask(ParallelTask<S> task) {
-    pendingTaskQueue.add(task);
-  }
-
-  @Override
-  public ParallelTask<S> createNewTask() {
-    if (population.size() > 2) {
-      List<S> parents = new ArrayList<>(2);
-      parents.add(selection.execute(population));
-      parents.add(selection.execute(population));
-
-      List<S> offspring = crossover.execute(parents);
-
-      mutation.execute(offspring.get(0));
-
-      return ParallelTask.create(createTaskIdentifier(), offspring.get(0));
-    } else {
-      return ParallelTask.create(createTaskIdentifier(), problem.createSolution());
+    private int createTaskIdentifier() {
+        return JMetalRandom.getInstance().nextInt(0, 1000000000);
     }
-  }
 
-  @Override
-  public boolean stoppingConditionIsNotMet() {
-    return !termination.isMet(attributes);
-  }
+    @Override
+    public void initProgress() {
+        attributes.put("EVALUATIONS", evaluations);
+        attributes.put("POPULATION", population);
+        attributes.put("COMPUTING_TIME", System.currentTimeMillis() - initTime);
 
-  @Override
-  public void run() {
-    initTime = System.currentTimeMillis();
-    super.run();
-  }
+        observable.setChanged();
+        observable.notifyObservers(attributes);
+    }
 
-  @Override
-  public List<S> getResult() {
-    return population;
-  }
+    @Override
+    public void updateProgress() {
+        attributes.put("EVALUATIONS", evaluations);
+        attributes.put("POPULATION", population);
+        attributes.put("COMPUTING_TIME", System.currentTimeMillis() - initTime);
+        attributes.put("BEST_SOLUTION", population.get(0));
 
-  public Observable<Map<String, Object>> getObservable() {
-    return observable;
-  }
+        observable.setChanged();
+        observable.notifyObservers(attributes);
+    }
+
+    @Override
+    public List<ParallelTask<S>> createInitialTasks() {
+        List<S> initialPopulation = new ArrayList<>();
+        List<ParallelTask<S>> initialTaskList = new ArrayList<>();
+        IntStream.range(0, populationSize)
+                .forEach(i -> initialPopulation.add(problem.createSolution()));
+        initialPopulation.forEach(
+                solution -> {
+                    int taskId = JMetalRandom.getInstance().nextInt(0, 1000);
+                    initialTaskList.add(ParallelTask.create(taskId, solution));
+                });
+
+        return initialTaskList;
+    }
+
+    @Override
+    public void submitInitialTasks(List<ParallelTask<S>> initialTaskList) {
+        if (initialTaskList.size() >= numberOfCores) {
+            initialTaskList.forEach(this::submitTask);
+        } else {
+            int idleWorkers = numberOfCores - initialTaskList.size();
+            initialTaskList.forEach(this::submitTask);
+            while (idleWorkers > 0) {
+                submitTask(createNewTask());
+                idleWorkers--;
+            }
+        }
+    }
+
+    @Override
+    public void processComputedTask(ParallelTask<S> task) {
+        evaluations++;
+        if (population.size() < populationSize) {
+            population.add(task.getContents());
+        } else {
+            List<S> offspringPopulation = new ArrayList<>(1);
+            offspringPopulation.add(task.getContents());
+
+            population = replacement.replace(population, offspringPopulation);
+            Check.that(population.size() == populationSize, "The population size is incorrect");
+        }
+    }
+
+    @Override
+    public void submitTask(ParallelTask<S> task) {
+        pendingTaskQueue.add(task);
+    }
+
+    @Override
+    public ParallelTask<S> createNewTask() {
+        if (population.size() > 2) {
+            List<S> parents = new ArrayList<>(2);
+            parents.add(selection.execute(population));
+            parents.add(selection.execute(population));
+
+            List<S> offspring = crossover.execute(parents);
+
+            mutation.execute(offspring.get(0));
+
+            return ParallelTask.create(createTaskIdentifier(), offspring.get(0));
+        } else {
+            return ParallelTask.create(createTaskIdentifier(), problem.createSolution());
+        }
+    }
+
+    @Override
+    public boolean stoppingConditionIsNotMet() {
+        return !termination.isMet(attributes);
+    }
+
+    @Override
+    public void run() {
+        initTime = System.currentTimeMillis();
+        super.run();
+    }
+
+    @Override
+    public List<S> getResult() {
+        return population;
+    }
+
+    public Observable<Map<String, Object>> getObservable() {
+        return observable;
+    }
 }
