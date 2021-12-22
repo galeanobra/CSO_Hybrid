@@ -5,6 +5,7 @@ import org.uma.jmetal.operator.crossover.CrossoverOperator;
 import org.uma.jmetal.operator.crossover.impl.DifferentialEvolutionCrossover;
 import org.uma.jmetal.operator.mutation.MutationOperator;
 import org.uma.jmetal.problem.Problem;
+import org.uma.jmetal.problem.multiobjective.UDN.StaticCSO;
 import org.uma.jmetal.solution.Solution;
 import org.uma.jmetal.solution.binarysolution.BinarySolution;
 import org.uma.jmetal.solution.doublesolution.DoubleSolution;
@@ -52,8 +53,10 @@ public class HybridMOEAD<S extends Solution<?>> extends AbstractMOEAD<S> {
 
                 S child = children.get(0);
                 mutationOperator.execute(child);
-                problem.evaluate(child);
 
+                ((StaticCSO) problem).intelligentSwitchOff((BinarySolution) child);
+
+                problem.evaluate(child);
                 evaluations++;
 
                 idealPoint.update(child.objectives());
