@@ -16,62 +16,65 @@ import org.uma.jmetal.util.errorchecking.Check;
  */
 @SuppressWarnings("serial")
 public class GenerationalDistance extends QualityIndicator {
-  private final double pow = 2.0;
+    private final double pow = 2.0;
 
-  /**
-   * Default constructor
-   */
-  public GenerationalDistance() {
-  }
-
-  /**
-   * Constructor
-   *
-   * @param referenceFront
-   */
-  public GenerationalDistance(double[][] referenceFront) {
-    super(referenceFront) ;
-  }
-
-  /**
-   * Evaluate() method
-   * @param front
-   * @return
-   */
-  @Override public double compute(double[][] front) {
-    Check.notNull(front);
-
-    return generationalDistance(front, referenceFront);
-  }
-
-  /**
-   * Returns the generational distance value for a given front
-   *
-   * @param front           The front
-   * @param referenceFront The reference pareto front
-   */
-  public double generationalDistance(double[][] front, double[][] referenceFront) {
-    double sum = 0.0;
-    for (int i = 0; i < front.length;  i++) {
-      sum += Math.pow(VectorUtils.distanceToClosestVector(front[i], referenceFront), pow);
+    /**
+     * Default constructor
+     */
+    public GenerationalDistance() {
     }
 
-    sum = Math.pow(sum, 1.0 / pow);
+    /**
+     * Constructor
+     *
+     * @param referenceFront
+     */
+    public GenerationalDistance(double[][] referenceFront) {
+        super(referenceFront);
+    }
 
-    return sum / front.length;
-  }
+    /**
+     * Evaluate() method
+     *
+     * @param front
+     * @return
+     */
+    @Override
+    public double compute(double[][] front) {
+        Check.notNull(front);
 
-  @Override public String getName() {
-    return "GD" ;
-  }
+        return generationalDistance(front, referenceFront);
+    }
 
-  @Override
-  public String getDescription() {
-    return "Generational distance quality indicator" ;
-  }
+    /**
+     * Returns the generational distance value for a given front
+     *
+     * @param front          The front
+     * @param referenceFront The reference pareto front
+     */
+    public double generationalDistance(double[][] front, double[][] referenceFront) {
+        double sum = 0.0;
+        for (int i = 0; i < front.length; i++) {
+            sum += Math.pow(VectorUtils.distanceToClosestVector(front[i], referenceFront), pow);
+        }
 
-  @Override
-  public boolean isTheLowerTheIndicatorValueTheBetter() {
-    return true ;
-  }
+        sum = Math.pow(sum, 1.0 / pow);
+
+        return sum / front.length;
+    }
+
+    @Override
+    public String getName() {
+        return "GD";
+    }
+
+    @Override
+    public String getDescription() {
+        return "Generational distance quality indicator";
+    }
+
+    @Override
+    public boolean isTheLowerTheIndicatorValueTheBetter() {
+        return true;
+    }
 }

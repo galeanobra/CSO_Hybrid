@@ -19,87 +19,90 @@ import org.uma.jmetal.util.errorchecking.JMetalException;
 @SuppressWarnings("serial")
 public class Epsilon extends QualityIndicator {
 
-  /**
-   * Default constructor
-   */
-  public Epsilon() {
-  }
-
-  /**
-   * Constructor
-   *
-   * @param referenceFront
-   */
-  public Epsilon(double[][] referenceFront) {
-    super(referenceFront) ;
-  }
-
-  @Override
-  public boolean isTheLowerTheIndicatorValueTheBetter() {
-    return true ;
-  }
-
-  /**
-   * Evaluate() method
-   *
-   * @param front
-   * @return
-   */
-  @Override public double compute(double[][] front) {
-    Check.notNull(front);
-
-    return epsilon(front, referenceFront);
-  }
-
-  /**
-   * Returns the value of the epsilon indicator.
-   *
-   * @param front Solution front
-   * @param referenceFront Reference Pareto front
-   * @return the value of the epsilon indicator
-   * @throws JMetalException
-   */
-  private double epsilon(double[][] front, double[][] referenceFront) throws JMetalException {
-
-    double eps, epsJ = 0.0, epsK = 0.0, epsTemp;
-
-    int numberOfObjectives = front[0].length ;
-
-    eps = Double.MIN_VALUE;
-
-    int a = referenceFront.length ;
-    int b =  front.length ;
-
-    for (int i = 0; i < referenceFront.length; i++) {
-      for (int j = 0; j < front.length; j++) {
-        for (int k = 0; k < numberOfObjectives; k++) {
-          epsTemp = front[j][k] - referenceFront[i][k] ;
-          if (k == 0) {
-            epsK = epsTemp;
-          } else if (epsK < epsTemp) {
-            epsK = epsTemp;
-          }
-        }
-        if (j == 0) {
-          epsJ = epsK;
-        } else if (epsJ > epsK) {
-          epsJ = epsK;
-        }
-      }
-      if (i == 0) {
-        eps = epsJ;
-      } else if (eps < epsJ) {
-        eps = epsJ;
-      }
+    /**
+     * Default constructor
+     */
+    public Epsilon() {
     }
-    return eps;
-  }
 
-  @Override public String getDescription() {
-    return "Additive Epsilon quality indicator" ;
-  }
+    /**
+     * Constructor
+     *
+     * @param referenceFront
+     */
+    public Epsilon(double[][] referenceFront) {
+        super(referenceFront);
+    }
 
-  @Override public String getName() {
-    return "EP" ;
-  }
+    @Override
+    public boolean isTheLowerTheIndicatorValueTheBetter() {
+        return true;
+    }
+
+    /**
+     * Evaluate() method
+     *
+     * @param front
+     * @return
+     */
+    @Override
+    public double compute(double[][] front) {
+        Check.notNull(front);
+
+        return epsilon(front, referenceFront);
+    }
+
+    /**
+     * Returns the value of the epsilon indicator.
+     *
+     * @param front          Solution front
+     * @param referenceFront Reference Pareto front
+     * @return the value of the epsilon indicator
+     * @throws JMetalException
+     */
+    private double epsilon(double[][] front, double[][] referenceFront) throws JMetalException {
+
+        double eps, epsJ = 0.0, epsK = 0.0, epsTemp;
+
+        int numberOfObjectives = front[0].length;
+
+        eps = Double.MIN_VALUE;
+
+        int a = referenceFront.length;
+        int b = front.length;
+
+        for (int i = 0; i < referenceFront.length; i++) {
+            for (int j = 0; j < front.length; j++) {
+                for (int k = 0; k < numberOfObjectives; k++) {
+                    epsTemp = front[j][k] - referenceFront[i][k];
+                    if (k == 0) {
+                        epsK = epsTemp;
+                    } else if (epsK < epsTemp) {
+                        epsK = epsTemp;
+                    }
+                }
+                if (j == 0) {
+                    epsJ = epsK;
+                } else if (epsJ > epsK) {
+                    epsJ = epsK;
+                }
+            }
+            if (i == 0) {
+                eps = epsJ;
+            } else if (eps < epsJ) {
+                eps = epsJ;
+            }
+        }
+        return eps;
+    }
+
+    @Override
+    public String getDescription() {
+        return "Additive Epsilon quality indicator";
+    }
+
+    @Override
+    public String getName() {
+        return "EP";
+    }
 }

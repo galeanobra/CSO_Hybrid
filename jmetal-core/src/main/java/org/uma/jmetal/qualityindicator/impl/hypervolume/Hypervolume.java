@@ -11,36 +11,37 @@ import org.uma.jmetal.qualityindicator.QualityIndicator;
 @SuppressWarnings("serial")
 public abstract class Hypervolume extends QualityIndicator {
 
-  public Hypervolume() {}
-
-  public Hypervolume(double[][] referenceFront) {
-    super(referenceFront) ;
-  }
-
-  public Hypervolume(double[] referencePoint) {
-    double[][] referenceFront = new double[referencePoint.length][referencePoint.length];
-    for (int i = 0; i < referencePoint.length; i++) {
-      double[] point = new double[referencePoint.length] ;
-      for (int j = 0; j < referencePoint.length; j++) {
-        if (j == i) {
-          double v = referencePoint[i] ;
-          point[j] = v ;
-        } else {
-          point[j] = 0.0 ;
-        }
-      }
-      referenceFront[i] = point ;
+    public Hypervolume() {
     }
-    this.referenceFront = referenceFront;
-  }
 
-  @Override
-  public String getName() {
-    return "HV";
-  }
+    public Hypervolume(double[][] referenceFront) {
+        super(referenceFront);
+    }
 
-  @Override
-  public boolean isTheLowerTheIndicatorValueTheBetter() {
-    return false;
-  }
+    public Hypervolume(double[] referencePoint) {
+        double[][] referenceFront = new double[referencePoint.length][referencePoint.length];
+        for (int i = 0; i < referencePoint.length; i++) {
+            double[] point = new double[referencePoint.length];
+            for (int j = 0; j < referencePoint.length; j++) {
+                if (j == i) {
+                    double v = referencePoint[i];
+                    point[j] = v;
+                } else {
+                    point[j] = 0.0;
+                }
+            }
+            referenceFront[i] = point;
+        }
+        this.referenceFront = referenceFront;
+    }
+
+    @Override
+    public String getName() {
+        return "HV";
+    }
+
+    @Override
+    public boolean isTheLowerTheIndicatorValueTheBetter() {
+        return false;
+    }
 }

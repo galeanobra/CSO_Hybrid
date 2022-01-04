@@ -12,55 +12,55 @@ import org.uma.jmetal.qualityindicator.impl.hypervolume.impl.PISAHypervolume;
  * @author Antonio J. Nebro <antonio@lcc.uma.es>
  */
 public class NormalizedHypervolume extends QualityIndicator {
-  private double referenceFrontHypervolume;
-  private Hypervolume hypervolume;
+    private double referenceFrontHypervolume;
+    private Hypervolume hypervolume;
 
-  public NormalizedHypervolume() {
-  }
+    public NormalizedHypervolume() {
+    }
 
-  public NormalizedHypervolume(double[] referencePoint) {
-    // TODO: add a unit test
-    double[][] referenceFront = {referencePoint};
-    hypervolume = new PISAHypervolume(referenceFront);
+    public NormalizedHypervolume(double[] referencePoint) {
+        // TODO: add a unit test
+        double[][] referenceFront = {referencePoint};
+        hypervolume = new PISAHypervolume(referenceFront);
 
-    referenceFrontHypervolume = hypervolume.compute(referenceFront);
-  }
+        referenceFrontHypervolume = hypervolume.compute(referenceFront);
+    }
 
-  public NormalizedHypervolume(double[][] referenceFront) {
-    super(referenceFront);
-    hypervolume = new PISAHypervolume(referenceFront);
+    public NormalizedHypervolume(double[][] referenceFront) {
+        super(referenceFront);
+        hypervolume = new PISAHypervolume(referenceFront);
 
-    referenceFrontHypervolume = hypervolume.compute(referenceFront);
-  }
+        referenceFrontHypervolume = hypervolume.compute(referenceFront);
+    }
 
-  @Override
-  public void setReferenceFront(double[][] referenceFront) {
-    super.setReferenceFront(referenceFront);
+    @Override
+    public void setReferenceFront(double[][] referenceFront) {
+        super.setReferenceFront(referenceFront);
 
-    hypervolume = new PISAHypervolume(referenceFront);
-    referenceFrontHypervolume = hypervolume.compute(referenceFront);
-  }
+        hypervolume = new PISAHypervolume(referenceFront);
+        referenceFrontHypervolume = hypervolume.compute(referenceFront);
+    }
 
-  @Override
-  public String getName() {
-    return "NHV";
-  }
+    @Override
+    public String getName() {
+        return "NHV";
+    }
 
-  @Override
-  public String getDescription() {
-    return "Normalized hypervolume";
-  }
+    @Override
+    public String getDescription() {
+        return "Normalized hypervolume";
+    }
 
 
-  @Override
-  public boolean isTheLowerTheIndicatorValueTheBetter() {
-    return true;
-  }
+    @Override
+    public boolean isTheLowerTheIndicatorValueTheBetter() {
+        return true;
+    }
 
-  @Override
-  public double compute(double[][] front) {
-    double hypervolumeValue = hypervolume.compute(front);
+    @Override
+    public double compute(double[][] front) {
+        double hypervolumeValue = hypervolume.compute(front);
 
-    return 1 - (hypervolumeValue / referenceFrontHypervolume);
-  }
+        return 1 - (hypervolumeValue / referenceFrontHypervolume);
+    }
 }

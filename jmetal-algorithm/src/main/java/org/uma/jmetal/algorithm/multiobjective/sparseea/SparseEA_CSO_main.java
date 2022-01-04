@@ -26,6 +26,7 @@ import org.uma.jmetal.operator.selection.impl.BinaryTournamentSelection;
 import org.uma.jmetal.problem.Problem;
 import org.uma.jmetal.problem.multiobjective.UDN.StaticCSO;
 import org.uma.jmetal.solution.binarysolution.BinarySolution;
+import org.uma.jmetal.util.comparator.RankingAndCrowdingDistanceComparator;
 import org.uma.jmetal.util.fileoutput.SolutionListOutput;
 import org.uma.jmetal.util.fileoutput.impl.DefaultFileOutputContext;
 
@@ -63,7 +64,7 @@ public class SparseEA_CSO_main {
         double crossoverProbability = 0.5; //0.9;
         double mutationProbability = 0.5; //1.0 / ((StaticCSO) problem).getTotalNumberOfActivableCells();
 
-        algorithm = new HybridSparseEA(problem, numEvals, popSize, crossoverProbability, mutationProbability, new BinaryTournamentSelection<>(), ((StaticCSO) problem).getTotalNumberOfActivableCells());
+        algorithm = new HybridSparseEA(problem, numEvals, popSize, crossoverProbability, mutationProbability, new BinaryTournamentSelection<>(new RankingAndCrowdingDistanceComparator<>()), ((StaticCSO) problem).getTotalNumberOfActivableCells());
 
         // Execute the Algorithm
         long initTime = System.currentTimeMillis();

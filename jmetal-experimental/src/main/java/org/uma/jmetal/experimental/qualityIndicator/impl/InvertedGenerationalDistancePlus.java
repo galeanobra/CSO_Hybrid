@@ -17,60 +17,64 @@ import java.io.FileNotFoundException;
 @SuppressWarnings("serial")
 public class InvertedGenerationalDistancePlus extends QualityIndicator {
 
-  /**
-   * Default constructor
-   */
-  public InvertedGenerationalDistancePlus() {
-  }
-
-  /**
-   * Constructor
-   *
-   * @param referenceFront
-   * @throws FileNotFoundException
-   */
-  public InvertedGenerationalDistancePlus(double[][] referenceFront) {
-    super(referenceFront) ;
-  }
-
-  /**
-   * Evaluate() method
-   * @param front
-   * @return
-   */
-  @Override public double compute(double[][] front) {
-    Check.notNull(front);
-
-    return invertedGenerationalDistancePlus(front, referenceFront);
-  }
-
-  /**
-   * Returns the inverted generational distance plus value for a given front
-   *
-   * @param front The front
-   * @param referenceFront The reference pareto front
-   */
-  public double invertedGenerationalDistancePlus(double[][] front, double[][] referenceFront) {
-
-    double sum = 0.0;
-    for (int i = 0 ; i < referenceFront.length; i++) {
-      sum += VectorUtils.distanceToClosestVector(referenceFront[i], front, new DominanceDistanceBetweenVectors());
+    /**
+     * Default constructor
+     */
+    public InvertedGenerationalDistancePlus() {
     }
 
-    // STEP 4. Divide the sum by the maximum number of points of the reference Pareto front
-    return sum / referenceFront.length;
-  }
+    /**
+     * Constructor
+     *
+     * @param referenceFront
+     * @throws FileNotFoundException
+     */
+    public InvertedGenerationalDistancePlus(double[][] referenceFront) {
+        super(referenceFront);
+    }
 
-  @Override public String getName() {
-    return "IGD+" ;
-  }
+    /**
+     * Evaluate() method
+     *
+     * @param front
+     * @return
+     */
+    @Override
+    public double compute(double[][] front) {
+        Check.notNull(front);
 
-  @Override public String getDescription() {
-    return "Inverted Generational Distance+" ;
-  }
+        return invertedGenerationalDistancePlus(front, referenceFront);
+    }
 
-  @Override
-  public boolean isTheLowerTheIndicatorValueTheBetter() {
-    return true ;
-  }
+    /**
+     * Returns the inverted generational distance plus value for a given front
+     *
+     * @param front          The front
+     * @param referenceFront The reference pareto front
+     */
+    public double invertedGenerationalDistancePlus(double[][] front, double[][] referenceFront) {
+
+        double sum = 0.0;
+        for (int i = 0; i < referenceFront.length; i++) {
+            sum += VectorUtils.distanceToClosestVector(referenceFront[i], front, new DominanceDistanceBetweenVectors());
+        }
+
+        // STEP 4. Divide the sum by the maximum number of points of the reference Pareto front
+        return sum / referenceFront.length;
+    }
+
+    @Override
+    public String getName() {
+        return "IGD+";
+    }
+
+    @Override
+    public String getDescription() {
+        return "Inverted Generational Distance+";
+    }
+
+    @Override
+    public boolean isTheLowerTheIndicatorValueTheBetter() {
+        return true;
+    }
 }

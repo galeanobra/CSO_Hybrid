@@ -10,60 +10,60 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class QualityIndicatorUtils {
-  /**
-   * Creates a list with the available indicators (but setCoverage)
-   *
-   * @param referenceFront
-   * @return
-   */
-  public static List<QualityIndicator> getAvailableIndicators(double[][] referenceFront) {
+    /**
+     * Creates a list with the available indicators (but setCoverage)
+     *
+     * @param referenceFront
+     * @return
+     */
+    public static List<QualityIndicator> getAvailableIndicators(double[][] referenceFront) {
 
-    List<QualityIndicator> list = new ArrayList<>();
-    list.add(new Epsilon(referenceFront));
-    list.add(new PISAHypervolume(referenceFront));
-    list.add(new NormalizedHypervolume(referenceFront));
-    list.add(new GenerationalDistance(referenceFront));
-    list.add(new InvertedGenerationalDistance(referenceFront));
-    list.add(new InvertedGenerationalDistancePlus(referenceFront));
-    list.add(new Spread(referenceFront));
-    list.add(new GeneralizedSpread(referenceFront));
+        List<QualityIndicator> list = new ArrayList<>();
+        list.add(new Epsilon(referenceFront));
+        list.add(new PISAHypervolume(referenceFront));
+        list.add(new NormalizedHypervolume(referenceFront));
+        list.add(new GenerationalDistance(referenceFront));
+        list.add(new InvertedGenerationalDistance(referenceFront));
+        list.add(new InvertedGenerationalDistancePlus(referenceFront));
+        list.add(new Spread(referenceFront));
+        list.add(new GeneralizedSpread(referenceFront));
 
-    return list;
-  }
-
-  /**
-   * Given an indicator name, finds the indicator in the list of indicator
-   *
-   * @param name
-   * @param list
-   * @return
-   */
-  public static QualityIndicator getIndicatorFromName(String name, List<QualityIndicator> list) {
-    QualityIndicator result = null;
-
-    for (QualityIndicator indicator : list) {
-      if (indicator.getName().equals(name)) {
-        result = indicator;
-        break;
-      }
+        return list;
     }
 
-    Check.notNull(result);
+    /**
+     * Given an indicator name, finds the indicator in the list of indicator
+     *
+     * @param name
+     * @param list
+     * @return
+     */
+    public static QualityIndicator getIndicatorFromName(String name, List<QualityIndicator> list) {
+        QualityIndicator result = null;
 
-    return result;
-  }
+        for (QualityIndicator indicator : list) {
+            if (indicator.getName().equals(name)) {
+                result = indicator;
+                break;
+            }
+        }
 
-  public static void printQualityIndicators(double[][] front, double[][] referenceFront){
-    double[][] normalizedReferenceFront = NormalizeUtils.normalize(referenceFront);
-    double[][] normalizedFront =
-            NormalizeUtils.normalize(
-                    front,
-                    NormalizeUtils.getMinValuesOfTheColumnsOfAMatrix(referenceFront),
-                    NormalizeUtils.getMaxValuesOfTheColumnsOfAMatrix(referenceFront));
+        Check.notNull(result);
 
-    List<QualityIndicator> qualityIndicators = getAvailableIndicators(normalizedReferenceFront) ;
-    for (QualityIndicator indicator: qualityIndicators) {
-      JMetalLogger.logger.info(indicator.getName() + ": " + indicator.compute(normalizedFront)) ;
+        return result;
     }
-  }
+
+    public static void printQualityIndicators(double[][] front, double[][] referenceFront) {
+        double[][] normalizedReferenceFront = NormalizeUtils.normalize(referenceFront);
+        double[][] normalizedFront =
+                NormalizeUtils.normalize(
+                        front,
+                        NormalizeUtils.getMinValuesOfTheColumnsOfAMatrix(referenceFront),
+                        NormalizeUtils.getMaxValuesOfTheColumnsOfAMatrix(referenceFront));
+
+        List<QualityIndicator> qualityIndicators = getAvailableIndicators(normalizedReferenceFront);
+        for (QualityIndicator indicator : qualityIndicators) {
+            JMetalLogger.logger.info(indicator.getName() + ": " + indicator.compute(normalizedFront));
+        }
+    }
 }
