@@ -76,7 +76,7 @@ public class Point {
         double powerDBm;
 
         //create a new map after X insertions to bound the memory used
-        if (signalPowerMap_.get(c.getID()) == null) {
+//        if (signalPowerMap_.get(c.getID()) == null) {
             Sector sec = c.getSector();
             double pathLoss = this.propagationRegion_.pathloss_;
             double receptorGain = Math.pow(10.0, sec.getReceptorGain() / 10.0);
@@ -92,9 +92,9 @@ public class Point {
             //
             powerDBm = 10.0 * Math.log10(power);
             signalPowerMap_.put(c.getID(), powerDBm);
-        } else {
-            powerDBm = signalPowerMap_.get(c.getID());
-        }
+//        } else {
+//            powerDBm = signalPowerMap_.get(c.getID());
+//        }
 
         return powerDBm;
     }
